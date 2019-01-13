@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &396912217
 GameObject:
@@ -212,7 +212,7 @@ Transform:
   m_LocalScale: {x: 0.25, y: 0.25, z: 0.25}
   m_Children: []
   m_Father: {fileID: 1273465453}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &396912219
 SphereCollider:
@@ -362,7 +362,7 @@ Transform:
   m_LocalScale: {x: 1, y: 4.331432, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &534669902
 GameObject:
@@ -373,6 +373,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 534669905}
+  - component: {fileID: 534669906}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   m_Layer: 0
@@ -440,12 +441,29 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.12603824, y: -0, z: -0, w: 0.9920254}
-  m_LocalPosition: {x: 0, y: 0.98, z: -2.1800003}
+  m_LocalPosition: {x: 30.99, y: 2.43, z: 21.34}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1273465453}
-  m_RootOrder: 0
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 14.481001, y: 0, z: 0}
+--- !u!114 &534669906
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a9cfe48434a0145ae8b02c825f09b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1273465451}
+  cameraTarget: {fileID: 469670205}
+  cameraSpeed: 0.35
+  groundHeight: 2
+  playerDistance: 8
 --- !u!1 &978922565
 GameObject:
   m_ObjectHideFlags: 0
@@ -536,7 +554,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 1273465453}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1212958165
 SphereCollider:
@@ -643,7 +661,6 @@ Transform:
   m_LocalPosition: {x: 30.99, y: 3.8000002, z: 23.52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 534669905}
   - {fileID: 1212958164}
   - {fileID: 396912218}
   m_Father: {fileID: 0}
@@ -661,7 +678,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e7dbec700123e04e92df2866b94b458, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTarget: {fileID: 469670205}
+  playerTarget: {fileID: 469670205}
   speed: 6
   jumpSpeed: 2
   gravity: 20

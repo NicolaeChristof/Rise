@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public GameObject cameraTarget;
+    public GameObject playerTarget;
 
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
@@ -19,16 +19,10 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 _moveDirection = Vector3.zero;
 
-    private Transform targetPosition;
-
     // Start is called before the first frame update
     void Start() {
         
         _controller = GetComponent<CharacterController>();
-
-        targetPosition = cameraTarget.transform;
-
-        Debug.Log(targetPosition.position);
 
     }
 
@@ -38,7 +32,17 @@ public class PlayerController : MonoBehaviour {
         if (_controller.isGrounded) {
 
             // Get input directions
-             _moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0.0f, Input.GetAxis("Vertical"));
+            _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
+
+            // if (Input.GetAxis("LS_h") > 0) {
+
+            //     // Face player to the right
+
+            // } else if (Input.GetAxis("LS_h") < 0) {
+
+            //     // Face player to the left
+
+            // }
 
             // Maintains direction after movement stops
             _moveDirection = transform.TransformDirection(_moveDirection);
@@ -50,7 +54,7 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            if (Input.GetButton("Jump")) {
+            if (Input.GetButton("A")) {
 
                 _moveDirection.y = jumpSpeed;
 
@@ -70,8 +74,12 @@ public class PlayerController : MonoBehaviour {
         // Move the Controller
         _controller.Move(_moveDirection * Time.deltaTime);
 
-        // face the player towards the center of the target
-        transform.LookAt(cameraTarget.transform);
+        Vector3 target = new Vector3(playerTarget.transform.position.x,
+                                     this.transform.position.y,
+                                     playerTarget.transform.position.z);
+
+        // face the player towards the target
+        transform.LookAt(target);
 
     }
 }
