@@ -53,55 +53,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\BranchScript.cs" />
-     <Compile Include="Assets\Scripts\CameraScript.cs" />
-     <Compile Include="Assets\Scripts\CursorController.cs" />
-     <Compile Include="Assets\Scripts\ExtensionMethods.cs" />
-     <Compile Include="Assets\Scripts\ForestController.cs" />
-     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\SapScript.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\AvailabilityCheck.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\ExceptionManager.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\FilterManager.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\FilterSelect.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Leaderboard.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\LeaderboardEntry.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\LeaderboardTypes.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\ObjectPool.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\PlayerAuthentication.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\PlayerProfile.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\SignInManager.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Singleton.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Social.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\SocialManagerComponent.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\DoubleStat.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\IntegerStat.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\StatBase.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\StatEventArgs.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\StatPanel.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\StatsManagerComponent.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\StringStat.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\Stats\XboxLiveUserEventArgs.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\ThemeHelper.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\UnityComponentExtensions.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\UnityTaskExtensions.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\XboxControllerButtons.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\XboxLiveAuthStatus.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\XboxLiveServicesSettings.cs" />
-     <Compile Include="Assets\Xbox Live\Scripts\XboxSocialUserEntry.cs" />
-     <None Include="Assets\Xbox Live\GameSave\README.txt" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\Newtonsoft.Json.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\System.Composition.Runtime.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\Caliburn.Micro.Platform.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\System.Composition.Convention.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\System.Composition.TypedParts.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\System.Composition.AttributedModel.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\Microsoft.IdentityModel.Clients.ActiveDirectory.Platform.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\Microsoft.IdentityModel.Clients.ActiveDirectory.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\System.Composition.Hosting.xml" />
-     <None Include="Assets\Xbox Live\Readme.txt" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\Caliburn.Micro.xml" />
-     <None Include="Assets\Xbox Live\Tools\AssociationWizard\Caliburn.Micro.Platform.Core.xml" />
+     <Compile Include="Assets\Scripts\PlayerController.cs" />
+     <Compile Include="Assets\Scripts\TerrainController.cs" />
  <Reference Include="Unity.TextMeshPro.Editor">
  <HintPath>C:/Users/Nico/Desktop/Capstone Project/Rise/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
@@ -332,18 +285,6 @@
  </Reference>
  <Reference Include="Unity.Analytics.Tracker">
  <HintPath>C:/Users/Nico/Desktop/Capstone Project/Rise/Library/PackageCache/com.unity.analytics@3.2.2/Unity.Analytics.Tracker.dll</HintPath>
- </Reference>
- <Reference Include="Newtonsoft.Json">
- <HintPath>C:/Users/Nico/Desktop/Capstone Project/Rise/Assets/Xbox Live/Libs/UnityEditor/NET35/Newtonsoft.Json.dll</HintPath>
- </Reference>
- <Reference Include="Microsoft.Xbox.Services.UnityEditor.CSharp">
- <HintPath>C:/Users/Nico/Desktop/Capstone Project/Rise/Assets/Xbox Live/Libs/UnityEditor/NET35/Microsoft.Xbox.Services.UnityEditor.CSharp.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Compat">
- <HintPath>C:/Users/Nico/Desktop/Capstone Project/Rise/Assets/Xbox Live/Libs/UnityEditor/NET35/Unity.Compat.dll</HintPath>
- </Reference>
- <Reference Include="Unity.Tasks">
- <HintPath>C:/Users/Nico/Desktop/Capstone Project/Rise/Assets/Xbox Live/Libs/UnityEditor/NET35/Unity.Tasks.dll</HintPath>
  </Reference>
  <Reference Include="netstandard">
  <HintPath>C:/Program Files/Unity/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
