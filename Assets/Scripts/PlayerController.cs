@@ -86,8 +86,8 @@ public class PlayerController : MonoBehaviour {
         _controller.Move(_moveDirection * Time.deltaTime);
 
         _target = new Vector3(playerTarget.transform.position.x,
-                                     this.transform.position.y,
-                                     playerTarget.transform.position.z);
+                              this.transform.position.y,
+                              playerTarget.transform.position.z);
 
         // face the player towards the target
         transform.LookAt(_target);
