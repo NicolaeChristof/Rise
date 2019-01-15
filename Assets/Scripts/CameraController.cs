@@ -8,8 +8,11 @@ public class CameraController : MonoBehaviour {
 
     public GameObject cameraTarget;
 
+    [Range(0.0f, 10.0f)]
+    public float cameraSpeed_h;
+
     [Range(0.0f, 1.0f)]
-    public float cameraSpeed;
+    public float cameraSpeed_v;
 
     [Range(0.0f, 10.0f)]
     public float groundHeight;
@@ -21,7 +24,14 @@ public class CameraController : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
-        
+
+        Vector3 target = new Vector3(cameraTarget.transform.position.x,
+                                     this.transform.position.y,
+                                     cameraTarget.transform.position.z);
+
+        // face the camera towards the center of the target
+        transform.LookAt(target);
+
     }
 
     // Update is called once per frame
@@ -30,20 +40,34 @@ public class CameraController : MonoBehaviour {
         // Get input directions
         _moveDirection = new Vector3(Input.GetAxis("RS_h"), Input.GetAxis("RS_v"), 0.0f);
 
+        // Keep camera close to player and out of the ground
         if ((transform.position.y + _moveDirection.y > groundHeight) &&
             (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&
             (transform.position.y + _moveDirection.y < player.transform.position.y + playerDistance)) {
 
-            transform.Translate(_moveDirection * cameraSpeed);
+            // Handle vertical camera movement
+            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
 
-            Vector3 target = new Vector3(cameraTarget.transform.position.x,
-                                         this.transform.position.y,
-                                         cameraTarget.transform.position.z);
+        } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
+                   (_moveDirection.y < 0)) {
 
-            // face the camera towards the center of the target
-            transform.LookAt(target);
+            // Handle vertical camera movement
+            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+        } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
+                   (_moveDirection.y > 0)) {
+
+            // Handle vertical camera movement
+            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
 
         }
+
+        Vector3 target = new Vector3(cameraTarget.transform.position.x,
+                                     this.transform.position.y,
+                                     cameraTarget.transform.position.z);
+
+        // rotate the camera around the center of the target
+        transform.RotateAround(target, Vector3.up, _moveDirection.x * cameraSpeed_h);
 
     }
 }
