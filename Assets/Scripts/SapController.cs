@@ -29,6 +29,7 @@ public class SapController : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Sap") {
             ChangeCurrentSap(25f);
+            other.gameObject.SetActive(false);
             Destroy(other.gameObject);
         }
     }

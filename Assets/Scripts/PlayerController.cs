@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 _moveDirection = Vector3.zero;
 
+    private Vector3 _target;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -33,16 +35,6 @@ public class PlayerController : MonoBehaviour {
 
             // Get input directions
             _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
-
-            // if (Input.GetAxis("LS_h") > 0) {
-
-            //     // Face player to the right
-
-            // } else if (Input.GetAxis("LS_h") < 0) {
-
-            //     // Face player to the left
-
-            // }
 
             // Maintains direction after movement stops
             _moveDirection = transform.TransformDirection(_moveDirection);
@@ -74,12 +66,12 @@ public class PlayerController : MonoBehaviour {
         // Move the Controller
         _controller.Move(_moveDirection * Time.deltaTime);
 
-        Vector3 target = new Vector3(playerTarget.transform.position.x,
-                                     this.transform.position.y,
-                                     playerTarget.transform.position.z);
+        _target = new Vector3(playerTarget.transform.position.x,
+                             this.transform.position.y,
+                             playerTarget.transform.position.z);
 
         // face the player towards the target
-        transform.LookAt(target);
+        transform.LookAt(_target);
 
     }
 }
