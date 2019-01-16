@@ -9,7 +9,7 @@ public class TreeController : MonoBehaviour
     private GameObject _reticle;
 
     // Local Constants
-    private const string MOVE_UP = "DPAD_v";
+    private const string MOVE_VERTICAL = "DPAD_v";
     private const string MOVE_LATERAL = "DPAD_h";
     private const string GROW = "LB";
 
@@ -25,6 +25,6 @@ public class TreeController : MonoBehaviour
 
     void Update()
     {
-        
+
     }
 }
