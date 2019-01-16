@@ -8,8 +8,8 @@ public class TreeController : MonoBehaviour {
     private GameObject _reticle;
 
     // Local Constants
-    private const string MOVE_VERTICAL = "LS_v";
-    private const string MOVE_LATERAL = "LS_h";
+    private const string MOVE_VERTICAL = "LS_v"; // TODO: Change?
+    private const string MOVE_LATERAL = "LS_h"; // TODO: Change?
     private const string GROW = "LB";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
@@ -52,10 +52,16 @@ public class TreeController : MonoBehaviour {
         }
     }
 
+    /// <summary>
+    /// Performs the growth update logic.
+    /// </summary>
     private void OnGrow() {
         // TODO!
     }
 
+    /// <summary>
+    /// Updates the position and rotation of the reticle object.
+    /// </summary>
     private void UpdateReticle() {
         // Horizontal-only raycast
         Vector3 position = _tree.transform.position;
@@ -75,6 +81,11 @@ public class TreeController : MonoBehaviour {
         _reticle.transform.LookAt(raycast.point + (raycast.normal * 2.0F));
     }
 
+    /// <summary>
+    /// Checks the epsilon of the passed value.
+    /// </summary>
+    /// <returns><c>true</c>, if epsilon passed, <c>false</c> otherwise.</returns>
+    /// <param name="passedValue">Passed value.</param>
     private bool CheckEpsilon(float passedValue) {
         return (System.Math.Abs(passedValue) > EPSILON);
     }
