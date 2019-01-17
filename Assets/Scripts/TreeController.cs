@@ -7,9 +7,10 @@ public class TreeController : MonoBehaviour {
     private GameObject _tree;
     private GameObject _reticle;
 
+    private string MOVE_VERTICAL;
+    private string MOVE_LATERAL;
+
     // Local Constants
-    private const string MOVE_VERTICAL = "Keyboard_retical_v"; // TODO: Change?
-    private const string MOVE_LATERAL = "Keyboard_retical_h"; // TODO: Change?
     private const string GROW = "LB";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
@@ -17,9 +18,24 @@ public class TreeController : MonoBehaviour {
     private const float DISTANCE = 2.0F;
 
     void Start() {
+
         // Establish local references
         _tree = GameObject.Find("Tree");
         _reticle = GameObject.Find("Tree Reticle");
+
+        if (GameModel.inputGamePad) {
+
+            MOVE_LATERAL = "RS_h";
+
+            MOVE_VERTICAL = "RS_v";
+
+        } else {
+
+            MOVE_LATERAL = "Keyboard_retical_h";
+
+            MOVE_VERTICAL = "Keyboard_retical_v";
+
+        }
     }
 
     void Update() {

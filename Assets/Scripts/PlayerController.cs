@@ -36,9 +36,15 @@ public class PlayerController : MonoBehaviour {
         if (_controller.isGrounded) {
 
             // Get input directions
-            // _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
+            if (GameModel.inputGamePad) {
 
-            _moveDirection = new Vector3(Input.GetAxis("Keyboard_player_h"), 0.0f, Input.GetAxis("Keyboard_player_v"));
+                _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
+
+            } else {
+
+                _moveDirection = new Vector3(Input.GetAxis("Keyboard_player_h"), 0.0f, Input.GetAxis("Keyboard_player_v"));
+
+            }
 
             if (_moveDirection.x < 0) {
 
