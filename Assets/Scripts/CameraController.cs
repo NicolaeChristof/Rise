@@ -38,7 +38,9 @@ public class CameraController : MonoBehaviour {
     void Update() {
 
         // Get input directions
-        _moveDirection = new Vector3(Input.GetAxis("RS_h"), Input.GetAxis("RS_v"), 0.0f);
+        // _moveDirection = new Vector3(Input.GetAxis("RS_h"), Input.GetAxis("RS_v"), 0.0f);
+
+        _moveDirection = new Vector3(Input.GetAxis("Keyboard_camera_h"), Input.GetAxis("Keyboard_camera_v"), 0.0f);
 
         // Keep camera close to player and out of the ground
         if ((transform.position.y + _moveDirection.y > groundHeight) &&

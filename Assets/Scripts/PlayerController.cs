@@ -36,14 +36,16 @@ public class PlayerController : MonoBehaviour {
         if (_controller.isGrounded) {
 
             // Get input directions
-            _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
+            // _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
 
-            if (Input.GetAxis("LS_h") < 0) {
+            _moveDirection = new Vector3(Input.GetAxis("Keyboard_player_h"), 0.0f, Input.GetAxis("Keyboard_player_v"));
+
+            if (_moveDirection.x < 0) {
 
                 // Face player model to the left
                 playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
-            } else if (Input.GetAxis("LS_h") > 0) {
+            } else if (_moveDirection.x > 0) {
 
                 // Face player model to the right
                 playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
@@ -65,7 +67,7 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            if (Input.GetButton("A")) {
+            if (Input.GetButton("A") || Input.GetButton("Jump")) {
 
                 _moveDirection.y = jumpSpeed;
 

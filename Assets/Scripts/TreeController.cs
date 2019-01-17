@@ -8,8 +8,8 @@ public class TreeController : MonoBehaviour {
     private GameObject _reticle;
 
     // Local Constants
-    private const string MOVE_VERTICAL = "LS_v"; // TODO: Change?
-    private const string MOVE_LATERAL = "LS_h"; // TODO: Change?
+    private const string MOVE_VERTICAL = "Keyboard_retical_v"; // TODO: Change?
+    private const string MOVE_LATERAL = "Keyboard_retical_h"; // TODO: Change?
     private const string GROW = "LB";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;

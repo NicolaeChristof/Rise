@@ -49,6 +49,6 @@ public class SapController : MonoBehaviour
             }
         }
         sapSlider.value = currentSap / maxSap;
-        Debug.Log(currentSap);
+        // Debug.Log(currentSap);
     }
 }
