@@ -14,8 +14,8 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 40.0f)]
     public float gravity;
 
-    [Range(0.0f, 20.0f)]
-    public float distanceToTree;
+    [Range(0.0f, 10.0f)]
+    public float maxPlayerDistance;
 
     private CharacterController _controller;
 
@@ -23,70 +23,97 @@ public class PlayerController : MonoBehaviour {
 
     private Vector3 _target;
 
+    private Vector3 heading;
+
+    private float distance;
+
+    private string HORIZONTAL_INPUT;
+
+    private string VERTICAL_INPUT;
+
+    private string JUMP;
+
     // Start is called before the first frame update
     void Start() {
         
         _controller = GetComponent<CharacterController>();
+
+        if (GameModel.inputGamePad) {
+
+            HORIZONTAL_INPUT = "LS_h";
+
+            VERTICAL_INPUT = "LS_v";
+
+            JUMP = "A";
+
+        } else {
+
+            HORIZONTAL_INPUT = "Keyboard_player_h";
+
+            VERTICAL_INPUT = "Keyboard_player_v";
+
+            JUMP = "Keyboard_jump";
+
+        }
 
     }
 
     // Update is called once per frame
     void Update() {
 
-        if (_controller.isGrounded) {
+        // Get input directions
+        _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
 
-            // Get input directions
-            if (GameModel.inputGamePad) {
+        // Orient player model
+        if (_moveDirection.x < 0) {
 
-                _moveDirection = new Vector3(Input.GetAxis("LS_h"), 0.0f, Input.GetAxis("LS_v"));
+            // Face player model to the left
+            playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
-            } else {
+        } else if (_moveDirection.x > 0) {
 
-                _moveDirection = new Vector3(Input.GetAxis("Keyboard_player_h"), 0.0f, Input.GetAxis("Keyboard_player_v"));
+            // Face player model to the right
+            playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
 
-            }
+        } else {
 
-            if (_moveDirection.x < 0) {
-
-                // Face player model to the left
-                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
-
-            } else if (_moveDirection.x > 0) {
-
-                // Face player model to the right
-                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
-
-            } else {
-
-                // Face player model outwards towards camera
-                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
-
-            }
-
-            // Maintains direction after movement stops
-            _moveDirection = transform.TransformDirection(_moveDirection);
-
-            if (_moveDirection != Vector3.zero) {
-
-                // Faces player towards movement direction
-                transform.forward = _moveDirection;
-
-            }
-
-            if (Input.GetButton("A") || Input.GetButton("Jump")) {
-
-                _moveDirection.y = jumpSpeed;
-
-            }
-
-            _moveDirection = _moveDirection * speed;
+            // Face player model outwards towards camera
+            playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
 
         }
 
-        if (!_controller.isGrounded) {
+        _moveDirection.x *= speed;
 
-            // Apply gravity
-            _moveDirection.y = _moveDirection.y - (gravity * Time.deltaTime);
+        _moveDirection.z *= speed;
+
+        if (Input.GetButton(JUMP) && _controller.isGrounded) {
+
+            _moveDirection.y = jumpSpeed;
+
+        }
+
+        // Apply gravity
+        _moveDirection.y -= gravity * Time.deltaTime;
+
+        heading = this.transform.position - playerTarget.transform.position;
+
+        distance = heading.magnitude;
+
+        // Debug.Log(distance);
+
+        if (distance > maxPlayerDistance) {
+
+            _moveDirection.z = 6;
+
+        }
+
+        // Maintains direction after movement stops
+        _moveDirection = transform.TransformDirection(_moveDirection);
+
+        if (_moveDirection != Vector3.zero) {
+
+            // Faces player towards movement direction
+            transform.forward = _moveDirection;
 
         }
 
