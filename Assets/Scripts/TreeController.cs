@@ -36,6 +36,8 @@ public class TreeController : MonoBehaviour {
             MOVE_VERTICAL = "Keyboard_retical_v";
 
         }
+
+        UpdateReticle();
     }
 
     void Update() {
