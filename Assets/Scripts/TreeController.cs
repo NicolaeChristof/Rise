@@ -12,11 +12,11 @@ public class TreeController : MonoBehaviour {
     private GameObject _tree;
     private GameObject _reticle;
 
-    private string MOVE_VERTICAL;
-    private string MOVE_LATERAL;
+    private string MOVE_VERTICAL = "RS_v";
+    private string MOVE_LATERAL = "RS_h";
+    private string GROW = "LB";
 
     // Local Constants
-    private const string GROW = "LB";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
     private const float EPSILON = 0.01F;
@@ -28,18 +28,11 @@ public class TreeController : MonoBehaviour {
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
-        if (GameModel.inputGamePad) {
-
-            MOVE_LATERAL = "RS_h";
-
-            MOVE_VERTICAL = "RS_v";
-
-        } else {
-
+        // If not using gamepad, switch input bindings
+        if(!GameModel.inputGamePad) {
             MOVE_LATERAL = "Keyboard_retical_h";
-
             MOVE_VERTICAL = "Keyboard_retical_v";
-
+            GROW = "Keyboard_trigger";
         }
 
         UpdateReticle();
