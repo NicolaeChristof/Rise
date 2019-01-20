@@ -12,8 +12,6 @@ public class SapController : MonoBehaviour {
     [HideInInspector]
     public float currentSap;
 
-    public Slider sapSlider;
-
     private string DRAIN;
 
     void Start() {
@@ -29,8 +27,6 @@ public class SapController : MonoBehaviour {
         }
 
         currentSap = maxSap;
-
-        sapSlider.value = currentSap / maxSap;
 
     }
 
@@ -85,8 +81,5 @@ public class SapController : MonoBehaviour {
             }
 
         }
-
-        sapSlider.value = currentSap / maxSap;
-
     }
 }
