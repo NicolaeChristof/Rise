@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject playerModel;
 
+    public AudioClip jumpSound;
+
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
 
@@ -17,15 +19,21 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 10.0f)]
     public float maxPlayerDistance;
 
+    [Range(0.0f, 1.0f)]
+    public float volLowRange;
+
+    [Range(1.0f, 2.0f)]
+    public float volHighRange;
+
     private CharacterController _controller;
 
     private Vector3 _moveDirection = Vector3.zero;
 
     private Vector3 _target;
 
-    private Vector3 heading;
+    private Vector3 _heading;
 
-    private float distance;
+    private float _distance;
 
     private string HORIZONTAL_INPUT;
 
@@ -33,10 +41,16 @@ public class PlayerController : MonoBehaviour {
 
     private string JUMP;
 
+    private AudioSource _source;
+
+    private float _volume;
+
     // Start is called before the first frame update
     void Start() {
         
         _controller = GetComponent<CharacterController>();
+
+        _source = GetComponent<AudioSource>();
 
         if (GameModel.inputGamePad) {
 
@@ -88,6 +102,10 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButton(JUMP) && _controller.isGrounded) {
 
+            _volume = Random.Range(volLowRange, volHighRange);
+
+            _source.PlayOneShot(jumpSound, _volume);
+
             _moveDirection.y = jumpSpeed;
 
         }
@@ -95,13 +113,13 @@ public class PlayerController : MonoBehaviour {
         // Apply gravity
         _moveDirection.y -= gravity * Time.deltaTime;
 
-        heading = this.transform.position - playerTarget.transform.position;
+        _heading = this.transform.position - playerTarget.transform.position;
 
-        distance = heading.magnitude;
+        _distance = _heading.magnitude;
 
         // Debug.Log(distance);
 
-        if (distance > maxPlayerDistance) {
+        if (_distance > maxPlayerDistance) {
 
             _moveDirection.z = 6;
 

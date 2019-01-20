@@ -27,7 +27,7 @@ public class TreeController : MonoBehaviour {
     // Local Fields
     private string MOVE_VERTICAL = "RS_v";
     private string MOVE_LATERAL = "RS_h";
-    private string GROW = "LB";
+    private string GROW = "RT";
     private string SELECT = "DPAD_v";
 
     private float _currentSap;
