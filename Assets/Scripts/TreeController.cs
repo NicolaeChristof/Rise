@@ -45,7 +45,7 @@ public class TreeController : MonoBehaviour {
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
-        _branches = new GameObject[]{ branch1, branch2, branch3 };
+        _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
         // If not using gamepad, switch input bindings
         if (!GameModel.inputGamePad) {
