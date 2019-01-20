@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class TreeController : MonoBehaviour {
+
+    // public references
+    public GameObject reticle;
+
     // Local References
     private GameObject _tree;
     private GameObject _reticle;
@@ -21,7 +25,7 @@ public class TreeController : MonoBehaviour {
 
         // Establish local references
         _tree = GameObject.Find("Tree");
-        _reticle = GameObject.Find("Tree Reticle");
+        _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
         if (GameModel.inputGamePad) {
 
