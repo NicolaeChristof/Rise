@@ -10,6 +10,7 @@ public class TreeController : MonoBehaviour {
     public GameObject branch1;
     public GameObject branch2;
     public GameObject branch3;
+    public GameObject branch4;
     public Slider slider;
 
     // Public Fields
