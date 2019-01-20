@@ -14,6 +14,7 @@ public class TreeController : MonoBehaviour {
     public float maxSap;
     public float minDistance;
     public float sapCost;
+    public float startingSap;
 
     // Local References
     private GameObject _tree;
@@ -34,7 +35,6 @@ public class TreeController : MonoBehaviour {
     private const float DISTANCE = 2.0F;
 
     void Start() {
-
         // Establish local references
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
@@ -46,6 +46,7 @@ public class TreeController : MonoBehaviour {
             GROW = "Keyboard_trigger";
         }
 
+        UpdateSap(startingSap);
         UpdateReticle();
     }
 
