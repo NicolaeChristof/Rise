@@ -9,11 +9,11 @@ public class SapController : MonoBehaviour {
     public float sapPickup;
 
     // Local References
-    private GameObject _treeController;
+    private TreeController _treeController;
 
     void Start() {
         // Resolve local references
-        _treeController = GameObject.Find("Tree Controller");
+        _treeController = GameObject.Find("Tree Controller").GetComponent<TreeController>();
     }
 
     private void Update() {
@@ -24,7 +24,7 @@ public class SapController : MonoBehaviour {
 
         if (other.tag == "Sap") {
             // Adjust held sap
-            _treeController.GetComponent<TreeController>().UpdateSap(sapPickup);
+            _treeController.UpdateSap(sapPickup);
 
             // Remove sap object
             other.gameObject.SetActive(false);
