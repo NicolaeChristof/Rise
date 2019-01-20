@@ -7,7 +7,9 @@ public class TreeController : MonoBehaviour {
 
     // public references
     public GameObject reticle;
-    public GameObject branch;
+    public GameObject branch1;
+    public GameObject branch2;
+    public GameObject branch3;
     public Slider slider;
 
     // Public Fields
@@ -24,8 +26,11 @@ public class TreeController : MonoBehaviour {
     private string MOVE_VERTICAL = "RS_v";
     private string MOVE_LATERAL = "RS_h";
     private string GROW = "LB";
+    private string SELECT = "DPAD_v";
 
     private float _currentSap;
+    private int _selectedBranch;
+    private GameObject[] _branches;
 
     // Local Constants
     private const string BRANCH_TAG = "Branch";
@@ -39,11 +44,14 @@ public class TreeController : MonoBehaviour {
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
+        _branches = new GameObject[]{ branch1, branch2, branch3 };
+
         // If not using gamepad, switch input bindings
-        if(!GameModel.inputGamePad) {
+        if (!GameModel.inputGamePad) {
             MOVE_LATERAL = "Keyboard_retical_h";
             MOVE_VERTICAL = "Keyboard_retical_v";
             GROW = "Keyboard_trigger";
+            SELECT = "Keyboard_next";
         }
 
         UpdateSap(startingSap);
@@ -75,10 +83,17 @@ public class TreeController : MonoBehaviour {
             UpdateReticle();
         }
 
+        // Handle Branch Selection
+        if (Input.GetButtonDown(SELECT)) {
+            int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+            _selectedBranch = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+        }
+
+        // Handle Growth
         if (Input.GetButtonDown(GROW)) {
             if (CanGrow()) {
                 // TODO: Switch to growth over time, add vibration and 
-                Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
+                Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
                 UpdateSap(-sapCost);
             }
             else {
