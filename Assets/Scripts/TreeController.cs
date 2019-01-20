@@ -88,6 +88,15 @@ public class TreeController : MonoBehaviour {
     }
 
     /// <summary>
+    /// The quantity of currently-stored sap.
+    /// </summary>
+    /// <value>The sap quantity.</value>
+    public float Sap {
+        get => _currentSap;
+        set => _currentSap = Mathf.Clamp(value, 0.0F, maxSap);
+    }
+
+    /// <summary>
     /// Modifies the current sap quantity by the passed value.
     /// </summary>
     /// <param name="passedValue">The value to modify the current sap by.</param>
