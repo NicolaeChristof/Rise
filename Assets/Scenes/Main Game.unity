@@ -710,6 +710,7 @@ MonoBehaviour:
   branch3: {fileID: 4352697463616401196, guid: 162dddf13a01e493191218dd257d319c, type: 3}
   branch4: {fileID: 4352697463616401196, guid: 02c9bf4a5fc7c4e92bb3a3ee29ede44a, type: 3}
   slider: {fileID: 1559643049}
+  growSound: {fileID: 8300000, guid: 8cde2aa3b615f434a85bbb18066f3a4c, type: 3}
   maxSap: 250
   minDistance: 0.5
   sapCost: 25
@@ -1823,8 +1824,6 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   maxPlayerDistance: 6
-  volLowRange: 0.5
-  volHighRange: 1
 --- !u!114 &1273465455
 MonoBehaviour:
   m_ObjectHideFlags: 0

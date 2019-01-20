@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    // Public References
     public GameObject playerTarget;
 
     public GameObject playerModel;
 
     public AudioClip jumpSound;
 
+    // Public Fields
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
 
@@ -19,14 +21,12 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 10.0f)]
     public float maxPlayerDistance;
 
-    [Range(0.0f, 1.0f)]
-    public float volLowRange;
-
-    [Range(1.0f, 2.0f)]
-    public float volHighRange;
-
+    // Private References
     private CharacterController _controller;
 
+    private AudioSource _source;
+
+    // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
     private Vector3 _target;
@@ -35,15 +35,14 @@ public class PlayerController : MonoBehaviour {
 
     private float _distance;
 
+    private float _volume;
+
+    // Inputs
     private string HORIZONTAL_INPUT;
 
     private string VERTICAL_INPUT;
 
     private string JUMP;
-
-    private AudioSource _source;
-
-    private float _volume;
 
     // Start is called before the first frame update
     void Start() {
@@ -102,7 +101,7 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButton(JUMP) && _controller.isGrounded) {
 
-            _volume = Random.Range(volLowRange, volHighRange);
+            _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
             _source.PlayOneShot(jumpSound, _volume);
 

@@ -12,6 +12,7 @@ public class TreeController : MonoBehaviour {
     public GameObject branch3;
     public GameObject branch4;
     public Slider slider;
+    public AudioClip growSound;
 
     // Public Fields
     public float maxSap;
@@ -23,6 +24,7 @@ public class TreeController : MonoBehaviour {
     private GameObject _tree;
     private GameObject _reticle;
     private Text _uitext;
+    private AudioSource _source;
 
     // Local Fields
     private string MOVE_VERTICAL = "RS_v";
@@ -46,6 +48,9 @@ public class TreeController : MonoBehaviour {
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
         _uitext = GameObject.Find("UIText").GetComponent<Text>();
+
+        _source = _reticle.AddComponent<AudioSource>() as AudioSource;
+        _source.playOnAwake = false;
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
@@ -98,6 +103,8 @@ public class TreeController : MonoBehaviour {
         if (Input.GetButtonDown(GROW)) {
             if (CanGrow()) {
                 // TODO: Switch to growth over time, add vibration and 
+                float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                _source.PlayOneShot(growSound, _volume);
                 Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
                 UpdateSap(-sapCost);
             }
