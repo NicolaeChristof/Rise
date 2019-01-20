@@ -89,6 +89,8 @@ public class TreeController : MonoBehaviour {
 
     /// <summary>
     /// The quantity of currently-stored sap.
+    /// 
+    /// When setting, the passed value will be clamped to be between 0 and the maximum value.
     /// </summary>
     /// <value>The sap quantity.</value>
     public float Sap {
