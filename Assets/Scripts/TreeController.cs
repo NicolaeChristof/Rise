@@ -64,15 +64,23 @@ public class TreeController : MonoBehaviour {
         }
 
         if (CheckEpsilon(grow)) {
-            OnGrow();
+            if (CanGrow()) {
+                Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
+            }
         }
     }
 
     /// <summary>
-    /// Performs the growth update logic.
+    /// Checks to see whether a branch can currently be placed.
     /// </summary>
-    private void OnGrow() {
-        Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
+    /// <returns><c>true</c>, If a branch can be placed, <c>false</c> otherwise.</returns>
+    private bool CanGrow() {
+        // Check Sap Level
+
+        // Check Branch Closeness
+
+        // TODO: Check Cooldown?
+        return true;
     }
 
     /// <summary>
