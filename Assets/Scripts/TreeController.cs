@@ -22,6 +22,7 @@ public class TreeController : MonoBehaviour {
     // Local References
     private GameObject _tree;
     private GameObject _reticle;
+    private Text _uitext;
 
     // Local Fields
     private string MOVE_VERTICAL = "RS_v";
@@ -44,6 +45,7 @@ public class TreeController : MonoBehaviour {
         // Establish local references
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
+        _uitext = GameObject.Find("UIText").GetComponent<Text>();
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
@@ -56,6 +58,7 @@ public class TreeController : MonoBehaviour {
         }
 
         UpdateSap(startingSap);
+        Select(0);
         UpdateReticle();
     }
 
@@ -87,7 +90,8 @@ public class TreeController : MonoBehaviour {
         // Handle Branch Selection
         if (Input.GetButtonDown(SELECT)) {
             int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
-            _selectedBranch = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+            int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+            Select(selected);
         }
 
         // Handle Growth
@@ -121,6 +125,15 @@ public class TreeController : MonoBehaviour {
     public void UpdateSap(float passedValue) {
         _currentSap = Mathf.Clamp(_currentSap + passedValue, 0.0F, maxSap);
         slider.value = (_currentSap / maxSap);
+    }
+
+    /// <summary>
+    /// Handles changes when a branch is selected.
+    /// </summary>
+    /// <param name="passedIndex">Passed index.</param>
+    private void Select(int passedIndex) {
+        _selectedBranch = passedIndex;
+        _uitext.text = "Branch Type: " + passedIndex;
     }
 
     /// <summary>
