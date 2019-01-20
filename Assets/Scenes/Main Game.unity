@@ -1299,9 +1299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a374df31ac0fc334e9fd4ce616c97c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSap: 250
-  sapDrainRate: -3
-  currentSap: 0
+  sapPickup: 25
 --- !u!1001 &1280092758
 PrefabInstance:
   m_ObjectHideFlags: 0
