@@ -407,7 +407,7 @@ MonoBehaviour:
   branch: {fileID: 4352697463616401196, guid: 59a92ea29efd54ad9810fb5b811ac9f0, type: 3}
   slider: {fileID: 1559643049}
   maxSap: 250
-  minDistance: 2
+  minDistance: 0.5
   sapCost: 25
   startingSap: 225
 --- !u!1 &396912217
@@ -1302,7 +1302,6 @@ MonoBehaviour:
   maxSap: 250
   sapDrainRate: -3
   currentSap: 0
-  sapSlider: {fileID: 1559643049}
 --- !u!1001 &1280092758
 PrefabInstance:
   m_ObjectHideFlags: 0
