@@ -370,7 +370,6 @@ GameObject:
   m_Component:
   - component: {fileID: 395999067}
   - component: {fileID: 395999068}
-  - component: {fileID: 395999069}
   m_Layer: 0
   m_Name: Tree Controller
   m_TagString: Untagged
@@ -411,19 +410,6 @@ MonoBehaviour:
   minDistance: 0.5
   sapCost: 25
   startingSap: 225
---- !u!114 &395999069
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 395999066}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a374df31ac0fc334e9fd4ce616c97c7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sapPickup: 25
 --- !u!1 &396912217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1242,6 +1228,7 @@ GameObject:
   - component: {fileID: 1273465453}
   - component: {fileID: 1273465452}
   - component: {fileID: 1273465454}
+  - component: {fileID: 1273465455}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1300,6 +1287,21 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   maxPlayerDistance: 6
+--- !u!114 &1273465455
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273465451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a374df31ac0fc334e9fd4ce616c97c7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSap: 250
+  sapDrainRate: -3
+  currentSap: 0
 --- !u!1001 &1280092758
 PrefabInstance:
   m_ObjectHideFlags: 0
