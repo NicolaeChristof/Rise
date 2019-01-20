@@ -77,8 +77,12 @@ public class TreeController : MonoBehaviour {
 
         if (Input.GetButtonDown(GROW)) {
             if (CanGrow()) {
+                // TODO: Switch to growth over time, add vibration and 
                 Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
                 UpdateSap(-sapCost);
+            }
+            else {
+                // TODO: Feedback if we can't grow!
             }
         }
     }
