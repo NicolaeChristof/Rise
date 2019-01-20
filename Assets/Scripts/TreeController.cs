@@ -105,7 +105,7 @@ public class TreeController : MonoBehaviour {
         // Check Branch Closeness (No Branch colliders in min distance)
         Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
         foreach (Collider iteratedCollider in colliders) {
-            if (iteratedCollider.tag.Equals(BRANCH_TAG)) {
+            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
                 return false;
             }
         }

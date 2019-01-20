@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6837279178405670046}
   m_Layer: 0
   m_Name: Branch
-  m_TagString: Untagged
+  m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -54,6 +54,10 @@ PrefabInstance:
     - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_Name
       value: UglyBranch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_TagString
+      value: Branch
       objectReference: {fileID: 0}
     - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_Name
