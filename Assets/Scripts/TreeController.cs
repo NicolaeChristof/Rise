@@ -1,20 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class TreeController : MonoBehaviour {
 
     // public references
     public GameObject reticle;
     public GameObject branch;
+    public Slider slider;
+
+    // Public Fields
+    public float maxSap;
+    public float sapCost;
 
     // Local References
     private GameObject _tree;
     private GameObject _reticle;
 
+    // Local Fields
     private string MOVE_VERTICAL = "RS_v";
     private string MOVE_LATERAL = "RS_h";
     private string GROW = "LB";
+
+    private float _currentSap;
 
     // Local Constants
     private const float VERTICAL_SPEED = 2.15F;
@@ -68,6 +77,15 @@ public class TreeController : MonoBehaviour {
                 Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
             }
         }
+    }
+
+    /// <summary>
+    /// Modifies the current sap quantity by the passed value.
+    /// </summary>
+    /// <param name="passedValue">The value to modify the current sap by.</param>
+    public void UpdateSap(float passedValue) {
+        _currentSap = Mathf.Clamp(_currentSap + passedValue, 0.0F, maxSap);
+        slider.value = (_currentSap / maxSap);
     }
 
     /// <summary>
