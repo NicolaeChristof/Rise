@@ -12,6 +12,7 @@ public class TreeController : MonoBehaviour {
 
     // Public Fields
     public float maxSap;
+    public float minDistance;
     public float sapCost;
 
     // Local References
@@ -26,6 +27,7 @@ public class TreeController : MonoBehaviour {
     private float _currentSap;
 
     // Local Constants
+    private const string BRANCH_TAG = "Branch";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
     private const float EPSILON = 0.01F;
@@ -72,7 +74,7 @@ public class TreeController : MonoBehaviour {
             UpdateReticle();
         }
 
-        if (CheckEpsilon(grow)) {
+        if (Input.GetButtonDown(GROW)) {
             if (CanGrow()) {
                 Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
             }
@@ -94,8 +96,17 @@ public class TreeController : MonoBehaviour {
     /// <returns><c>true</c>, If a branch can be placed, <c>false</c> otherwise.</returns>
     private bool CanGrow() {
         // Check Sap Level
+        if (_currentSap < sapCost) {
+            return false;
+        }
 
-        // Check Branch Closeness
+        // Check Branch Closeness (No Branch colliders in min distance)
+        Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
+        foreach (Collider iteratedCollider in colliders) {
+            if (iteratedCollider.tag.Equals(BRANCH_TAG)) {
+                return false;
+            }
+        }
 
         // TODO: Check Cooldown?
         return true;
