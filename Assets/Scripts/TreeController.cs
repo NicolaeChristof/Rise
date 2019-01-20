@@ -6,6 +6,7 @@ public class TreeController : MonoBehaviour {
 
     // public references
     public GameObject reticle;
+    public GameObject branch;
 
     // Local References
     private GameObject _tree;
@@ -78,7 +79,7 @@ public class TreeController : MonoBehaviour {
     /// Performs the growth update logic.
     /// </summary>
     private void OnGrow() {
-        // TODO!
+        Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
     }
 
     /// <summary>
