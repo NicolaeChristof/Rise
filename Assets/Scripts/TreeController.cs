@@ -77,6 +77,7 @@ public class TreeController : MonoBehaviour {
         if (Input.GetButtonDown(GROW)) {
             if (CanGrow()) {
                 Instantiate(branch, _reticle.transform.position, _reticle.transform.rotation);
+                UpdateSap(-sapCost);
             }
         }
     }
