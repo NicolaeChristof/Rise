@@ -5,81 +5,30 @@ using UnityEngine.UI;
 
 public class SapController : MonoBehaviour {
 
-    public float maxSap;
+    // Public Fields
+    public float sapPickup;
 
-    public float sapDrainRate;
-
-    [HideInInspector]
-    public float currentSap;
-
-    private string DRAIN;
+    // Local References
+    private GameObject _treeController;
 
     void Start() {
-
-        if (GameModel.inputGamePad) {
-
-            DRAIN = "RT";
-
-        } else {
-
-            DRAIN = "Keyboard_drain";
-
-        }
-
-        currentSap = maxSap;
-
+        // Resolve local references
+        _treeController = GameObject.Find("Tree Controller");
     }
 
     private void Update() {
-
-        if (Input.GetAxis(DRAIN) > 0f) {
-
-            ChangeCurrentSap(sapDrainRate);
-
-        }
 
     }
 
     private void OnTriggerEnter(Collider other) {
 
         if (other.tag == "Sap") {
+            // Adjust held sap
+            _treeController.GetComponent<TreeController>().UpdateSap(sapPickup);
 
-            ChangeCurrentSap(25f);
-
+            // Remove sap object
             other.gameObject.SetActive(false);
-
             Destroy(other.gameObject);
-
-        }
-
-    }
-
-    private void ChangeCurrentSap(float changeValue) {
-
-        if (changeValue >= 0f) {
-
-            if (currentSap < (maxSap - changeValue)) {
-
-                currentSap += changeValue;
-
-            } else {
-
-                currentSap = maxSap;
-
-            }
-
-        } else {
-
-            if (currentSap > Mathf.Abs(changeValue)) {
-
-                currentSap += changeValue;
-
-            } else {
-
-                currentSap = 0f;
-
-            }
-
         }
     }
 }
