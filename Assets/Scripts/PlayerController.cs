@@ -39,6 +39,8 @@ public class PlayerController : MonoBehaviour {
 
     private float _volume;
 
+    private bool _moving = false;
+
     // Inputs
     private string HORIZONTAL_INPUT;
 
@@ -79,7 +81,9 @@ public class PlayerController : MonoBehaviour {
         // Get input directions
         _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
 
-        if (_moveDirection.x != 0) {
+        if (_moveDirection.x != 0 && !_moving) {
+
+            _moving = true;
 
             _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
@@ -102,6 +106,10 @@ public class PlayerController : MonoBehaviour {
 
             // Face player model outwards towards camera
             playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+
+            // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+
+            _moving = false;
 
         }
 
