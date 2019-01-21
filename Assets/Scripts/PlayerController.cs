@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip jumpSound;
 
+    public AudioClip walkSound;
+
     // Public Fields
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
@@ -76,6 +78,14 @@ public class PlayerController : MonoBehaviour {
 
         // Get input directions
         _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
+
+        if (_moveDirection.x != 0) {
+
+            _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+            _source.PlayOneShot(walkSound, _volume);
+
+        }
 
         // Orient player model
         if (_moveDirection.x < 0) {

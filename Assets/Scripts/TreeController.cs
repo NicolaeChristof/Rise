@@ -51,6 +51,7 @@ public class TreeController : MonoBehaviour {
 
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
+        _source.spatialBlend = 1.0f;
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
