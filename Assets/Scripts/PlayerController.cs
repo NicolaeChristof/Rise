@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
+    // Public References
     public GameObject playerTarget;
 
     public GameObject playerModel;
 
+    public AudioClip jumpSound;
+
+    public AudioClip walkSound;
+
+    // Public Fields
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
 
@@ -17,16 +23,25 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 10.0f)]
     public float maxPlayerDistance;
 
+    // Private References
     private CharacterController _controller;
 
+    private AudioSource _source;
+
+    // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
     private Vector3 _target;
 
-    private Vector3 heading;
+    private Vector3 _heading;
 
-    private float distance;
+    private float _distance;
 
+    private float _volume;
+
+    private bool _moving = false;
+
+    // Inputs
     private string HORIZONTAL_INPUT;
 
     private string VERTICAL_INPUT;
@@ -37,6 +52,8 @@ public class PlayerController : MonoBehaviour {
     void Start() {
         
         _controller = GetComponent<CharacterController>();
+
+        _source = GetComponent<AudioSource>();
 
         if (GameModel.inputGamePad) {
 
@@ -64,6 +81,16 @@ public class PlayerController : MonoBehaviour {
         // Get input directions
         _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
 
+        if (_moveDirection.x != 0 && !_moving) {
+
+            _moving = true;
+
+            _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+            _source.PlayOneShot(walkSound, _volume);
+
+        }
+
         // Orient player model
         if (_moveDirection.x < 0) {
 
@@ -80,6 +107,10 @@ public class PlayerController : MonoBehaviour {
             // Face player model outwards towards camera
             playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
 
+            // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+
+            _moving = false;
+
         }
 
         _moveDirection.x *= speed;
@@ -88,6 +119,10 @@ public class PlayerController : MonoBehaviour {
 
         if (Input.GetButton(JUMP) && _controller.isGrounded) {
 
+            _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+            _source.PlayOneShot(jumpSound, _volume);
+
             _moveDirection.y = jumpSpeed;
 
         }
@@ -95,13 +130,13 @@ public class PlayerController : MonoBehaviour {
         // Apply gravity
         _moveDirection.y -= gravity * Time.deltaTime;
 
-        heading = this.transform.position - playerTarget.transform.position;
+        _heading = this.transform.position - playerTarget.transform.position;
 
-        distance = heading.magnitude;
+        _distance = _heading.magnitude;
 
         // Debug.Log(distance);
 
-        if (distance > maxPlayerDistance) {
+        if (_distance > maxPlayerDistance) {
 
             _moveDirection.z = 6;
 

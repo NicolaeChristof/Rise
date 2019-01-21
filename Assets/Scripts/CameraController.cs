@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour {
 
+    // Public References
     public GameObject player;
 
     public GameObject cameraTarget;
 
+    // Public Fields
     [Range(0.0f, 10.0f)]
     public float cameraSpeed_h;
 
@@ -20,10 +22,18 @@ public class CameraController : MonoBehaviour {
     [Range(1.0f, 10.0f)]
     public float playerDistance;
 
+    // Private References
+    private AudioSource _source;
+
+    // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
     // Start is called before the first frame update
     void Start() {
+
+        _source = GetComponent<AudioSource>();
+
+        _source.Play();
 
         Vector3 target = new Vector3(cameraTarget.transform.position.x,
                                      this.transform.position.y,
