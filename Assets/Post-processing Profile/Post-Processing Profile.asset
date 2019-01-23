@@ -9,40 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
   m_Name: Post-Processing Profile
   m_EditorClassIdentifier: 
-  m_Name: Post-Processing Profile
-  m_EditorClassIdentifier: 
---- !u!114 &114006036324160514
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  focusDistance:
-    overrideState: 0
-    value: 10
-  aperture:
-    overrideState: 0
-    value: 5.6
-  focalLength:
-    overrideState: 0
-    value: 50
-  kernelSize:
-    overrideState: 0
-    value: 1
---- !u!114 &114160738539091676
+  settings:
+  - {fileID: 114230962416330952}
+  - {fileID: 114346846683516614}
+  - {fileID: 114159558015971502}
+--- !u!114 &114159558015971502
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1353,7 +1327,7 @@ MonoBehaviour:
       - 0.5
       - 0.5
       - 0.5
---- !u!114 &114222053019764162
+--- !u!114 &114230962416330952
 MonoBehaviour:
   m_ObjectHideFlags: 3
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1400,3 +1374,31 @@ MonoBehaviour:
   dirtIntensity:
     overrideState: 0
     value: 0
+--- !u!114 &114346846683516614
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
+  m_Name: DepthOfField
+  m_EditorClassIdentifier: 
+  active: 1
+  enabled:
+    overrideState: 1
+    value: 1
+  focusDistance:
+    overrideState: 0
+    value: 10
+  aperture:
+    overrideState: 0
+    value: 5.6
+  focalLength:
+    overrideState: 0
+    value: 50
+  kernelSize:
+    overrideState: 0
+    value: 1
