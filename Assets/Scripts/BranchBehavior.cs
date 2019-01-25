@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BranchBehavior : MonoBehaviour {
+
+	// Public Fields
+	public string readableName = "Normal Branch";
+
 	void Start() {
 
 	}
@@ -11,7 +15,8 @@ public class BranchBehavior : MonoBehaviour {
 
 	}
 
+	// TODO: Internalize? I18n?
 	public virtual string GetReadableName() {
-		return "Normal Branch";
+		return readableName;
 	}
 }

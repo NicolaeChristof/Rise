@@ -10,8 +10,4 @@ public class BranchBehaviorBreaky : BranchBehavior {
 	void Update() {
 
 	}
-
-	public override string GetReadableName() {
-		return "Breaky Branch";
-	}
 }

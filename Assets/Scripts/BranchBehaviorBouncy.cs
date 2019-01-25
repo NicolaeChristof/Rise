@@ -10,8 +10,4 @@ public class BranchBehaviorBouncy : BranchBehavior {
 	void Update() {
 
 	}
-
-	public override string GetReadableName() {
-		return "Bouncy Branch";
-	}
 }

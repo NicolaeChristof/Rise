@@ -10,8 +10,4 @@ public class BranchBehaviorSlippery : BranchBehavior {
 	void Update() {
 
 	}
-
-	public override string GetReadableName() {
-		return "Slippery Branch";
-	}
 }
