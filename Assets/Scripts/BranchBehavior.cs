@@ -16,15 +16,15 @@ public class BranchBehavior : MonoBehaviour {
 	}
 
 	public void OnTriggerEnter(Collider collision) {
-
+		print("Entered " + readableName);
 	}
 
 	public void OnTriggerStay(Collider collision) {
-
+		print("Stay " + readableName);
 	}
 
 	public void OnTriggerExit(Collider collision) {
-
+		print("Exit " + readableName);
 	}
 
 	// TODO: Internalize? I18n?
