@@ -9,8 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6837279178405670046}
+  - component: {fileID: 9065571123867440469}
   m_Layer: 0
-  m_Name: Branch 2
+  m_Name: BranchBouncy
   m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,6 +32,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &9065571123867440469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287e1843451b2471095b0740fb5e9dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!65 &7299926644475468195
 BoxCollider:
   m_ObjectHideFlags: 0

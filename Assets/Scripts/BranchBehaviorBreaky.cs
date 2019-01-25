@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BranchBehavior : MonoBehaviour {
+public class BranchBehaviorBreaky : BranchBehavior {
 	void Start() {
 
 	}
@@ -11,7 +11,7 @@ public class BranchBehavior : MonoBehaviour {
 
 	}
 
-	public virtual string GetReadableName() {
-		return "Normal Branch";
+	public override string GetReadableName() {
+		return "Breaky Branch";
 	}
 }
