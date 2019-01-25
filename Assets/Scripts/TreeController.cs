@@ -277,6 +277,7 @@ public class TreeController : MonoBehaviour {
         _selectedBranch = passedIndex;
         sapSliders[_selectedBranch].gameObject.SetActive(true);
         sapText.text = _currentSap[_selectedBranch].ToString();
+		_uitext.text = _branches[_selectedBranch].GetComponent<BranchBehavior>().GetReadableName();
     }
 
     /// <summary>
