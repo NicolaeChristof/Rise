@@ -51,22 +51,31 @@ public class CameraController : MonoBehaviour {
 
         }
 
-        // Keep camera close to player and out of the ground
-        if ((transform.position.y + _moveDirection.y > groundHeight) &&
-            (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&
-            (transform.position.y + _moveDirection.y < player.transform.position.y + playerDistance)) {
+        if (this.name == "Squirrel Camera") {
 
-            // Handle vertical camera movement
-            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+            // Keep camera close to player and out of the ground
+            if ((transform.position.y + _moveDirection.y > groundHeight) &&
+                (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&
+                (transform.position.y + _moveDirection.y < player.transform.position.y + playerDistance)) {
 
-        } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
-                   (_moveDirection.y < 0)) {
+                // Handle vertical camera movement
+                transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
 
-            // Handle vertical camera movement
-            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+            } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
+                       (_moveDirection.y < 0)) {
 
-        } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
-                   (_moveDirection.y > 0)) {
+                // Handle vertical camera movement
+                transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+            } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
+                       (_moveDirection.y > 0)) {
+
+                // Handle vertical camera movement
+                transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+            }
+
+        } else {
 
             // Handle vertical camera movement
             transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
