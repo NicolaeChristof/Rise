@@ -30,7 +30,7 @@ public class TreeController : MonoBehaviour {
     private string MOVE_VERTICAL = "LS_v";
     private string MOVE_LATERAL = "LS_h";
     private string GROW = "RT";
-    private string SELECT = "DPAD_v";
+    private string SELECT = "RB";
 
     private float _currentSap;
     private int _selectedBranch;
@@ -118,10 +118,22 @@ public class TreeController : MonoBehaviour {
             }
 
             // Handle Branch Selection
-            if (Input.GetButtonDown(SELECT)) {
-                int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
-                int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                Select(selected);
+            if (GameModel.inputGamePad) {
+                // will need to modify this if we want to use dpad, temporarily switching to RB
+                if (Input.GetButtonDown(SELECT) && !GameModel.isSquirrel) {
+                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+                    Select(selected);
+                }
+
+            } else {
+
+                if (Input.GetButtonDown(SELECT) && !GameModel.isSquirrel) {
+                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+                    Select(selected);
+                }
+
             }
 
             // Handle Growth
