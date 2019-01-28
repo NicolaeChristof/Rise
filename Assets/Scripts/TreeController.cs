@@ -57,8 +57,8 @@ public class TreeController : MonoBehaviour {
 
         // If not using gamepad, switch input bindings
         if (!GameModel.inputGamePad) {
-            MOVE_LATERAL = "Keyboard_retical_h";
-            MOVE_VERTICAL = "Keyboard_retical_v";
+            MOVE_LATERAL = "Keyboard_player_h";
+            MOVE_VERTICAL = "Keyboard_player_v";
             GROW = "Keyboard_trigger";
             SELECT = "Keyboard_next";
         }
@@ -79,14 +79,8 @@ public class TreeController : MonoBehaviour {
             if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = Input.GetAxis(MOVE_VERTICAL);
+                moveVertical = -Input.GetAxis(MOVE_VERTICAL);
                 moveLateral = Input.GetAxis(MOVE_LATERAL);
-
-                if (GameModel.inputGamePad) {
-
-                    moveVertical = -moveVertical;
-
-                }
 
                 grow = Input.GetAxis(GROW);
 
