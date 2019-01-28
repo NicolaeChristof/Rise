@@ -69,7 +69,7 @@ public class PlayerController : MonoBehaviour {
 
             JUMP = "A";
 
-            SWAP = "LB";
+            SWAP = "RS_B";
 
         } else {
 
@@ -93,6 +93,8 @@ public class PlayerController : MonoBehaviour {
             if (Input.GetButtonDown(SWAP)) {
 
                 GameModel.isSquirrel = !GameModel.isSquirrel;
+
+                Debug.Log(GameModel.isSquirrel);
 
                 if (GameModel.isSquirrel) {
 

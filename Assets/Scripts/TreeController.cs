@@ -27,8 +27,8 @@ public class TreeController : MonoBehaviour {
     private AudioSource _source;
 
     // Local Fields
-    private string MOVE_VERTICAL = "RS_v";
-    private string MOVE_LATERAL = "RS_h";
+    private string MOVE_VERTICAL = "LS_v";
+    private string MOVE_LATERAL = "LS_h";
     private string GROW = "RT";
     private string SELECT = "DPAD_v";
 
@@ -81,6 +81,13 @@ public class TreeController : MonoBehaviour {
                 // Poll Input
                 moveVertical = Input.GetAxis(MOVE_VERTICAL);
                 moveLateral = Input.GetAxis(MOVE_LATERAL);
+
+                if (GameModel.inputGamePad) {
+
+                    moveVertical = -moveVertical;
+
+                }
+
                 grow = Input.GetAxis(GROW);
 
             } else {
@@ -118,17 +125,36 @@ public class TreeController : MonoBehaviour {
             }
 
             // Handle Growth
-            if (Input.GetButtonDown(GROW) && !GameModel.isSquirrel) {
-                if (CanGrow()) {
-                    // TODO: Switch to growth over time, add vibration and 
-                    float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                    _source.PlayOneShot(growSound, _volume);
-                    Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                    UpdateSap(-sapCost);
+            if (GameModel.inputGamePad && !GameModel.isSquirrel) {
+
+                if (grow > 0) {
+                    if (CanGrow()) {
+                        // TODO: Switch to growth over time, add vibration and 
+                        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                        _source.PlayOneShot(growSound, _volume);
+                        Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                        UpdateSap(-sapCost);
+                    }
+                    else {
+                        // TODO: Feedback if we can't grow!
+                    }
                 }
-                else {
-                    // TODO: Feedback if we can't grow!
+
+            } else {
+
+                if (Input.GetButtonDown(GROW)) {
+                    if (CanGrow()) {
+                        // TODO: Switch to growth over time, add vibration and 
+                        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                        _source.PlayOneShot(growSound, _volume);
+                        Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                        UpdateSap(-sapCost);
+                    }
+                    else {
+                        // TODO: Feedback if we can't grow!
+                    }
                 }
+
             }
 
         }
