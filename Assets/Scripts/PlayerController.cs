@@ -54,6 +54,8 @@ public class PlayerController : MonoBehaviour {
 
     private string SWAP;
 
+    private string PAUSE;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -71,6 +73,8 @@ public class PlayerController : MonoBehaviour {
 
             SWAP = "RS_B";
 
+            PAUSE = "Start";
+
         } else {
 
             HORIZONTAL_INPUT = "Keyboard_player_h";
@@ -81,12 +85,20 @@ public class PlayerController : MonoBehaviour {
 
             SWAP = "Keyboard_swap_player";
 
+            PAUSE = "Pause";
+
         }
 
     }
 
     // Update is called once per frame
     void Update() {
+
+        if (Input.GetButtonDown(PAUSE)) {
+
+            GameModel.paused = !GameModel.paused;
+
+        }
 
         if (!GameModel.paused) {
 
