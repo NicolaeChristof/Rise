@@ -1060,11 +1060,11 @@ GameObject:
   m_Component:
   - component: {fileID: 534669905}
   - component: {fileID: 534669906}
+  - component: {fileID: 534669909}
   - component: {fileID: 534669904}
   - component: {fileID: 534669903}
   - component: {fileID: 534669907}
   - component: {fileID: 534669908}
-  - component: {fileID: 534669909}
   m_Layer: 0
   m_Name: Squirrel Camera
   m_TagString: MainCamera
@@ -1324,6 +1324,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 1273465453}
   treeTransform: {fileID: 469670209}
+  Tree_Controller: {fileID: 395999068}
 --- !u!1001 &574526275
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2076,6 +2077,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1237406275}
   - component: {fileID: 1237406274}
+  - component: {fileID: 1237406269}
   - component: {fileID: 1237406273}
   - component: {fileID: 1237406270}
   m_Layer: 0
@@ -2085,6 +2087,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1237406269
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237406268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 05157a5ff066ce344bcee87d36b77d7e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTransform: {fileID: 1273465453}
+  treeTransform: {fileID: 469670209}
+  Tree_Controller: {fileID: 395999068}
 --- !u!114 &1237406270
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2204,7 +2221,7 @@ MonoBehaviour:
   cameraSpeed_h: 3
   cameraSpeed_v: 0.2
   groundHeight: 2
-  playerDistance: 8
+  playerDistance: 10
 --- !u!4 &1237406275
 Transform:
   m_ObjectHideFlags: 0

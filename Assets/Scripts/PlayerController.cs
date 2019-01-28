@@ -94,8 +94,6 @@ public class PlayerController : MonoBehaviour {
 
                 GameModel.isSquirrel = !GameModel.isSquirrel;
 
-                Debug.Log(GameModel.isSquirrel);
-
                 if (GameModel.isSquirrel) {
 
                     squirrelCamera.enabled = true;

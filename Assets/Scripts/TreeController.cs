@@ -162,6 +162,13 @@ public class TreeController : MonoBehaviour {
     }
 
     /// <summary>
+    /// Returns the current reticle transform
+    /// </summary>
+    public Transform getReticleTransform () {
+        return _reticle.transform;
+    }
+
+    /// <summary>
     /// The quantity of currently-stored sap.
     /// 
     /// When setting, the passed value will be clamped to be between 0 and the maximum value.
