@@ -11,7 +11,7 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
-    public Slider slider;
+    public Slider[] sliders;
     public AudioClip growSound;
 
     // Public Fields
@@ -32,7 +32,7 @@ public class TreeController : MonoBehaviour {
     private string GROW = "RT";
     private string SELECT = "DPAD_v";
 
-    private float _currentSap;
+    private float[] _currentSap;
     private int _selectedBranch;
     private GameObject[] _branches;
 
@@ -55,6 +55,8 @@ public class TreeController : MonoBehaviour {
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
+        _currentSap = new float[_branches.Length];
+
         // If not using gamepad, switch input bindings
         if (!GameModel.inputGamePad) {
             MOVE_LATERAL = "Keyboard_retical_h";
@@ -63,7 +65,10 @@ public class TreeController : MonoBehaviour {
             SELECT = "Keyboard_next";
         }
 
-        UpdateSap(startingSap);
+        for (int i = 0; i < _branches.Length; i++) {
+            UpdateSap(startingSap, i);
+        }
+
         Select(0);
         UpdateReticle();
     }
@@ -107,7 +112,7 @@ public class TreeController : MonoBehaviour {
                 float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
                 _source.PlayOneShot(growSound, _volume);
                 Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                UpdateSap(-sapCost);
+                UpdateSap(-sapCost, _selectedBranch);
             }
             else {
                 // TODO: Feedback if we can't grow!
@@ -122,17 +127,17 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <value>The sap quantity.</value>
     public float Sap {
-        get => _currentSap;
-        set => _currentSap = Mathf.Clamp(value, 0.0F, maxSap);
+        get => _currentSap[_selectedBranch];
+        set => _currentSap[_selectedBranch] = Mathf.Clamp(value, 0.0F, maxSap);
     }
 
     /// <summary>
     /// Modifies the current sap quantity by the passed value.
     /// </summary>
     /// <param name="passedValue">The value to modify the current sap by.</param>
-    public void UpdateSap(float passedValue) {
-        _currentSap = Mathf.Clamp(_currentSap + passedValue, 0.0F, maxSap);
-        slider.value = (_currentSap / maxSap);
+    public void UpdateSap(float passedValue, int branchType) {
+        _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap);
+        sliders[branchType].value = (_currentSap[branchType] / maxSap);
     }
 
     /// <summary>
@@ -150,7 +155,7 @@ public class TreeController : MonoBehaviour {
     /// <returns><c>true</c>, If a branch can be placed, <c>false</c> otherwise.</returns>
     private bool CanGrow() {
         // Check Sap Level
-        if (_currentSap < sapCost) {
+        if (_currentSap[_selectedBranch] < sapCost) {
             return false;
         }
 
