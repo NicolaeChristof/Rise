@@ -63,6 +63,10 @@ public class PlayerController : MonoBehaviour {
 
         _source = GetComponent<AudioSource>();
 
+        squirrelCamera.enabled = true;
+
+        treeCamera.enabled = false;
+
         if (GameModel.inputGamePad) {
 
             HORIZONTAL_INPUT = "LS_h";
