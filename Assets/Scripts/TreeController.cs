@@ -27,10 +27,10 @@ public class TreeController : MonoBehaviour {
     private AudioSource _source;
 
     // Local Fields
-    private string MOVE_VERTICAL = "RS_v";
-    private string MOVE_LATERAL = "RS_h";
+    private string MOVE_VERTICAL = "LS_v";
+    private string MOVE_LATERAL = "LS_h";
     private string GROW = "RT";
-    private string SELECT = "DPAD_v";
+    private string SELECT = "RB";
 
     private float _currentSap;
     private int _selectedBranch;
@@ -57,8 +57,8 @@ public class TreeController : MonoBehaviour {
 
         // If not using gamepad, switch input bindings
         if (!GameModel.inputGamePad) {
-            MOVE_LATERAL = "Keyboard_retical_h";
-            MOVE_VERTICAL = "Keyboard_retical_v";
+            MOVE_LATERAL = "Keyboard_player_h";
+            MOVE_VERTICAL = "Keyboard_player_v";
             GROW = "Keyboard_trigger";
             SELECT = "Keyboard_next";
         }
@@ -69,50 +69,109 @@ public class TreeController : MonoBehaviour {
     }
 
     void Update() {
-        // Poll Input
-        float moveVertical = Input.GetAxis(MOVE_VERTICAL);
-        float moveLateral = Input.GetAxis(MOVE_LATERAL);
-        float grow = Input.GetAxis(GROW);
 
-        bool moved = false;
+        if (!GameModel.paused) {
 
-        // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-        if (CheckEpsilon(moveVertical)) {
-            transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-            moved = true;
-        }
+            float moveVertical;
+            float moveLateral;
+            float grow;
 
-        // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
-        if (CheckEpsilon(moveLateral)) {
-            transform.Translate(Vector3.right * (moveLateral * Time.deltaTime * LATERAL_SPEED), Space.Self);
-            moved = true;
-        }
+            if (!GameModel.isSquirrel) {
 
-        // If the controller was actuated, move the reticle object
-        if (moved) {
-            UpdateReticle();
-        }
+                // Poll Input
+                moveVertical = -Input.GetAxis(MOVE_VERTICAL);
+                moveLateral = Input.GetAxis(MOVE_LATERAL);
 
-        // Handle Branch Selection
-        if (Input.GetButtonDown(SELECT)) {
-            int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
-            int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-            Select(selected);
-        }
+                grow = Input.GetAxis(GROW);
 
-        // Handle Growth
-        if (Input.GetButtonDown(GROW)) {
-            if (CanGrow()) {
-                // TODO: Switch to growth over time, add vibration and 
-                float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                _source.PlayOneShot(growSound, _volume);
-                Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                UpdateSap(-sapCost);
+            } else {
+
+                moveVertical = 0.0f;
+                moveLateral = 0.0f;
+                grow = 0.0f;
+
             }
-            else {
-                // TODO: Feedback if we can't grow!
+
+            bool moved = false;
+
+            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+            if (CheckEpsilon(moveVertical)) {
+                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
+                moved = true;
             }
+
+            // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
+            if (CheckEpsilon(moveLateral)) {
+                transform.Translate(Vector3.right * (moveLateral * Time.deltaTime * LATERAL_SPEED), Space.Self);
+                moved = true;
+            }
+
+            // If the controller was actuated, move the reticle object
+            if (moved) {
+                UpdateReticle();
+            }
+
+            // Handle Branch Selection
+            if (GameModel.inputGamePad) {
+                // will need to modify this if we want to use dpad, temporarily switching to RB
+                if (Input.GetButtonDown(SELECT) && !GameModel.isSquirrel) {
+                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+                    Select(selected);
+                }
+
+            } else {
+
+                if (Input.GetButtonDown(SELECT) && !GameModel.isSquirrel) {
+                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+                    Select(selected);
+                }
+
+            }
+
+            // Handle Growth
+            if (GameModel.inputGamePad && !GameModel.isSquirrel) {
+
+                if (grow > 0) {
+                    if (CanGrow()) {
+                        // TODO: Switch to growth over time, add vibration and 
+                        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                        _source.PlayOneShot(growSound, _volume);
+                        Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                        UpdateSap(-sapCost);
+                    }
+                    else {
+                        // TODO: Feedback if we can't grow!
+                    }
+                }
+
+            } else {
+
+                if (Input.GetButtonDown(GROW)) {
+                    if (CanGrow()) {
+                        // TODO: Switch to growth over time, add vibration and 
+                        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                        _source.PlayOneShot(growSound, _volume);
+                        Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                        UpdateSap(-sapCost);
+                    }
+                    else {
+                        // TODO: Feedback if we can't grow!
+                    }
+                }
+
+            }
+
         }
+
+    }
+
+    /// <summary>
+    /// Returns the current reticle transform
+    /// </summary>
+    public Transform getReticleTransform () {
+        return _reticle.transform;
     }
 
     /// <summary>

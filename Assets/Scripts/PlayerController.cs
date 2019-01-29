@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour {
 
     public GameObject playerModel;
 
+    public Camera squirrelCamera;
+
+    public Camera treeCamera;
+
     public AudioClip jumpSound;
 
     public AudioClip walkSound;
@@ -20,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 40.0f)]
     public float gravity;
 
-    [Range(0.0f, 10.0f)]
+    [Range(0.0f, 20.0f)]
     public float maxPlayerDistance;
 
     // Private References
@@ -48,6 +52,10 @@ public class PlayerController : MonoBehaviour {
 
     private string JUMP;
 
+    private string SWAP;
+
+    private string PAUSE;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -63,6 +71,10 @@ public class PlayerController : MonoBehaviour {
 
             JUMP = "A";
 
+            SWAP = "RS_B";
+
+            PAUSE = "Start";
+
         } else {
 
             HORIZONTAL_INPUT = "Keyboard_player_h";
@@ -71,6 +83,10 @@ public class PlayerController : MonoBehaviour {
 
             JUMP = "Keyboard_jump";
 
+            SWAP = "Keyboard_swap_player";
+
+            PAUSE = "Pause";
+
         }
 
     }
@@ -78,89 +94,130 @@ public class PlayerController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        // Get input directions
-        _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
+        if (Input.GetButtonDown(PAUSE)) {
 
-        if (_moveDirection.x != 0 && !_moving) {
-
-            _moving = true;
-
-            _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-
-            _source.PlayOneShot(walkSound, _volume);
+            GameModel.paused = !GameModel.paused;
 
         }
 
-        // Orient player model
-        if (_moveDirection.x < 0) {
+        if (!GameModel.paused) {
 
-            // Face player model to the left
-            playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
+            if (Input.GetButtonDown(SWAP)) {
 
-        } else if (_moveDirection.x > 0) {
+                GameModel.isSquirrel = !GameModel.isSquirrel;
 
-            // Face player model to the right
-            playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
+                if (GameModel.isSquirrel) {
 
-        } else {
+                    squirrelCamera.enabled = true;
 
-            // Face player model outwards towards camera
-            playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+                    treeCamera.enabled = false;
 
-            // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+                } else {
 
-            _moving = false;
+                    squirrelCamera.enabled = false;
+
+                    treeCamera.enabled = true;
+
+                }
+
+            }
+
+            if (GameModel.isSquirrel) {
+
+                // Get input directions
+                _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
+
+                // Walking sound
+                if (_moveDirection.x != 0 && !_moving) {
+
+                    _moving = true;
+
+                    _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+                    _source.PlayOneShot(walkSound, _volume);
+
+                }
+
+                // Orient player model
+                if (_moveDirection.x < 0) {
+
+                    // Face player model to the left
+                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
+
+                } else if (_moveDirection.x > 0) {
+
+                    // Face player model to the right
+                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
+
+                } else {
+
+                    // Face player model outwards towards camera
+                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+
+                    // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+
+                    _moving = false;
+
+                }
+
+                _moveDirection.x *= speed;
+
+                _moveDirection.z *= speed;
+
+                if (Input.GetButton(JUMP) && _controller.isGrounded) {
+
+                    _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+                    _source.PlayOneShot(jumpSound, _volume);
+
+                    _moveDirection.y = jumpSpeed;
+
+                }
+
+            } else {
+
+                // Drop player if they swapped to tree mode
+                _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
+
+            }
+
+            // Apply gravity
+            _moveDirection.y -= gravity * Time.deltaTime;
+
+            _heading = this.transform.position - playerTarget.transform.position;
+
+            _distance = _heading.magnitude;
+
+            // Debug.Log(_distance);
+
+            if (_distance > maxPlayerDistance) {
+
+                _moveDirection.z = 6;
+
+            }
+
+            // Maintains direction after movement stops
+            _moveDirection = transform.TransformDirection(_moveDirection);
+
+            if (_moveDirection != Vector3.zero) {
+
+                // Faces player towards movement direction
+                transform.forward = _moveDirection;
+
+            }
+
+            // Move the Controller
+            _controller.Move(_moveDirection * Time.deltaTime);
+
+            _target = new Vector3(playerTarget.transform.position.x,
+                                  this.transform.position.y,
+                                  playerTarget.transform.position.z);
+
+            // face the player towards the target
+            transform.LookAt(_target);
 
         }
-
-        _moveDirection.x *= speed;
-
-        _moveDirection.z *= speed;
-
-        if (Input.GetButton(JUMP) && _controller.isGrounded) {
-
-            _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-
-            _source.PlayOneShot(jumpSound, _volume);
-
-            _moveDirection.y = jumpSpeed;
-
-        }
-
-        // Apply gravity
-        _moveDirection.y -= gravity * Time.deltaTime;
-
-        _heading = this.transform.position - playerTarget.transform.position;
-
-        _distance = _heading.magnitude;
-
-        // Debug.Log(distance);
-
-        if (_distance > maxPlayerDistance) {
-
-            _moveDirection.z = 6;
-
-        }
-
-        // Maintains direction after movement stops
-        _moveDirection = transform.TransformDirection(_moveDirection);
-
-        if (_moveDirection != Vector3.zero) {
-
-            // Faces player towards movement direction
-            transform.forward = _moveDirection;
-
-        }
-
-        // Move the Controller
-        _controller.Move(_moveDirection * Time.deltaTime);
-
-        _target = new Vector3(playerTarget.transform.position.x,
-                              this.transform.position.y,
-                              playerTarget.transform.position.z);
-
-        // face the player towards the target
-        transform.LookAt(_target);
 
     }
+
 }
