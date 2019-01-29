@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class GameModel {
 
-    public static bool inputGamePad = true;
+    public static bool inputGamePad = false;
 
     public static bool paused = false;
 
