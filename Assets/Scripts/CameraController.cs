@@ -43,15 +43,7 @@ public class CameraController : MonoBehaviour {
         if (!GameModel.paused) {
 
             // Get input directions
-            if (GameModel.inputGamePad) {
-
-                _moveDirection = new Vector3(Input.GetAxis("RS_h"), Input.GetAxis("RS_v"), 0.0f);
-
-            } else {
-
-                _moveDirection = new Vector3(Input.GetAxis("Keyboard_camera_h"), Input.GetAxis("Keyboard_camera_v"), 0.0f);
-
-            }
+            _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_CAMERA_INPUT), Input.GetAxis(GameModel.VERTICAL_CAMERA_INPUT), 0.0f);
 
             if (this.name == "Squirrel Camera") {
 
