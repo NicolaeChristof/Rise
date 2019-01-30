@@ -45,17 +45,6 @@ public class PlayerController : MonoBehaviour {
 
     private bool _moving = false;
 
-    // Inputs
-    // private string HORIZONTAL_INPUT;
-
-    // private string VERTICAL_INPUT;
-
-    // private string JUMP;
-
-    // private string SWAP;
-
-    // private string PAUSE;
-
     // Start is called before the first frame update
     void Start() {
         
