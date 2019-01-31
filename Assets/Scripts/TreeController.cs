@@ -11,7 +11,8 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
-    public Slider[] sliders;
+    public Slider[] sapSliders;
+    public Text sapText;
     public AudioClip growSound;
 
     // Public Fields
@@ -42,7 +43,6 @@ public class TreeController : MonoBehaviour {
         // Establish local references
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
-        _uitext = GameObject.Find("UIText").GetComponent<Text>();
 
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
@@ -57,9 +57,11 @@ public class TreeController : MonoBehaviour {
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
             if (_selectedBranch != i) {
-                sliders[i].gameObject.SetActive(false);
+                sapSliders[i].gameObject.SetActive(false);
             }
         }
+
+        Select(0);
 
         UpdateReticle();
     }
@@ -187,7 +189,8 @@ public class TreeController : MonoBehaviour {
     /// <param name="passedValue">The value to modify the current sap by.</param>
     public void UpdateSap(float passedValue, int branchType) {
         _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap);
-        sliders[branchType].value = (_currentSap[branchType] / maxSap);
+        sapSliders[branchType].value = (_currentSap[branchType] / maxSap);
+        sapText.text = _currentSap[_selectedBranch].ToString();
     }
 
     /// <summary>
@@ -195,10 +198,10 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
-        sliders[_selectedBranch].gameObject.SetActive(false);
+        sapSliders[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
-        sliders[_selectedBranch].gameObject.SetActive(true);
-        _uitext.text = "Branch Type: " + passedIndex;
+        sapSliders[_selectedBranch].gameObject.SetActive(true);
+        sapText.text = _currentSap[_selectedBranch].ToString();
     }
 
     /// <summary>
