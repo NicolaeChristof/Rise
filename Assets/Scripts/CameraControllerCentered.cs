@@ -7,6 +7,8 @@ public class CameraControllerCentered : MonoBehaviour {
     public Transform playerTransform;
     public Transform treeTransform;
 
+    public TreeController Tree_Controller;
+
     private Camera _cam;
     private Vector3 _camOffset;
     private Vector3 _treeToPlayerAngle;
@@ -24,6 +26,9 @@ public class CameraControllerCentered : MonoBehaviour {
     }
 
     void LateUpdate() {
+        if (this.name == "Tree Camera") {
+            playerTransform = Tree_Controller.getReticleTransform();
+        }
         _treeToPlayerAngle = playerTransform.position - treeTransform.position;
         _unalteredOffset = (_treeToPlayerAngle + treeTransform.position);
         _unalteredOffsetNew = transform.InverseTransformPoint(_unalteredOffset);
