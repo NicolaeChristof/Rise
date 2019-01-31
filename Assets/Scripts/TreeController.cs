@@ -27,11 +27,6 @@ public class TreeController : MonoBehaviour {
     private AudioSource _source;
 
     // Local Fields
-    private string MOVE_VERTICAL = "LS_v";
-    private string MOVE_LATERAL = "LS_h";
-    private string GROW = "RT";
-    private string SELECT = "RB";
-
     private float _currentSap;
     private int _selectedBranch;
     private GameObject[] _branches;
@@ -55,14 +50,6 @@ public class TreeController : MonoBehaviour {
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
-        // If not using gamepad, switch input bindings
-        if (!GameModel.inputGamePad) {
-            MOVE_LATERAL = "Keyboard_player_h";
-            MOVE_VERTICAL = "Keyboard_player_v";
-            GROW = "Keyboard_trigger";
-            SELECT = "Keyboard_next";
-        }
-
         UpdateSap(startingSap);
         Select(0);
         UpdateReticle();
@@ -79,10 +66,10 @@ public class TreeController : MonoBehaviour {
             if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = -Input.GetAxis(MOVE_VERTICAL);
-                moveLateral = Input.GetAxis(MOVE_LATERAL);
+                moveVertical = -Input.GetAxis(GameModel.VERTICAL_INPUT);
+                moveLateral = Input.GetAxis(GameModel.HORIZONTAL_INPUT);
 
-                grow = Input.GetAxis(GROW);
+                grow = Input.GetAxis(GameModel.GROW);
 
             } else {
 
@@ -114,16 +101,16 @@ public class TreeController : MonoBehaviour {
             // Handle Branch Selection
             if (GameModel.inputGamePad) {
                 // will need to modify this if we want to use dpad, temporarily switching to RB
-                if (Input.GetButtonDown(SELECT) && !GameModel.isSquirrel) {
-                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+                if (Input.GetButtonDown(GameModel.SELECT) && !GameModel.isSquirrel) {
+                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
                     int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                     Select(selected);
                 }
 
             } else {
 
-                if (Input.GetButtonDown(SELECT) && !GameModel.isSquirrel) {
-                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(SELECT));
+                if (Input.GetButtonDown(GameModel.SELECT) && !GameModel.isSquirrel) {
+                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
                     int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                     Select(selected);
                 }
@@ -148,7 +135,7 @@ public class TreeController : MonoBehaviour {
 
             } else {
 
-                if (Input.GetButtonDown(GROW)) {
+                if (Input.GetButtonDown(GameModel.GROW)) {
                     if (CanGrow()) {
                         // TODO: Switch to growth over time, add vibration and 
                         float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);

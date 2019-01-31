@@ -45,17 +45,6 @@ public class PlayerController : MonoBehaviour {
 
     private bool _moving = false;
 
-    // Inputs
-    private string HORIZONTAL_INPUT;
-
-    private string VERTICAL_INPUT;
-
-    private string JUMP;
-
-    private string SWAP;
-
-    private string PAUSE;
-
     // Start is called before the first frame update
     void Start() {
         
@@ -63,60 +52,33 @@ public class PlayerController : MonoBehaviour {
 
         _source = GetComponent<AudioSource>();
 
-        if (GameModel.inputGamePad) {
-
-            HORIZONTAL_INPUT = "LS_h";
-
-            VERTICAL_INPUT = "LS_v";
-
-            JUMP = "A";
-
-            SWAP = "RS_B";
-
-            PAUSE = "Start";
-
-        } else {
-
-            HORIZONTAL_INPUT = "Keyboard_player_h";
-
-            VERTICAL_INPUT = "Keyboard_player_v";
-
-            JUMP = "Keyboard_jump";
-
-            SWAP = "Keyboard_swap_player";
-
-            PAUSE = "Pause";
-
-        }
-
     }
 
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetButtonDown(PAUSE)) {
-
-            GameModel.paused = !GameModel.paused;
-
-        }
-
         if (!GameModel.paused) {
 
-            if (Input.GetButtonDown(SWAP)) {
+            // Add  "&& GameModel.singlePlayer" to if statement after multiple inputs are in
+            if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
 
                 GameModel.isSquirrel = !GameModel.isSquirrel;
 
-                if (GameModel.isSquirrel) {
+                if (!GameModel.splitScreen) {
 
-                    squirrelCamera.enabled = true;
+                    if (GameModel.isSquirrel) {
 
-                    treeCamera.enabled = false;
+                        squirrelCamera.enabled = true;
 
-                } else {
+                        treeCamera.enabled = false;
 
-                    squirrelCamera.enabled = false;
+                    } else {
 
-                    treeCamera.enabled = true;
+                        squirrelCamera.enabled = false;
+
+                        treeCamera.enabled = true;
+
+                    }
 
                 }
 
@@ -125,7 +87,7 @@ public class PlayerController : MonoBehaviour {
             if (GameModel.isSquirrel) {
 
                 // Get input directions
-                _moveDirection = new Vector3(Input.GetAxis(HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(VERTICAL_INPUT));
+                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_INPUT));
 
                 // Walking sound
                 if (_moveDirection.x != 0 && !_moving) {
@@ -164,7 +126,7 @@ public class PlayerController : MonoBehaviour {
 
                 _moveDirection.z *= speed;
 
-                if (Input.GetButton(JUMP) && _controller.isGrounded) {
+                if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
 
                     _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
