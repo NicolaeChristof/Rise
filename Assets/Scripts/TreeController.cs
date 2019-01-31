@@ -27,7 +27,7 @@ public class TreeController : MonoBehaviour {
     private AudioSource _source;
 
     // Local Fields
-    private float _currentSap;
+    private float[] _currentSap;
     private int _selectedBranch;
     private GameObject[] _branches;
 
@@ -49,6 +49,8 @@ public class TreeController : MonoBehaviour {
         _source.spatialBlend = 1.0f;
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
+
+        _currentSap = new float[_branches.Length];
 
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
@@ -129,7 +131,7 @@ public class TreeController : MonoBehaviour {
                         float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
                         _source.PlayOneShot(growSound, _volume);
                         Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                        UpdateSap(-sapCost);
+                        UpdateSap(-sapCost, _selectedBranch);
                     }
                     else {
                         // TODO: Feedback if we can't grow!
@@ -144,7 +146,7 @@ public class TreeController : MonoBehaviour {
                         float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
                         _source.PlayOneShot(growSound, _volume);
                         Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                        UpdateSap(-sapCost);
+                        UpdateSap(-sapCost, _selectedBranch);
                     }
                     else {
                         // TODO: Feedback if we can't grow!
