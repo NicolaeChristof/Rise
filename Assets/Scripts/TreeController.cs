@@ -52,11 +52,15 @@ public class TreeController : MonoBehaviour {
 
         _currentSap = new float[_branches.Length];
 
+        Select(0);
+
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
+            if (_selectedBranch != i) {
+                sliders[i].gameObject.SetActive(false);
+            }
         }
 
-        Select(0);
         UpdateReticle();
     }
 
@@ -191,7 +195,9 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
+        sliders[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
+        sliders[_selectedBranch].gameObject.SetActive(true);
         _uitext.text = "Branch Type: " + passedIndex;
     }
 
