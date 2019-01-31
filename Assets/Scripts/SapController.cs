@@ -36,7 +36,7 @@ public class SapController : MonoBehaviour {
         if (other.tag == "Sap") {
 
             if (other.GetComponent<SapType>() != null) {
-                _treeController.UpdateSap(sapPickup, other.GetComponent<SapType>().sapType);
+                _treeController.UpdateSap(other.GetComponent<SapType>().sapValue, other.GetComponent<SapType>().sapType);
             } else {
                 // Adjust held sap
                 _treeController.UpdateSap(sapPickup, 0);

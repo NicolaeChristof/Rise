@@ -5,4 +5,5 @@ using UnityEngine;
 public class SapType : MonoBehaviour
 {
     public int sapType;
+    public int sapValue = 1;
 }
