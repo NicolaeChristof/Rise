@@ -11,7 +11,8 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
-    public Slider slider;
+    public Slider[] sapSliders;
+    public Text sapText;
     public AudioClip growSound;
 
     // Public Fields
@@ -27,7 +28,7 @@ public class TreeController : MonoBehaviour {
     private AudioSource _source;
 
     // Local Fields
-    private float _currentSap;
+    private float[] _currentSap;
     private int _selectedBranch;
     private GameObject[] _branches;
 
@@ -42,7 +43,6 @@ public class TreeController : MonoBehaviour {
         // Establish local references
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
-        _uitext = GameObject.Find("UIText").GetComponent<Text>();
 
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
@@ -50,8 +50,19 @@ public class TreeController : MonoBehaviour {
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
-        UpdateSap(startingSap);
+        _currentSap = new float[_branches.Length];
+
         Select(0);
+
+        for (int i = 0; i < _branches.Length; i++) {
+            UpdateSap(startingSap, i);
+            if (_selectedBranch != i) {
+                sapSliders[i].gameObject.SetActive(false);
+            }
+        }
+
+        Select(0);
+
         UpdateReticle();
     }
 
@@ -126,7 +137,7 @@ public class TreeController : MonoBehaviour {
                         float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
                         _source.PlayOneShot(growSound, _volume);
                         Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                        UpdateSap(-sapCost);
+                        UpdateSap(-sapCost, _selectedBranch);
                     }
                     else {
                         // TODO: Feedback if we can't grow!
@@ -141,7 +152,7 @@ public class TreeController : MonoBehaviour {
                         float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
                         _source.PlayOneShot(growSound, _volume);
                         Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                        UpdateSap(-sapCost);
+                        UpdateSap(-sapCost, _selectedBranch);
                     }
                     else {
                         // TODO: Feedback if we can't grow!
@@ -168,17 +179,18 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <value>The sap quantity.</value>
     public float Sap {
-        get => _currentSap;
-        set => _currentSap = Mathf.Clamp(value, 0.0F, maxSap);
+        get => _currentSap[_selectedBranch];
+        set => _currentSap[_selectedBranch] = Mathf.Clamp(value, 0.0F, maxSap);
     }
 
     /// <summary>
     /// Modifies the current sap quantity by the passed value.
     /// </summary>
     /// <param name="passedValue">The value to modify the current sap by.</param>
-    public void UpdateSap(float passedValue) {
-        _currentSap = Mathf.Clamp(_currentSap + passedValue, 0.0F, maxSap);
-        slider.value = (_currentSap / maxSap);
+    public void UpdateSap(float passedValue, int branchType) {
+        _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap);
+        sapSliders[branchType].value = (_currentSap[branchType] / maxSap);
+        sapText.text = _currentSap[_selectedBranch].ToString();
     }
 
     /// <summary>
@@ -186,8 +198,10 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
+        sapSliders[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
-        _uitext.text = "Branch Type: " + passedIndex;
+        sapSliders[_selectedBranch].gameObject.SetActive(true);
+        sapText.text = _currentSap[_selectedBranch].ToString();
     }
 
     /// <summary>
@@ -196,7 +210,7 @@ public class TreeController : MonoBehaviour {
     /// <returns><c>true</c>, If a branch can be placed, <c>false</c> otherwise.</returns>
     private bool CanGrow() {
         // Check Sap Level
-        if (_currentSap < sapCost) {
+        if (_currentSap[_selectedBranch] < sapCost) {
             return false;
         }
 

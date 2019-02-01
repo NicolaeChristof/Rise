@@ -16,6 +16,8 @@ public class SapController : MonoBehaviour {
 
     private AudioSource _source;
 
+    private SapType _sapType;
+
     void Start() {
 
         _source = GetComponent<AudioSource>();
@@ -32,9 +34,13 @@ public class SapController : MonoBehaviour {
     private void OnTriggerEnter(Collider other) {
 
         if (other.tag == "Sap") {
-            
-            // Adjust held sap
-            _treeController.UpdateSap(sapPickup);
+
+            if (other.GetComponent<SapType>() != null) {
+                _treeController.UpdateSap(other.GetComponent<SapType>().sapValue, other.GetComponent<SapType>().sapType);
+            } else {
+                // Adjust held sap
+                _treeController.UpdateSap(sapPickup, 0);
+            }
 
             // Play sound
             float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);

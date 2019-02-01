@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3b0d782feb23f747b60a01c2439d70f, type: 2}
+  - {fileID: 2100000, guid: a2cd4911a3fea1346a5c9c3002881b60, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -118,7 +118,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 2
-  m_Color: {r: 0.9950158, g: 1, b: 0.6273585, a: 1}
+  m_Color: {r: 0.62441504, g: 0.8773585, b: 0.30210927, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -156,8 +156,9 @@ GameObject:
   m_Component:
   - component: {fileID: 8054649134457348853}
   - component: {fileID: 4239923448075859978}
+  - component: {fileID: 6958240571181792006}
   m_Layer: 0
-  m_Name: Sap
+  m_Name: Sap_Green
   m_TagString: Sap
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -192,3 +193,17 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.75, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &6958240571181792006
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092395956840239951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd57f85280045a447a1e4c85f14c7ae3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sapType: 1
+  sapValue: 1
