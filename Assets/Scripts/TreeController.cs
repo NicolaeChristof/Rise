@@ -74,21 +74,35 @@ public class TreeController : MonoBehaviour {
             float moveLateral;
             float grow;
 
-            if (!GameModel.isSquirrel) {
+            if (GameModel.singlePlayer) {
 
-                // Poll Input
-                moveVertical = -Input.GetAxis(GameModel.VERTICAL_INPUT);
-                moveLateral = Input.GetAxis(GameModel.HORIZONTAL_INPUT);
+                if (!GameModel.isSquirrel) {
 
-                grow = Input.GetAxis(GameModel.GROW);
+                    // Poll Input
+                    moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+                    moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+
+                    grow = Input.GetAxis(GameModel.GROW);
+
+                } else {
+
+                    moveVertical = 0.0f;
+                    moveLateral = 0.0f;
+                    grow = 0.0f;
+
+                }
 
             } else {
 
-                moveVertical = 0.0f;
-                moveLateral = 0.0f;
-                grow = 0.0f;
+                // Poll Input
+                moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+                moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+
+                grow = Input.GetAxis(GameModel.GROW);
 
             }
+
+            
 
             bool moved = false;
 
@@ -110,20 +124,24 @@ public class TreeController : MonoBehaviour {
             }
 
             // Handle Branch Selection
-            if (GameModel.inputGamePad) {
-                // will need to modify this if we want to use dpad, temporarily switching to RB
-                if (Input.GetButtonDown(GameModel.SELECT) && !GameModel.isSquirrel) {
+            if (Input.GetButtonDown(GameModel.SELECT)) {
+
+                if (GameModel.singlePlayer) {
+
+                    if (!GameModel.isSquirrel) {
+
+                        int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
+                        int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+                        Select(selected);
+
+                    }
+
+                } else {
+
                     int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
                     int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                     Select(selected);
-                }
 
-            } else {
-
-                if (Input.GetButtonDown(GameModel.SELECT) && !GameModel.isSquirrel) {
-                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
-                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                    Select(selected);
                 }
 
             }

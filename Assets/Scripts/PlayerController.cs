@@ -59,7 +59,6 @@ public class PlayerController : MonoBehaviour {
 
         if (!GameModel.paused) {
 
-            // Add  "&& GameModel.singlePlayer" to if statement after multiple inputs are in
             if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
 
                 GameModel.isSquirrel = !GameModel.isSquirrel;
@@ -87,7 +86,7 @@ public class PlayerController : MonoBehaviour {
             if (GameModel.isSquirrel) {
 
                 // Get input directions
-                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_INPUT));
+                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
 
                 // Walking sound
                 if (_moveDirection.x != 0 && !_moving) {

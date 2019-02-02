@@ -42,39 +42,59 @@ public class CameraController : MonoBehaviour {
 
         if (!GameModel.paused) {
 
-            // Get input directions
-            _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_CAMERA_INPUT), Input.GetAxis(GameModel.VERTICAL_CAMERA_INPUT), 0.0f);
+            if (GameModel.singlePlayer) {
 
-            if (this.name == "Squirrel Camera") {
+                if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
 
-                // Keep camera close to player and out of the ground
-                if ((transform.position.y + _moveDirection.y > groundHeight) &&
-                    (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&
-                    (transform.position.y + _moveDirection.y < player.transform.position.y + playerDistance)) {
+                    // Get input directions
+                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT), Input.GetAxis(GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT), 0.0f);
 
-                    // Handle vertical camera movement
-                    transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+                } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
 
-                } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
-                           (_moveDirection.y < 0)) {
-
-                    // Handle vertical camera movement
-                    transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
-
-                } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
-                           (_moveDirection.y > 0)) {
-
-                    // Handle vertical camera movement
-                    transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
-
+                    // Get input directions
+                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_TREE_CAMERA_INPUT), Input.GetAxis(GameModel.VERTICAL_TREE_CAMERA_INPUT), 0.0f);
                 }
 
             } else {
 
-                // Handle vertical camera movement
-                transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+                if (this.name == "Squirrel Camera") {
+
+                    // Get input directions
+                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT), Input.GetAxis(GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT), 0.0f);
+
+                } else if (this.name == "Tree Camera") {
+
+                    // Get input directions
+                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_TREE_CAMERA_INPUT), Input.GetAxis(GameModel.VERTICAL_TREE_CAMERA_INPUT), 0.0f);
+
+                }
 
             }
+
+            //     // Keep camera close to player and out of the ground
+            //     if ((transform.position.y + _moveDirection.y > groundHeight) &&
+            //         (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&
+            //         (transform.position.y + _moveDirection.y < player.transform.position.y + playerDistance)) {
+
+            //         // Handle vertical camera movement
+            //         transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+            //     } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
+            //                (_moveDirection.y < 0)) {
+
+            //         // Handle vertical camera movement
+            //         transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+            //     } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
+            //                (_moveDirection.y > 0)) {
+
+            //         // Handle vertical camera movement
+            //         transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+            //     }
+
+             // Handle vertical camera movement
+            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
 
             Vector3 target = new Vector3(cameraTarget.transform.position.x,
                                          this.transform.position.y,

@@ -23,12 +23,13 @@ public class CameraControllerCentered : MonoBehaviour {
         _cam = GetComponent<Camera>();
         _camOffset = transform.position - playerTransform.position;
         _playerController = playerTransform.GetComponent<PlayerController>();
-    }
 
-    void LateUpdate() {
         if (this.name == "Tree Camera") {
             playerTransform = Tree_Controller.getReticleTransform();
         }
+    }
+
+    void LateUpdate() {
         _treeToPlayerAngle = playerTransform.position - treeTransform.position;
         _unalteredOffset = (_treeToPlayerAngle + treeTransform.position);
         _unalteredOffsetNew = transform.InverseTransformPoint(_unalteredOffset);
