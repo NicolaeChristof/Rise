@@ -11,6 +11,7 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
+    public GameObject player;
     public Slider[] sapSliders;
     public Text sapText;
     public AudioClip growSound;
@@ -20,6 +21,12 @@ public class TreeController : MonoBehaviour {
     public float minDistance;
     public float sapCost;
     public float startingSap;
+
+    [Range(0.0f, 10.0f)]
+    public float groundHeight;
+
+    [Range(1.0f, 10.0f)]
+    public float playerDistance;
 
     // Local References
     private GameObject _tree;
@@ -78,8 +85,6 @@ public class TreeController : MonoBehaviour {
 
                 if (!GameModel.isSquirrel) {
 
-                    Debug.Log(GameModel.GROW);
-
                     // Poll Input
                     moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
                     moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
@@ -97,7 +102,7 @@ public class TreeController : MonoBehaviour {
             } else {
 
                 // Poll Input
-                moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+                moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
                 moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
 
                 grow = Input.GetAxis(GameModel.GROW);
@@ -106,10 +111,35 @@ public class TreeController : MonoBehaviour {
 
             bool moved = false;
 
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                moved = true;
+            // Keep tree player close to squirrel player and out of the ground
+            if (//(transform.position.y - moveVertical > groundHeight) && // need to spawn retical above ground before we can implement this
+                (transform.position.y - moveVertical > player.transform.position.y - playerDistance) &&
+                (transform.position.y - moveVertical < player.transform.position.y + playerDistance)) {
+
+                // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+                if (CheckEpsilon(moveVertical)) {
+                    transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
+                    moved = true;
+                }
+
+            } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
+                       (moveVertical > 0)) {
+
+                // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+                if (CheckEpsilon(moveVertical)) {
+                    transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
+                    moved = true;
+                }
+
+            } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
+                       (moveVertical < 0)) {
+
+                // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+                if (CheckEpsilon(moveVertical)) {
+                    transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
+                    moved = true;
+                }
+
             }
 
             // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
@@ -187,17 +217,21 @@ public class TreeController : MonoBehaviour {
 
             } else {
 
-                if (Input.GetButtonDown(GameModel.GROW)) {
-                    if (CanGrow()) {
-                        // TODO: Switch to growth over time, add vibration and 
-                        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                        _source.PlayOneShot(growSound, _volume);
-                        Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                        UpdateSap(-sapCost, _selectedBranch);
+                if (!GameModel.isSquirrel) {
+
+                    if (Input.GetButtonDown(GameModel.GROW)) {
+                        if (CanGrow()) {
+                            // TODO: Switch to growth over time, add vibration and 
+                            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                            _source.PlayOneShot(growSound, _volume);
+                            Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                            UpdateSap(-sapCost, _selectedBranch);
+                        }
+                        else {
+                            // TODO: Feedback if we can't grow!
+                        }
                     }
-                    else {
-                        // TODO: Feedback if we can't grow!
-                    }
+
                 }
 
             }

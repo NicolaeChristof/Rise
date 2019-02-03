@@ -5,8 +5,6 @@ using UnityEngine;
 public class CameraController : MonoBehaviour {
 
     // Public References
-    public GameObject player;
-
     public GameObject cameraTarget;
 
     // Public Fields
@@ -15,12 +13,6 @@ public class CameraController : MonoBehaviour {
 
     [Range(0.0f, 1.0f)]
     public float cameraSpeed_v;
-
-    [Range(0.0f, 10.0f)]
-    public float groundHeight;
-
-    [Range(1.0f, 10.0f)]
-    public float playerDistance;
 
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
@@ -70,31 +62,6 @@ public class CameraController : MonoBehaviour {
                 }
 
             }
-
-            // PLEASE KEEP THE COMMENTED CODE BELOW FOR NOW
-            // I PLAN TO USE IT LATER
-
-            //     // Keep camera close to player and out of the ground
-            //     if ((transform.position.y + _moveDirection.y > groundHeight) &&
-            //         (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&
-            //         (transform.position.y + _moveDirection.y < player.transform.position.y + playerDistance)) {
-
-            //         // Handle vertical camera movement
-            //         transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
-
-            //     } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
-            //                (_moveDirection.y < 0)) {
-
-            //         // Handle vertical camera movement
-            //         transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
-
-            //     } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
-            //                (_moveDirection.y > 0)) {
-
-            //         // Handle vertical camera movement
-            //         transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
-
-            //     }
 
              // Handle vertical camera movement
             transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
