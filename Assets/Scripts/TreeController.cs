@@ -78,6 +78,8 @@ public class TreeController : MonoBehaviour {
 
                 if (!GameModel.isSquirrel) {
 
+                    Debug.Log(GameModel.GROW);
+
                     // Poll Input
                     moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
                     moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
