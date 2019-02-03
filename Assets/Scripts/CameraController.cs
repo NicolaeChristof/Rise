@@ -71,6 +71,9 @@ public class CameraController : MonoBehaviour {
 
             }
 
+            // PLEASE KEEP THE COMMENTED CODE BELOW FOR NOW
+            // I PLAN TO USE IT LATER
+
             //     // Keep camera close to player and out of the ground
             //     if ((transform.position.y + _moveDirection.y > groundHeight) &&
             //         (transform.position.y + _moveDirection.y > player.transform.position.y - playerDistance) &&

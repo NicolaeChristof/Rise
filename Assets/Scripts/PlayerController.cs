@@ -125,6 +125,8 @@ public class PlayerController : MonoBehaviour {
 
                 _moveDirection.z *= speed;
 
+                Debug.Log(GameModel.JUMP);
+
                 if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
 
                     _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
