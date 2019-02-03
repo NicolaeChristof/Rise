@@ -102,8 +102,6 @@ public class TreeController : MonoBehaviour {
 
             }
 
-            
-
             bool moved = false;
 
             // If vertical axis is actuated beyond epsilon value, translate reticle vertically
@@ -147,19 +145,42 @@ public class TreeController : MonoBehaviour {
             }
 
             // Handle Growth
-            if (GameModel.inputGamePad && !GameModel.isSquirrel) {
+            if (GameModel.inputGamePad) {
 
-                if (grow > 0) {
-                    if (CanGrow()) {
-                        // TODO: Switch to growth over time, add vibration and 
-                        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                        _source.PlayOneShot(growSound, _volume);
-                        Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                        UpdateSap(-sapCost, _selectedBranch);
+                if (GameModel.singlePlayer) {
+
+                    if (!GameModel.isSquirrel) {
+
+                        if (grow > 0) {
+                            if (CanGrow()) {
+                                // TODO: Switch to growth over time, add vibration and 
+                                float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                                _source.PlayOneShot(growSound, _volume);
+                                Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                                UpdateSap(-sapCost, _selectedBranch);
+                            }
+                            else {
+                                // TODO: Feedback if we can't grow!
+                            }
+                        }
+
                     }
-                    else {
-                        // TODO: Feedback if we can't grow!
+
+                } else {
+
+                    if (grow > 0) {
+                        if (CanGrow()) {
+                            // TODO: Switch to growth over time, add vibration and 
+                            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                            _source.PlayOneShot(growSound, _volume);
+                            Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+                            UpdateSap(-sapCost, _selectedBranch);
+                        }
+                        else {
+                            // TODO: Feedback if we can't grow!
+                        }
                     }
+
                 }
 
             } else {

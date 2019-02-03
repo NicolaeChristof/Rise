@@ -11,6 +11,13 @@ public class SettingsController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 
+        // Can only use keyboard in single player mode
+        if (!GameModel.inputGamePad) {
+
+            GameModel.singlePlayer = true;
+
+        }
+
         // Single/Multi Player Settings
         if (GameModel.singlePlayer) {
 
