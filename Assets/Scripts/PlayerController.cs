@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip walkSound;
 
+    public Slider treeSlider;
+
     // Public Fields
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
@@ -26,6 +29,11 @@ public class PlayerController : MonoBehaviour {
 
     [Range(0.0f, 20.0f)]
     public float maxPlayerDistance;
+
+    // The height of a real-life squirrel
+    public float realSquirrelHeight;
+
+    public Text heightText;
 
     // Private References
     private CharacterController _controller;
@@ -45,12 +53,26 @@ public class PlayerController : MonoBehaviour {
 
     private bool _moving = false;
 
+    private float _realToVirtualRatio;
+
+    private float _heightOffset = 2.25f;
+
+    private float _currentHeight;
+
+    private float _currentHeightActual;
+
+    private float _treeHeight;
+
     // Start is called before the first frame update
     void Start() {
         
         _controller = GetComponent<CharacterController>();
 
         _source = GetComponent<AudioSource>();
+
+        _realToVirtualRatio = realSquirrelHeight / _controller.height;
+
+        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
 
     }
 
@@ -179,6 +201,14 @@ public class PlayerController : MonoBehaviour {
             transform.LookAt(_target);
 
         }
+
+        _currentHeight = transform.position.y - _heightOffset;
+        _currentHeightActual =  _currentHeight * _realToVirtualRatio;
+
+        // https://answers.unity.com/questions/50391/how-to-round-a-float-to-2-dp.html
+        heightText.text = "Height: " + _currentHeightActual.ToString("F1") + "m";
+
+        treeSlider.value = _currentHeight / _treeHeight;
 
     }
 
