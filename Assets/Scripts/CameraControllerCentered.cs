@@ -36,13 +36,29 @@ public class CameraControllerCentered : MonoBehaviour {
     void LateUpdate() {
 
         // Get input directions
-        if (this.name == "Squirrel Camera") {
+        if (GameModel.singlePlayer) {
 
-            _zoom = new Vector3(0.0f, 0.0f, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT));
+            if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
+
+                _zoom = new Vector3(0.0f, 0.0f, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT));
+
+            } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
+
+                _zoom = new Vector3(0.0f, 0.0f, Input.GetAxis(GameModel.VERTICAL_TREE_CAMERA_INPUT));
+        
+            }
 
         } else {
 
-            _zoom = new Vector3(0.0f, 0.0f, Input.GetAxis(GameModel.VERTICAL_TREE_CAMERA_INPUT));
+            if (this.name == "Squirrel Camera") {
+
+                _zoom = new Vector3(0.0f, 0.0f, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT));
+
+            } else if (this.name == "Tree Camera") {
+
+                _zoom = new Vector3(0.0f, 0.0f, Input.GetAxis(GameModel.VERTICAL_TREE_CAMERA_INPUT));
+
+            }
 
         }
 
