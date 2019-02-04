@@ -88,6 +88,9 @@ public class PlayerController : MonoBehaviour {
                 // Get input directions
                 _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
 
+                // Disable z axis movement
+                _moveDirection.z = 1.0f;
+
                 // Walking sound
                 if (_moveDirection.x != 0 && !_moving) {
 
@@ -144,18 +147,6 @@ public class PlayerController : MonoBehaviour {
 
             // Apply gravity
             _moveDirection.y -= gravity * Time.deltaTime;
-
-            _heading = this.transform.position - playerTarget.transform.position;
-
-            _distance = _heading.magnitude;
-
-            // Debug.Log(_distance);
-
-            if (_distance > maxPlayerDistance) {
-
-                _moveDirection.z = 6;
-
-            }
 
             // Maintains direction after movement stops
             _moveDirection = transform.TransformDirection(_moveDirection);
