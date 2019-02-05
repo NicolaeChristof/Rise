@@ -16,7 +16,7 @@ public class TreeController : MonoBehaviour {
     public AudioClip growSound;
 
     // Public Fields
-    public float maxSap;
+    public float[] maxSap;
     public float minDistance;
     public float sapCost;
     public float startingSap;
@@ -51,6 +51,8 @@ public class TreeController : MonoBehaviour {
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
         _currentSap = new float[_branches.Length];
+
+        maxSap = new float[] { 8f, 10f, 10f, 8f };
 
         Select(0);
 
@@ -180,7 +182,7 @@ public class TreeController : MonoBehaviour {
     /// <value>The sap quantity.</value>
     public float Sap {
         get => _currentSap[_selectedBranch];
-        set => _currentSap[_selectedBranch] = Mathf.Clamp(value, 0.0F, maxSap);
+        set => _currentSap[_selectedBranch] = Mathf.Clamp(value, 0.0F, maxSap[_selectedBranch]);
     }
 
     /// <summary>
@@ -188,8 +190,8 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedValue">The value to modify the current sap by.</param>
     public void UpdateSap(float passedValue, int branchType) {
-        _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap);
-        sapSliders[branchType].value = (_currentSap[branchType] / maxSap);
+        _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
+        sapSliders[branchType].value = (_currentSap[branchType] / maxSap[_selectedBranch]);
         sapText.text = _currentSap[_selectedBranch].ToString();
     }
 
