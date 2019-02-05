@@ -57,7 +57,7 @@ public class TextureController : MonoBehaviour {
 
         float height, slope;
 
-        Vector3 normal;
+        // Vector3 normal;
 
         textureMap = new float[alphaWidth, alphaHeight, alphaLayers];
 

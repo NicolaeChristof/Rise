@@ -73,8 +73,8 @@ InputManager:
     m_Name: RS_h_P1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -89,8 +89,8 @@ InputManager:
     m_Name: RS_h_P2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: left
-    positiveButton: right
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
@@ -105,15 +105,15 @@ InputManager:
     m_Name: RS_v_P1
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.6
     sensitivity: 3
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
     axis: 4
     joyNum: 1
@@ -121,15 +121,15 @@ InputManager:
     m_Name: RS_v_P2
     descriptiveName: 
     descriptiveNegativeName: 
-    negativeButton: down
-    positiveButton: up
+    negativeButton: 
+    positiveButton: 
     altNegativeButton: 
     altPositiveButton: 
     gravity: 3
     dead: 0.6
     sensitivity: 3
     snap: 1
-    invert: 1
+    invert: 0
     type: 2
     axis: 4
     joyNum: 2
@@ -641,7 +641,7 @@ InputManager:
     dead: 0.001
     sensitivity: 1000
     snap: 0
-    invert: 0
+    invert: 1
     type: 0
     axis: 0
     joyNum: 0
