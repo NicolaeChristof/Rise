@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   readableName: Normal Branch
+  knot: {fileID: 8174824283699533124, guid: 4da7af38e76f44fe2a91e4a958725025, type: 3}
 --- !u!1001 &5544203855101796011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -80,18 +81,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6837279178405670046}
     m_Modifications:
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Name
-      value: UglyBranch
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_TagString
-      value: Branch
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Name
-      value: Mesh
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -135,6 +124,18 @@ PrefabInstance:
     - target: {fileID: 400002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_Name
+      value: UglyBranch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_TagString
+      value: Branch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_Name
+      value: Mesh
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
