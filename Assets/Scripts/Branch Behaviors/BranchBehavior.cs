@@ -28,7 +28,7 @@ public class BranchBehavior : MonoBehaviour {
 		print("Exit " + readableName);
 	}
 
-	public void OnDestroy() {
+	public void OnBreak() {
 		// TODO: Play break sound
 		Instantiate(knot, transform.position, transform.rotation);
 	}

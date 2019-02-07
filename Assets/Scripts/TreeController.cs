@@ -231,6 +231,7 @@ public class TreeController : MonoBehaviour {
 					}
 				}
 				if (closestBranch != null) {
+					closestBranch.GetComponent<BranchBehavior>().OnBreak();
 					Object.Destroy(closestBranch);
 				}
 			}
