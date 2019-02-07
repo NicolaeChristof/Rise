@@ -35,11 +35,9 @@ public class PlayerController : MonoBehaviour {
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
+    private Vector3 _externalForce = Vector3.zero;
+
     private Vector3 _target;
-
-    private Vector3 _heading;
-
-    private float _distance;
 
     private float _volume;
 
@@ -148,6 +146,11 @@ public class PlayerController : MonoBehaviour {
             // Apply gravity
             _moveDirection.y -= gravity * Time.deltaTime;
 
+            // Apply external force
+            _moveDirection += _externalForce;
+
+            _externalForce = new Vector3(0.0f, 0.0f, 0.0f);
+
             // Maintains direction after movement stops
             _moveDirection = transform.TransformDirection(_moveDirection);
 
@@ -169,6 +172,14 @@ public class PlayerController : MonoBehaviour {
             transform.LookAt(_target);
 
         }
+
+    }
+
+    public void addExternalForce (Vector3 force) {
+
+        _externalForce += force;
+
+        Debug.Log(_externalForce);
 
     }
 

@@ -5,9 +5,9 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = true;
+    public static bool inputGamePad = false;
 
-    public static bool singlePlayer = false;
+    public static bool singlePlayer = true;
 
     public static bool splitScreen = true;
 
