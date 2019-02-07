@@ -7,6 +7,12 @@ public class BranchBehaviorBouncy : BranchBehavior {
 
 	}
 
+	public override void OnTriggerEnter(Collider collision) {
+		if (collision.gameObject.tag.Equals("Player")) {
+			print("player entered");
+		}
+	}
+
 	void Update() {
 
 	}
