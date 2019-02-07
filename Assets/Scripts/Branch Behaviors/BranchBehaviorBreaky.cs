@@ -10,4 +10,8 @@ public class BranchBehaviorBreaky : BranchBehavior {
 	void Update() {
 
 	}
+
+	public override void OnTriggerEnter(Collider collision) {
+		print("Entered " + readableName);
+	}
 }
