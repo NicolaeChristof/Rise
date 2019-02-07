@@ -11,7 +11,7 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
-    public Slider[] sapSliders;
+    public Image[,] branchLeaves;
     public Text sapText;
     public AudioClip growSound;
 
@@ -39,6 +39,9 @@ public class TreeController : MonoBehaviour {
     private const float EPSILON = 0.01F;
     private const float DISTANCE = 2.0F;
 
+    [SerializeField]
+    private Image[] sapSliders = new Image[1];
+
     void Start() {
         // Establish local references
         _tree = GameObject.Find("Tree");
@@ -52,7 +55,27 @@ public class TreeController : MonoBehaviour {
 
         _currentSap = new float[_branches.Length];
 
-        maxSap = new float[] { 8f, 10f, 10f, 8f };
+        maxSap = new float[] { 11f };
+
+        branchLeaves = new Image[_branches.Length, (int)Mathf.Max(maxSap)+1];
+
+        for(int i=0; i<_branches.Length; i++) {
+            Component[] components = new Component[sapSliders[i].GetComponentsInChildren<Image>().Length];
+            components = sapSliders[i].GetComponentsInChildren<Image>();
+
+            Debug.Log(components.Length);
+
+            for(int j=1; j<components.Length; j++) {
+                int leftMost = int.MaxValue;
+
+                for(int k=0; k<components.Length; k++) {
+                    if(components[k].transform.position.x < leftMost && components[k] != GetComponentInParent<Image>()) {
+                        leftMost = k;
+                    }
+                }
+                branchLeaves[i, j] = (Image)components[leftMost];
+            }
+        }
 
         Select(0);
 
@@ -191,7 +214,7 @@ public class TreeController : MonoBehaviour {
     /// <param name="passedValue">The value to modify the current sap by.</param>
     public void UpdateSap(float passedValue, int branchType) {
         _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
-        sapSliders[branchType].value = (_currentSap[branchType] / maxSap[_selectedBranch]);
+        (branchLeaves[branchType, (int)_currentSap[branchType]-1]).gameObject.SetActive(false);
         sapText.text = _currentSap[_selectedBranch].ToString();
     }
 
