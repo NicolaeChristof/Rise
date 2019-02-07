@@ -35,6 +35,8 @@ public class PlayerController : MonoBehaviour {
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
+	private Vector3 _velocity = Vector3.zero;
+
     private Vector3 _target;
 
     private Vector3 _heading;
@@ -158,8 +160,9 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            // Move the Controller
-            _controller.Move(_moveDirection * Time.deltaTime);
+			// Move the Controller
+			ApplyVelocity();
+			ApplyMotion(_moveDirection);
 
             _target = new Vector3(playerTarget.transform.position.x,
                                   this.transform.position.y,
@@ -171,5 +174,28 @@ public class PlayerController : MonoBehaviour {
         }
 
     }
+
+	public Vector3 GetMoveDirection() {
+		return _moveDirection;
+	}
+
+	public void SetVelocity(Vector3 passedVelocityVector) {
+		_velocity = passedVelocityVector;
+	}
+
+	private void ApplyVelocity() {
+		// Apply velocity to move direction vector
+		_moveDirection = _moveDirection + (_velocity * Time.deltaTime);
+
+		// Apply velocity falloff TODO: Fix me. This is currently tied to gravity.
+		float falloff = (gravity * Time.deltaTime);
+		_velocity.x = Mathf.Clamp(_velocity.x - (falloff * Mathf.Sign(_velocity.x)), 0, float.MaxValue);
+		_velocity.y = Mathf.Clamp(_velocity.y - (falloff * Mathf.Sign(_velocity.y)), 0, float.MaxValue);
+		_velocity.z = Mathf.Clamp(_velocity.z - (falloff * Mathf.Sign(_velocity.z)), 0, float.MaxValue);
+	}
+
+	private void ApplyMotion(Vector3 passedMotionVector) {
+		_controller.Move(passedMotionVector * Time.deltaTime);
+	}
 
 }
