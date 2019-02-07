@@ -215,7 +215,26 @@ public class TreeController : MonoBehaviour {
 
                 }
 
-            } else {
+			}
+			// Handle Break
+			else if (Input.GetButtonDown(GameModel.BREAK)) {
+				float distance = float.MaxValue;
+				GameObject closestBranch = null;
+				Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
+				foreach (Collider iteratedCollider in colliders) {
+					if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
+						float currentDistance = Vector3.Distance(iteratedCollider.transform.position, _reticle.transform.position);
+						if (currentDistance < distance) {
+							distance = currentDistance;
+							closestBranch = iteratedCollider.gameObject;
+						}
+					}
+				}
+				if (closestBranch != null) {
+					Object.Destroy(closestBranch);
+				}
+			}
+			else {
 
                 if (!GameModel.isSquirrel) {
 
