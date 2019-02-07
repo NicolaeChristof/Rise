@@ -74,6 +74,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readableName: Breaky Branch
   knot: {fileID: 8174824283699533124, guid: 4da7af38e76f44fe2a91e4a958725025, type: 3}
+  maxLandings: 3
 --- !u!114 &4693429241623209897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -88,6 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   readableName: Normal Branch
   knot: {fileID: 0}
+  maxLandings: 3
 --- !u!1001 &5544203855101796011
 PrefabInstance:
   m_ObjectHideFlags: 0

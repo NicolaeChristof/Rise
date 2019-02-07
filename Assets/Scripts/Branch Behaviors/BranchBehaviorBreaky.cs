@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BranchBehaviorBreaky : BranchBehavior {
+
+	// Public Fields
+	public int maxLandings;
+
+	// Local Fields
+	private int _landings;
+
 	void Start() {
 
 	}
@@ -12,6 +19,10 @@ public class BranchBehaviorBreaky : BranchBehavior {
 	}
 
 	public override void OnTriggerEnter(Collider collision) {
-		print("Entered " + readableName);
+		_landings += 1;
+		if (_landings > maxLandings) {
+			OnBreak();
+			Object.Destroy(gameObject);
+		}
 	}
 }
