@@ -17,15 +17,15 @@ public class BranchBehavior : MonoBehaviour {
 	}
 
 	public virtual void OnTriggerEnter(Collider collision) {
-		print("Entered " + readableName);
+
 	}
 
 	public virtual void OnTriggerStay(Collider collision) {
-		print("Stay " + readableName);
+
 	}
 
 	public virtual void OnTriggerExit(Collider collision) {
-		print("Exit " + readableName);
+
 	}
 
 	public virtual void OnBreak() {
