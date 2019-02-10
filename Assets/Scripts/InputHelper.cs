@@ -50,6 +50,10 @@ public class InputHelper : MonoBehaviour {
 	public readonly static string[] START = { "START_P1", "START_P2" };
 	public readonly static string[] BACK = { "BACK_P1", "BACK_P2" };
 
+	// Local Fields
+	private ControlProfile _playerOne;
+	private ControlProfile _playerTwo;
+
 	public InputHelper() {
 
 	}
@@ -62,5 +66,52 @@ public class InputHelper : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 
+	}
+
+	/* Internal Methods */
+
+	/* ControlProfile Implementation */
+
+	public class ControlProfile {
+		// Public Fields
+		public InputMode mode;
+
+		// Local Fields
+		private readonly string _profileName;
+		private uint _gamepadIndex;
+
+		// Local Objects
+		private readonly Dictionary<SquirrelInput, string[]> _squirrelBindings;
+		private readonly Dictionary<TreeInput, string[]> _treeBindings;
+
+		public ControlProfile(string passedName) {
+			_squirrelBindings = new Dictionary<SquirrelInput, string[]>();
+			_treeBindings = new Dictionary<TreeInput, string[]>();
+			_profileName = passedName;
+		}
+
+		public void SetGamepad(uint index) {
+			_gamepadIndex = index;
+		}
+
+		public void RegisterBinding(TreeInput input, string[] binding) {
+			_treeBindings.Add(input, binding);
+		}
+
+		public void RegisterBinding(SquirrelInput input, string[] binding) {
+			_squirrelBindings.Add(input, binding);
+		}
+
+		public string GetBinding(SquirrelInput input) {
+			return _squirrelBindings[input][_gamepadIndex];
+		}
+
+		public string GetBinding(TreeInput input) {
+			return _treeBindings[input][_gamepadIndex];
+		}
+
+		public string GetName() {
+			return _profileName;
+		}
 	}
 }
