@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,6 +55,11 @@ public class InputHelper : MonoBehaviour {
 	private ControlProfile _playerOne;
 	private ControlProfile _playerTwo;
 
+	// Local Objects
+
+	private readonly static Func<ControlProfile, TreeInput, string> BINDING_TREE = (profile, key) => { return profile.GetBinding(key); };
+	private readonly static Func<ControlProfile, SquirrelInput, string> BINDING_SQUIRREL = (profile, key) => { return profile.GetBinding(key); };
+
 	public InputHelper() {
 
 	}
@@ -68,7 +74,50 @@ public class InputHelper : MonoBehaviour {
 
 	}
 
+	public float GetAxis(SquirrelInput input) {
+		return GetSquirrelInput(Input.GetAxis, input, 0.0F);
+	}
+
+	public float GetAxis(TreeInput input) {
+		return GetTreeInput(Input.GetAxis, input, 0.0F);
+	}
+
+	public bool GetButtonDown(SquirrelInput input) {
+		return GetSquirrelInput(Input.GetButtonDown, input, false);
+	}
+
+	public bool GetButtonDown(TreeInput input) {
+		return GetTreeInput(Input.GetButtonDown, input, false);
+	}
+
+	public bool GetButtonUp(SquirrelInput input) {
+		return GetSquirrelInput(Input.GetButtonUp, input, false);
+	}
+
+	public bool GetButtonUp(TreeInput input) {
+		return GetTreeInput(Input.GetButtonUp, input, false);
+	}
+
 	/* Internal Methods */
+	private T GetTreeInput<T>(Func<string, T> inputFunction, TreeInput key, T defaultValue) {
+		return GetInputUsing(BINDING_TREE, inputFunction, key, InputMode.TREE, defaultValue);
+	}
+	
+	private T GetSquirrelInput<T>(Func<string, T> inputFunction, SquirrelInput key, T defaultValue) {
+		return GetInputUsing(BINDING_SQUIRREL, inputFunction, key, InputMode.SQUIRREL, defaultValue);
+	}
+
+	private U GetInputUsing<T,U>(Func<ControlProfile, T, string> bindingFunction, Func<string, U> inputFunction, T key, InputMode mode, U defaultvalue) {
+		if (_playerOne.mode == mode) {
+			return inputFunction(bindingFunction(_playerOne, key));
+		}
+		if (!GameModel.singlePlayer) {
+			if (_playerTwo.mode == mode) {
+				return inputFunction(bindingFunction(_playerTwo, key));
+			}
+		}
+		return defaultvalue;
+	}
 
 	/* ControlProfile Implementation */
 
