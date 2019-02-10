@@ -1,0 +1,30 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class NutSpawnerBehavior : MonoBehaviour {
+
+    // Public References
+    public GameObject nut;
+
+    // Public Fields
+    public float frequency;
+
+    // Start is called before the first frame update
+    void Start() {
+
+        InvokeRepeating("SpawnNut", 0.0f, frequency);
+
+    }
+
+    // Update is called once per frame
+    void Update() {
+        
+    }
+
+    private void SpawnNut () {
+
+        Instantiate(nut, transform.position, transform.rotation);
+
+    }
+}
