@@ -11,9 +11,8 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
-    public Image[,] branchLeaves;
-    public Text sapText;
     public AudioClip growSound;
+    public Image[] sapBranchBars = new Image[4];
 
     // Public Fields
     public float[] maxSap;
@@ -39,8 +38,7 @@ public class TreeController : MonoBehaviour {
     private const float EPSILON = 0.01F;
     private const float DISTANCE = 2.0F;
 
-    [SerializeField]
-    private Image[] sapSliders = new Image[1];
+    private List<GameObject>[] _branchLeaves;
 
     void Start() {
         // Establish local references
@@ -55,26 +53,12 @@ public class TreeController : MonoBehaviour {
 
         _currentSap = new float[_branches.Length];
 
-        maxSap = new float[] { 11f };
+        maxSap = new float[] { 8f, 8f, 8f, 8f };
 
-        branchLeaves = new Image[_branches.Length, (int)Mathf.Max(maxSap)+1];
+        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
 
-        for(int i=0; i<_branches.Length; i++) {
-            Component[] components = new Component[sapSliders[i].GetComponentsInChildren<Image>().Length];
-            components = sapSliders[i].GetComponentsInChildren<Image>();
-
-            Debug.Log(components.Length);
-
-            for(int j=1; j<components.Length; j++) {
-                int leftMost = int.MaxValue;
-
-                for(int k=0; k<components.Length; k++) {
-                    if(components[k].transform.position.x < leftMost && components[k] != GetComponentInParent<Image>()) {
-                        leftMost = k;
-                    }
-                }
-                branchLeaves[i, j] = (Image)components[leftMost];
-            }
+        for (int i = 0; i < sapBranchBars.Length; i++) {
+            _branchLeaves[i] = SetBranchLeaves(i);
         }
 
         Select(0);
@@ -82,7 +66,7 @@ public class TreeController : MonoBehaviour {
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
             if (_selectedBranch != i) {
-                sapSliders[i].gameObject.SetActive(false);
+                sapBranchBars[i].gameObject.SetActive(false);
             }
         }
 
@@ -214,8 +198,16 @@ public class TreeController : MonoBehaviour {
     /// <param name="passedValue">The value to modify the current sap by.</param>
     public void UpdateSap(float passedValue, int branchType) {
         _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
-        (branchLeaves[branchType, (int)_currentSap[branchType]-1]).gameObject.SetActive(false);
-        sapText.text = _currentSap[_selectedBranch].ToString();
+
+        int i = 0;
+        foreach (GameObject leaf in _branchLeaves[branchType]) {
+            if (i <= _currentSap[branchType]) {
+                leaf.SetActive(true);
+            } else {
+                leaf.SetActive(false);
+            }
+            i++;
+        }
     }
 
     /// <summary>
@@ -223,10 +215,9 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
-        sapSliders[_selectedBranch].gameObject.SetActive(false);
+        sapBranchBars[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
-        sapSliders[_selectedBranch].gameObject.SetActive(true);
-        sapText.text = _currentSap[_selectedBranch].ToString();
+        sapBranchBars[_selectedBranch].gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -280,5 +271,20 @@ public class TreeController : MonoBehaviour {
     /// <param name="passedValue">Passed value.</param>
     private bool CheckEpsilon(float passedValue) {
         return (System.Math.Abs(passedValue) > EPSILON);
+    }
+
+    /// <summary>
+    /// Assigns a list of leaf Game Objects to each UI branch.
+    /// </summary>
+    private List<GameObject> SetBranchLeaves(int branch) {
+        List<GameObject> leaves = new List<GameObject>();
+
+        for(int j = 0; j < sapBranchBars[branch].transform.childCount; j++) {
+            leaves.Add(sapBranchBars[branch].transform.GetChild(j).gameObject);
+        }
+
+        leaves.Reverse();
+
+        return leaves;
     }
 }
