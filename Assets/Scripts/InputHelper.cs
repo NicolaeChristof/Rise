@@ -56,7 +56,6 @@ public class InputHelper : MonoBehaviour {
 	private ControlProfile _playerTwo;
 
 	// Local Objects
-
 	private readonly static Func<ControlProfile, TreeInput, string> BINDING_TREE = (profile, key) => { return profile.GetBinding(key); };
 	private readonly static Func<ControlProfile, SquirrelInput, string> BINDING_SQUIRREL = (profile, key) => { return profile.GetBinding(key); };
 
