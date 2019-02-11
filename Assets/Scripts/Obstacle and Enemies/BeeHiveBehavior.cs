@@ -18,9 +18,9 @@ public class BeeHiveBehavior : MonoBehaviour {
 
         if (collider.gameObject.name == "Player") {
 
-            Debug.Log("Player Detected!");
+            Debug.Log("Player Detected! (Bee Hive)");
 
-            // push the player
+            // Push the player
 
         }
 

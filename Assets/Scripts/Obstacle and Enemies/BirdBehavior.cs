@@ -15,13 +15,18 @@ public class BirdBehavior : MonoBehaviour {
     [Range(-10.0f, 10.0f)]
     public float speed;
 
+    [Range(0.0f, 10.0f)]
+    public float maxDistance;
+
     // Private References
     private PlayerController _playerController;
 
     // Private Fields
-    private Vector3 _moveDirection = Vector3.zero;
-
     private Vector3 _target;
+
+    private Vector3 _heading;
+
+    private float _distance;
 
     // Start is called before the first frame update
     void Start() {
@@ -39,15 +44,13 @@ public class BirdBehavior : MonoBehaviour {
 
         if (!GameModel.paused) {
 
-            _moveDirection = new Vector3(speed, 0.0f, 1.0f);
-
             // Orient bird model
-            if (speed < 0) {
+            if (speed > 0) {
 
                 // Face bird model to the left
                 birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
-            } else if (speed > 0) {
+            } else if (speed < 0) {
 
                 // Face bird model to the right
                 birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
@@ -55,8 +58,17 @@ public class BirdBehavior : MonoBehaviour {
             }
 
             // Move the bird
-            transform.Translate(_moveDirection);
-            // transform.RotateAround(_target, Vector3.up, speed);
+            transform.RotateAround(_target, Vector3.up, speed);
+
+            _heading = this.transform.position - _target;
+
+            _distance = _heading.magnitude;
+
+            if (_distance > maxDistance) {
+
+                transform.Translate(new Vector3(0.0f, 0.0f, 1.0f));
+
+            }
 
             // face the bird towards the target
             transform.LookAt(_target);
@@ -67,13 +79,19 @@ public class BirdBehavior : MonoBehaviour {
 
     void OnCollisionEnter (Collision collision) {
 
-        if (collision.gameObject.name == "Player") {
+        if (collision.gameObject.name != "Tree") {
 
-            // _playerController.addExternalForce(new Vector3(-(speed * 15), 10.0f, 0.0f));
+            if (collision.gameObject.name == "Player") {
+
+                Debug.Log("Player Detected! (Bird)");
+
+                // Push the player
+
+            }
+
+            speed = -speed;
 
         }
-
-        speed = -speed;
 
     }
 }

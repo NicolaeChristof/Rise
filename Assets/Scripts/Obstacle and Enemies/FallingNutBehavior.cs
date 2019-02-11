@@ -27,7 +27,7 @@ public class FallingNutBehavior : MonoBehaviour {
 
         if (collision.gameObject.name == "Player") {
 
-            Debug.Log("I Hit the Player!");
+            Debug.Log("Player Detected! (Nut)");
 
         }
 
