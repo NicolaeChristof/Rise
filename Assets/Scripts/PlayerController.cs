@@ -57,30 +57,6 @@ public class PlayerController : MonoBehaviour {
 
         if (!GameModel.paused) {
 
-            if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
-
-                GameModel.isSquirrel = !GameModel.isSquirrel;
-
-                if (!GameModel.splitScreen) {
-
-                    if (GameModel.isSquirrel) {
-
-                        squirrelCamera.enabled = true;
-
-                        treeCamera.enabled = false;
-
-                    } else {
-
-                        squirrelCamera.enabled = false;
-
-                        treeCamera.enabled = true;
-
-                    }
-
-                }
-
-            }
-
             if (GameModel.isSquirrel) {
 
                 // Get input directions

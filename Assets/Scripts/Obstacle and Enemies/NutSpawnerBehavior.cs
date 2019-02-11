@@ -8,6 +8,7 @@ public class NutSpawnerBehavior : MonoBehaviour {
     public GameObject nut;
 
     // Public Fields
+    [Range(1.0f, 5.0f)]
     public float frequency;
 
     // Start is called before the first frame update

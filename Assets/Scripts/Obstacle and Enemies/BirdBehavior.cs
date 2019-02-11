@@ -71,7 +71,7 @@ public class BirdBehavior : MonoBehaviour {
 
             if (collision.gameObject.name == "Player") {
 
-                _playerController.addExternalForce(new Vector3(-(speed * 15), 10.0f, 0.0f));
+                // _playerController.addExternalForce(new Vector3(-(speed * 15), 10.0f, 0.0f));
 
             }
 

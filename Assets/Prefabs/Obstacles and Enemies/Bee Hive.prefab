@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7711375699527254704}
   - component: {fileID: 7711375699527254705}
-  - component: {fileID: 7711375699527254718}
+  - component: {fileID: 2788632372418932911}
   m_Layer: 0
   m_Name: Bee Hive
   m_TagString: Untagged
@@ -45,19 +45,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4ae596326abbe4ba49c86f008d5eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!135 &7711375699527254718
-SphereCollider:
+--- !u!136 &2788632372418932911
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7711375699527254707}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 1.5
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Height: 4.5
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.75}
 --- !u!1 &7711375699817047281
 GameObject:
   m_ObjectHideFlags: 0

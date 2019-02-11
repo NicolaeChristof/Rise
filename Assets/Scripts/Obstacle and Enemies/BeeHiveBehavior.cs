@@ -13,4 +13,10 @@ public class BeeHiveBehavior : MonoBehaviour {
     void Update() {
         
     }
+
+    void OnTriggerEnter (Collider collider) {
+
+        // push the player
+
+    }
 }
