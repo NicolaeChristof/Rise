@@ -55,8 +55,8 @@ public class BirdBehavior : MonoBehaviour {
             }
 
             // Move the bird
-            // transform.Translate(_moveDirection);
-            transform.RotateAround(_target, Vector3.up, speed);
+            transform.Translate(_moveDirection);
+            // transform.RotateAround(_target, Vector3.up, speed);
 
             // face the bird towards the target
             transform.LookAt(_target);
