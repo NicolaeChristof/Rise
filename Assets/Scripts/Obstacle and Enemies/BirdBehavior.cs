@@ -66,6 +66,7 @@ public class BirdBehavior : MonoBehaviour {
 
             if (_distance > maxDistance) {
 
+                // If bird jitters change 0.2 to 0.1
                 transform.Translate(new Vector3(0.0f, 0.0f, 0.2f));
 
             }
