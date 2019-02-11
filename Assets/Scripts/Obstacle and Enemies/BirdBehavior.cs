@@ -42,12 +42,12 @@ public class BirdBehavior : MonoBehaviour {
             _moveDirection = new Vector3(speed, 0.0f, 1.0f);
 
             // Orient bird model
-            if (speed > 0) {
+            if (speed < 0) {
 
                 // Face bird model to the left
                 birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
-            } else if (speed < 0) {
+            } else if (speed > 0) {
 
                 // Face bird model to the right
                 birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
@@ -67,17 +67,13 @@ public class BirdBehavior : MonoBehaviour {
 
     void OnCollisionEnter (Collision collision) {
 
-        // if (collision.gameObject.name != "Tree") {
+        if (collision.gameObject.name == "Player") {
 
-            if (collision.gameObject.name == "Player") {
+            // _playerController.addExternalForce(new Vector3(-(speed * 15), 10.0f, 0.0f));
 
-                // _playerController.addExternalForce(new Vector3(-(speed * 15), 10.0f, 0.0f));
+        }
 
-            }
-
-            speed = -speed;
-
-        // }
+        speed = -speed;
 
     }
 }

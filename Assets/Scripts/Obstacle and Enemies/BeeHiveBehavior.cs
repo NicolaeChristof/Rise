@@ -16,7 +16,13 @@ public class BeeHiveBehavior : MonoBehaviour {
 
     void OnTriggerEnter (Collider collider) {
 
-        // push the player
+        if (collider.gameObject.name == "Player") {
+
+            Debug.Log("Player Detected!");
+
+            // push the player
+
+        }
 
     }
 }
