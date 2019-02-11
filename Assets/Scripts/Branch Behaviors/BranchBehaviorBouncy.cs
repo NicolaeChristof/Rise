@@ -9,8 +9,7 @@ public class BranchBehaviorBouncy : BranchBehavior {
 
 	public override void OnTriggerEnter(Collider collision) {
 		if (collision.gameObject.tag.Equals("Player")) {
-			PlayerController controller = collision.gameObject.GetComponent<PlayerController>();
-			controller.SetVelocity(new Vector3(0, 20, 0));
+			// TODO: Add acceleration using only instantaneousy velocity! Whee!
 		}
 	}
 

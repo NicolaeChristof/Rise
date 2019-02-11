@@ -5,7 +5,7 @@ using UnityEngine;
 public class BranchBehaviorSlippery : BranchBehavior {
 
 	// Public Fields
-	public float slipFactor = 1000.0F;
+	public float slipFactor = 0.1F;
 
 	void Start() {
 
@@ -17,16 +17,13 @@ public class BranchBehaviorSlippery : BranchBehavior {
 
 	public override void OnTriggerEnter(Collider collision) {
 		if (collision.gameObject.tag.Equals("Player")) {
-			PlayerController controller = collision.gameObject.GetComponent<PlayerController>();
-			Vector3 slipVelocity = new Vector3(Random.Range(1.0F, 10.0F), 0, Random.Range(1.0F, 10.0F));
-			controller.SetVelocity(slipVelocity * slipFactor);
+			// TODO: Make it slippery using only instantaneous velocity! Wheee!
 		}
 	}
 
 	public override void OnTriggerExit(Collider collision) {
 		if (collision.gameObject.tag.Equals("Player")) {
-			PlayerController controller = collision.gameObject.GetComponent<PlayerController>();
-			controller.SetVelocity(Vector3.zero);
+			// TODO: Make it slippery using only instantaneous velocity! Wheee!
 		}
 	}
 }
