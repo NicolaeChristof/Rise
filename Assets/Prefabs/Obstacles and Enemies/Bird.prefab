@@ -49,7 +49,7 @@ MonoBehaviour:
   birdTarget: {fileID: 0}
   birdModel: {fileID: 2330307565564537027}
   player: {fileID: 0}
-  speed: 3
+  speed: 2.5
   maxDistance: 5
 --- !u!54 &2330307564692175989
 Rigidbody:
@@ -65,7 +65,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 4
+  m_Constraints: 116
   m_CollisionDetection: 2
 --- !u!65 &2330307564692175986
 BoxCollider:
@@ -78,7 +78,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1.5}
+  m_Size: {x: 1, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2330307564856761664
 GameObject:

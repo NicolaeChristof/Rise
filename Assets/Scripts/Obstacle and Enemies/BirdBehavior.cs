@@ -12,10 +12,10 @@ public class BirdBehavior : MonoBehaviour {
     public GameObject player;
 
     // Public Fields
-    [Range(-10.0f, 10.0f)]
+    [Range(-5.0f, 5.0f)]
     public float speed;
 
-    [Range(0.0f, 10.0f)]
+    [Range(0.0f, 7.0f)]
     public float maxDistance;
 
     // Private References
@@ -66,7 +66,7 @@ public class BirdBehavior : MonoBehaviour {
 
             if (_distance > maxDistance) {
 
-                transform.Translate(new Vector3(0.0f, 0.0f, 1.0f));
+                transform.Translate(new Vector3(0.0f, 0.0f, 0.2f));
 
             }
 
