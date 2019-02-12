@@ -11,13 +11,13 @@ public class TreeController : MonoBehaviour {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
+
     public GameObject player;
-    public Slider[] sapSliders;
-    public Text sapText;
     public AudioClip growSound;
+    public Image[] sapBranchBars = new Image[4];
 
     // Public Fields
-    public float maxSap;
+    public float[] maxSap;
     public float minDistance;
     public float sapCost;
     public float startingSap;
@@ -46,6 +46,8 @@ public class TreeController : MonoBehaviour {
     private const float EPSILON = 0.01F;
     private const float DISTANCE = 2.0F;
 
+    private List<GameObject>[] _branchLeaves;
+
     void Start() {
         // Establish local references
         _tree = GameObject.Find("Tree");
@@ -59,12 +61,20 @@ public class TreeController : MonoBehaviour {
 
         _currentSap = new float[_branches.Length];
 
+        maxSap = new float[] { 8f, 8f, 8f, 8f };
+
+        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
+
+        for (int i = 0; i < sapBranchBars.Length; i++) {
+            _branchLeaves[i] = SetBranchLeaves(i);
+        }
+
         Select(0);
 
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
             if (_selectedBranch != i) {
-                sapSliders[i].gameObject.SetActive(false);
+                sapBranchBars[i].gameObject.SetActive(false);
             }
         }
 
@@ -255,7 +265,7 @@ public class TreeController : MonoBehaviour {
     /// <value>The sap quantity.</value>
     public float Sap {
         get => _currentSap[_selectedBranch];
-        set => _currentSap[_selectedBranch] = Mathf.Clamp(value, 0.0F, maxSap);
+        set => _currentSap[_selectedBranch] = Mathf.Clamp(value, 0.0F, maxSap[_selectedBranch]);
     }
 
     /// <summary>
@@ -263,9 +273,17 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedValue">The value to modify the current sap by.</param>
     public void UpdateSap(float passedValue, int branchType) {
-        _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap);
-        sapSliders[branchType].value = (_currentSap[branchType] / maxSap);
-        sapText.text = _currentSap[_selectedBranch].ToString();
+        _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
+
+        int i = 0;
+        foreach (GameObject leaf in _branchLeaves[branchType]) {
+            if (i <= _currentSap[branchType]) {
+                leaf.SetActive(true);
+            } else {
+                leaf.SetActive(false);
+            }
+            i++;
+        }
     }
 
     /// <summary>
@@ -273,10 +291,9 @@ public class TreeController : MonoBehaviour {
     /// </summary>
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
-        sapSliders[_selectedBranch].gameObject.SetActive(false);
+        sapBranchBars[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
-        sapSliders[_selectedBranch].gameObject.SetActive(true);
-        sapText.text = _currentSap[_selectedBranch].ToString();
+        sapBranchBars[_selectedBranch].gameObject.SetActive(true);
     }
 
     /// <summary>
@@ -330,5 +347,20 @@ public class TreeController : MonoBehaviour {
     /// <param name="passedValue">Passed value.</param>
     private bool CheckEpsilon(float passedValue) {
         return (System.Math.Abs(passedValue) > EPSILON);
+    }
+
+    /// <summary>
+    /// Assigns a list of leaf Game Objects to each UI branch.
+    /// </summary>
+    private List<GameObject> SetBranchLeaves(int branch) {
+        List<GameObject> leaves = new List<GameObject>();
+
+        for(int j = 0; j < sapBranchBars[branch].transform.childCount; j++) {
+            leaves.Add(sapBranchBars[branch].transform.GetChild(j).gameObject);
+        }
+
+        leaves.Reverse();
+
+        return leaves;
     }
 }
