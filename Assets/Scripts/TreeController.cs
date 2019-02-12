@@ -61,7 +61,7 @@ public class TreeController : MonoBehaviour {
 
         _currentSap = new float[_branches.Length];
 
-        maxSap = new float[] { 8f, 8f, 8f, 8f };
+        maxSap = new float[] { 8f, 10f, 8f, 9f };
 
         _branchLeaves = new List<GameObject>[sapBranchBars.Length];
 
