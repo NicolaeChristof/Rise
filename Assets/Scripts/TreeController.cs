@@ -277,7 +277,7 @@ public class TreeController : MonoBehaviour {
 
         int i = 0;
         foreach (GameObject leaf in _branchLeaves[branchType]) {
-            if (i <= _currentSap[branchType]) {
+            if (i < _currentSap[branchType]) {
                 leaf.SetActive(true);
             } else {
                 leaf.SetActive(false);
