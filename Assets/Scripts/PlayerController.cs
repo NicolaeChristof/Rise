@@ -81,7 +81,6 @@ public class PlayerController : MonoBehaviour {
 
         if (!GameModel.paused) {
 
-            // Add  "&& GameModel.singlePlayer" to if statement after multiple inputs are in
             if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
 
                 GameModel.isSquirrel = !GameModel.isSquirrel;
@@ -109,7 +108,10 @@ public class PlayerController : MonoBehaviour {
             if (GameModel.isSquirrel) {
 
                 // Get input directions
-                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_INPUT));
+                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
+
+                // Disable z axis movement
+                _moveDirection.z = 1.0f;
 
                 // Walking sound
                 if (_moveDirection.x != 0 && !_moving) {
@@ -167,18 +169,6 @@ public class PlayerController : MonoBehaviour {
 
             // Apply gravity
             _moveDirection.y -= gravity * Time.deltaTime;
-
-            _heading = this.transform.position - playerTarget.transform.position;
-
-            _distance = _heading.magnitude;
-
-            // Debug.Log(_distance);
-
-            if (_distance > maxPlayerDistance) {
-
-                _moveDirection.z = 6;
-
-            }
 
             // Maintains direction after movement stops
             _moveDirection = transform.TransformDirection(_moveDirection);

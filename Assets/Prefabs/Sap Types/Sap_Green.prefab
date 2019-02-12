@@ -157,6 +157,7 @@ GameObject:
   - component: {fileID: 8054649134457348853}
   - component: {fileID: 4239923448075859978}
   - component: {fileID: 6958240571181792006}
+  - component: {fileID: 1435116075058932064}
   m_Layer: 0
   m_Name: Sap_Green
   m_TagString: Sap
@@ -207,3 +208,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sapType: 1
   sapValue: 1
+--- !u!114 &1435116075058932064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092395956840239951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2816ec3594e6b664aaaaec1c6198e1f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
