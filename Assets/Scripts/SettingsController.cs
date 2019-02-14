@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour {
 
     public Camera squirrelCamera;
 
     public Camera treeCamera;
+
+    public Button pauseButton;
+    public Button restartButton;
+    public Button menuButton;
 
     // Start is called before the first frame update
     void Start() {
@@ -123,6 +129,12 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+        pauseButton.onClick.AddListener(pauseEvent);
+        restartButton.onClick.AddListener(restartEvent);
+        menuButton.onClick.AddListener(menuEvent);
+
+        GameModel.paused = false;
+
     }
 
     // Update is called once per frame
@@ -131,7 +143,7 @@ public class SettingsController : MonoBehaviour {
         // Listen for Pause
         if (Input.GetButtonDown(GameModel.PAUSE)) {
 
-            GameModel.paused = !GameModel.paused;
+            pauseEvent();
 
         }
 
@@ -159,5 +171,20 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+    }
+
+    void pauseEvent() {
+        pauseButton.gameObject.SetActive( !pauseButton.IsActive() );
+        menuButton.gameObject.SetActive(!menuButton.IsActive());
+        restartButton.gameObject.SetActive(!restartButton.IsActive());
+        GameModel.paused = !GameModel.paused;
+    }
+
+    void restartEvent() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void menuEvent() {
+        Debug.Log("You hit the menu event");
     }
 }
