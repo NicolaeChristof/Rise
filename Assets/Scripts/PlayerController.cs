@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
 
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour {
 
     public AudioClip walkSound;
 
+    public Slider treeSlider;
+
     // Public Fields
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
@@ -27,6 +30,11 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 20.0f)]
     public float maxPlayerDistance;
 
+    // The height of a real-life squirrel
+    public float realSquirrelHeight;
+
+    public Text heightText;
+
     // Private References
     private CharacterController _controller;
 
@@ -35,15 +43,27 @@ public class PlayerController : MonoBehaviour {
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
-    private Vector3 _target;
+    private Vector3 _externalForce = Vector3.zero;
+
+	private Vector3 _velocity = Vector3.zero;
 
     private Vector3 _heading;
 
-    private float _distance;
+    private Vector3 _target;
 
     private float _volume;
 
     private bool _moving = false;
+
+    private float _realToVirtualRatio;
+
+    private float _heightOffset = 2.25f;
+
+    private float _currentHeight;
+
+    private float _currentHeightActual;
+
+    private float _treeHeight;
 
     // Start is called before the first frame update
     void Start() {
@@ -52,36 +72,16 @@ public class PlayerController : MonoBehaviour {
 
         _source = GetComponent<AudioSource>();
 
+        _realToVirtualRatio = realSquirrelHeight / _controller.height;
+
+        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
+
     }
 
     // Update is called once per frame
     void Update() {
 
         if (!GameModel.paused) {
-
-            if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
-
-                GameModel.isSquirrel = !GameModel.isSquirrel;
-
-                if (!GameModel.splitScreen) {
-
-                    if (GameModel.isSquirrel) {
-
-                        squirrelCamera.enabled = true;
-
-                        treeCamera.enabled = false;
-
-                    } else {
-
-                        squirrelCamera.enabled = false;
-
-                        treeCamera.enabled = true;
-
-                    }
-
-                }
-
-            }
 
             if (GameModel.isSquirrel) {
 
@@ -148,6 +148,11 @@ public class PlayerController : MonoBehaviour {
             // Apply gravity
             _moveDirection.y -= gravity * Time.deltaTime;
 
+            // Apply external force
+            _moveDirection += _externalForce;
+
+            _externalForce = new Vector3(0.0f, 0.0f, 0.0f);
+
             // Maintains direction after movement stops
             _moveDirection = transform.TransformDirection(_moveDirection);
 
@@ -158,8 +163,9 @@ public class PlayerController : MonoBehaviour {
 
             }
 
-            // Move the Controller
-            _controller.Move(_moveDirection * Time.deltaTime);
+			// Move the Controller
+			ApplyVelocity();
+			ApplyMotion(_moveDirection);
 
             _target = new Vector3(playerTarget.transform.position.x,
                                   this.transform.position.y,
@@ -170,6 +176,45 @@ public class PlayerController : MonoBehaviour {
 
         }
 
+        _currentHeight = transform.position.y - _heightOffset;
+        _currentHeightActual =  _currentHeight * _realToVirtualRatio;
+
+        // https://answers.unity.com/questions/50391/how-to-round-a-float-to-2-dp.html
+        heightText.text = "Height: " + _currentHeightActual.ToString("F1") + "m";
+
+        treeSlider.value = _currentHeight / _treeHeight;
+
     }
+
+    public void addExternalForce (Vector3 force) {
+
+        _externalForce += force;
+
+        Debug.Log(_externalForce);
+
+    }
+
+	public Vector3 GetMoveDirection() {
+		return _moveDirection;
+	}
+
+	public void SetVelocity(Vector3 passedVelocityVector) {
+		_velocity = passedVelocityVector;
+	}
+
+	private void ApplyVelocity() {
+		// Apply velocity to move direction vector
+		_moveDirection = _moveDirection + (_velocity * Time.deltaTime);
+
+		// Apply velocity falloff TODO: Fix me. This is currently tied to gravity.
+		float falloff = (gravity * Time.deltaTime);
+		_velocity.x = Mathf.Clamp(_velocity.x - (falloff * Mathf.Sign(_velocity.x)), 0, float.MaxValue);
+		_velocity.y = Mathf.Clamp(_velocity.y - (falloff * Mathf.Sign(_velocity.y)), 0, float.MaxValue);
+		_velocity.z = Mathf.Clamp(_velocity.z - (falloff * Mathf.Sign(_velocity.z)), 0, float.MaxValue);
+	}
+
+	private void ApplyMotion(Vector3 passedMotionVector) {
+		_controller.Move(passedMotionVector * Time.deltaTime);
+	}
 
 }

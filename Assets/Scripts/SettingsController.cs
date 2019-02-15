@@ -71,6 +71,8 @@ public class SettingsController : MonoBehaviour {
 
                 GameModel.SELECT = "Keyboard_next";
 
+				GameModel.BREAK = "Keyboard_break";
+
             }
 
         } else {
@@ -95,6 +97,8 @@ public class SettingsController : MonoBehaviour {
             GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
 
             GameModel.GROW = "RT_P2";
+
+			GameModel.BREAK = "LT_P2";
 
             GameModel.SELECT = "RB_P2";
 
@@ -132,6 +136,30 @@ public class SettingsController : MonoBehaviour {
         if (Input.GetButtonDown(GameModel.PAUSE)) {
 
             GameModel.paused = !GameModel.paused;
+
+        }
+
+        if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
+
+            GameModel.isSquirrel = !GameModel.isSquirrel;
+
+            if (!GameModel.splitScreen) {
+
+                if (GameModel.isSquirrel) {
+
+                    squirrelCamera.enabled = true;
+
+                    treeCamera.enabled = false;
+
+                } else {
+
+                    squirrelCamera.enabled = false;
+
+                    treeCamera.enabled = true;
+
+                }
+
+            }
 
         }
 

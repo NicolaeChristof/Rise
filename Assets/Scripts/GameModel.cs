@@ -5,9 +5,9 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = true;
+    public static bool inputGamePad = false;
 
-    public static bool singlePlayer = false;
+    public static bool singlePlayer = true;
 
     public static bool splitScreen = true;
 
@@ -44,6 +44,8 @@ public static class GameModel {
     public static string PAUSE = "Start_P1";
 
     public static string GROW = "RT_P1";
+
+	public static string BREAK = "LT_P1";
 
     public static string SELECT = "RB_P1";
 
