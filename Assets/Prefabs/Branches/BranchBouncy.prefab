@@ -9,8 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6837279178405670046}
+  - component: {fileID: 6767032193523892632}
+  - component: {fileID: 6080448899054578373}
+  - component: {fileID: 9065571123867440469}
   m_Layer: 0
-  m_Name: Branch 3
+  m_Name: BranchBouncy
   m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,19 +34,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7299926644475468195
+--- !u!65 &6767032193523892632
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5544203855101696009}
+  m_GameObject: {fileID: 4352697463616401196}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1.6, z: 6.5}
   m_Center: {x: 0, y: 0, z: 2}
+--- !u!65 &6080448899054578373
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6, y: 1.8, z: 6.5}
+  m_Center: {x: 0, y: 0.2, z: 2}
+--- !u!114 &9065571123867440469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 287e1843451b2471095b0740fb5e9dd3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readableName: Bouncy Branch
+  knot: {fileID: 7787768055099848696, guid: a0c3b6db0d03344cabd4cbe73caae481, type: 3}
 --- !u!1001 &5544203855101796011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,18 +81,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6837279178405670046}
     m_Modifications:
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Name
-      value: UglyBranch
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_TagString
-      value: Branch
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Name
-      value: Mesh
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -107,18 +125,24 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_Name
+      value: UglyBranch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_TagString
+      value: Branch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_Name
+      value: Mesh
+      objectReference: {fileID: 0}
     - target: {fileID: 2300000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5053d5e4d4081466888dceee43fd2c54, type: 2}
+      objectReference: {fileID: 2100000, guid: 03541e997cf25414a82ac14905d2830b, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
---- !u!1 &5544203855101696009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5544203855101796011}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5544203855102182441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 1131b5553f25a4f518708f9b7e7f3b2d,
