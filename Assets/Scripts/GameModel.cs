@@ -45,6 +45,8 @@ public static class GameModel {
 
     public static string GROW = "RT_P1";
 
+	public static string BREAK = "LT_P1";
+
     public static string SELECT = "RB_P1";
 
 }
