@@ -9,8 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6837279178405670046}
-  m_Layer: 9
-  m_Name: Branch 1
+  - component: {fileID: 9028861733990485342}
+  - component: {fileID: 3223051356646589436}
+  - component: {fileID: 1077472617203752459}
+  m_Layer: 0
+  m_Name: BranchNormal
   m_TagString: Branch
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -31,19 +34,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &7299926644475468195
+--- !u!65 &9028861733990485342
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5544203855101696009}
+  m_GameObject: {fileID: 4352697463616401196}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1.8, y: 1.6, z: 6.5}
   m_Center: {x: 0, y: 0, z: 2}
+--- !u!65 &3223051356646589436
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.6, y: 1.8, z: 6.5}
+  m_Center: {x: 0, y: 0.2, z: 2}
+--- !u!114 &1077472617203752459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe3e22b07d5614a23b1f52779b87a108, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  readableName: Normal Branch
+  knot: {fileID: 7787768055099848696, guid: a0c3b6db0d03344cabd4cbe73caae481, type: 3}
 --- !u!1001 &5544203855101796011
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -51,26 +81,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6837279178405670046}
     m_Modifications:
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Name
-      value: UglyBranch
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_TagString
-      value: Branch
-      objectReference: {fileID: 0}
-    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Name
-      value: Mesh
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 400002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -115,14 +125,20 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_Name
+      value: UglyBranch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_TagString
+      value: Branch
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
+      propertyPath: m_Name
+      value: Mesh
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1131b5553f25a4f518708f9b7e7f3b2d, type: 3}
---- !u!1 &5544203855101696009 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 100002, guid: 1131b5553f25a4f518708f9b7e7f3b2d,
-    type: 3}
-  m_PrefabInstance: {fileID: 5544203855101796011}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5544203855102182441 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400002, guid: 1131b5553f25a4f518708f9b7e7f3b2d,
