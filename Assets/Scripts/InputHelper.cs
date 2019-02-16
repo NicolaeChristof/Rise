@@ -65,7 +65,15 @@ public class InputHelper : MonoBehaviour {
 
 	// Start is called before the first frame update
 	void Start() {
+		// Initialize Control Profiles
+		_playerOne = GetProfileFor("playerOne");
+		_playerTwo = GetProfileFor("playerTwo");
 
+		_playerOne.SetGamepad(1);
+		_playerTwo.SetGamepad(2);
+
+		SetDefaults(ref _playerOne); // TODO: Remove when configuration file loading is implemented
+		SetDefaults(ref _playerTwo); // TODO: Remove when configuration file loading is implemented
 	}
 
 	// Update is called once per frame
@@ -97,7 +105,17 @@ public class InputHelper : MonoBehaviour {
 		return GetTreeInput(Input.GetButtonUp, input, false);
 	}
 
+	public void SetDefaults(ref ControlProfile profile) {
+
+	}
+
 	/* Internal Methods */
+
+	private ControlProfile GetProfileFor(string profileName) {
+		// TODO: Fetch profiles from configuration file by name.
+		return new ControlProfile(profileName);
+	}
+
 	private T GetTreeInput<T>(Func<string, T> inputFunction, TreeInput key, T defaultValue) {
 		return GetInputUsing(BINDING_TREE, inputFunction, key, InputMode.TREE, defaultValue);
 	}
