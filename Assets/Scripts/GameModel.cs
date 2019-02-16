@@ -15,6 +15,8 @@ public static class GameModel {
 
     public static bool isSquirrel = true;
 
+	public static bool debugMode = true;
+
     // Sound Controls
     public static float volLowRange = 0.5f;
 
