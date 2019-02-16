@@ -58,16 +58,17 @@ public class BirdBehavior : MonoBehaviour {
             }
 
             // Move the bird
-            transform.RotateAround(_target, Vector3.up, speed);
-
             _heading = this.transform.position - _target;
 
             _distance = _heading.magnitude;
 
             if (_distance > maxDistance) {
 
-                // If bird jitters change 0.2 to 0.1
                 transform.Translate(new Vector3(0.0f, 0.0f, 0.2f));
+
+            } else {
+
+                transform.RotateAround(_target, Vector3.up, speed);
 
             }
 

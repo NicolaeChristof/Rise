@@ -79,6 +79,8 @@ public class SettingsController : MonoBehaviour {
 
                 GameModel.SELECT = "Keyboard_next";
 
+				GameModel.BREAK = "Keyboard_break";
+
             }
 
         } else {
@@ -103,6 +105,8 @@ public class SettingsController : MonoBehaviour {
             GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
 
             GameModel.GROW = "RT_P2";
+
+			GameModel.BREAK = "LT_P2";
 
             GameModel.SELECT = "RB_P2";
 
