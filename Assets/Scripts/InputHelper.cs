@@ -85,28 +85,76 @@ public class InputHelper : MonoBehaviour {
 
 	}
 
+	/// <summary>
+	/// Returns the axis actuation value for the passed Squirrel input. Use like Input.GetAxis.
+	/// </summary>
+	/// <returns>The axis.</returns>
+	/// <param name="input">The input.</param>
 	public float GetAxis(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetAxis, input, 0.0F);
 	}
 
+	/// <summary>
+	/// Returns the axis actuation value for the passed Tree input. Use like Input.GetAxis.
+	/// </summary>
+	/// <returns>The axis.</returns>
+	/// <param name="input">The input.</param>
 	public float GetAxis(TreeInput input) {
 		return GetTreeInput(Input.GetAxis, input, 0.0F);
 	}
 
+	/// <summary>
+	/// Returns <see langword="true"/> on the tick that the Squirrel input is actuated. Use like Input.GetButtonDown.
+	/// </summary>
+	/// <returns><c>true</c>, if button first down on this tick, <c>false</c> otherwise.</returns>
+	/// <param name="input">Input.</param>
 	public bool GetButtonDown(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetButtonDown, input, false);
 	}
 
+	/// <summary>
+	/// Returns <see langword="true"/> on the tick that the Tree input is actuated. Use like Input.GetButtonDown.
+	/// </summary>
+	/// <returns><c>true</c>, if button first down on this tick, <c>false</c> otherwise.</returns>
+	/// <param name="input">Input.</param>
 	public bool GetButtonDown(TreeInput input) {
 		return GetTreeInput(Input.GetButtonDown, input, false);
 	}
 
+	/// <summary>
+	/// Returns <see langword="true"/> on the tick that the Squirrel input is released. Use like Input.GetButtonUp.
+	/// </summary>
+	/// <returns><c>true</c>, if button was first up on this tick, <c>false</c> otherwise.</returns>
+	/// <param name="input">Input.</param>
 	public bool GetButtonUp(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetButtonUp, input, false);
 	}
 
+	/// <summary>
+	/// Returns <see langword="true"/> on the tick that the Tree input is released. Use like Input.GetButtonUp.
+	/// </summary>
+	/// <returns><c>true</c>, if button first up on this tick, <c>false</c> otherwise.</returns>
+	/// <param name="input">Input.</param>
 	public bool GetButtonUp(TreeInput input) {
 		return GetTreeInput(Input.GetButtonUp, input, false);
+	}
+
+	/// <summary>
+	/// Returns <see langword="true"/> every tick that the Squirrel input is actuated. Use like Input.GetButton.
+	/// </summary>
+	/// <returns><c>true</c>, if button down on this tick, <c>false</c> otherwise.</returns>
+	/// <param name="input">Input.</param>
+	public bool GetButton(SquirrelInput input) {
+		return GetSquirrelInput(Input.GetButton, input, false);
+	}
+
+	/// <summary>
+	/// Returns <see langword="true"/> every tick that the Tree input is actuated. Use like Input.GetButton.
+	/// </summary>
+	/// <returns><c>true</c>, if button down on this tick, <c>false</c> otherwise.</returns>
+	/// <param name="input">Input.</param>
+	public bool GetButton(TreeInput input) {
+		return GetTreeInput(Input.GetButton, input, false);
 	}
 
 	/// <summary>
