@@ -6,6 +6,16 @@ using System.Runtime.CompilerServices;
 
 public class InputHelper : MonoBehaviour {
 	// Public Fields
+	public ControlProfile PlayerOne { get; private set; }
+	public ControlProfile PlayerTwo { get; private set; }
+
+	// Local Fields
+
+	// Local Objects
+	private readonly static Func<ControlProfile, TreeInput, string> BINDING_TREE = (profile, key) => { return profile.GetBinding(key); };
+	private readonly static Func<ControlProfile, SquirrelInput, string> BINDING_SQUIRREL = (profile, key) => { return profile.GetBinding(key); };
+
+	// Controller Bindings
 	public enum SquirrelInput {
 		MOVE_HORIZONTAL,
 		MOVE_VERTICAL,
@@ -36,7 +46,6 @@ public class InputHelper : MonoBehaviour {
 		TREE
 	}
 
-	// Controller Bindings
 	public readonly static string[] RT = { "RT_P1", "RT_P2" };
 	public readonly static string[] LT = { "LT_P1", "LT_P2" };
 	public readonly static string[] RB = { "RB_P1", "RB_P2" };
@@ -53,14 +62,6 @@ public class InputHelper : MonoBehaviour {
 	public readonly static string[] LS_v = { "LS_v_P1", "LS_v_P2" };
 	public readonly static string[] START = { "START_P1", "START_P2" };
 	public readonly static string[] BACK = { "BACK_P1", "BACK_P2" };
-
-	// Local Fields
-	public ControlProfile PlayerOne { get; private set; }
-	public ControlProfile PlayerTwo { get; private set; }
-
-	// Local Objects
-	private readonly static Func<ControlProfile, TreeInput, string> BINDING_TREE = (profile, key) => { return profile.GetBinding(key); };
-	private readonly static Func<ControlProfile, SquirrelInput, string> BINDING_SQUIRREL = (profile, key) => { return profile.GetBinding(key); };
 
 	public InputHelper() {
 
