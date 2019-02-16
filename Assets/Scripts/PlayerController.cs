@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour {
 
     private float _realToVirtualRatio;
 
-    public float _heightOffset = 1f;
+    public float _heightOffset = -20f;
 
     private float _currentHeight;
 

@@ -10,9 +10,11 @@ public class SettingsController : MonoBehaviour {
 
     public Camera treeCamera;
 
-    public Button pauseButton;
-    public Button restartButton;
-    public Button menuButton;
+    public Button[] buttonArray = new Button[3];
+
+    //private int buttonSelected = 1;
+
+    //private bool justSelected;
 
     // Start is called before the first frame update
     void Start() {
@@ -129,12 +131,13 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-        pauseButton.onClick.AddListener(pauseEvent);
-        restartButton.onClick.AddListener(restartEvent);
-        menuButton.onClick.AddListener(menuEvent);
+        buttonArray[0].onClick.AddListener(menuEvent);
+        buttonArray[1].onClick.AddListener(pauseEvent);
+        buttonArray[2].onClick.AddListener(restartEvent);
 
         GameModel.paused = false;
 
+        //buttonArray[buttonSelected].Select();
     }
 
     // Update is called once per frame
@@ -171,12 +174,31 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+        /*
+        if (GameModel.paused) {
+            if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) > 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
+                buttonSelected++;
+                justSelected = true;
+            } else if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) < 0) && (buttonSelected > 0) && !justSelected) {
+                buttonSelected--;
+                justSelected = true;
+            }
+
+            if (justSelected) {
+                buttonArray[buttonSelected].Select();
+            }
+
+            if (Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) == 0) {
+                justSelected = false;
+            }
+        } */
+
     }
 
     void pauseEvent() {
-        pauseButton.gameObject.SetActive( !pauseButton.IsActive() );
-        menuButton.gameObject.SetActive(!menuButton.IsActive());
-        restartButton.gameObject.SetActive(!restartButton.IsActive());
+        buttonArray[0].gameObject.SetActive(!buttonArray[0].IsActive());
+        buttonArray[1].gameObject.SetActive(!buttonArray[1].IsActive());
+        buttonArray[2].gameObject.SetActive(!buttonArray[2].IsActive());
         GameModel.paused = !GameModel.paused;
     }
 
@@ -187,4 +209,5 @@ public class SettingsController : MonoBehaviour {
     void menuEvent() {
         Debug.Log("You hit the menu event");
     }
+
 }
