@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Runtime.CompilerServices;
 
 public class InputHelper : MonoBehaviour {
 	// Public Fields
@@ -108,7 +109,7 @@ public class InputHelper : MonoBehaviour {
 	/// Sets the bindings of the passed ControlProfile to their default values.
 	/// </summary>
 	/// <param name="profile">The ControlProfile to set.</param>
-	public void SetDefaults(ref ControlProfile profile) {
+	public void SetDefaults(ControlProfile profile) {
 		// Squirrel Controls
 		profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, LS_h);
 		profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, LS_v);
@@ -138,7 +139,7 @@ public class InputHelper : MonoBehaviour {
 	private ControlProfile GetProfileFor(string profileName) {
 		// TODO: Fetch profile corresponding to "profileName" from file. If that fails, load default.
 		ControlProfile profile = new ControlProfile("default");
-		SetDefaults(ref profile);
+		SetDefaults(profile);
 		return profile;
 	}
 
@@ -187,23 +188,44 @@ public class InputHelper : MonoBehaviour {
 		}
 
 		public void RegisterBinding(TreeInput input, string[] binding) {
-			_treeBindings.Add(input, binding);
+			CheckAndPutBinding(_treeBindings, input, binding);
 		}
 
 		public void RegisterBinding(SquirrelInput input, string[] binding) {
-			_squirrelBindings.Add(input, binding);
+			CheckAndPutBinding(_squirrelBindings, input, binding);
 		}
 
 		public string GetBinding(SquirrelInput input) {
-			return _squirrelBindings[input][_gamepadIndex];
+			return CheckAndGetBinding(_squirrelBindings, input, _gamepadIndex);
 		}
 
 		public string GetBinding(TreeInput input) {
-			return _treeBindings[input][_gamepadIndex];
+			return CheckAndGetBinding(_treeBindings, input, _gamepadIndex);
 		}
 
 		public string GetName() {
 			return _profileName;
+		}
+
+		/* Internal Methods */
+		private static string CheckAndGetBinding<T>(Dictionary<T, string[]> dictionary, T key, uint index) {
+			if (!dictionary.ContainsKey(key)) {
+				Debug.LogError(string.Format("No binding provided for {0} control: {1}", key.GetType(), key));
+				return "!!!NULL!!!";
+			}
+			return dictionary[key][index];
+		}
+
+		private static void CheckAndPutBinding<T>(Dictionary<T, string[]> dictionary, T key, string[] binding) {
+			if (binding == null) {
+				Debug.LogError("Null binding passed to control profile!");
+			}
+			else if (binding.Length < 2) {
+				Debug.LogError("Invalid binding passed to control profile!");
+			}
+			else {
+				dictionary.Add(key, binding);
+			}
 		}
 	}
 }
