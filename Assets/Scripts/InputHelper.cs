@@ -83,7 +83,17 @@ public class InputHelper : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
+		// Handle Pause
+		if (GetButton(SquirrelInput.PAUSE) || GetButton(TreeInput.PAUSE)) {
+			GameModel.paused = !GameModel.paused;
+		}
 
+		// Handle Swap
+		if (GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP)) {
+			// TODO: Hold for duration, then swap if confirmed?
+			PlayerOne.SwapModes();
+			PlayerTwo.SwapModes();
+		}
 	}
 
 	/// <summary>
@@ -254,6 +264,15 @@ public class InputHelper : MonoBehaviour {
 
 		public string GetBinding(TreeInput input) {
 			return CheckAndGetBinding(_treeBindings, input, _gamepadIndex);
+		}
+
+		public void SwapModes() {
+			if (mode == InputMode.SQUIRREL) {
+				mode = InputMode.TREE;
+			}
+			else if (mode == InputMode.TREE) {
+				mode = InputMode.SQUIRREL;
+			}
 		}
 
 		public string GetName() {
