@@ -105,8 +105,14 @@ public class InputHelper : MonoBehaviour {
 		return GetTreeInput(Input.GetButtonUp, input, false);
 	}
 
+	/// <summary>
+	/// Sets the bindings of the passed ControlProfile to their default values.
+	/// </summary>
+	/// <param name="profile">The ControlProfile to set.</param>
 	public void SetDefaults(ref ControlProfile profile) {
+		// Squirrel Controls
 
+		// Tree Controls
 	}
 
 	/* Internal Methods */
