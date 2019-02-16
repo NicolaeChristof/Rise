@@ -55,8 +55,8 @@ public class InputHelper : MonoBehaviour {
 	public readonly static string[] BACK = { "BACK_P1", "BACK_P2" };
 
 	// Local Fields
-	private ControlProfile _playerOne;
-	private ControlProfile _playerTwo;
+	public ControlProfile PlayerOne { get; private set; }
+	public ControlProfile PlayerTwo { get; private set; }
 
 	// Local Objects
 	private readonly static Func<ControlProfile, TreeInput, string> BINDING_TREE = (profile, key) => { return profile.GetBinding(key); };
@@ -69,15 +69,15 @@ public class InputHelper : MonoBehaviour {
 	// Start is called before the first frame update
 	void Start() {
 		// Initialize Control Profiles
-		_playerOne = GetProfileFor("playerOne");
-		_playerTwo = GetProfileFor("playerTwo");
+		PlayerOne = GetProfileFor("playerOne");
+		PlayerTwo = GetProfileFor("playerTwo");
 
-		_playerOne.SetGamepad(1);
-		_playerTwo.SetGamepad(2);
+		PlayerOne.SetGamepad(1);
+		PlayerTwo.SetGamepad(2);
 
 		// TODO: Set mode on setup screen, not statically
-		_playerOne.mode = InputMode.SQUIRREL;
-		_playerTwo.mode = InputMode.TREE;
+		PlayerOne.mode = InputMode.SQUIRREL;
+		PlayerTwo.mode = InputMode.TREE;
 	}
 
 	// Update is called once per frame
@@ -204,12 +204,12 @@ public class InputHelper : MonoBehaviour {
 	}
 
 	private U GetInputUsing<T,U>(Func<ControlProfile, T, string> bindingFunction, Func<string, U> inputFunction, T key, InputMode mode, U defaultvalue) {
-		if (_playerOne.mode == mode) {
-			return inputFunction(bindingFunction(_playerOne, key));
+		if (PlayerOne.mode == mode) {
+			return inputFunction(bindingFunction(PlayerOne, key));
 		}
 		if (!GameModel.singlePlayer) {
-			if (_playerTwo.mode == mode) {
-				return inputFunction(bindingFunction(_playerTwo, key));
+			if (PlayerTwo.mode == mode) {
+				return inputFunction(bindingFunction(PlayerTwo, key));
 			}
 		}
 		return defaultvalue;
