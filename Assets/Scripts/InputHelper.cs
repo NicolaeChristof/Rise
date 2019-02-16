@@ -74,6 +74,10 @@ public class InputHelper : MonoBehaviour {
 
 		_playerOne.SetGamepad(1);
 		_playerTwo.SetGamepad(2);
+
+		// TODO: Set mode on setup screen, not statically
+		_playerOne.mode = InputMode.SQUIRREL;
+		_playerTwo.mode = InputMode.TREE;
 	}
 
 	// Update is called once per frame
