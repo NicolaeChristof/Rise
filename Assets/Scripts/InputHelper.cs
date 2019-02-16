@@ -71,9 +71,6 @@ public class InputHelper : MonoBehaviour {
 
 		_playerOne.SetGamepad(1);
 		_playerTwo.SetGamepad(2);
-
-		SetDefaults(ref _playerOne); // TODO: Remove when configuration file loading is implemented
-		SetDefaults(ref _playerTwo); // TODO: Remove when configuration file loading is implemented
 	}
 
 	// Update is called once per frame
@@ -118,8 +115,10 @@ public class InputHelper : MonoBehaviour {
 	/* Internal Methods */
 
 	private ControlProfile GetProfileFor(string profileName) {
-		// TODO: Fetch profiles from configuration file by name.
-		return new ControlProfile(profileName);
+		// TODO: Fetch profile corresponding to "profileName" from file. If that fails, load default.
+		ControlProfile profile = new ControlProfile("default");
+		SetDefaults(ref profile);
+		return profile;
 	}
 
 	private T GetTreeInput<T>(Func<string, T> inputFunction, TreeInput key, T defaultValue) {
