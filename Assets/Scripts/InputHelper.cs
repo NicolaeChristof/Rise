@@ -8,17 +8,19 @@ public class InputHelper : MonoBehaviour {
 	public enum SquirrelInput {
 		MOVE_HORIZONTAL,
 		MOVE_VERTICAL,
+		CAMERA_HORIZONTAL,
+		CAMERA_VERTICAL,
 		SWAP,
 		PAUSE,
 
 		JUMP,
-		PEEK_LEFT,
-		PEEK_RIGHT,
 	}
 
 	public enum TreeInput {
 		MOVE_HORIZTONAL,
 		MOVE_VERTICAL,
+		CAMERA_HORIZONTAL,
+		CAMERA_VERTICAL,
 		SWAP,
 		PAUSE,
 
@@ -108,8 +110,27 @@ public class InputHelper : MonoBehaviour {
 	/// <param name="profile">The ControlProfile to set.</param>
 	public void SetDefaults(ref ControlProfile profile) {
 		// Squirrel Controls
+		profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, LS_h);
+		profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, LS_v);
+		profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, RS_h);
+		profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, RS_v);
+		profile.RegisterBinding(SquirrelInput.PAUSE, BACK);
+		profile.RegisterBinding(SquirrelInput.SWAP, Y);
+
+		profile.RegisterBinding(SquirrelInput.JUMP, A);
 
 		// Tree Controls
+		profile.RegisterBinding(TreeInput.MOVE_HORIZTONAL, LS_h);
+		profile.RegisterBinding(TreeInput.MOVE_VERTICAL, LS_v);
+		profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
+		profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);
+		profile.RegisterBinding(TreeInput.PAUSE, BACK);
+		profile.RegisterBinding(TreeInput.SWAP, Y);
+
+		profile.RegisterBinding(TreeInput.BRANCH_PLACE, RT);
+		profile.RegisterBinding(TreeInput.BRANCH_REMOVE, LT);
+		profile.RegisterBinding(TreeInput.SELECT_LEFT, LB);
+		profile.RegisterBinding(TreeInput.SELECT_RIGHT, RB);
 	}
 
 	/* Internal Methods */
