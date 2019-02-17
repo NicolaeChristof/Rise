@@ -100,6 +100,10 @@ public class InputHelper : MonoBehaviour {
 			PlayerOne.SwapModes();
 			PlayerTwo.SwapModes();
 		}
+
+		if (GameModel.debugMode) {
+			PrintDebug();
+		}
 	}
 
 	/// <summary>
@@ -230,6 +234,19 @@ public class InputHelper : MonoBehaviour {
 			}
 		}
 		return defaultvalue;
+	}
+
+	private void PrintDebug() {
+		foreach (SquirrelInput input in (SquirrelInput[])Enum.GetValues(typeof(SquirrelInput))) {
+			if (GetButton(input) || Math.Abs(GetAxis(input)) > 0.1F) {
+				print("SQUIRREL: " + input);
+			}
+		}
+		foreach (TreeInput input in (TreeInput[])Enum.GetValues(typeof(SquirrelInput))) {
+			if (GetButton(input) || Math.Abs(GetAxis(input)) > 0.1F) {
+				print("TREE: " + input);
+			}
+		}
 	}
 
 	/* ControlProfile Implementation */
