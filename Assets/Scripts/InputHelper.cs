@@ -89,13 +89,12 @@ public class InputHelper : MonoBehaviour {
 	// Update is called once per frame
 	void Update() {
 		// Handle Pause
-		if (GetButton(SquirrelInput.PAUSE) || GetButton(TreeInput.PAUSE)) {
+		if (Pause()) {
 			GameModel.paused = !GameModel.paused;
 		}
 
 		// Handle Swap
-		bool swap = GameModel.singlePlayer ? GetButton(SquirrelInput.SWAP) || GetButton(TreeInput.SWAP) : GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP);
-		if (swap) {
+		if (Swap()) {
 			// TODO: Hold for duration, then swap if confirmed?
 			PlayerOne.SwapModes();
 			PlayerTwo.SwapModes();
@@ -104,6 +103,22 @@ public class InputHelper : MonoBehaviour {
 		if (GameModel.debugMode) {
 			PrintDebug();
 		}
+	}
+
+	/// <summary>
+	/// Returns whether the InputHelper detected a game pause input this tick.
+	/// </summary>
+	/// <returns>Whether input for pause was detected.</returns>
+	public bool Pause() {
+		return (GetButton(SquirrelInput.PAUSE) || GetButton(TreeInput.PAUSE));
+	}
+
+	/// <summary>
+	/// Returns whether the InputHelper detected a mode swap input this tick.
+	/// </summary>
+	/// <returns>Whether input for swap was detected.</returns>
+	public bool Swap() {
+		return GameModel.singlePlayer ? GetButtonDown(SquirrelInput.SWAP) || GetButtonDown(TreeInput.SWAP) : GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP);
 	}
 
 	/// <summary>
