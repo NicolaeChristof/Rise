@@ -2345,6 +2345,12 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &382100917 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988453567747118701, guid: f5f00a030aaa0be488bf8773bdd74013,
+    type: 3}
+  m_PrefabInstance: {fileID: 1733428546}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &395999066
 GameObject:
   m_ObjectHideFlags: 0
@@ -5192,6 +5198,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1479800051}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &935090398 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988453567747118701, guid: f5f00a030aaa0be488bf8773bdd74013,
+    type: 3}
+  m_PrefabInstance: {fileID: 1897437762}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &937563080 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988453567747118701, guid: f5f00a030aaa0be488bf8773bdd74013,
+    type: 3}
+  m_PrefabInstance: {fileID: 1275325931}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &942975216
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6629,10 +6647,9 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_Children:
-  - {fileID: 396912218}
+  m_Children: []
   m_Father: {fileID: 1273465453}
-  m_RootOrder: 0
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!23 &1212958166
 MeshRenderer:
@@ -7085,6 +7102,7 @@ Transform:
   m_Children:
   - {fileID: 1476618800}
   - {fileID: 1156701057}
+  - {fileID: 1212958164}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -7223,6 +7241,36 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!54 &1273465457
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273465451}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!136 &1273465458
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273465451}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.5
+  m_Height: 1.7563126
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.00010883808, z: 0}
 --- !u!1001 &1275325931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7300,38 +7348,13 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1273465451}
+    - target: {fileID: 2330307564692175991, guid: f5f00a030aaa0be488bf8773bdd74013,
+        type: 3}
+      propertyPath: birdModel
+      value: 
+      objectReference: {fileID: 937563080}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f00a030aaa0be488bf8773bdd74013, type: 3}
---- !u!54 &1273465457
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273465451}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
---- !u!136 &1273465458
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1273465451}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 0.5
-  m_Height: 1.7563126
-  m_Direction: 1
-  m_Center: {x: 0, y: 0.00010883808, z: 0}
 --- !u!4 &1279015006 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7150636402826049791, guid: 17fd3d2564b2c23449e6553a59f7242c,
@@ -9217,6 +9240,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1100323961}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1581467212 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988453567747118701, guid: f5f00a030aaa0be488bf8773bdd74013,
+    type: 3}
+  m_PrefabInstance: {fileID: 2023932110}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1583365232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9291,6 +9320,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7150636402826049791, guid: 17fd3d2564b2c23449e6553a59f7242c,
     type: 3}
   m_PrefabInstance: {fileID: 1905245390}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1584293086 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7988453567747118701, guid: f5f00a030aaa0be488bf8773bdd74013,
+    type: 3}
+  m_PrefabInstance: {fileID: 2330307565315178926}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1594331130 stripped
 Transform:
@@ -9911,6 +9946,11 @@ PrefabInstance:
       propertyPath: birdTarget
       value: 
       objectReference: {fileID: 469670205}
+    - target: {fileID: 2330307564692175991, guid: f5f00a030aaa0be488bf8773bdd74013,
+        type: 3}
+      propertyPath: birdModel
+      value: 
+      objectReference: {fileID: 382100917}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f00a030aaa0be488bf8773bdd74013, type: 3}
 --- !u!1001 &1756343918
@@ -10537,6 +10577,11 @@ PrefabInstance:
       propertyPath: birdTarget
       value: 
       objectReference: {fileID: 469670205}
+    - target: {fileID: 2330307564692175991, guid: f5f00a030aaa0be488bf8773bdd74013,
+        type: 3}
+      propertyPath: birdModel
+      value: 
+      objectReference: {fileID: 935090398}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f00a030aaa0be488bf8773bdd74013, type: 3}
 --- !u!1001 &1905245390
@@ -11518,6 +11563,11 @@ PrefabInstance:
       propertyPath: birdTarget
       value: 
       objectReference: {fileID: 469670205}
+    - target: {fileID: 2330307564692175991, guid: f5f00a030aaa0be488bf8773bdd74013,
+        type: 3}
+      propertyPath: birdModel
+      value: 
+      objectReference: {fileID: 1581467212}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f00a030aaa0be488bf8773bdd74013, type: 3}
 --- !u!1001 &2026890780
@@ -12320,6 +12370,11 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1273465451}
+    - target: {fileID: 2330307564692175991, guid: f5f00a030aaa0be488bf8773bdd74013,
+        type: 3}
+      propertyPath: birdModel
+      value: 
+      objectReference: {fileID: 1584293086}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5f00a030aaa0be488bf8773bdd74013, type: 3}
 --- !u!1001 &7711375700968315606
