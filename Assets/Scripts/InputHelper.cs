@@ -73,8 +73,8 @@ public class InputHelper : MonoBehaviour {
 		PlayerOne = GetProfileFor("playerOne");
 		PlayerTwo = GetProfileFor("playerTwo");
 
-		PlayerOne.SetGamepad(1);
-		PlayerTwo.SetGamepad(2);
+		PlayerOne.SetGamepad(0);
+		PlayerTwo.SetGamepad(1);
 
 		// TODO: Set mode on setup screen, not statically
 		PlayerOne.mode = InputMode.SQUIRREL;
