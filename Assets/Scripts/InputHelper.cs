@@ -88,10 +88,10 @@ public class InputHelper : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update() {
-		// Handle Pause
+		/* Handle Pause
 		if (Pause()) {
 			GameModel.paused = !GameModel.paused;
-		}
+		} */
 
 		// Handle Swap
 		if (Swap()) {
