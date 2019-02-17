@@ -46,22 +46,27 @@ public class InputHelper : MonoBehaviour {
 		TREE
 	}
 
-	public readonly static string[] RT = { "RT_P1", "RT_P2" };
-	public readonly static string[] LT = { "LT_P1", "LT_P2" };
-	public readonly static string[] RB = { "RB_P1", "RB_P2" };
-	public readonly static string[] LB = { "LB_P1", "LB_P2" };
-	public readonly static string[] A = { "A_P1", "A_P2" };
-	public readonly static string[] B = { "B_P1", "B_P2" };
-	public readonly static string[] X = { "X_P1", "X_P2" };
-	public readonly static string[] Y = { "Y_P1", "Y_P2" };
-	public readonly static string[] DP_h = { "DP_h_P1", "DP_h_P2" };
-	public readonly static string[] DP_v = { "DP_v_P1", "DP_v_P2" };
-	public readonly static string[] RS_h = { "RS_h_P1", "RS_h_P2" };
-	public readonly static string[] RS_v = { "RS_v_P1", "RS_v_P2" };
-	public readonly static string[] LS_h = { "LS_h_P1", "LS_h_P2" };
-	public readonly static string[] LS_v = { "LS_v_P1", "LS_v_P2" };
-	public readonly static string[] START = { "START_P1", "START_P2" };
-	public readonly static string[] BACK = { "BACK_P1", "BACK_P2" };
+	public enum InputType {
+		XBOX_ONE,
+		XBOX_360
+	}
+
+	public readonly static string[] RT = { "RT_P1", "RT_P2", "360_RT_P1", "360_RT_P2" };
+	public readonly static string[] LT = { "LT_P1", "LT_P2", "360_LT_P1", "360_LT_P2" };
+	public readonly static string[] RB = { "RB_P1", "RB_P2", "360_RB_P1", "360_RB_P2" };
+	public readonly static string[] LB = { "LB_P1", "LB_P2", "360_LB_P1", "360_LB_P2" };
+	public readonly static string[] A = { "A_P1", "A_P2", "360_A_P1", "360_A_P2" };
+	public readonly static string[] B = { "B_P1", "B_P2", "360_B_P1", "360_B_P2" };
+	public readonly static string[] X = { "X_P1", "X_P2", "360_X_P1", "360_X_P2" };
+	public readonly static string[] Y = { "Y_P1", "Y_P2", "360_Y_P1", "360_Y_P2" };
+	public readonly static string[] DP_h = { "DP_h_P1", "DP_h_P2", "360_DP_h_P1", "360_DP_h_P2" };
+	public readonly static string[] DP_v = { "DP_v_P1", "DP_v_P2", "360_DP_v_P1", "360_DP_v_P2" };
+	public readonly static string[] RS_h = { "RS_h_P1", "RS_h_P2", "360_RS_h_P1", "360_RS_h_P2" };
+	public readonly static string[] RS_v = { "RS_v_P1", "RS_v_P2", "360_RS_v_P1", "360_RS_v_P2" };
+	public readonly static string[] LS_h = { "LS_h_P1", "LS_h_P2", "360_LS_h_P1", "360_LS_h_P2" };
+	public readonly static string[] LS_v = { "LS_v_P1", "LS_v_P2", "360_LS_v_P1", "360_LS_v_P2" };
+	public readonly static string[] START = { "START_P1", "START_P2", "360_START_P1", "360_START_P2" };
+	public readonly static string[] BACK = { "BACK_P1", "BACK_P2", "360_BACK_P1", "360_BACK_P2" };
 
 	public InputHelper() {
 
@@ -231,6 +236,7 @@ public class InputHelper : MonoBehaviour {
 	public class ControlProfile {
 		// Public Fields
 		public InputMode mode;
+		public InputType type;
 
 		// Local Fields
 		private readonly string _profileName;
@@ -244,6 +250,7 @@ public class InputHelper : MonoBehaviour {
 			_squirrelBindings = new Dictionary<SquirrelInput, string[]>();
 			_treeBindings = new Dictionary<TreeInput, string[]>();
 			_profileName = passedName;
+			type = InputType.XBOX_ONE;
 		}
 
 		public void SetGamepad(uint index) {
@@ -259,11 +266,11 @@ public class InputHelper : MonoBehaviour {
 		}
 
 		public string GetBinding(SquirrelInput input) {
-			return CheckAndGetBinding(_squirrelBindings, input, _gamepadIndex);
+			return CheckAndGetBinding(_squirrelBindings, input, GetIndex());
 		}
 
 		public string GetBinding(TreeInput input) {
-			return CheckAndGetBinding(_treeBindings, input, _gamepadIndex);
+			return CheckAndGetBinding(_treeBindings, input, GetIndex());
 		}
 
 		public void SwapModes() {
@@ -286,6 +293,15 @@ public class InputHelper : MonoBehaviour {
 				return "!!!NULL!!!";
 			}
 			return dictionary[key][index];
+		}
+
+		private uint GetIndex() {
+			switch (type) {
+				case InputType.XBOX_360:
+					return _gamepadIndex + 2;
+				default:
+					return _gamepadIndex;
+			}
 		}
 
 		private static void CheckAndPutBinding<T>(Dictionary<T, string[]> dictionary, T key, string[] binding) {
