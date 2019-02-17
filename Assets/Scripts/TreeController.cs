@@ -227,7 +227,7 @@ public class TreeController : MonoBehaviour {
 
 			}
 			// Handle Break
-			else if (Input.GetButtonDown(GameModel.BREAK)) {
+			else if (CheckEpsilon(Input.GetAxis(GameModel.BREAK)) || (Input.GetButtonDown(GameModel.BREAK))) {
 				float distance = float.MaxValue;
 				GameObject closestBranch = null;
 				Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
