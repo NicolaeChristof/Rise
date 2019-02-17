@@ -31,7 +31,7 @@ public class TreeController : MonoBehaviour {
     // Local References
     private GameObject _tree;
     private GameObject _reticle;
-    private Text _uitext;
+    // private Text _uitext;
     private AudioSource _source;
 
     // Local Fields
@@ -225,7 +225,27 @@ public class TreeController : MonoBehaviour {
 
                 }
 
-            } else {
+			}
+			// Handle Break
+			else if (Input.GetButtonDown(GameModel.BREAK)) {
+				float distance = float.MaxValue;
+				GameObject closestBranch = null;
+				Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
+				foreach (Collider iteratedCollider in colliders) {
+					if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
+						float currentDistance = Vector3.Distance(iteratedCollider.transform.position, _reticle.transform.position);
+						if (currentDistance < distance) {
+							distance = currentDistance;
+							closestBranch = iteratedCollider.gameObject;
+						}
+					}
+				}
+				if (closestBranch != null) {
+					closestBranch.GetComponent<BranchBehavior>().OnBreak();
+					Object.Destroy(closestBranch);
+				}
+			}
+			else {
 
                 if (!GameModel.isSquirrel) {
 
@@ -294,13 +314,14 @@ public class TreeController : MonoBehaviour {
         sapBranchBars[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
         sapBranchBars[_selectedBranch].gameObject.SetActive(true);
-    }
+		// _uitext.text = _branches[_selectedBranch].GetComponent<BranchBehavior>().GetReadableName();
+	}
 
-    /// <summary>
-    /// Checks to see whether a branch can currently be placed.
-    /// </summary>
-    /// <returns><c>true</c>, If a branch can be placed, <c>false</c> otherwise.</returns>
-    private bool CanGrow() {
+	/// <summary>
+	/// Checks to see whether a branch can currently be placed.
+	/// </summary>
+	/// <returns><c>true</c>, If a branch can be placed, <c>false</c> otherwise.</returns>
+	private bool CanGrow() {
         // Check Sap Level
         if (_currentSap[_selectedBranch] < sapCost) {
             return false;
