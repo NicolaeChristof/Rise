@@ -94,7 +94,8 @@ public class InputHelper : MonoBehaviour {
 		}
 
 		// Handle Swap
-		if (GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP)) {
+		bool swap = GameModel.singlePlayer ? GetButton(SquirrelInput.SWAP) || GetButton(TreeInput.SWAP) : GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP);
+		if (swap) {
 			// TODO: Hold for duration, then swap if confirmed?
 			PlayerOne.SwapModes();
 			PlayerTwo.SwapModes();
