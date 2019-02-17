@@ -43,7 +43,7 @@ public static class GameModel {
 
     public static string SWAP = "RS_B_P1";
 
-    public static string PAUSE = "Start_P1";
+    public static string PAUSE = "START_P1";
 
     public static string GROW = "RT_P1";
 
