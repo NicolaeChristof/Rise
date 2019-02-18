@@ -5442,6 +5442,7 @@ GameObject:
   - component: {fileID: 978922566}
   - component: {fileID: 978922569}
   - component: {fileID: 978922568}
+  - component: {fileID: 978922571}
   m_Layer: 0
   m_Name: Master Controller
   m_TagString: Untagged
@@ -5543,6 +5544,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squirrelCamera: {fileID: 534669904}
   treeCamera: {fileID: 1237406273}
+--- !u!114 &978922571
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 978922565}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fb5452809b8044cbbe343c063dff0ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &982024421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7942988497882146801, guid: d7ebf3555f85d8f4fa27523293929c5b,
