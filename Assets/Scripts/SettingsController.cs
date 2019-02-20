@@ -12,9 +12,9 @@ public class SettingsController : MonoBehaviour {
 
     public Button[] buttonArray = new Button[3];
 
-    //private int buttonSelected = 1;
+    private int buttonSelected = 1;
 
-    //private bool justSelected;
+    private bool justSelected;
 
     // Start is called before the first frame update
     void Start() {
@@ -141,7 +141,7 @@ public class SettingsController : MonoBehaviour {
 
         GameModel.paused = false;
 
-        //buttonArray[buttonSelected].Select();
+        buttonArray[buttonSelected].Select();
     }
 
     // Update is called once per frame
@@ -178,7 +178,6 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-        /*
         if (GameModel.paused) {
             if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) > 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
                 buttonSelected++;
@@ -195,7 +194,11 @@ public class SettingsController : MonoBehaviour {
             if (Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) == 0) {
                 justSelected = false;
             }
-        } */
+
+            if (Input.GetButtonDown(GameModel.JUMP)) {
+                buttonArray[buttonSelected].onClick.Invoke();
+            }
+        }
 
     }
 
