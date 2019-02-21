@@ -2,20 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
 public class UIController : MonoBehaviour
 {
     public Button pauseButton;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    private void Start() {
+        pauseButton.onClick.AddListener(pauseEvent);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        //pauseButton.onClick(Start());
+    void pauseEvent() {
+        SceneManager.LoadScene( SceneManager.GetActiveScene().buildIndex );
     }
 }

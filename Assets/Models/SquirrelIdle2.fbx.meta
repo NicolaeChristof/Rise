@@ -82,7 +82,12 @@ ModelImporter:
     7400000: Armature.001|Armature.001Action
     9500000: //RootNode
     13700000: Squirrel
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: No Name
+    second: {fileID: 2100000, guid: 048668cfeec7aa74da1f95df67bcf345, type: 2}
   materials:
     importMaterials: 1
     materialName: 0

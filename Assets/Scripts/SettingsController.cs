@@ -1,12 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SettingsController : MonoBehaviour {
 
     public Camera squirrelCamera;
 
     public Camera treeCamera;
+
+    public Button[] buttonArray = new Button[3];
+
+    private int buttonSelected = 1;
+
+    private bool justSelected;
 
     // Start is called before the first frame update
     void Start() {
@@ -127,6 +135,13 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+        buttonArray[0].onClick.AddListener(menuEvent);
+        buttonArray[1].onClick.AddListener(pauseEvent);
+        buttonArray[2].onClick.AddListener(restartEvent);
+
+        GameModel.paused = false;
+
+        buttonArray[buttonSelected].Select();
     }
 
     // Update is called once per frame
@@ -135,7 +150,7 @@ public class SettingsController : MonoBehaviour {
         // Listen for Pause
         if (Input.GetButtonDown(GameModel.PAUSE)) {
 
-            GameModel.paused = !GameModel.paused;
+            pauseEvent();
 
         }
 
@@ -163,5 +178,43 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+        if (GameModel.paused) {
+            if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) > 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
+                buttonSelected++;
+                justSelected = true;
+            } else if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) < 0) && (buttonSelected > 0) && !justSelected) {
+                buttonSelected--;
+                justSelected = true;
+            }
+
+            if (justSelected) {
+                buttonArray[buttonSelected].Select();
+            }
+
+            if (Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) == 0) {
+                justSelected = false;
+            }
+
+            if (Input.GetButtonDown(GameModel.JUMP)) {
+                buttonArray[buttonSelected].onClick.Invoke();
+            }
+        }
+
     }
+
+    void pauseEvent() {
+        buttonArray[0].gameObject.SetActive(!buttonArray[0].IsActive());
+        buttonArray[1].gameObject.SetActive(!buttonArray[1].IsActive());
+        buttonArray[2].gameObject.SetActive(!buttonArray[2].IsActive());
+        GameModel.paused = !GameModel.paused;
+    }
+
+    void restartEvent() {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    void menuEvent() {
+        Debug.Log("You hit the menu event");
+    }
+
 }
