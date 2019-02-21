@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = false;
+    public static bool inputGamePad = true;
 
     public static bool singlePlayer = true;
 
@@ -14,6 +14,8 @@ public static class GameModel {
     public static bool paused = false;
 
     public static bool isSquirrel = true;
+
+	public static bool debugMode = true;
 
     // Sound Controls
     public static float volLowRange = 0.5f;
@@ -41,7 +43,7 @@ public static class GameModel {
 
     public static string SWAP = "RS_B_P1";
 
-    public static string PAUSE = "Start_P1";
+    public static string PAUSE = "START_P1";
 
     public static string GROW = "RT_P1";
 

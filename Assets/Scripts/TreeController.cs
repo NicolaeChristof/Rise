@@ -194,40 +194,22 @@ public class TreeController : MonoBehaviour {
                     if (!GameModel.isSquirrel) {
 
                         if (grow > 0) {
-                            if (CanGrow()) {
-                                // TODO: Switch to growth over time, add vibration and 
-                                float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                                _source.PlayOneShot(growSound, _volume);
-                                Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                                UpdateSap(-sapCost, _selectedBranch);
-                            }
-                            else {
-                                // TODO: Feedback if we can't grow!
-                            }
-                        }
+							AttemptGrowBranch();
+						}
 
                     }
 
                 } else {
 
                     if (grow > 0) {
-                        if (CanGrow()) {
-                            // TODO: Switch to growth over time, add vibration and 
-                            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                            _source.PlayOneShot(growSound, _volume);
-                            Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                            UpdateSap(-sapCost, _selectedBranch);
-                        }
-                        else {
-                            // TODO: Feedback if we can't grow!
-                        }
-                    }
+						AttemptGrowBranch();
+					}
 
                 }
 
 			}
 			// Handle Break
-			else if (Input.GetButtonDown(GameModel.BREAK)) {
+			if (CheckEpsilon(Input.GetAxis(GameModel.BREAK)) || (Input.GetButtonDown(GameModel.BREAK))) {
 				float distance = float.MaxValue;
 				GameObject closestBranch = null;
 				Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
@@ -250,17 +232,8 @@ public class TreeController : MonoBehaviour {
                 if (!GameModel.isSquirrel) {
 
                     if (Input.GetButtonDown(GameModel.GROW)) {
-                        if (CanGrow()) {
-                            // TODO: Switch to growth over time, add vibration and 
-                            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                            _source.PlayOneShot(growSound, _volume);
-                            Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-                            UpdateSap(-sapCost, _selectedBranch);
-                        }
-                        else {
-                            // TODO: Feedback if we can't grow!
-                        }
-                    }
+						AttemptGrowBranch();
+					}
 
                 }
 
@@ -270,10 +243,26 @@ public class TreeController : MonoBehaviour {
 
     }
 
-    /// <summary>
-    /// Returns the current reticle transform
-    /// </summary>
-    public Transform getReticleTransform () {
+	/// <summary>
+	/// Attempts to grow a branch.
+	/// </summary>
+	public void AttemptGrowBranch() {
+		if (CanGrow()) {
+			// TODO: Switch to growth over time, add vibration and 
+			float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+			_source.PlayOneShot(growSound, _volume);
+			Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+			UpdateSap(-sapCost, _selectedBranch);
+		}
+		else {
+			// TODO: Feedback if we can't grow!
+		}
+	}
+
+	/// <summary>
+	/// Returns the current reticle transform
+	/// </summary>
+	public Transform getReticleTransform () {
         return _reticle.transform;
     }
 
