@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class SettingsController : MonoBehaviour {
 
@@ -10,12 +11,21 @@ public class SettingsController : MonoBehaviour {
 
     public Camera treeCamera;
 
-    public Button[] buttonArray = new Button[3];
+    public Text[] buttonArray = new Text[3];
 
-    private int buttonSelected = 1;
+    public Image[] selectorArray = new Image[3];
+
+    private int buttonSelected = 0;
 
     private bool justSelected;
 
+    private delegate void selectAction();
+
+    private selectAction[] selectActions;
+
+    selectAction currentSelectAction;
+
+    public GameObject pauseMenu;
     // Start is called before the first frame update
     void Start() {
 
@@ -135,13 +145,13 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-        buttonArray[0].onClick.AddListener(menuEvent);
-        buttonArray[1].onClick.AddListener(pauseEvent);
-        buttonArray[2].onClick.AddListener(restartEvent);
 
         GameModel.paused = false;
 
-        buttonArray[buttonSelected].Select();
+        selectActions = new selectAction[3] { pauseEvent, restartEvent, menuEvent };
+
+        Select(0);
+
     }
 
     // Update is called once per frame
@@ -179,33 +189,46 @@ public class SettingsController : MonoBehaviour {
         }
 
         if (GameModel.paused) {
-            if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) > 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
+
+            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
                 buttonSelected++;
                 justSelected = true;
-            } else if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) < 0) && (buttonSelected > 0) && !justSelected) {
+            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (buttonSelected > 0) && !justSelected) {
                 buttonSelected--;
                 justSelected = true;
             }
 
             if (justSelected) {
-                buttonArray[buttonSelected].Select();
+                Select(buttonSelected);
             }
 
-            if (Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) == 0) {
+            if (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) {
                 justSelected = false;
             }
 
             if (Input.GetButtonDown(GameModel.JUMP)) {
-                buttonArray[buttonSelected].onClick.Invoke();
+                currentSelectAction();
             }
         }
 
     }
 
+    void Select(int button) {
+        Debug.Log(button);
+
+        for(int i=0; i<buttonArray.Length; i++) {
+            if (i == button) {
+                selectorArray[i].gameObject.SetActive(true);
+            } else {
+                selectorArray[i].gameObject.SetActive(false);
+            }
+        }
+
+        currentSelectAction = selectActions[button];
+    }
+
     void pauseEvent() {
-        buttonArray[0].gameObject.SetActive(!buttonArray[0].IsActive());
-        buttonArray[1].gameObject.SetActive(!buttonArray[1].IsActive());
-        buttonArray[2].gameObject.SetActive(!buttonArray[2].IsActive());
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
         GameModel.paused = !GameModel.paused;
     }
 
