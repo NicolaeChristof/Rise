@@ -3,29 +3,30 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.Events;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SettingsController : MonoBehaviour {
 
     public Camera squirrelCamera;
-
     public Camera treeCamera;
+    public PostProcessProfile postProcessProfile;
 
     public Text[] buttonArray = new Text[3];
-
     public Image[] selectorArray = new Image[3];
-
-    private int buttonSelected = 0;
-
-    private bool justSelected;
-
-    private delegate void selectAction();
-
-    private selectAction[] selectActions;
-
-    selectAction currentSelectAction;
-
     public GameObject pauseMenu;
+
+    public float pauseDOF;
+
+    private int _buttonSelected = 0;
+    private bool _justSelected;
+
+    private delegate void _selectAction();
+    private _selectAction[] _selectActions;
+    private _selectAction _currentSelectAction;
+
+    private DepthOfField depthOfField;
+    private float defaultDOF;
+
     // Start is called before the first frame update
     void Start() {
 
@@ -148,9 +149,13 @@ public class SettingsController : MonoBehaviour {
 
         GameModel.paused = false;
 
-        selectActions = new selectAction[3] { pauseEvent, restartEvent, menuEvent };
+        _selectActions = new _selectAction[3] { pauseEvent, restartEvent, menuEvent };
 
         Select(0);
+
+        postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
+
+        defaultDOF = depthOfField.focusDistance;
 
     }
 
@@ -190,25 +195,26 @@ public class SettingsController : MonoBehaviour {
 
         if (GameModel.paused) {
 
-            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
-                buttonSelected++;
-                justSelected = true;
-            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (buttonSelected > 0) && !justSelected) {
-                buttonSelected--;
-                justSelected = true;
+            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+                _buttonSelected++;
+                _justSelected = true;
+            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (_buttonSelected > 0) && !_justSelected) {
+                _buttonSelected--;
+                _justSelected = true;
             }
 
-            if (justSelected) {
-                Select(buttonSelected);
+            if (_justSelected) {
+                Select(_buttonSelected);
             }
 
             if (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) {
-                justSelected = false;
+                _justSelected = false;
             }
 
             if (Input.GetButtonDown(GameModel.JUMP)) {
-                currentSelectAction();
+                _currentSelectAction();
             }
+
         }
 
     }
@@ -224,15 +230,25 @@ public class SettingsController : MonoBehaviour {
             }
         }
 
-        currentSelectAction = selectActions[button];
+        _currentSelectAction = _selectActions[button];
     }
 
     void pauseEvent() {
         pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        if (GameModel.paused) {
+            postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = defaultDOF;
+        } else {
+            postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = pauseDOF;
+        }
+
         GameModel.paused = !GameModel.paused;
     }
 
     void restartEvent() {
+        pauseEvent();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
