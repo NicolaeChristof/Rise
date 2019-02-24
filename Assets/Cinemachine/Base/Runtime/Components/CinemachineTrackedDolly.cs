@@ -30,6 +30,8 @@ namespace Cinemachine
         [Tooltip("The position along the path at which the camera will be placed.  This can be animated directly, or set automatically by the Auto-Dolly feature to get as close as possible to the Follow target.  The value is interpreted according to the Position Units setting.")]
         public float m_PathPosition;
 
+        public float m_PathSpeed;
+
         /// <summary>How to interpret the Path Position</summary>
         [Tooltip("How to interpret Path Position.  If set to Path Units, values are as follows: 0 represents the first waypoint on the path, 1 is the second, and so on.  Values in-between are points on the path in between the waypoints.  If set to Distance, then Path Position represents distance along the path.")]
         public CinemachinePathBase.PositionUnits m_PositionUnits = CinemachinePathBase.PositionUnits.PathUnits;
@@ -181,6 +183,7 @@ namespace Cinemachine
                 // Apply the path position offset
                 m_PathPosition += m_AutoDolly.m_PositionOffset;
             }
+            m_PathPosition += m_PathSpeed;
             float newPathPosition = m_PathPosition;
 
             if (deltaTime >= 0)

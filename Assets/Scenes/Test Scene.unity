@@ -2007,7 +2007,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 0
+  m_PathPosition: 1.1999995
+  m_PathSpeed: 0.025
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
   m_XDamping: 0
@@ -4087,6 +4088,7 @@ GameObject:
   - component: {fileID: 593501733}
   - component: {fileID: 593501730}
   - component: {fileID: 593501732}
+  - component: {fileID: 593501731}
   m_Layer: 0
   m_Name: Track Camera
   m_TagString: Untagged
@@ -4125,6 +4127,18 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+--- !u!114 &593501731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593501729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47f30ad0e983a3d4da8cec41130d76df, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!20 &593501732
 Camera:
   m_ObjectHideFlags: 0
@@ -4174,8 +4188,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.01274383, y: 0.339998, z: 0.0046078335, w: 0.94032854}
-  m_LocalPosition: {x: 28.425518, y: 4.6447554, z: 21.541473}
+  m_LocalRotation: {x: -0.020055758, y: 0.09432881, z: 0.0021171705, w: 0.99533683}
+  m_LocalPosition: {x: 53.612988, y: 4.172743, z: 16.031391}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -7788,7 +7802,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.01274383, y: 0.339998, z: 0.0046078335, w: 0.94032854}
+  m_LocalRotation: {x: -0.020055758, y: 0.09432881, z: 0.0021171705, w: 0.99533683}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11301,27 +11315,27 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 1
   m_Waypoints:
-  - position: {x: 28.425518, y: 4.6447554, z: 21.541473}
+  - position: {x: 32.158966, y: 4.6447554, z: 27.59144}
     roll: 0
-  - position: {x: 49.468594, y: 4.644755, z: 9.302502}
+  - position: {x: 49.962063, y: 3.975585, z: 17.602245}
     roll: 0
-  - position: {x: 69.51089, y: 4.644755, z: 10.347994}
+  - position: {x: 69.70896, y: 4.907222, z: 11.662131}
     roll: 0
-  - position: {x: 89.17153, y: 4.644755, z: 18.217682}
+  - position: {x: 90.76644, y: 2.8557968, z: 19.661053}
     roll: 0
-  - position: {x: 105.121475, y: 4.644755, z: 39.679962}
+  - position: {x: 104.0627, y: 4.1695013, z: 39.687725}
     roll: 0
-  - position: {x: 111.26259, y: 4.644756, z: 70.77438}
+  - position: {x: 106.008316, y: 3.434926, z: 68.56422}
     roll: 0
-  - position: {x: 99.920006, y: 4.6447563, z: 100.248405}
+  - position: {x: 95.9504, y: 4.1079106, z: 89.33885}
     roll: 0
-  - position: {x: 74.43038, y: 4.6447563, z: 114.45137}
+  - position: {x: 74.599045, y: 4.0514903, z: 113.093704}
     roll: 0
-  - position: {x: 40.328873, y: 4.6447563, z: 111.9067}
+  - position: {x: 43.567097, y: 5.930681, z: 98.23217}
     roll: 0
-  - position: {x: 24.189325, y: 4.6447563, z: 88.37562}
+  - position: {x: 28.926336, y: 4.231804, z: 79.7917}
     roll: 0
-  - position: {x: 15.742706, y: 4.6447563, z: 53.02226}
+  - position: {x: 17.415379, y: 4.36, z: 53.400333}
     roll: 0
 --- !u!4 &1932524116
 Transform:
