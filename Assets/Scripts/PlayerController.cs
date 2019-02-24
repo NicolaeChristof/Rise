@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : RiseBehavior {
 
     // Public References
     public GameObject playerTarget;
@@ -79,102 +79,98 @@ public class PlayerController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void UpdateTick() {
 
-        if (!GameModel.paused) {
+        if (GameModel.isSquirrel) {
 
-            if (GameModel.isSquirrel) {
+            // Get input directions
+            _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
 
-                // Get input directions
-                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
+            // Disable z axis movement
+            _moveDirection.z = 1.0f;
 
-                // Disable z axis movement
-                _moveDirection.z = 1.0f;
+            // Walking sound
+            if (_moveDirection.x != 0 && !_moving) {
 
-                // Walking sound
-                if (_moveDirection.x != 0 && !_moving) {
+                _moving = true;
 
-                    _moving = true;
+                _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
-                    _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                _source.PlayOneShot(walkSound, _volume);
 
-                    _source.PlayOneShot(walkSound, _volume);
+            }
 
-                }
+            // Orient player model
+            if (_moveDirection.x < 0) {
 
-                // Orient player model
-                if (_moveDirection.x < 0) {
+                // Face player model to the left
+                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
-                    // Face player model to the left
-                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
+            } else if (_moveDirection.x > 0) {
 
-                } else if (_moveDirection.x > 0) {
-
-                    // Face player model to the right
-                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
-
-                } else {
-
-                    // Face player model outwards towards camera
-                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
-
-                    // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
-
-                    _moving = false;
-
-                }
-
-                _moveDirection.x *= speed;
-
-                _moveDirection.z *= speed;
-
-                if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
-
-                    _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-
-                    _source.PlayOneShot(jumpSound, _volume);
-
-                    _moveDirection.y = jumpSpeed;
-
-                }
+                // Face player model to the right
+                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
 
             } else {
 
-                // Drop player if they swapped to tree mode
-                _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
+                // Face player model outwards towards camera
+                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+
+                // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+
+                _moving = false;
 
             }
 
-            // Apply gravity
-            _moveDirection.y -= gravity * Time.deltaTime;
+            _moveDirection.x *= speed;
 
-            // Apply external force
-            _moveDirection += _externalForce;
+            _moveDirection.z *= speed;
 
-            _externalForce = new Vector3(0.0f, 0.0f, 0.0f);
+            if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
 
-            // Maintains direction after movement stops
-            _moveDirection = transform.TransformDirection(_moveDirection);
+                _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
-            if (_moveDirection != Vector3.zero) {
+                _source.PlayOneShot(jumpSound, _volume);
 
-                // Faces player towards movement direction
-                transform.forward = _moveDirection;
+                _moveDirection.y = jumpSpeed;
 
             }
 
-			// Move the Controller
-			ApplyVelocity();
-			ApplyMotion(_moveDirection);
+        } else {
 
-            _target = new Vector3(playerTarget.transform.position.x,
-                                  this.transform.position.y,
-                                  playerTarget.transform.position.z);
-
-            // face the player towards the target
-            transform.LookAt(_target);
+            // Drop player if they swapped to tree mode
+            _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
 
         }
+
+        // Apply gravity
+        _moveDirection.y -= gravity * Time.deltaTime;
+
+        // Apply external force
+        _moveDirection += _externalForce;
+
+        _externalForce = new Vector3(0.0f, 0.0f, 0.0f);
+
+        // Maintains direction after movement stops
+        _moveDirection = transform.TransformDirection(_moveDirection);
+
+        if (_moveDirection != Vector3.zero) {
+
+            // Faces player towards movement direction
+            transform.forward = _moveDirection;
+
+        }
+
+		// Move the Controller
+		ApplyVelocity();
+		ApplyMotion(_moveDirection);
+
+        _target = new Vector3(playerTarget.transform.position.x,
+                             this.transform.position.y,
+                             playerTarget.transform.position.z);
+
+        // face the player towards the target
+        transform.LookAt(_target);
 
         _currentHeight = transform.position.y - _heightOffset;
         _currentHeightActual =  _currentHeight * _realToVirtualRatio;
@@ -183,6 +179,12 @@ public class PlayerController : MonoBehaviour {
         heightText.text = "Height: " + _currentHeightActual.ToString("F1") + "m";
 
         treeSlider.value = _currentHeight / _treeHeight;
+
+    }
+
+    public override void UpdateAlways() {
+
+
 
     }
 
