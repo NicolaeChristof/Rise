@@ -2007,7 +2007,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 151.77632
+  m_PathPosition: 0.065
   m_PathSpeed: 0.015
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -4190,8 +4190,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.008644002, y: 0.8875863, z: 0.017020784, w: 0.46024588}
-  m_LocalPosition: {x: 31.782925, y: 4.6475716, z: 84.15458}
+  m_LocalRotation: {x: -0.0071816924, y: 0.4372862, z: 0.0035846091, w: 0.8992866}
+  m_LocalPosition: {x: 25.8902, y: 5.346111, z: 33.7564}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -4209,7 +4209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 4f9c35127ccae614f977e616caae6856, type: 2}
+  sharedProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
   isGlobal: 1
   blendDistance: 0
   weight: 1
@@ -4226,7 +4226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 534669905}
+  volumeTrigger: {fileID: 593501733}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -7084,7 +7084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 948f4100a11a5c24981795d21301da5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  volumeTrigger: {fileID: 534669905}
+  volumeTrigger: {fileID: 1237406275}
   volumeLayer:
     serializedVersion: 2
     m_Bits: 256
@@ -7881,7 +7881,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.008644002, y: 0.8875863, z: 0.017020784, w: 0.46024588}
+  m_LocalRotation: {x: -0.0071816924, y: 0.4372862, z: 0.0035846091, w: 0.8992866}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11394,27 +11394,47 @@ MonoBehaviour:
     width: 0.2
   m_Looped: 1
   m_Waypoints:
-  - position: {x: 32.158966, y: 4.6447554, z: 27.59144}
+  - position: {x: 24.307732, y: 5.329818, z: 35.117638}
     roll: 0
-  - position: {x: 49.962063, y: 3.975585, z: 17.602245}
+  - position: {x: 54.612885, y: 4.75513, z: 15.840954}
     roll: 0
-  - position: {x: 69.70896, y: 4.907222, z: 11.662131}
+  - position: {x: 72.05703, y: 4.9986234, z: 13.21332}
     roll: 0
-  - position: {x: 90.76644, y: 2.8557968, z: 19.661053}
+  - position: {x: 89.27527, y: 2.3227668, z: 15.881594}
     roll: 0
-  - position: {x: 104.0627, y: 4.1695013, z: 39.687725}
+  - position: {x: 104.09006, y: 4.4970455, z: 40.49831}
     roll: 0
-  - position: {x: 106.008316, y: 3.434926, z: 68.56422}
+  - position: {x: 105.554535, y: 2.8576458, z: 68.271484}
     roll: 0
-  - position: {x: 95.9504, y: 4.1079106, z: 89.33885}
+  - position: {x: 97.773445, y: 4.175595, z: 92.03287}
     roll: 0
-  - position: {x: 74.599045, y: 4.0514903, z: 113.093704}
+  - position: {x: 67.827034, y: 3.1058857, z: 111.851036}
     roll: 0
   - position: {x: 43.567097, y: 5.930681, z: 98.23217}
     roll: 0
-  - position: {x: 28.926336, y: 4.231804, z: 79.7917}
+  - position: {x: 29.614328, y: 3.5095541, z: 80.547646}
     roll: 0
-  - position: {x: 17.415379, y: 4.36, z: 53.400333}
+  - position: {x: 19.846495, y: 14.72868, z: 56.126625}
+    roll: 0
+  - position: {x: 38.071743, y: 18.255362, z: 37.315937}
+    roll: 0
+  - position: {x: 52.98774, y: 23.527853, z: 27.964657}
+    roll: 0
+  - position: {x: 69.45895, y: 24.45499, z: 30.20048}
+    roll: 0
+  - position: {x: 86.30991, y: 26.383154, z: 38.242146}
+    roll: 0
+  - position: {x: 95.80819, y: 26.569284, z: 62.641838}
+    roll: 0
+  - position: {x: 92.17212, y: 31.127851, z: 87.42002}
+    roll: 0
+  - position: {x: 85.67959, y: 28.990467, z: 96.59134}
+    roll: 0
+  - position: {x: 59.566387, y: 20.981342, z: 98.81585}
+    roll: 0
+  - position: {x: 36.698063, y: 20.539915, z: 94.16875}
+    roll: 0
+  - position: {x: 18.039719, y: 7.3883166, z: 58.17651}
     roll: 0
 --- !u!4 &1932524116
 Transform:
