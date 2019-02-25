@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class TrackCameraController : RiseBehavior {
 
+    private Camera _trackCam;
+
     // Start is called before the first frame update
     void Start() {
 
-
+        _trackCam = GetComponent<Camera>();
 
     }
 
@@ -20,15 +22,13 @@ public class TrackCameraController : RiseBehavior {
 
     public override void UpdateAlways() {
 
-        // Debug.Log(this.enabled);
-
         if (GameModel.paused) {
 
-            // this.enabled = true;
+            _trackCam.depth = 0;
 
         } else {
 
-            // this.enabled = false;
+            _trackCam.depth = -2;
 
         }
 
