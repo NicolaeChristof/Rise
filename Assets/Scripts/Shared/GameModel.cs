@@ -18,7 +18,7 @@ public static class GameModel {
 	public static bool debugMode = true;
 
     // Sound Controls
-    public static float volLowRange = 0.5f;
+    public static float volLowRange = 0.8f;
 
     public static float volHighRange = 1.0f;
 
