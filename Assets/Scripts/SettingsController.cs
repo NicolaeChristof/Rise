@@ -219,6 +219,12 @@ public class SettingsController : MonoBehaviour {
 
     }
 
+    public void OnApplicationQuit() {
+        postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
+
+        depthOfField.focusDistance.value = defaultDOF;
+    }
+
     void Select(int button) {
         Debug.Log(button);
 
