@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TreeController : MonoBehaviour {
+public class TreeController : RiseBehavior {
 
     // public references
     public GameObject reticle;
@@ -83,100 +83,90 @@ public class TreeController : MonoBehaviour {
         UpdateReticle();
     }
 
-    void Update() {
+    public override void UpdateTick() {
 
-        if (!GameModel.paused) {
+        float moveVertical;
+        float moveLateral;
+        float grow;
 
-            float moveVertical;
-            float moveLateral;
-            float grow;
+        if (GameModel.singlePlayer) {
 
-            if (GameModel.singlePlayer) {
-
-                if (!GameModel.isSquirrel) {
-
-                    // Poll Input
-                    moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
-                    moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
-
-                    grow = Input.GetAxis(GameModel.GROW);
-
-                } else {
-
-                    moveVertical = 0.0f;
-                    moveLateral = 0.0f;
-                    grow = 0.0f;
-
-                }
-
-            } else {
+            if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+                moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
                 moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
 
                 grow = Input.GetAxis(GameModel.GROW);
 
-            }
+            } else {
 
-            bool moved = false;
-
-            // Keep tree player close to squirrel player and out of the ground
-            if (//(transform.position.y - moveVertical > groundHeight) && // need to spawn retical above ground before we can implement this
-                (transform.position.y - moveVertical > player.transform.position.y - playerDistance) &&
-                (transform.position.y - moveVertical < player.transform.position.y + playerDistance)) {
-
-                // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-                if (CheckEpsilon(moveVertical)) {
-                    transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                    moved = true;
-                }
-
-            } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
-                       (moveVertical > 0)) {
-
-                // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-                if (CheckEpsilon(moveVertical)) {
-                    transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                    moved = true;
-                }
-
-            } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
-                       (moveVertical < 0)) {
-
-                // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-                if (CheckEpsilon(moveVertical)) {
-                    transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                    moved = true;
-                }
+                moveVertical = 0.0f;
+                moveLateral = 0.0f;
+                grow = 0.0f;
 
             }
 
-            // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
-            if (CheckEpsilon(moveLateral)) {
-                transform.Translate(Vector3.right * (moveLateral * Time.deltaTime * LATERAL_SPEED), Space.Self);
+        } else {
+
+            // Poll Input
+            moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+            moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+
+            grow = Input.GetAxis(GameModel.GROW);
+
+        }
+
+        bool moved = false;
+
+        // Keep tree player close to squirrel player and out of the ground
+        if (//(transform.position.y - moveVertical > groundHeight) && // need to spawn retical above ground before we can implement this
+            (transform.position.y - moveVertical > player.transform.position.y - playerDistance) &&
+            (transform.position.y - moveVertical < player.transform.position.y + playerDistance)) {
+
+            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+            if (CheckEpsilon(moveVertical)) {
+                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
                 moved = true;
             }
 
-            // If the controller was actuated, move the reticle object
-            if (moved) {
-                UpdateReticle();
+        } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
+                   (moveVertical > 0)) {
+
+            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+            if (CheckEpsilon(moveVertical)) {
+                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
+                 moved = true;
             }
 
-            // Handle Branch Selection
-            if (Input.GetButtonDown(GameModel.SELECT)) {
+        } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
+                   (moveVertical < 0)) {
 
-                if (GameModel.singlePlayer) {
+            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+            if (CheckEpsilon(moveVertical)) {
+                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
+                moved = true;
+            }
 
-                    if (!GameModel.isSquirrel) {
+        }
 
-                        int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
-                        int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                        Select(selected);
+        // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
+        if (CheckEpsilon(moveLateral)) {
+            transform.Translate(Vector3.right * (moveLateral * Time.deltaTime * LATERAL_SPEED), Space.Self);
+            moved = true;
+        }
 
-                    }
+        // If the controller was actuated, move the reticle object
+        if (moved) {
+            UpdateReticle();
+        }
 
-                } else {
+        // Handle Branch Selection
+        if (Input.GetButtonDown(GameModel.SELECT)) {
+
+            if (GameModel.singlePlayer) {
+
+                if (!GameModel.isSquirrel) {
 
                     int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
                     int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
@@ -184,22 +174,22 @@ public class TreeController : MonoBehaviour {
 
                 }
 
+            } else {
+
+                int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
+                int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+                Select(selected);
+
             }
 
-            // Handle Growth
-            if (GameModel.inputGamePad) {
+        }
 
-                if (GameModel.singlePlayer) {
+        // Handle Growth
+        if (GameModel.inputGamePad) {
 
-                    if (!GameModel.isSquirrel) {
+            if (GameModel.singlePlayer) {
 
-                        if (grow > 0) {
-							AttemptGrowBranch();
-						}
-
-                    }
-
-                } else {
+                if (!GameModel.isSquirrel) {
 
                     if (grow > 0) {
 						AttemptGrowBranch();
@@ -207,39 +197,51 @@ public class TreeController : MonoBehaviour {
 
                 }
 
-			}
-			// Handle Break
-			if (CheckEpsilon(Input.GetAxis(GameModel.BREAK)) || (Input.GetButtonDown(GameModel.BREAK))) {
-				float distance = float.MaxValue;
-				GameObject closestBranch = null;
-				Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
-				foreach (Collider iteratedCollider in colliders) {
-					if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
-						float currentDistance = Vector3.Distance(iteratedCollider.transform.position, _reticle.transform.position);
-						if (currentDistance < distance) {
-							distance = currentDistance;
-							closestBranch = iteratedCollider.gameObject;
-						}
+            } else {
+
+                if (grow > 0) {
+					AttemptGrowBranch();
+				}
+
+            }
+
+		}
+		// Handle Break
+		if (CheckEpsilon(Input.GetAxis(GameModel.BREAK)) || (Input.GetButtonDown(GameModel.BREAK))) {
+			float distance = float.MaxValue;
+			GameObject closestBranch = null;
+			Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
+			foreach (Collider iteratedCollider in colliders) {
+				if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
+					float currentDistance = Vector3.Distance(iteratedCollider.transform.position, _reticle.transform.position);
+					if (currentDistance < distance) {
+						distance = currentDistance;
+						closestBranch = iteratedCollider.gameObject;
 					}
 				}
-				if (closestBranch != null) {
-					closestBranch.GetComponent<BranchBehavior>().OnBreak();
-					Object.Destroy(closestBranch);
-				}
 			}
-			else {
+			if (closestBranch != null) {
+				closestBranch.GetComponent<BranchBehavior>().OnBreak();
+				Object.Destroy(closestBranch);
+			}
+		}
+		else {
 
-                if (!GameModel.isSquirrel) {
+            if (!GameModel.isSquirrel) {
 
-                    if (Input.GetButtonDown(GameModel.GROW)) {
-						AttemptGrowBranch();
-					}
-
-                }
+                if (Input.GetButtonDown(GameModel.GROW)) {
+					AttemptGrowBranch();
+				}
 
             }
 
         }
+
+    }
+
+    public override void UpdateAlways() {
+
+
 
     }
 
