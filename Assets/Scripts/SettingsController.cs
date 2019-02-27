@@ -3,18 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Rendering.PostProcessing;
 
 public class SettingsController : MonoBehaviour {
 
     public Camera squirrelCamera;
-
     public Camera treeCamera;
+    public PostProcessProfile postProcessProfile;
 
-    public Button[] buttonArray = new Button[3];
+    public Text[] buttonArray = new Text[3];
+    public Image[] selectorArray = new Image[3];
+    public GameObject pauseMenu;
 
-    private int buttonSelected = 1;
+    public float pauseDOF;
 
-    private bool justSelected;
+    private int _buttonSelected = 0;
+    private bool _justSelected;
+
+    private delegate void _selectAction();
+    private _selectAction[] _selectActions;
+    private _selectAction _currentSelectAction;
+
+    private DepthOfField depthOfField;
+    private float defaultDOF;
 
     // Start is called before the first frame update
     void Start() {
@@ -135,13 +146,17 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-        buttonArray[0].onClick.AddListener(menuEvent);
-        buttonArray[1].onClick.AddListener(pauseEvent);
-        buttonArray[2].onClick.AddListener(restartEvent);
 
         GameModel.paused = false;
 
-        buttonArray[buttonSelected].Select();
+        _selectActions = new _selectAction[3] { pauseEvent, restartEvent, menuEvent };
+
+        Select(0);
+
+        postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
+
+        defaultDOF = depthOfField.focusDistance;
+
     }
 
     // Update is called once per frame
@@ -179,37 +194,67 @@ public class SettingsController : MonoBehaviour {
         }
 
         if (GameModel.paused) {
-            if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) > 0) && (buttonSelected < (buttonArray.Length - 1)) && !justSelected) {
-                buttonSelected++;
-                justSelected = true;
-            } else if ((Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) < 0) && (buttonSelected > 0) && !justSelected) {
-                buttonSelected--;
-                justSelected = true;
+
+            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+                _buttonSelected++;
+                _justSelected = true;
+            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (_buttonSelected > 0) && !_justSelected) {
+                _buttonSelected--;
+                _justSelected = true;
             }
 
-            if (justSelected) {
-                buttonArray[buttonSelected].Select();
+            if (_justSelected) {
+                Select(_buttonSelected);
             }
 
-            if (Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT) == 0) {
-                justSelected = false;
+            if (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) {
+                _justSelected = false;
             }
 
             if (Input.GetButtonDown(GameModel.JUMP)) {
-                buttonArray[buttonSelected].onClick.Invoke();
+                _currentSelectAction();
             }
+
         }
 
     }
 
+    public void OnApplicationQuit() {
+        postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
+
+        depthOfField.focusDistance.value = defaultDOF;
+    }
+
+    void Select(int button) {
+        Debug.Log(button);
+
+        for(int i=0; i<buttonArray.Length; i++) {
+            if (i == button) {
+                selectorArray[i].gameObject.SetActive(true);
+            } else {
+                selectorArray[i].gameObject.SetActive(false);
+            }
+        }
+
+        _currentSelectAction = _selectActions[button];
+    }
+
     void pauseEvent() {
-        buttonArray[0].gameObject.SetActive(!buttonArray[0].IsActive());
-        buttonArray[1].gameObject.SetActive(!buttonArray[1].IsActive());
-        buttonArray[2].gameObject.SetActive(!buttonArray[2].IsActive());
+        pauseMenu.SetActive(!pauseMenu.activeSelf);
+
+        if (GameModel.paused) {
+            postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = defaultDOF;
+        } else {
+            postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = pauseDOF;
+        }
+
         GameModel.paused = !GameModel.paused;
     }
 
     void restartEvent() {
+        pauseEvent();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
