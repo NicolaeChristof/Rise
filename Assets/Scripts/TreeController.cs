@@ -53,7 +53,7 @@ public class TreeController : RiseBehavior {
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
-        transform.Translate(0.0f, 5.0f, 0.0f);
+        transform.Translate(0.0f, 3.0f, 0.0f);
 
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
