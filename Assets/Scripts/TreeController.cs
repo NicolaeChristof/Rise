@@ -53,6 +53,8 @@ public class TreeController : RiseBehavior {
         _tree = GameObject.Find("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
+        transform.Translate(0.0f, 5.0f, 0.0f);
+
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
         _source.spatialBlend = 1.0f;
@@ -120,7 +122,7 @@ public class TreeController : RiseBehavior {
         bool moved = false;
 
         // Keep tree player close to squirrel player and out of the ground
-        if (//(transform.position.y - moveVertical > groundHeight) && // need to spawn retical above ground before we can implement this
+        if ((transform.position.y - moveVertical > groundHeight) &&
             (transform.position.y - moveVertical > player.transform.position.y - playerDistance) &&
             (transform.position.y - moveVertical < player.transform.position.y + playerDistance)) {
 
