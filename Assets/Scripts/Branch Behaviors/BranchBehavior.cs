@@ -18,7 +18,7 @@ public class BranchBehavior : MonoBehaviour {
 
         _originalRotation = transform.localEulerAngles;
 
-        _deformationAngle = 8.0f;
+        _deformationAngle = 6.0f;
 
     }
 
@@ -32,7 +32,7 @@ public class BranchBehavior : MonoBehaviour {
 
         if (collider.gameObject.name == "Squirrel") {
 
-            transform.DORotate(transform.localEulerAngles + Quaternion.AngleAxis(_deformationAngle, Vector3.right).eulerAngles, 2.0f, RotateMode.Fast)
+            transform.DORotate(_originalRotation + Quaternion.AngleAxis(_deformationAngle, Vector3.right).eulerAngles, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
 
         }
