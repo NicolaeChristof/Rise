@@ -9,11 +9,13 @@ public class SettingsController : MonoBehaviour {
 
     public Camera squirrelCamera;
     public Camera treeCamera;
-    public PostProcessProfile postProcessProfile;
+    /*public PostProcessProfile postProcessProfile;
 
     public Text[] buttonArray = new Text[3];
     public Image[] selectorArray = new Image[3];
     public GameObject pauseMenu;
+
+    public GameObject mainMenu;
 
     public float pauseDOF;
 
@@ -26,6 +28,9 @@ public class SettingsController : MonoBehaviour {
 
     private DepthOfField depthOfField;
     private float defaultDOF;
+
+    private enum menus { Main, Pause, Options, None };
+    private menus currentMenu;*/
 
     // Start is called before the first frame update
     void Start() {
@@ -145,7 +150,9 @@ public class SettingsController : MonoBehaviour {
             treeCamera.enabled = false;
 
         }
+        /*
 
+        currentMenu = menus.Main;
 
         GameModel.paused = false;
 
@@ -155,19 +162,12 @@ public class SettingsController : MonoBehaviour {
 
         postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
 
-        defaultDOF = depthOfField.focusDistance;
+        defaultDOF = depthOfField.focusDistance;*/
 
     }
 
     // Update is called once per frame
     void Update() {
-
-        // Listen for Pause
-        if (Input.GetButtonDown(GameModel.PAUSE)) {
-
-            pauseEvent();
-
-        }
 
         if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
 
@@ -193,6 +193,7 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+        /*
         if (GameModel.paused) {
 
             if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
@@ -215,14 +216,33 @@ public class SettingsController : MonoBehaviour {
                 _currentSelectAction();
             }
 
-        }
+        }*/
 
     }
 
+    /*
     public void OnApplicationQuit() {
         postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
 
         depthOfField.focusDistance.value = defaultDOF;
+    }
+
+    void ChangeMenu(menus passedMenu) {
+        currentMenu = passedMenu;
+
+        switch (currentMenu) {
+            case menus.Pause:
+                pauseEvent();
+                break;
+            case menus.Main:
+                menuEvent();
+                break;
+            case menus.Options:
+                // Set optionmenu active
+                break;
+            case menus.None:
+                break;
+        }
     }
 
     void Select(int button) {
@@ -240,17 +260,19 @@ public class SettingsController : MonoBehaviour {
     }
 
     void pauseEvent() {
-        pauseMenu.SetActive(!pauseMenu.activeSelf);
+        GameModel.paused = !GameModel.paused;
 
-        if (GameModel.paused) {
+        if (!GameModel.paused) {
+            currentMenu = menus.
+            pauseMenu.SetActive(false);
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
         } else {
+            currentMenu = menus.Pause;
+            pauseMenu.SetActive(true);
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = pauseDOF;
         }
-
-        GameModel.paused = !GameModel.paused;
     }
 
     void restartEvent() {
@@ -259,7 +281,12 @@ public class SettingsController : MonoBehaviour {
     }
 
     void menuEvent() {
-        Debug.Log("You hit the menu event");
+        currentMenu = menus.Main;
+
+        pauseEvent();
+
+        mainMenu.SetActive(true);
     }
+    */
 
 }
