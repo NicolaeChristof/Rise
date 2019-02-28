@@ -16,7 +16,7 @@ public class BeeHiveBehavior : MonoBehaviour {
 
     void OnTriggerEnter (Collider collider) {
 
-        if (collider.gameObject.name == "Player") {
+        if (collider.gameObject.name == "Squirrel") {
 
             Debug.Log("Player Detected! (Bee Hive)");
 

@@ -83,7 +83,7 @@ public class BirdBehavior : MonoBehaviour {
 
         if (collision.gameObject.name != "Tree") {
 
-            if (collision.gameObject.name == "Player") {
+            if (collision.gameObject.name == "Squirrel") {
 
                 Debug.Log("Player Detected! (Bird)");
 
