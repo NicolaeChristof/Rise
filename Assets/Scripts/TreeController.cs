@@ -11,6 +11,7 @@ public class TreeController : RiseBehavior {
     public GameObject branch2;
     public GameObject branch3;
     public GameObject branch4;
+    public GameObject branch5;
 
     public GameObject player;
     public AudioClip growSound;
