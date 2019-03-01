@@ -8,9 +8,13 @@ public class CheckpointBehavior : MonoBehaviour {
 
     private GameObject _tree;
 
+    private Collider _trigger;
+
     void Start() {
 
         _tree = GameObject.FindGameObjectWithTag("Tree");
+
+        _trigger = GetComponent<BoxCollider>();
 
         transform.position = new Vector3(_tree.transform.position.x, transform.position.y, _tree.transform.position.z);
 
@@ -26,7 +30,9 @@ public class CheckpointBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            Debug.Log("Hello Squirrel");
+            web.SetActive(true);
+
+            _trigger.enabled = false;
 
         }
 
