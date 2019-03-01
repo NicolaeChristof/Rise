@@ -58,9 +58,19 @@ public class SettingsController : MonoBehaviour {
 
                 GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P1";
 
-                GameModel.GROW = "RT_P1";
+                GameModel.JUMP = "A_P1";
 
-                GameModel.SELECT = "RB_P1";
+                GameModel.SWAP = "X_P1";
+
+                GameModel.PAUSE_P1 = "START_P1";
+
+                GameModel.PAUSE_P2 = "START_P2";
+
+                GameModel.GROW = "A_P1";
+
+                GameModel.BREAK = "B_P1";
+
+                GameModel.SELECT = "Y_P1";
 
             } else {
 
@@ -84,7 +94,9 @@ public class SettingsController : MonoBehaviour {
 
                 GameModel.SWAP = "Keyboard_swap_player";
 
-                GameModel.PAUSE = "Keyboard_pause";
+                GameModel.PAUSE_P1 = "Keyboard_pause";
+
+                GameModel.PAUSE_P2 = "Keyboard_pause";
 
                 GameModel.GROW = "Keyboard_trigger";
 
@@ -115,11 +127,19 @@ public class SettingsController : MonoBehaviour {
 
             GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
 
-            GameModel.GROW = "RT_P2";
+            GameModel.JUMP = "A_P1";
 
-			GameModel.BREAK = "LT_P2";
+            GameModel.SWAP = "X_P1";
 
-            GameModel.SELECT = "RB_P2";
+            GameModel.PAUSE_P1 = "START_P1";
+
+            GameModel.PAUSE_P2 = "START_P2";
+
+            GameModel.GROW = "A_P2";
+
+			GameModel.BREAK = "B_P2";
+
+            GameModel.SELECT = "Y_P2";
 
         }
 
@@ -146,7 +166,6 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-
         GameModel.paused = false;
 
         _selectActions = new _selectAction[3] { pauseEvent, restartEvent, menuEvent };
@@ -163,7 +182,7 @@ public class SettingsController : MonoBehaviour {
     void Update() {
 
         // Listen for Pause
-        if (Input.GetButtonDown(GameModel.PAUSE)) {
+        if (Input.GetButtonDown(GameModel.PAUSE_P1) || Input.GetButtonDown(GameModel.PAUSE_P2)) {
 
             pauseEvent();
 
@@ -195,10 +214,10 @@ public class SettingsController : MonoBehaviour {
 
         if (GameModel.paused) {
 
-            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+            if (((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) || (Input.GetAxis(GameModel.VERTICAL_TREE_INPUT) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
                 _buttonSelected++;
                 _justSelected = true;
-            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (_buttonSelected > 0) && !_justSelected) {
+            } else if (((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) || (Input.GetAxis(GameModel.VERTICAL_TREE_INPUT) < 0)) && (_buttonSelected > 0) && !_justSelected) {
                 _buttonSelected--;
                 _justSelected = true;
             }
@@ -207,7 +226,7 @@ public class SettingsController : MonoBehaviour {
                 Select(_buttonSelected);
             }
 
-            if (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) {
+            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) || (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0)) {
                 _justSelected = false;
             }
 
@@ -226,7 +245,7 @@ public class SettingsController : MonoBehaviour {
     }
 
     void Select(int button) {
-        Debug.Log(button);
+        // Debug.Log(button);
 
         for(int i=0; i<buttonArray.Length; i++) {
             if (i == button) {

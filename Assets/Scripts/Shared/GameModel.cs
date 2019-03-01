@@ -41,14 +41,16 @@ public static class GameModel {
 
     public static string JUMP = "A_P1";
 
-    public static string SWAP = "RS_B_P1";
+    public static string SWAP = "X_P1";
 
-    public static string PAUSE = "START_P1";
+    public static string PAUSE_P1 = "START_P1";
 
-    public static string GROW = "RT_P1";
+    public static string PAUSE_P2 = "START_P2";
 
-	public static string BREAK = "LT_P1";
+    public static string GROW = "A_P1";
 
-    public static string SELECT = "RB_P1";
+	public static string BREAK = "B_P1";
+
+    public static string SELECT = "Y_P1";
 
 }
