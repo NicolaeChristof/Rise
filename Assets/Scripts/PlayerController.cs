@@ -135,8 +135,6 @@ public class PlayerController : RiseBehavior {
 
             if (Input.GetButton(GameModel.JUMP) && _numJumps < maxJumps) {
 
-                Debug.Log("Jump" + _numJumps);
-
                 _numJumps++;
 
                 _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
