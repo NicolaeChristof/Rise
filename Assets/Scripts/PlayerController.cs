@@ -79,7 +79,7 @@ public class PlayerController : RiseBehavior {
     }
 
     // Update is called once per frame
-    public override void UpdateTick() {
+    public override void UpdateTick () {
 
         if (GameModel.isSquirrel) {
 
@@ -182,7 +182,7 @@ public class PlayerController : RiseBehavior {
 
     }
 
-    public override void UpdateAlways() {
+    public override void UpdateAlways () {
 
 
 

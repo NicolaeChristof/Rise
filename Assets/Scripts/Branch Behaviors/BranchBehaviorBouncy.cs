@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BranchBehaviorBouncy : BranchBehavior {
 
-	public override void OnTriggerEnter(Collider collider) {
+	public override void OnTriggerEnter (Collider collider) {
 
         base.OnTriggerEnter(collider);
 
@@ -13,13 +13,13 @@ public class BranchBehaviorBouncy : BranchBehavior {
 		}
 	}
 
-    public override void OnTriggerStay(Collider collider) {
+    public override void OnTriggerStay (Collider collider) {
 
         base.OnTriggerStay(collider);
 
     }
 
-    public override void OnTriggerExit(Collider collider) {
+    public override void OnTriggerExit (Collider collider) {
 
         base.OnTriggerExit(collider);
 

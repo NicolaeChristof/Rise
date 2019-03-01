@@ -28,7 +28,7 @@ public class BranchBehavior : MonoBehaviour {
 
     }
 
-    public virtual void OnTriggerEnter(Collider collider) {
+    public virtual void OnTriggerEnter (Collider collider) {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
@@ -39,13 +39,13 @@ public class BranchBehavior : MonoBehaviour {
 
     }
 
-    public virtual void OnTriggerStay(Collider collider) {
+    public virtual void OnTriggerStay (Collider collider) {
 
 
 
     }
 
-    public virtual void OnTriggerExit(Collider collider) {
+    public virtual void OnTriggerExit (Collider collider) {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
@@ -56,13 +56,13 @@ public class BranchBehavior : MonoBehaviour {
 
     }
 
-    public virtual void OnBreak() {
+    public virtual void OnBreak () {
         // TODO: Play break sound
         Instantiate(knot, transform.position, transform.rotation);
     }
 
     // TODO: Internalize? I18n?
-    public virtual string GetReadableName() {
+    public virtual string GetReadableName () {
         return readableName;
     }
 }

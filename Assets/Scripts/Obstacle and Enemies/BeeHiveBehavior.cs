@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BeeHiveBehavior : MonoBehaviour {
 
@@ -16,7 +17,7 @@ public class BeeHiveBehavior : MonoBehaviour {
 
     void OnTriggerEnter (Collider collider) {
 
-        if (collider.gameObject.name == "Squirrel") {
+        if (collider.gameObject.tag.Equals("Player")) {
 
             Debug.Log("Player Detected! (Bee Hive)");
 

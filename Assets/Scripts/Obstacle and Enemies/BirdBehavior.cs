@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BirdBehavior : MonoBehaviour {
+public class BirdBehavior : RiseBehavior {
 
     // Public References
     public GameObject birdTarget;
@@ -40,42 +40,44 @@ public class BirdBehavior : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void UpdateTick() {
 
-        if (!GameModel.paused) {
+        // Orient bird model
+        if (speed > 0) {
 
-            // Orient bird model
-            if (speed > 0) {
+            // Face bird model to the left
+            birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
 
-                // Face bird model to the left
-                birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
+        } else if (speed < 0) {
 
-            } else if (speed < 0) {
-
-                // Face bird model to the right
-                birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
-
-            }
-
-            // Move the bird
-            _heading = this.transform.position - _target;
-
-            _distance = _heading.magnitude;
-
-            if (_distance > maxDistance) {
-
-                transform.Translate(new Vector3(0.0f, 0.0f, 0.2f));
-
-            } else {
-
-                transform.RotateAround(_target, Vector3.up, speed);
-
-            }
-
-            // face the bird towards the target
-            transform.LookAt(_target);
+            // Face bird model to the right
+            birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
         }
+
+        // Move the bird
+        _heading = this.transform.position - _target;
+
+        _distance = _heading.magnitude;
+
+        if (_distance > maxDistance) {
+
+            transform.Translate(new Vector3(0.0f, 0.0f, 0.2f));
+
+        } else {
+
+            transform.RotateAround(_target, Vector3.up, speed);
+
+        }
+
+        // face the bird towards the target
+        transform.LookAt(_target);
+
+    }
+
+    public override void UpdateAlways() {
+
+
 
     }
 
