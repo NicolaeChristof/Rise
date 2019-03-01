@@ -42,6 +42,8 @@ public class TreeController : RiseBehavior {
     // Local Constants
     private const string BRANCH_TAG = "Branch";
     private const string DEAD_ZONE_TAG = "Dead Zone";
+    private const string SAP_TAG = "Sap";
+    private const string PLAYER_TAG = "Player";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
     private const float EPSILON = 0.01F;
@@ -324,8 +326,11 @@ public class TreeController : RiseBehavior {
         // Check Branch Closeness (No Branch colliders in min distance)
         Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
         foreach (Collider iteratedCollider in colliders) {
-            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG) || iteratedCollider.gameObject.tag.Equals(DEAD_ZONE_TAG)) {
-                Debug.Log(iteratedCollider.gameObject.name);
+            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(DEAD_ZONE_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(SAP_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(PLAYER_TAG))
+            {
                 return false;
             }
         }
