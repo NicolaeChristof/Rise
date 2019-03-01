@@ -30,6 +30,9 @@ public class PlayerController : RiseBehavior {
     [Range(0.0f, 20.0f)]
     public float maxPlayerDistance;
 
+    [Range(0, 2)]
+    public int maxJumps;
+
     // The height of a real-life squirrel
     public float realSquirrelHeight;
 
@@ -65,6 +68,8 @@ public class PlayerController : RiseBehavior {
 
     private float _treeHeight;
 
+    private float _numJumps;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -75,6 +80,8 @@ public class PlayerController : RiseBehavior {
         _realToVirtualRatio = realSquirrelHeight / _controller.height;
 
         _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
+
+        _numJumps = 0;
 
     }
 
@@ -126,13 +133,23 @@ public class PlayerController : RiseBehavior {
 
             _moveDirection.z *= speed;
 
-            if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
+            if (Input.GetButton(GameModel.JUMP) && _numJumps < maxJumps) {
+
+                Debug.Log("Jump" + _numJumps);
+
+                _numJumps++;
 
                 _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
                 _source.PlayOneShot(jumpSound, _volume);
 
                 _moveDirection.y = jumpSpeed;
+
+            }
+
+            if (_controller.isGrounded) {
+
+                _numJumps = 0;
 
             }
 
