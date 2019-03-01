@@ -30,7 +30,7 @@ public class BranchBehavior : MonoBehaviour {
 
     public virtual void OnTriggerEnter(Collider collider) {
 
-        if (collider.gameObject.name == "Squirrel") {
+        if (collider.gameObject.tag.Equals("Player")) {
 
             transform.DORotate(_originalRotation + Quaternion.AngleAxis(_deformationAngle, Vector3.right).eulerAngles, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
@@ -41,11 +41,13 @@ public class BranchBehavior : MonoBehaviour {
 
     public virtual void OnTriggerStay(Collider collider) {
 
+
+
     }
 
     public virtual void OnTriggerExit(Collider collider) {
 
-        if (collider.gameObject.name == "Squirrel") {
+        if (collider.gameObject.tag.Equals("Player")) {
 
             transform.DORotate(_originalRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
