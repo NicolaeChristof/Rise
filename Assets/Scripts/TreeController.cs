@@ -50,7 +50,7 @@ public class TreeController : RiseBehavior {
 
     void Start() {
         // Establish local references
-        _tree = GameObject.Find("Tree");
+        _tree = GameObject.FindGameObjectWithTag("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
         transform.Translate(0.0f, 3.0f, 0.0f);
