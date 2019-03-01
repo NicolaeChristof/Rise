@@ -96,7 +96,7 @@ public class TreeController : RiseBehavior {
             if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+                moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
                 moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
 
                 grow = Input.GetAxis(GameModel.GROW);
