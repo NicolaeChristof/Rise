@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CheckpointBehavior : MonoBehaviour {
 
+    public GameObject web;
+
     void Start() {
 
 
