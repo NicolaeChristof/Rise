@@ -9,28 +9,6 @@ public class SettingsController : MonoBehaviour {
 
     public Camera squirrelCamera;
     public Camera treeCamera;
-    /*public PostProcessProfile postProcessProfile;
-
-    public Text[] buttonArray = new Text[3];
-    public Image[] selectorArray = new Image[3];
-    public GameObject pauseMenu;
-
-    public GameObject mainMenu;
-
-    public float pauseDOF;
-
-    private int _buttonSelected = 0;
-    private bool _justSelected;
-
-    private delegate void _selectAction();
-    private _selectAction[] _selectActions;
-    private _selectAction _currentSelectAction;
-
-    private DepthOfField depthOfField;
-    private float defaultDOF;
-
-    private enum menus { Main, Pause, Options, None };
-    private menus currentMenu;*/
 
     // Start is called before the first frame update
     void Start() {
@@ -150,19 +128,6 @@ public class SettingsController : MonoBehaviour {
             treeCamera.enabled = false;
 
         }
-        /*
-
-        currentMenu = menus.Main;
-
-        GameModel.paused = false;
-
-        _selectActions = new _selectAction[3] { pauseEvent, restartEvent, menuEvent };
-
-        Select(0);
-
-        postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
-
-        defaultDOF = depthOfField.focusDistance;*/
 
     }
 
@@ -193,100 +158,6 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-        /*
-        if (GameModel.paused) {
-
-            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
-                _buttonSelected++;
-                _justSelected = true;
-            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (_buttonSelected > 0) && !_justSelected) {
-                _buttonSelected--;
-                _justSelected = true;
-            }
-
-            if (_justSelected) {
-                Select(_buttonSelected);
-            }
-
-            if (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) {
-                _justSelected = false;
-            }
-
-            if (Input.GetButtonDown(GameModel.JUMP)) {
-                _currentSelectAction();
-            }
-
-        }*/
-
     }
-
-    /*
-    public void OnApplicationQuit() {
-        postProcessProfile.TryGetSettings<DepthOfField>(out depthOfField);
-
-        depthOfField.focusDistance.value = defaultDOF;
-    }
-
-    void ChangeMenu(menus passedMenu) {
-        currentMenu = passedMenu;
-
-        switch (currentMenu) {
-            case menus.Pause:
-                pauseEvent();
-                break;
-            case menus.Main:
-                menuEvent();
-                break;
-            case menus.Options:
-                // Set optionmenu active
-                break;
-            case menus.None:
-                break;
-        }
-    }
-
-    void Select(int button) {
-        Debug.Log(button);
-
-        for(int i=0; i<buttonArray.Length; i++) {
-            if (i == button) {
-                selectorArray[i].gameObject.SetActive(true);
-            } else {
-                selectorArray[i].gameObject.SetActive(false);
-            }
-        }
-
-        _currentSelectAction = _selectActions[button];
-    }
-
-    void pauseEvent() {
-        GameModel.paused = !GameModel.paused;
-
-        if (!GameModel.paused) {
-            currentMenu = menus.
-            pauseMenu.SetActive(false);
-            postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = defaultDOF;
-        } else {
-            currentMenu = menus.Pause;
-            pauseMenu.SetActive(true);
-            postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = pauseDOF;
-        }
-    }
-
-    void restartEvent() {
-        pauseEvent();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
-
-    void menuEvent() {
-        currentMenu = menus.Main;
-
-        pauseEvent();
-
-        mainMenu.SetActive(true);
-    }
-    */
 
 }
