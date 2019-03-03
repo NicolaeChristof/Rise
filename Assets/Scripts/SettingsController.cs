@@ -142,10 +142,10 @@ public class SettingsController : MonoBehaviour {
 
         if (GameModel.paused) {
 
-            if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+            if (((InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
                 _buttonSelected++;
                 _justSelected = true;
-            } else if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) < 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) < 0)) && (_buttonSelected > 0) && !_justSelected) {
+            } else if (((InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0) || (InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL) < 0)) && (_buttonSelected > 0) && !_justSelected) {
                 _buttonSelected--;
                 _justSelected = true;
             }
@@ -154,11 +154,11 @@ public class SettingsController : MonoBehaviour {
                 Select(_buttonSelected);
             }
 
-            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) == 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) == 0)) {
+            if ((InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) == 0) || (InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL) == 0)) {
                 _justSelected = false;
             }
 
-            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) || InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
+            if (InputHelper.GetButtonDown(InputHelper.SquirrelInput.JUMP) || InputHelper.GetButtonDown(InputHelper.TreeInput.BRANCH_PLACE)) {
                 _currentSelectAction();
             }
 

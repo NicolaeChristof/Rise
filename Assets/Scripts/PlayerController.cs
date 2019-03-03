@@ -91,7 +91,7 @@ public class PlayerController : RiseBehavior {
         if (GameModel.isSquirrel) {
 
             // Get input directions
-            _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
+            _moveDirection = new Vector3(InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL));
 
             // Disable z axis movement
             _moveDirection.z = 1.0f;
@@ -133,7 +133,7 @@ public class PlayerController : RiseBehavior {
 
             _moveDirection.z *= speed;
 
-            if (InputHelper.GetButton(SquirrelInput.JUMP) && _numJumps < maxJumps) {
+            if (InputHelper.GetButton(InputHelper.SquirrelInput.JUMP) && _numJumps < maxJumps) {
 
                 _numJumps++;
 
