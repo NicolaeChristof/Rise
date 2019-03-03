@@ -115,8 +115,8 @@ public class TreeController : RiseBehavior {
         } else {
 
             // Poll Input
-            moveVertical = InputHelper.GetAxis(InputHelper.TreeInput.CAMERA_VERTICAL);
-            moveLateral = InputHelper.GetAxis(InputHelper.TreeInput.CAMERA_HORIZONTAL);
+            moveVertical = InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL);
+            moveLateral = InputHelper.GetAxis(InputHelper.TreeInput.MOVE_HORIZONTAL);
 
             grow = InputHelper.GetAxis(InputHelper.TreeInput.BRANCH_PLACE);
 
