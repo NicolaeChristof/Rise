@@ -48,9 +48,11 @@ public static class InputHelper {
 
 	public enum InputType {
 		XBOX_ONE,
-		XBOX_360
+		XBOX_360,
+        KEYBOARD
 	};
 
+    // Controller Inputs
 	public readonly static string[] RT = { "RT_P1", "RT_P2", "360_RT_P1", "360_RT_P2" };
 	public readonly static string[] LT = { "LT_P1", "LT_P2", "360_LT_P1", "360_LT_P2" };
 	public readonly static string[] RB = { "RB_P1", "RB_P2", "360_RB_P1", "360_RB_P2" };
@@ -67,6 +69,18 @@ public static class InputHelper {
 	public readonly static string[] LS_v = { "LS_v_P1", "LS_v_P2", "360_LS_v_P1", "360_LS_v_P2" };
 	public readonly static string[] START = { "START_P1", "START_P2", "360_START_P1", "360_START_P2" };
 	public readonly static string[] BACK = { "BACK_P1", "BACK_P2", "360_BACK_P1", "360_BACK_P2" };
+
+    // Keyboard Inputs
+    public readonly static string[] KEY_MOVE_H = { "Keyboard_player_h" };
+    public readonly static string[] KEY_MOVE_V = { "Keyboard_player_v" };
+    public readonly static string[] KEY_CAMERA_H = { "Keyboard_camera_h" };
+    public readonly static string[] KEY_CAMERA_V = { "Keyboard_camera_v" };
+    public readonly static string[] KEY_JUMP = { "Keyboard_jump" };
+    public readonly static string[] KEY_SELECT = { "Keyboard_next" };
+    public readonly static string[] KEY_ACTION_1 = { "Keyboard_trigger" };
+    public readonly static string[] KEY_ACTION_2 = { "Keyboard_break" };
+    public readonly static string[] KEY_SWAP = { "Keyboard_swap_player" };
+    public readonly static string[] KEY_PAUSE = { "Keyboard_pause" };
 
 	public static void Initialize() {
 		// Initialize Control Profiles
