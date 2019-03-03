@@ -7,22 +7,26 @@ public class BranchBehaviorSlippery : BranchBehavior {
 	// Public Fields
 	public float slipFactor = 0.1F;
 
-	void Start() {
+	public override void OnTriggerEnter (Collider collider) {
 
-	}
+        base.OnTriggerEnter(collider);
 
-	void Update() {
-
-	}
-
-	public override void OnTriggerEnter(Collider collision) {
-		if (collision.gameObject.tag.Equals("Player")) {
+		if (collider.gameObject.tag.Equals("Player")) {
 			// TODO: Make it slippery using only instantaneous velocity! Wheee!
 		}
 	}
 
-	public override void OnTriggerExit(Collider collision) {
-		if (collision.gameObject.tag.Equals("Player")) {
+    public override void OnTriggerStay (Collider collider) {
+
+        base.OnTriggerStay(collider);
+
+    }
+
+	public override void OnTriggerExit (Collider collider) {
+
+        base.OnTriggerExit(collider);
+
+		if (collider.gameObject.tag.Equals("Player")) {
 			// TODO: Make it slippery using only instantaneous velocity! Wheee!
 		}
 	}
