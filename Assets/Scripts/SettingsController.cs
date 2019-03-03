@@ -53,7 +53,32 @@ public class SettingsController : MonoBehaviour {
 
             } else {
 
-                // set keyboard controls here
+                InputHelper.ControlProfile profile = new InputHelper.ControlProfile("keyboard", InputHelper.InputType.KEYBOARD);
+
+                // Squirrel Controls
+                profile.RegisterBinding(InputHelper.SquirrelInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
+                profile.RegisterBinding(InputHelper.SquirrelInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
+                profile.RegisterBinding(InputHelper.SquirrelInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
+                profile.RegisterBinding(InputHelper.SquirrelInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
+                profile.RegisterBinding(InputHelper.SquirrelInput.PAUSE, InputHelper.KEY_PAUSE);
+                profile.RegisterBinding(InputHelper.SquirrelInput.SWAP, InputHelper.KEY_SWAP);
+
+                profile.RegisterBinding(InputHelper.SquirrelInput.JUMP, InputHelper.KEY_JUMP);
+
+                // Tree Controls
+                profile.RegisterBinding(InputHelper.TreeInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
+                profile.RegisterBinding(InputHelper.TreeInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
+                profile.RegisterBinding(InputHelper.TreeInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
+                profile.RegisterBinding(InputHelper.TreeInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
+                profile.RegisterBinding(InputHelper.TreeInput.PAUSE, InputHelper.KEY_PAUSE);
+                profile.RegisterBinding(InputHelper.TreeInput.SWAP, InputHelper.KEY_SWAP);
+
+                profile.RegisterBinding(InputHelper.TreeInput.BRANCH_PLACE, InputHelper.KEY_ACTION_1);
+                profile.RegisterBinding(InputHelper.TreeInput.BRANCH_REMOVE, InputHelper.KEY_ACTION_2);
+                // profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
+                profile.RegisterBinding(InputHelper.TreeInput.SELECT_RIGHT, InputHelper.KEY_SELECT);
+
+
 
             }
 

@@ -71,16 +71,16 @@ public static class InputHelper {
 	public readonly static string[] BACK = { "BACK_P1", "BACK_P2", "360_BACK_P1", "360_BACK_P2" };
 
     // Keyboard Inputs
-    public readonly static string[] KEY_MOVE_H = { "Keyboard_player_h" };
-    public readonly static string[] KEY_MOVE_V = { "Keyboard_player_v" };
-    public readonly static string[] KEY_CAMERA_H = { "Keyboard_camera_h" };
-    public readonly static string[] KEY_CAMERA_V = { "Keyboard_camera_v" };
-    public readonly static string[] KEY_JUMP = { "Keyboard_jump" };
-    public readonly static string[] KEY_SELECT = { "Keyboard_next" };
-    public readonly static string[] KEY_ACTION_1 = { "Keyboard_trigger" };
-    public readonly static string[] KEY_ACTION_2 = { "Keyboard_break" };
-    public readonly static string[] KEY_SWAP = { "Keyboard_swap_player" };
-    public readonly static string[] KEY_PAUSE = { "Keyboard_pause" };
+    public readonly static string[] KEY_MOVE_H = { "Keyboard_player_h", "Keyboard_player_h" };
+    public readonly static string[] KEY_MOVE_V = { "Keyboard_player_v", "Keyboard_player_v" };
+    public readonly static string[] KEY_CAMERA_H = { "Keyboard_camera_h", "Keyboard_camera_h" };
+    public readonly static string[] KEY_CAMERA_V = { "Keyboard_camera_v", "Keyboard_camera_v" };
+    public readonly static string[] KEY_JUMP = { "Keyboard_jump", "Keyboard_jump" };
+    public readonly static string[] KEY_SELECT = { "Keyboard_next", "Keyboard_next" };
+    public readonly static string[] KEY_ACTION_1 = { "Keyboard_trigger", "Keyboard_trigger" };
+    public readonly static string[] KEY_ACTION_2 = { "Keyboard_break", "Keyboard_break" };
+    public readonly static string[] KEY_SWAP = { "Keyboard_swap_player", "Keyboard_swap_player" };
+    public readonly static string[] KEY_PAUSE = { "Keyboard_pause", "Keyboard_pause" };
 
 	public static void Initialize() {
 		// Initialize Control Profiles
@@ -234,7 +234,7 @@ public static class InputHelper {
 
 	private static ControlProfile GetProfileFor(string profileName) {
 		// TODO: Fetch profile corresponding to "profileName" from file. If that fails, load default.
-		ControlProfile profile = new ControlProfile("default");
+		ControlProfile profile = new ControlProfile("default", InputType.XBOX_ONE);
 		SetDefaults(profile);
 		return profile;
 	}
@@ -287,11 +287,11 @@ public static class InputHelper {
 		private readonly Dictionary<SquirrelInput, string[]> _squirrelBindings;
 		private readonly Dictionary<TreeInput, string[]> _treeBindings;
 
-		public ControlProfile(string passedName) {
+		public ControlProfile(string passedName, InputType inputType) {
 			_squirrelBindings = new Dictionary<SquirrelInput, string[]>();
 			_treeBindings = new Dictionary<TreeInput, string[]>();
 			_profileName = passedName;
-			type = InputType.XBOX_ONE;
+			type = inputType;
 		}
 
 		public void SetGamepad(uint index) {
