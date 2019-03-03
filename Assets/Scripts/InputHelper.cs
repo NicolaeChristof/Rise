@@ -28,7 +28,7 @@ public static class InputHelper {
 	};
 
 	public enum TreeInput {
-		MOVE_HORIZTONAL,
+		MOVE_HORIZONTAL,
 		MOVE_VERTICAL,
 		CAMERA_HORIZONTAL,
 		CAMERA_VERTICAL,
@@ -217,7 +217,7 @@ public static class InputHelper {
 		profile.RegisterBinding(SquirrelInput.JUMP, A);
 
 		// Tree Controls
-		profile.RegisterBinding(TreeInput.MOVE_HORIZTONAL, LS_h);
+		profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, LS_h);
 		profile.RegisterBinding(TreeInput.MOVE_VERTICAL, LS_v);
 		profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
 		profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);
