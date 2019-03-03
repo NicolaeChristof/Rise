@@ -49,104 +49,23 @@ public class SettingsController : MonoBehaviour {
 
             if (GameModel.inputGamePad) {
 
-                // GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
-
-                // GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
-
-                // GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
-
-                // GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
-
-                // GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P1";
-
-                // GameModel.VERTICAL_TREE_INPUT = "LS_v_P1";
-
-                // GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P1";
-
-                // GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P1";
-
-                // GameModel.JUMP = "A_P1";
-
-                // GameModel.SWAP = "X_P1";
-
-                // GameModel.PAUSE_P1 = "START_P1";
-
-                // GameModel.PAUSE_P2 = "START_P2";
-
-                // GameModel.GROW = "A_P1";
-
-                // GameModel.BREAK = "B_P1";
-
-                // GameModel.SELECT = "Y_P1";
+                // by default controls are set for game pad
 
             } else {
 
-    //             GameModel.HORIZONTAL_SQUIRREL_INPUT = "Keyboard_player_h";
-
-    //             GameModel.VERTICAL_SQUIRREL_INPUT = "Keyboard_player_v";
-
-    //             GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_h";
-
-    //             GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_v";
-
-    //             GameModel.HORIZONTAL_TREE_INPUT = "Keyboard_player_h";
-
-    //             GameModel.VERTICAL_TREE_INPUT = "Keyboard_player_v";
-
-    //             GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "Keyboard_camera_h";
-
-    //             GameModel.VERTICAL_TREE_CAMERA_INPUT = "Keyboard_camera_v";
-
-    //             GameModel.JUMP = "Keyboard_jump";
-
-    //             GameModel.SWAP = "Keyboard_swap_player";
-
-    //             GameModel.PAUSE_P1 = "Keyboard_pause";
-
-    //             GameModel.PAUSE_P2 = "Keyboard_pause";
-
-    //             GameModel.GROW = "Keyboard_trigger";
-
-    //             GameModel.SELECT = "Keyboard_next";
-
-				// GameModel.BREAK = "Keyboard_break";
+                // set keyboard controls here
 
             }
 
         } else {
 
-            // Force split screen mode in multiplayer since swap is disabled
+            // Force GamePad input in multiplayer
+            GameModel.inputGamePad = true;
+
+            // Force split screen mode in multiplayer
             GameModel.splitScreen = true;
 
-   //          GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
-
-   //          GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
-
-   //          GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
-
-   //          GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
-
-   //          GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P2";
-
-   //          GameModel.VERTICAL_TREE_INPUT = "LS_v_P2";
-
-   //          GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P2";
-
-   //          GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
-
-   //          GameModel.JUMP = "A_P1";
-
-   //          GameModel.SWAP = "X_P1";
-
-   //          GameModel.PAUSE_P1 = "START_P1";
-
-   //          GameModel.PAUSE_P2 = "START_P2";
-
-   //          GameModel.GROW = "A_P2";
-
-			// GameModel.BREAK = "B_P2";
-
-   //          GameModel.SELECT = "Y_P2";
+            // by default controls are set for game pad
 
         }
 
