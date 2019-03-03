@@ -191,13 +191,13 @@ public class SettingsController : MonoBehaviour {
         InputHelper.Check();
 
         // Listen for Pause
-        if (Input.GetButtonDown(GameModel.PAUSE_P1) || Input.GetButtonDown(GameModel.PAUSE_P2)) {
+        if (InputHelper.Pause()) {
 
             pauseEvent();
 
         }
 
-        if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
+        if (InputHelper.Swap()) {
 
             GameModel.isSquirrel = !GameModel.isSquirrel;
 
@@ -223,10 +223,10 @@ public class SettingsController : MonoBehaviour {
 
         if (GameModel.paused) {
 
-            if (((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) || (Input.GetAxis(GameModel.VERTICAL_TREE_INPUT) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+            if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
                 _buttonSelected++;
                 _justSelected = true;
-            } else if (((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) || (Input.GetAxis(GameModel.VERTICAL_TREE_INPUT) < 0)) && (_buttonSelected > 0) && !_justSelected) {
+            } else if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) < 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) < 0)) && (_buttonSelected > 0) && !_justSelected) {
                 _buttonSelected--;
                 _justSelected = true;
             }
@@ -235,11 +235,11 @@ public class SettingsController : MonoBehaviour {
                 Select(_buttonSelected);
             }
 
-            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) || (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0)) {
+            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) == 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) == 0)) {
                 _justSelected = false;
             }
 
-            if (Input.GetButtonDown(GameModel.JUMP)) {
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) || InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
                 _currentSelectAction();
             }
 
