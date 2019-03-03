@@ -99,10 +99,10 @@ public class TreeController : RiseBehavior {
             if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
-                moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+                moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+                moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
 
-                grow = Input.GetAxis(GameModel.GROW);
+                grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
 
             } else {
 
@@ -115,10 +115,10 @@ public class TreeController : RiseBehavior {
         } else {
 
             // Poll Input
-            moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
-            moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+            moveVertical = InputHelper.GetAxis(TreeInput.CAMERA_VERTICAL);
+            moveLateral = InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL);
 
-            grow = Input.GetAxis(GameModel.GROW);
+            grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
 
         }
 
@@ -167,13 +167,13 @@ public class TreeController : RiseBehavior {
         }
 
         // Handle Branch Selection
-        if (Input.GetButtonDown(GameModel.SELECT)) {
+        if (InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT)) {
 
             if (GameModel.singlePlayer) {
 
                 if (!GameModel.isSquirrel) {
 
-                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
+                    int scrollDirection = Mathf.RoundToInt(InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT));
                     int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                     Select(selected);
 
@@ -181,7 +181,7 @@ public class TreeController : RiseBehavior {
 
             } else {
 
-                int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
+                int scrollDirection = Mathf.RoundToInt(InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT));
                 int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                 Select(selected);
 
@@ -212,7 +212,7 @@ public class TreeController : RiseBehavior {
 
 		}
 		// Handle Break
-		if (CheckEpsilon(Input.GetAxis(GameModel.BREAK)) || (Input.GetButtonDown(GameModel.BREAK))) {
+		if (CheckEpsilon(InputHelper.GetAxis(TreeInput.BRANCH_REMOVE)) || (InputHelper.GetButtonDown(TreeInput.BRANCH_REMOVE))) {
 			float distance = float.MaxValue;
 			GameObject closestBranch = null;
 			Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
@@ -234,7 +234,7 @@ public class TreeController : RiseBehavior {
 
             if (!GameModel.isSquirrel) {
 
-                if (Input.GetButtonDown(GameModel.GROW)) {
+                if (InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
 					AttemptGrowBranch();
 				}
 
