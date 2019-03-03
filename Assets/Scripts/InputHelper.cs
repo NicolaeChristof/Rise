@@ -4,10 +4,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Runtime.CompilerServices;
 
-public class InputHelper : MonoBehaviour {
+public static class InputHelper {
 	// Public Fields
-	public ControlProfile PlayerOne { get; private set; }
-	public ControlProfile PlayerTwo { get; private set; }
+	public static ControlProfile PlayerOne { get; private set; }
+	public static ControlProfile PlayerTwo { get; private set; }
 
 	// Local Fields
 
@@ -25,7 +25,7 @@ public class InputHelper : MonoBehaviour {
 		PAUSE,
 
 		JUMP,
-	}
+	};
 
 	public enum TreeInput {
 		MOVE_HORIZTONAL,
@@ -39,17 +39,17 @@ public class InputHelper : MonoBehaviour {
 		BRANCH_REMOVE,
 		SELECT_LEFT,
 		SELECT_RIGHT,
-	}
+	};
 
 	public enum InputMode {
 		SQUIRREL,
 		TREE
-	}
+	};
 
 	public enum InputType {
 		XBOX_ONE,
 		XBOX_360
-	}
+	};
 
 	public readonly static string[] RT = { "RT_P1", "RT_P2", "360_RT_P1", "360_RT_P2" };
 	public readonly static string[] LT = { "LT_P1", "LT_P2", "360_LT_P1", "360_LT_P2" };
@@ -68,12 +68,7 @@ public class InputHelper : MonoBehaviour {
 	public readonly static string[] START = { "START_P1", "START_P2", "360_START_P1", "360_START_P2" };
 	public readonly static string[] BACK = { "BACK_P1", "BACK_P2", "360_BACK_P1", "360_BACK_P2" };
 
-	public InputHelper() {
-
-	}
-
-	// Start is called before the first frame update
-	void Start() {
+	public static void Initialize() {
 		// Initialize Control Profiles
 		PlayerOne = GetProfileFor("playerOne");
 		PlayerTwo = GetProfileFor("playerTwo");
@@ -86,8 +81,7 @@ public class InputHelper : MonoBehaviour {
 		PlayerTwo.mode = InputMode.TREE;
 	}
 
-	// Update is called once per frame
-	void Update() {
+	public static void Check() {
 		/* Handle Pause
 		if (Pause()) {
 			GameModel.paused = !GameModel.paused;
@@ -109,7 +103,7 @@ public class InputHelper : MonoBehaviour {
 	/// Returns whether the InputHelper detected a game pause input this tick.
 	/// </summary>
 	/// <returns>Whether input for pause was detected.</returns>
-	public bool Pause() {
+	public static bool Pause() {
 		return (GetButton(SquirrelInput.PAUSE) || GetButton(TreeInput.PAUSE));
 	}
 
@@ -117,7 +111,7 @@ public class InputHelper : MonoBehaviour {
 	/// Returns whether the InputHelper detected a mode swap input this tick.
 	/// </summary>
 	/// <returns>Whether input for swap was detected.</returns>
-	public bool Swap() {
+	public static bool Swap() {
 		return GameModel.singlePlayer ? GetButtonDown(SquirrelInput.SWAP) || GetButtonDown(TreeInput.SWAP) : GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP);
 	}
 
@@ -126,7 +120,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns>The axis.</returns>
 	/// <param name="input">The input.</param>
-	public float GetAxis(SquirrelInput input) {
+	public static float GetAxis(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetAxis, input, 0.0F);
 	}
 
@@ -135,7 +129,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns>The axis.</returns>
 	/// <param name="input">The input.</param>
-	public float GetAxis(TreeInput input) {
+	public static float GetAxis(TreeInput input) {
 		return GetTreeInput(Input.GetAxis, input, 0.0F);
 	}
 
@@ -144,7 +138,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if button first down on this tick, <c>false</c> otherwise.</returns>
 	/// <param name="input">Input.</param>
-	public bool GetButtonDown(SquirrelInput input) {
+	public static bool GetButtonDown(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetButtonDown, input, false);
 	}
 
@@ -153,7 +147,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if button first down on this tick, <c>false</c> otherwise.</returns>
 	/// <param name="input">Input.</param>
-	public bool GetButtonDown(TreeInput input) {
+	public static bool GetButtonDown(TreeInput input) {
 		return GetTreeInput(Input.GetButtonDown, input, false);
 	}
 
@@ -162,7 +156,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if button was first up on this tick, <c>false</c> otherwise.</returns>
 	/// <param name="input">Input.</param>
-	public bool GetButtonUp(SquirrelInput input) {
+	public static bool GetButtonUp(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetButtonUp, input, false);
 	}
 
@@ -171,7 +165,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if button first up on this tick, <c>false</c> otherwise.</returns>
 	/// <param name="input">Input.</param>
-	public bool GetButtonUp(TreeInput input) {
+	public static bool GetButtonUp(TreeInput input) {
 		return GetTreeInput(Input.GetButtonUp, input, false);
 	}
 
@@ -180,7 +174,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if button down on this tick, <c>false</c> otherwise.</returns>
 	/// <param name="input">Input.</param>
-	public bool GetButton(SquirrelInput input) {
+	public static bool GetButton(SquirrelInput input) {
 		return GetSquirrelInput(Input.GetButton, input, false);
 	}
 
@@ -189,7 +183,7 @@ public class InputHelper : MonoBehaviour {
 	/// </summary>
 	/// <returns><c>true</c>, if button down on this tick, <c>false</c> otherwise.</returns>
 	/// <param name="input">Input.</param>
-	public bool GetButton(TreeInput input) {
+	public static bool GetButton(TreeInput input) {
 		return GetTreeInput(Input.GetButton, input, false);
 	}
 
@@ -197,14 +191,14 @@ public class InputHelper : MonoBehaviour {
 	/// Sets the bindings of the passed ControlProfile to their default values.
 	/// </summary>
 	/// <param name="profile">The ControlProfile to set.</param>
-	public void SetDefaults(ControlProfile profile) {
+	public static void SetDefaults(ControlProfile profile) {
 		// Squirrel Controls
 		profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, LS_h);
 		profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, LS_v);
 		profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, RS_h);
 		profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, RS_v);
-		profile.RegisterBinding(SquirrelInput.PAUSE, BACK);
-		profile.RegisterBinding(SquirrelInput.SWAP, Y);
+		profile.RegisterBinding(SquirrelInput.PAUSE, START);
+		profile.RegisterBinding(SquirrelInput.SWAP, X);
 
 		profile.RegisterBinding(SquirrelInput.JUMP, A);
 
@@ -213,33 +207,33 @@ public class InputHelper : MonoBehaviour {
 		profile.RegisterBinding(TreeInput.MOVE_VERTICAL, LS_v);
 		profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
 		profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);
-		profile.RegisterBinding(TreeInput.PAUSE, BACK);
-		profile.RegisterBinding(TreeInput.SWAP, Y);
+		profile.RegisterBinding(TreeInput.PAUSE, START);
+		profile.RegisterBinding(TreeInput.SWAP, X);
 
-		profile.RegisterBinding(TreeInput.BRANCH_PLACE, RT);
-		profile.RegisterBinding(TreeInput.BRANCH_REMOVE, LT);
-		profile.RegisterBinding(TreeInput.SELECT_LEFT, LB);
-		profile.RegisterBinding(TreeInput.SELECT_RIGHT, RB);
+		profile.RegisterBinding(TreeInput.BRANCH_PLACE, A);
+		profile.RegisterBinding(TreeInput.BRANCH_REMOVE, B);
+		// profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
+		profile.RegisterBinding(TreeInput.SELECT_RIGHT, Y);
 	}
 
 	/* Internal Methods */
 
-	private ControlProfile GetProfileFor(string profileName) {
+	private static ControlProfile GetProfileFor(string profileName) {
 		// TODO: Fetch profile corresponding to "profileName" from file. If that fails, load default.
 		ControlProfile profile = new ControlProfile("default");
 		SetDefaults(profile);
 		return profile;
 	}
 
-	private T GetTreeInput<T>(Func<string, T> inputFunction, TreeInput key, T defaultValue) {
+	private static T GetTreeInput<T>(Func<string, T> inputFunction, TreeInput key, T defaultValue) {
 		return GetInputUsing(BINDING_TREE, inputFunction, key, InputMode.TREE, defaultValue);
 	}
 	
-	private T GetSquirrelInput<T>(Func<string, T> inputFunction, SquirrelInput key, T defaultValue) {
+	private static T GetSquirrelInput<T>(Func<string, T> inputFunction, SquirrelInput key, T defaultValue) {
 		return GetInputUsing(BINDING_SQUIRREL, inputFunction, key, InputMode.SQUIRREL, defaultValue);
 	}
 
-	private U GetInputUsing<T,U>(Func<ControlProfile, T, string> bindingFunction, Func<string, U> inputFunction, T key, InputMode mode, U defaultvalue) {
+	private static U GetInputUsing<T,U>(Func<ControlProfile, T, string> bindingFunction, Func<string, U> inputFunction, T key, InputMode mode, U defaultvalue) {
 		if (PlayerOne.mode == mode) {
 			return inputFunction(bindingFunction(PlayerOne, key));
 		}
@@ -251,15 +245,15 @@ public class InputHelper : MonoBehaviour {
 		return defaultvalue;
 	}
 
-	private void PrintDebug() {
+	private static void PrintDebug() {
 		foreach (SquirrelInput input in (SquirrelInput[])Enum.GetValues(typeof(SquirrelInput))) {
 			if (GetButton(input) || Math.Abs(GetAxis(input)) > 0.1F) {
-				print("SQUIRREL: " + input);
+				Debug.Log("SQUIRREL: " + input);
 			}
 		}
 		foreach (TreeInput input in (TreeInput[])Enum.GetValues(typeof(SquirrelInput))) {
 			if (GetButton(input) || Math.Abs(GetAxis(input)) > 0.1F) {
-				print("TREE: " + input);
+				Debug.Log("TREE: " + input);
 			}
 		}
 	}
