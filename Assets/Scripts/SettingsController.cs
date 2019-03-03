@@ -35,6 +35,8 @@ public class SettingsController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 
+        InputHelper.Initialize();
+
         // Can only use keyboard in single player mode
         if (!GameModel.inputGamePad) {
 
@@ -185,6 +187,8 @@ public class SettingsController : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+
+        InputHelper.Check();
 
         // Listen for Pause
         if (Input.GetButtonDown(GameModel.PAUSE_P1) || Input.GetButtonDown(GameModel.PAUSE_P2)) {
