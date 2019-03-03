@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class CheckpointBehavior : MonoBehaviour {
 
+    // Public References
     public GameObject web;
 
+    // Private References
     private GameObject _tree;
 
     private Collider _trigger;

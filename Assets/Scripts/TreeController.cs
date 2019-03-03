@@ -41,6 +41,9 @@ public class TreeController : RiseBehavior {
 
     // Local Constants
     private const string BRANCH_TAG = "Branch";
+    private const string DEAD_ZONE_TAG = "Dead Zone";
+    private const string SAP_TAG = "Sap";
+    private const string PLAYER_TAG = "Player";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
     private const float EPSILON = 0.01F;
@@ -50,7 +53,7 @@ public class TreeController : RiseBehavior {
 
     void Start() {
         // Establish local references
-        _tree = GameObject.Find("Tree");
+        _tree = GameObject.FindGameObjectWithTag("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
         transform.Translate(0.0f, 3.0f, 0.0f);
@@ -96,7 +99,7 @@ public class TreeController : RiseBehavior {
             if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
+                moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
                 moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
 
                 grow = Input.GetAxis(GameModel.GROW);
@@ -323,7 +326,11 @@ public class TreeController : RiseBehavior {
         // Check Branch Closeness (No Branch colliders in min distance)
         Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
         foreach (Collider iteratedCollider in colliders) {
-            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
+            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(DEAD_ZONE_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(SAP_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(PLAYER_TAG))
+            {
                 return false;
             }
         }
