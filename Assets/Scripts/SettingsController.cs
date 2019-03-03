@@ -7,6 +7,7 @@ using UnityEngine.Rendering.PostProcessing;
 
 public class SettingsController : MonoBehaviour {
 
+    // Public References
     public Camera squirrelCamera;
     public Camera treeCamera;
     public PostProcessProfile postProcessProfile;
@@ -15,8 +16,12 @@ public class SettingsController : MonoBehaviour {
     public Image[] selectorArray = new Image[3];
     public GameObject pauseMenu;
 
+    // Public Fields
     public float pauseDOF;
 
+    // Private References
+
+    // Private Fields
     private int _buttonSelected = 0;
     private bool _justSelected;
 
@@ -42,67 +47,67 @@ public class SettingsController : MonoBehaviour {
 
             if (GameModel.inputGamePad) {
 
-                GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
+                // GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
 
-                GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
+                // GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
 
-                GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
+                // GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
 
-                GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
+                // GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
 
-                GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P1";
+                // GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P1";
 
-                GameModel.VERTICAL_TREE_INPUT = "LS_v_P1";
+                // GameModel.VERTICAL_TREE_INPUT = "LS_v_P1";
 
-                GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P1";
+                // GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P1";
 
-                GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P1";
+                // GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P1";
 
-                GameModel.JUMP = "A_P1";
+                // GameModel.JUMP = "A_P1";
 
-                GameModel.SWAP = "X_P1";
+                // GameModel.SWAP = "X_P1";
 
-                GameModel.PAUSE_P1 = "START_P1";
+                // GameModel.PAUSE_P1 = "START_P1";
 
-                GameModel.PAUSE_P2 = "START_P2";
+                // GameModel.PAUSE_P2 = "START_P2";
 
-                GameModel.GROW = "A_P1";
+                // GameModel.GROW = "A_P1";
 
-                GameModel.BREAK = "B_P1";
+                // GameModel.BREAK = "B_P1";
 
-                GameModel.SELECT = "Y_P1";
+                // GameModel.SELECT = "Y_P1";
 
             } else {
 
-                GameModel.HORIZONTAL_SQUIRREL_INPUT = "Keyboard_player_h";
+    //             GameModel.HORIZONTAL_SQUIRREL_INPUT = "Keyboard_player_h";
 
-                GameModel.VERTICAL_SQUIRREL_INPUT = "Keyboard_player_v";
+    //             GameModel.VERTICAL_SQUIRREL_INPUT = "Keyboard_player_v";
 
-                GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_h";
+    //             GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_h";
 
-                GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_v";
+    //             GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_v";
 
-                GameModel.HORIZONTAL_TREE_INPUT = "Keyboard_player_h";
+    //             GameModel.HORIZONTAL_TREE_INPUT = "Keyboard_player_h";
 
-                GameModel.VERTICAL_TREE_INPUT = "Keyboard_player_v";
+    //             GameModel.VERTICAL_TREE_INPUT = "Keyboard_player_v";
 
-                GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "Keyboard_camera_h";
+    //             GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "Keyboard_camera_h";
 
-                GameModel.VERTICAL_TREE_CAMERA_INPUT = "Keyboard_camera_v";
+    //             GameModel.VERTICAL_TREE_CAMERA_INPUT = "Keyboard_camera_v";
 
-                GameModel.JUMP = "Keyboard_jump";
+    //             GameModel.JUMP = "Keyboard_jump";
 
-                GameModel.SWAP = "Keyboard_swap_player";
+    //             GameModel.SWAP = "Keyboard_swap_player";
 
-                GameModel.PAUSE_P1 = "Keyboard_pause";
+    //             GameModel.PAUSE_P1 = "Keyboard_pause";
 
-                GameModel.PAUSE_P2 = "Keyboard_pause";
+    //             GameModel.PAUSE_P2 = "Keyboard_pause";
 
-                GameModel.GROW = "Keyboard_trigger";
+    //             GameModel.GROW = "Keyboard_trigger";
 
-                GameModel.SELECT = "Keyboard_next";
+    //             GameModel.SELECT = "Keyboard_next";
 
-				GameModel.BREAK = "Keyboard_break";
+				// GameModel.BREAK = "Keyboard_break";
 
             }
 
@@ -111,35 +116,35 @@ public class SettingsController : MonoBehaviour {
             // Force split screen mode in multiplayer since swap is disabled
             GameModel.splitScreen = true;
 
-            GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
+   //          GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
 
-            GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
+   //          GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
 
-            GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
+   //          GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
 
-            GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
+   //          GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
 
-            GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P2";
+   //          GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P2";
 
-            GameModel.VERTICAL_TREE_INPUT = "LS_v_P2";
+   //          GameModel.VERTICAL_TREE_INPUT = "LS_v_P2";
 
-            GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P2";
+   //          GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P2";
 
-            GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
+   //          GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
 
-            GameModel.JUMP = "A_P1";
+   //          GameModel.JUMP = "A_P1";
 
-            GameModel.SWAP = "X_P1";
+   //          GameModel.SWAP = "X_P1";
 
-            GameModel.PAUSE_P1 = "START_P1";
+   //          GameModel.PAUSE_P1 = "START_P1";
 
-            GameModel.PAUSE_P2 = "START_P2";
+   //          GameModel.PAUSE_P2 = "START_P2";
 
-            GameModel.GROW = "A_P2";
+   //          GameModel.GROW = "A_P2";
 
-			GameModel.BREAK = "B_P2";
+			// GameModel.BREAK = "B_P2";
 
-            GameModel.SELECT = "Y_P2";
+   //          GameModel.SELECT = "Y_P2";
 
         }
 
