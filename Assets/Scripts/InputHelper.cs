@@ -212,7 +212,7 @@ public static class InputHelper {
 		profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, RS_h);
 		profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, RS_v);
 		profile.RegisterBinding(SquirrelInput.PAUSE, START);
-		profile.RegisterBinding(SquirrelInput.SWAP, X);
+		profile.RegisterBinding(SquirrelInput.SWAP, Y);
 
 		profile.RegisterBinding(SquirrelInput.JUMP, A);
 
@@ -222,12 +222,12 @@ public static class InputHelper {
 		profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
 		profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);
 		profile.RegisterBinding(TreeInput.PAUSE, START);
-		profile.RegisterBinding(TreeInput.SWAP, X);
+		profile.RegisterBinding(TreeInput.SWAP, Y);
 
 		profile.RegisterBinding(TreeInput.BRANCH_PLACE, A);
 		profile.RegisterBinding(TreeInput.BRANCH_REMOVE, B);
 		// profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
-		profile.RegisterBinding(TreeInput.SELECT_RIGHT, Y);
+		profile.RegisterBinding(TreeInput.SELECT_RIGHT, X);
 	}
 
 	/* Internal Methods */
