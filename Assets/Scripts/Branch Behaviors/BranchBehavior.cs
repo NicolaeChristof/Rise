@@ -12,13 +12,13 @@ public class BranchBehavior : MonoBehaviour {
     // Private fields
     private Vector3 _originalRotation;
 
-    private float _deformationAngle;
+    private Vector3 _newRotation;
 
     void Start() {
 
         _originalRotation = transform.localEulerAngles;
 
-        _deformationAngle = 6.0f;
+        _newRotation = _originalRotation + Quaternion.AngleAxis(6.0f, Vector3.right).eulerAngles;
 
     }
 
@@ -32,7 +32,7 @@ public class BranchBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            transform.DORotate(_originalRotation + Quaternion.AngleAxis(_deformationAngle, Vector3.right).eulerAngles, 2.0f, RotateMode.Fast)
+            transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
 
         }
