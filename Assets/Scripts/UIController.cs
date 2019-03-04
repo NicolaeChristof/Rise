@@ -73,8 +73,7 @@ public class UIController : RiseBehavior {
         if (GameModel.startAtMenu) {
             MenuEvent(true);
         } else {
-            currentMenu = 1;
-            OpenMenu(currentMenu, false);
+            OpenMenu(1, false);
         }
     }
 
@@ -83,11 +82,11 @@ public class UIController : RiseBehavior {
         if (GameModel.paused) {
             // Here we're testing which option in the current menu the
             // user has select and storing it in the _buttonSelected variable
-            if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0) && !_justSelected) {
+            if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0f) && !_justSelected) {
                 _buttonToSelect++;
                 _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
                 _justSelected = true;
-            } else if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0) && !_justSelected) {
+            } else if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0f) && !_justSelected) {
                 _buttonToSelect--;
                 _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
                 _justSelected = true;
