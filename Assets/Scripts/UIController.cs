@@ -5,10 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
+using RiseExtensions;
 
 public class UIController : RiseBehavior {
-
-    public InputHelper inputHelper;
 
     // The Game Objects that hold each menu
     public GameObject mainMenuObject;
@@ -45,6 +44,8 @@ public class UIController : RiseBehavior {
 
     public Camera _trackCam;
 
+    private bool justPaused = false;
+
     private void Start() {
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject };
@@ -59,7 +60,7 @@ public class UIController : RiseBehavior {
         // this involves configuring which game objects correspond to each thing
         // option
         listsOfOptionLists = new List<List<GameObject>>();
-        for(int i=0; i<_listsOfSelectActions.Count; i++) {
+        for (int i = 0; i < _listsOfSelectActions.Count; i++) {
             listsOfOptionLists.Add(new List<GameObject>());
             for (int j = 0; j < menuObjects[i].transform.childCount; j++) {
                 GameObject currentlySelectedGameObject = menuObjects[i].transform.GetChild(j).gameObject;
@@ -71,6 +72,7 @@ public class UIController : RiseBehavior {
         }
 
         if (GameModel.startAtMenu) {
+            GameModel.paused = true;
             MenuEvent(true);
         } else {
             OpenMenu(1, false);
@@ -79,14 +81,16 @@ public class UIController : RiseBehavior {
 
 
     public override void UpdateAlways() {
+        Debug.Log(GameModel.paused);
+
         if (GameModel.paused) {
             // Here we're testing which option in the current menu the
             // user has select and storing it in the _buttonSelected variable
-            if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0f) && !_justSelected) {
+            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0f) && !_justSelected) {
                 _buttonToSelect++;
                 _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
                 _justSelected = true;
-            } else if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0f) && !_justSelected) {
+            } else if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) < 0f) && !_justSelected) {
                 _buttonToSelect--;
                 _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
                 _justSelected = true;
@@ -94,7 +98,7 @@ public class UIController : RiseBehavior {
 
             // This is to ensure that you can't select multiple options
             // in one stick push
-            if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) == 0)) {
+            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) == 0)) {
                 _justSelected = false;
             }
 
@@ -105,11 +109,11 @@ public class UIController : RiseBehavior {
             }
 
             // This calls whatever _currentSelectAction is pointing to
-            if (inputHelper.GetButtonDown(InputHelper.SquirrelInput.JUMP)) {
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP)) {
                 _currentSelectAction(true);
             }
 
-            if(currentMenu == 0 || currentMenu == 2) {
+            if (currentMenu == 0 || currentMenu == 2) {
                 _trackCam.depth = 0;
             } else {
                 _trackCam.depth = -2;
@@ -118,9 +122,10 @@ public class UIController : RiseBehavior {
     }
 
     public override void UpdateTick() {
-        if(inputHelper.GetButtonDown(InputHelper.SquirrelInput.PAUSE)) {
+        if (InputHelper.GetButtonDown(SquirrelInput.PAUSE)) {
             PauseEvent(true);
         }
+
     }
 
     public void OnApplicationQuit() {

@@ -28,10 +28,13 @@ public class SettingsController : MonoBehaviour {
         if (GameModel.singlePlayer) {
 
             if (GameModel.inputGamePad) {
-			
+
                 // by default controls are set for game pad
 
+                GameModel.singlePlayer = true;
+
             } else {
+
 				InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
 
@@ -76,13 +79,6 @@ public class SettingsController : MonoBehaviour {
     void Update() {
 
         InputHelper.Check();
-
-        // Listen for Pause
-        if (InputHelper.Pause()) {
-
-            pauseEvent();
-
-        }
 
         if (InputHelper.Swap()) {
 

@@ -11,7 +11,7 @@ public static class GameModel {
 
     public static bool splitScreen = true;
 
-    public static bool paused = true;
+    public static bool paused = false;
 
     public static bool isSquirrel = true;
 
