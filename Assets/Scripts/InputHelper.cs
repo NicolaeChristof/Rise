@@ -203,7 +203,7 @@ public class InputHelper : MonoBehaviour {
 		profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, LS_v);
 		profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, RS_h);
 		profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, RS_v);
-		profile.RegisterBinding(SquirrelInput.PAUSE, BACK);
+		profile.RegisterBinding(SquirrelInput.PAUSE, START);
 		profile.RegisterBinding(SquirrelInput.SWAP, Y);
 
 		profile.RegisterBinding(SquirrelInput.JUMP, A);
