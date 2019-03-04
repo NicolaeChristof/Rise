@@ -53,7 +53,7 @@ public class SettingsController : MonoBehaviour {
                 // by default controls are set for game pad
 
             } else {
-
+				InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
 
         } else {
