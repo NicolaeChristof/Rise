@@ -230,6 +230,9 @@ namespace RiseExtensions {
 		}
 
 		public static void SetKeyboard(ControlProfile profile) {
+			// Set mode flag
+			profile.type = InputType.KEYBOARD;
+
 			// Squirrel Controls
 			profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, KEY_MOVE_H);
 			profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, KEY_MOVE_V);
