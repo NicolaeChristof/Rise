@@ -2092,7 +2092,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 105.446686
+  m_PathPosition: 106.720985
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -4335,8 +4335,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.24011284, y: 0.036915824, z: -0.009636332, w: 0.96999496}
-  m_LocalPosition: {x: 59.884964, y: 24.312527, z: 28.058992}
+  m_LocalRotation: {x: 0.24817663, y: -0.28834993, z: 0.07698561, w: 0.92159426}
+  m_LocalPosition: {x: 81.91295, y: 25.834194, z: 34.538128}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -5195,6 +5195,33 @@ PrefabInstance:
       propertyPath: _trackCam
       value: 
       objectReference: {fileID: 593501732}
+    - target: {fileID: 1874433054, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737707754222980247, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053821467, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -230
+      objectReference: {fileID: 0}
+    - target: {fileID: 3134788607054221773, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -230
+      objectReference: {fileID: 0}
+    - target: {fileID: 1460090839, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: m_Text
+      value: Return to Menu
+      objectReference: {fileID: 0}
+    - target: {fileID: 1825546612721438402, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_Text
+      value: Return to Menu
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1001 &792401304
@@ -7732,7 +7759,7 @@ MonoBehaviour:
   maxJumps: 2
   realSquirrelHeight: 1.2
   heightText: {fileID: 1260038881}
-  _heightOffset: -20
+  _heightOffset: 2
 --- !u!114 &1273465455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8156,7 +8183,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.24011284, y: 0.036915824, z: -0.009636332, w: 0.96999496}
+  m_LocalRotation: {x: 0.24817663, y: -0.28834993, z: 0.07698561, w: 0.92159426}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
