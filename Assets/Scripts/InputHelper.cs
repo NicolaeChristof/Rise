@@ -376,6 +376,7 @@ namespace RiseExtensions {
 					Debug.LogError("Invalid binding passed to control profile!");
 				}
 				else {
+					dictionary.Remove(key);
 					dictionary.Add(key, binding);
 				}
 			}
