@@ -220,7 +220,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(TreeInput.MOVE_VERTICAL, LS_v);
 			profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
 			profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);
-			profile.RegisterBinding(TreeInput.PAUSE, BACK);
+			profile.RegisterBinding(TreeInput.PAUSE, START);
 			profile.RegisterBinding(TreeInput.SWAP, Y);
 
 			profile.RegisterBinding(TreeInput.BRANCH_PLACE, A);

@@ -46,6 +46,10 @@ public class UIController : RiseBehavior {
 
     private bool justPaused = false;
 
+    private float _currentAxis = 0f;
+    private bool _pressedSelect = false;
+    private bool _pressedPause = false;
+
     private void Start() {
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject };
@@ -83,14 +87,23 @@ public class UIController : RiseBehavior {
     public override void UpdateAlways() {
         Debug.Log(GameModel.paused);
 
+        if (GameModel.isSquirrel) {
+            _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
+            _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
+        } else {
+            _currentAxis = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+            _pressedSelect = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
+        }
+
         if (GameModel.paused) {
+
             // Here we're testing which option in the current menu the
             // user has select and storing it in the _buttonSelected variable
-            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0f) && !_justSelected) {
+            if ((_currentAxis > 0f) && !_justSelected) {
                 _buttonToSelect++;
                 _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
                 _justSelected = true;
-            } else if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) < 0f) && !_justSelected) {
+            } else if ((_currentAxis < 0f) && !_justSelected) {
                 _buttonToSelect--;
                 _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
                 _justSelected = true;
@@ -98,7 +111,7 @@ public class UIController : RiseBehavior {
 
             // This is to ensure that you can't select multiple options
             // in one stick push
-            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) == 0)) {
+            if (_currentAxis == 0) {
                 _justSelected = false;
             }
 
@@ -109,7 +122,7 @@ public class UIController : RiseBehavior {
             }
 
             // This calls whatever _currentSelectAction is pointing to
-            if (InputHelper.GetButtonDown(SquirrelInput.JUMP)) {
+            if (_pressedSelect) {
                 _currentSelectAction(true);
             }
 
@@ -122,7 +135,13 @@ public class UIController : RiseBehavior {
     }
 
     public override void UpdateTick() {
-        if (InputHelper.GetButtonDown(SquirrelInput.PAUSE)) {
+        if (GameModel.isSquirrel) {
+            _pressedPause = InputHelper.GetButtonDown(SquirrelInput.PAUSE);
+        } else {
+            _pressedPause = InputHelper.GetButtonDown(TreeInput.PAUSE);
+        }
+
+        if (_pressedPause) {
             PauseEvent(true);
         }
 
@@ -158,6 +177,7 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
+        GameModel.isSquirrel = true;
         OpenMenu(0, true);
     }
 
@@ -180,6 +200,7 @@ public class UIController : RiseBehavior {
     public void RestartEvent(bool isTrue) {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
+        GameModel.isSquirrel = true;
         OpenMenu(1, false);
         GameModel.paused = false;
     }
