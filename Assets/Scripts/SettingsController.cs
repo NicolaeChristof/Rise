@@ -49,37 +49,10 @@ public class SettingsController : MonoBehaviour {
         if (GameModel.singlePlayer) {
 
             if (GameModel.inputGamePad) {
-
+			
                 // by default controls are set for game pad
 
             } else {
-
-                InputHelper.ControlProfile profile = new InputHelper.ControlProfile("keyboard", InputType.KEYBOARD);
-
-                // Squirrel Controls
-                profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
-                profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
-                profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
-                profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
-                profile.RegisterBinding(SquirrelInput.PAUSE, InputHelper.KEY_PAUSE);
-                profile.RegisterBinding(SquirrelInput.SWAP, InputHelper.KEY_SWAP);
-
-                profile.RegisterBinding(SquirrelInput.JUMP, InputHelper.KEY_JUMP);
-
-                // Tree Controls
-                profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
-                profile.RegisterBinding(TreeInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
-                profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
-                profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
-                profile.RegisterBinding(TreeInput.PAUSE, InputHelper.KEY_PAUSE);
-                profile.RegisterBinding(TreeInput.SWAP, InputHelper.KEY_SWAP);
-
-                profile.RegisterBinding(TreeInput.BRANCH_PLACE, InputHelper.KEY_ACTION_1);
-                profile.RegisterBinding(TreeInput.BRANCH_REMOVE, InputHelper.KEY_ACTION_2);
-                // profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
-                profile.RegisterBinding(TreeInput.SELECT_RIGHT, InputHelper.KEY_SELECT);
-
-
 
             }
 

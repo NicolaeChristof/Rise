@@ -229,6 +229,30 @@ namespace RiseExtensions {
 			profile.RegisterBinding(TreeInput.SELECT_RIGHT, X);
 		}
 
+		public static void SetKeyboard(ControlProfile profile) {
+			// Squirrel Controls
+			profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, KEY_MOVE_H);
+			profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, KEY_MOVE_V);
+			profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, KEY_CAMERA_H);
+			profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, KEY_CAMERA_V);
+			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_PAUSE);
+			profile.RegisterBinding(SquirrelInput.SWAP, KEY_SWAP);
+			profile.RegisterBinding(SquirrelInput.JUMP, KEY_JUMP);
+
+			// Tree Controls
+			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, KEY_MOVE_H);
+			profile.RegisterBinding(TreeInput.MOVE_VERTICAL, KEY_MOVE_V);
+			profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, KEY_CAMERA_H);
+			profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, KEY_CAMERA_V);
+			profile.RegisterBinding(TreeInput.PAUSE, KEY_PAUSE);
+			profile.RegisterBinding(TreeInput.SWAP, KEY_SWAP);
+
+			profile.RegisterBinding(TreeInput.BRANCH_PLACE, KEY_ACTION_1);
+			profile.RegisterBinding(TreeInput.BRANCH_REMOVE, KEY_ACTION_2);
+			// profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
+			profile.RegisterBinding(TreeInput.SELECT_RIGHT, KEY_SELECT);
+		}
+
 		/* Internal Methods */
 
 		private static ControlProfile GetProfileFor(string profileName) {
