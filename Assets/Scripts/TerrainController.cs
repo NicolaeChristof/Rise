@@ -38,8 +38,6 @@ public class TerrainController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        Time.fixedDeltaTime = 0.25f;
-
         offsetX = offsetY = 0.0f;
 
         CreateTerrain();

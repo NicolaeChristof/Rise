@@ -1,40 +1,68 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class BranchBehavior : MonoBehaviour {
 
-	// Public Fields
-	public string readableName = "Normal Branch";
-	public GameObject knot;
+    // Public Fields
+    public string readableName = "Normal Branch";
+    public GameObject knot;
 
-	void Start() {
+    // Private fields
+    private Vector3 _originalRotation;
 
-	}
+    private float _deformationAngle;
 
-	void Update() {
+    void Start() {
 
-	}
+        _originalRotation = transform.localEulerAngles;
 
-	public virtual void OnTriggerEnter(Collider collision) {
+        _deformationAngle = 6.0f;
 
-	}
+    }
 
-	public virtual void OnTriggerStay(Collider collision) {
+    void Update() {
 
-	}
 
-	public virtual void OnTriggerExit(Collider collision) {
 
-	}
+    }
 
-	public virtual void OnBreak() {
-		// TODO: Play break sound
-		Instantiate(knot, transform.position, transform.rotation);
-	}
+    public virtual void OnTriggerEnter (Collider collider) {
 
-	// TODO: Internalize? I18n?
-	public virtual string GetReadableName() {
-		return readableName;
-	}
+        if (collider.gameObject.tag.Equals("Player")) {
+
+            transform.DORotate(_originalRotation + Quaternion.AngleAxis(_deformationAngle, Vector3.right).eulerAngles, 2.0f, RotateMode.Fast)
+                .SetEase(Ease.OutElastic);
+
+        }
+
+    }
+
+    public virtual void OnTriggerStay (Collider collider) {
+
+
+
+    }
+
+    public virtual void OnTriggerExit (Collider collider) {
+
+        if (collider.gameObject.tag.Equals("Player")) {
+
+            transform.DORotate(_originalRotation, 2.0f, RotateMode.Fast)
+                .SetEase(Ease.OutElastic);
+
+        }
+
+    }
+
+    public virtual void OnBreak () {
+        // TODO: Play break sound
+        Instantiate(knot, transform.position, transform.rotation);
+    }
+
+    // TODO: Internalize? I18n?
+    public virtual string GetReadableName () {
+        return readableName;
+    }
 }

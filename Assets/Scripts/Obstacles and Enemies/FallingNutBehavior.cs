@@ -25,7 +25,7 @@ public class FallingNutBehavior : MonoBehaviour {
 
     void OnCollisionEnter (Collision collision) {
 
-        if (collision.gameObject.name == "Player") {
+        if (collision.gameObject.name == "Squirrel") {
 
             Debug.Log("Player Detected! (Nut)");
 
