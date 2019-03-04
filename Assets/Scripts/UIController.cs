@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
+using UnityEngine.Rendering.PostProcessing;
 
 public class UIController : RiseBehavior {
 
@@ -14,11 +15,13 @@ public class UIController : RiseBehavior {
     public GameObject pauseMenuObject;
     public GameObject optionsMenuObject;
 
+    public PostProcessProfile postProcessProfile;
+
     public List<List<GameObject>> listsOfOptionLists;
     private List<GameObject> _optionList;
 
     private List<GameObject> menuObjects;
-    private int currentMenu = 0;
+    private static int currentMenu = 0;
 
     // Select Actions are the functions that get called
     // when you hit a menu option. You pass in a bool
@@ -35,6 +38,12 @@ public class UIController : RiseBehavior {
     private bool _justSelected = false;
 
     private int _buttonToSelect = 0;
+
+    public float pauseDOF;
+    private DepthOfField depthOfField;
+    private float defaultDOF = 2.94f;
+
+    public Camera _trackCam;
 
     private void Start() {
         // Setting menuObjects to store all the menus in the game
@@ -61,63 +70,72 @@ public class UIController : RiseBehavior {
             }
         }
 
-        OpenMenu(currentMenu);
-
-        /* TAKE OUT */
-        _currentSelectAction = _selectActionsList[0];
-
-
-        /*
-        foreach (List<GameObject> listOfGameObjects in listsOfOptionLists) {
-            foreach (GameObject currGameObect in listOfGameObjects) {
-                Debug.Log(currGameObect);
-            }
+        if (GameModel.startAtMenu) {
+            MenuEvent(true);
+        } else {
+            currentMenu = 1;
+            OpenMenu(currentMenu, false);
         }
-        */
     }
 
 
     public override void UpdateAlways() {
-        // Here we're testing which option in the current menu the
-        // user has select and storing it in the _buttonSelected variable
-        if((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0) && !_justSelected){
-            _buttonToSelect++;
-            _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count-1);
-            _justSelected = true;
-        } else if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0) && !_justSelected) {
-            _buttonToSelect--;
-            _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count-1);
-            _justSelected = true;
-        }
+        if (GameModel.paused) {
+            // Here we're testing which option in the current menu the
+            // user has select and storing it in the _buttonSelected variable
+            if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0) && !_justSelected) {
+                _buttonToSelect++;
+                _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
+                _justSelected = true;
+            } else if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0) && !_justSelected) {
+                _buttonToSelect--;
+                _buttonToSelect = (int)Mathf.Clamp(_buttonToSelect, 0, listsOfOptionLists[currentMenu].Count - 1);
+                _justSelected = true;
+            }
 
-        // This is to ensure that you can't select multiple options
-        // in one stick push
-        if((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) == 0)) {
-            _justSelected = false;
-        }
+            // This is to ensure that you can't select multiple options
+            // in one stick push
+            if ((inputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) == 0)) {
+                _justSelected = false;
+            }
 
-        // This calls a function that updates the menu visually as well as
-        // seting what _currentSelectAction is
-        if (_justSelected) {
-            Select(_buttonToSelect);
-        }
+            // This calls a function that updates the menu visually as well as
+            // seting what _currentSelectAction is
+            if (_justSelected) {
+                Select(_buttonToSelect);
+            }
 
-        // This calls whatever _currentSelectAction is pointing to
-        if (inputHelper.GetButtonDown(InputHelper.SquirrelInput.JUMP)) {
-            _currentSelectAction(true);
+            // This calls whatever _currentSelectAction is pointing to
+            if (inputHelper.GetButtonDown(InputHelper.SquirrelInput.JUMP)) {
+                _currentSelectAction(true);
+            }
+
+            if(currentMenu == 0 || currentMenu == 2) {
+                _trackCam.depth = 0;
+            } else {
+                _trackCam.depth = -2;
+            }
         }
     }
 
-    public override void UpdateTick() {}
+    public override void UpdateTick() {
+        if(inputHelper.GetButtonDown(InputHelper.SquirrelInput.PAUSE)) {
+            PauseEvent(true);
+        }
+    }
+
+    public void OnApplicationQuit() {
+        postProcessProfile.TryGetSettings(out depthOfField);
+        depthOfField.focusDistance.value = defaultDOF;
+    }
 
     void Select(int button) {
-        //for (int i = 0; i < listsOfOptionLists.Count; i++) {
-            for(int i = 0; i < listsOfOptionLists[currentMenu].Count; i++) {
-                for (int j = 0; j < listsOfOptionLists[currentMenu][i].transform.childCount; j++) {
-                    listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.SetActive(false);
-                }
+        for(int i = 0; i < listsOfOptionLists[currentMenu].Count; i++) {
+            for (int j = 0; j < listsOfOptionLists[currentMenu][i].transform.childCount; j++) {
+                listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.SetActive(false);
             }
-        //}
+        }
+
         _buttonSelected = button;
         for (int l = 0; l < listsOfOptionLists[currentMenu][_buttonSelected].transform.childCount; l++) {
             listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.SetActive(true);
@@ -126,27 +144,40 @@ public class UIController : RiseBehavior {
     }
 
     public void PauseEvent(bool isTrue) {
-        OpenMenu(1);
+        if (!GameModel.paused) {
+            GameModel.paused = true;
+            OpenMenu(1, true);
+        } else {
+            GameModel.paused = false;
+            OpenMenu(1, false);
+        }
     }
 
     public void MenuEvent(bool isTrue) {
-        OpenMenu(0);
+        OpenMenu(0, true);
     }
 
     public void SinglePlayerEvent(bool isTrue) {
-        RestartEvent(true);
+        GameModel.singlePlayer = true;
+        OpenMenu(1, false);
+        GameModel.paused = false;
     }
 
     public void TwoPlayerEvent(bool isTrue) {
-        Debug.Log("Two Players Acivated");
+        GameModel.singlePlayer = false;
+        OpenMenu(1, false);
+        GameModel.paused = false;
     }
 
     public void OptionsEvent(bool isTrue) {
-        OpenMenu(2);
+        OpenMenu(2, true);
     }
 
     public void RestartEvent(bool isTrue) {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
+        GameModel.startAtMenu = false;
+        OpenMenu(1, false);
+        GameModel.paused = false;
     }
 
     public void QualityEvent(bool isTrue) {
@@ -158,31 +189,47 @@ public class UIController : RiseBehavior {
     }
 
     public void ExitGameEvent(bool isTrue) {
-        Debug.Log("Exit Game Activated");
+        Application.Quit();
     }
 
     public void ExitFromPauseEvent(bool isTrue) {
-        // IMPLEMENT : Go to main menu
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
+        GameModel.startAtMenu = true;
+        OpenMenu(0, true);
+        GameModel.paused = true;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
-        OpenMenu(0);
+        OpenMenu(0, true);
     }
 
-    public void OpenMenu(int menu) {
+    public void OpenMenu(int menu, bool inMenu) {
         menuObjects[currentMenu].SetActive(false);
         currentMenu = menu;
-        menuObjects[currentMenu].SetActive(true);
-        _selectActionsList = _listsOfSelectActions[menu];
-        _optionList = listsOfOptionLists[currentMenu];
 
-        for (int i = 0; i <_optionList.Count; i++) {
-            _optionList[i].transform.GetChild(0).gameObject.SetActive(false);
+        if (inMenu) {
+            GameModel.inMenu = true;
+            menuObjects[currentMenu].SetActive(true);
+            _selectActionsList = _listsOfSelectActions[menu];
+            _optionList = listsOfOptionLists[currentMenu];
+
+            for (int i = 0; i < _optionList.Count; i++) {
+                _optionList[i].transform.GetChild(0).gameObject.SetActive(false);
+            }
+
+            _buttonToSelect = 0;
+
+            Select(_buttonToSelect);
+
+            postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = pauseDOF;
+        } else {
+            GameModel.inMenu = false;
+            GameModel.paused = false;
+
+            postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = defaultDOF;
         }
-
-        _buttonToSelect = 0;
-
-        Select(_buttonToSelect);
     }
 
 }

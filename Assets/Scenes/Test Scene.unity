@@ -2081,7 +2081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 8.63015
+  m_PathPosition: 8.805154
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3833,7 +3833,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &562199924
 Transform:
   m_ObjectHideFlags: 0
@@ -4198,7 +4198,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 47f30ad0e983a3d4da8cec41130d76df, type: 3}
   m_Name: 
@@ -4230,7 +4230,7 @@ Camera:
   field of view: 40
   orthographic: 0
   orthographic size: 10
-  m_Depth: 0
+  m_Depth: -2
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -4252,8 +4252,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.014154605, y: 0.9123959, z: 0.03190765, w: 0.40781778}
-  m_LocalPosition: {x: 34.620075, y: 3.4632304, z: 87.45567}
+  m_LocalRotation: {x: -0.017870747, y: 0.8900773, z: 0.035294544, w: 0.4540896}
+  m_LocalPosition: {x: 32.33821, y: 3.1216273, z: 84.36584}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6056,6 +6056,9 @@ MonoBehaviour:
   mainMenuObject: {fileID: 792013026}
   pauseMenuObject: {fileID: 1734308155}
   optionsMenuObject: {fileID: 792013025}
+  postProcessProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
+  pauseDOF: 0.1
+  _trackCam: {fileID: 593501732}
 --- !u!4 &982024421 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7942988497882146801, guid: d7ebf3555f85d8f4fa27523293929c5b,
@@ -7566,7 +7569,7 @@ MonoBehaviour:
   maxPlayerDistance: 15
   realSquirrelHeight: 1.2
   heightText: {fileID: 1260038881}
-  _heightOffset: -20
+  _heightOffset: 2
 --- !u!114 &1273465455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7990,7 +7993,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.014154605, y: 0.9123959, z: 0.03190765, w: 0.40781778}
+  m_LocalRotation: {x: -0.017870747, y: 0.8900773, z: 0.035294544, w: 0.4540896}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
