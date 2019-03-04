@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RiseExtensions;
 
-public class CameraController : MonoBehaviour {
+public class CameraController : RiseBehavior {
 
     // Public References
     public GameObject cameraTarget;
@@ -13,6 +14,8 @@ public class CameraController : MonoBehaviour {
 
     [Range(0.0f, 1.0f)]
     public float cameraSpeed_v;
+
+    // Private Reference
 
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
@@ -30,49 +33,53 @@ public class CameraController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void UpdateTick() {
 
-        if (!GameModel.paused) {
+        if (GameModel.singlePlayer) {
 
-            if (GameModel.singlePlayer) {
+            if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
 
-                if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
+                // Get input directions
+                _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
-                    // Get input directions
-                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT), 0.0f, 0.0f);
+            } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
 
-                } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
+                // Get input directions
+                _moveDirection = new Vector3(InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
+            
+            }
 
-                    // Get input directions
-                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_TREE_CAMERA_INPUT), 0.0f, 0.0f);
-                }
+        } else {
 
-            } else {
+            if (this.name == "Squirrel Camera") {
 
-                if (this.name == "Squirrel Camera") {
+                // Get input directions
+                _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
-                    // Get input directions
-                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT), 0.0f, 0.0f);
+            } else if (this.name == "Tree Camera") {
 
-                } else if (this.name == "Tree Camera") {
-
-                    // Get input directions
-                    _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_TREE_CAMERA_INPUT), 0.0f, 0.0f);
-
-                }
+                // Get input directions
+                _moveDirection = new Vector3(InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
             }
 
-             // Handle vertical camera movement
-            transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
-
-            Vector3 target = new Vector3(cameraTarget.transform.position.x,
-                                         this.transform.position.y,
-                                         cameraTarget.transform.position.z);
-
-            // rotate the camera around the center of the target
-            transform.RotateAround(target, Vector3.up, _moveDirection.x * cameraSpeed_h);
-
         }
+
+        // Handle vertical camera movement
+        transform.Translate(0.0f, _moveDirection.y * cameraSpeed_v, 0.0f);
+
+        Vector3 target = new Vector3(cameraTarget.transform.position.x,
+                                     this.transform.position.y,
+                                     cameraTarget.transform.position.z);
+
+        // rotate the camera around the center of the target
+        transform.RotateAround(target, Vector3.up, _moveDirection.x * cameraSpeed_h);
+
+    }
+
+    public override void UpdateAlways() {
+
+
+
     }
 }
