@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using RiseExtensions;
 
 public class CameraController : RiseBehavior {
 
@@ -39,12 +40,12 @@ public class CameraController : RiseBehavior {
             if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
 
                 // Get input directions
-                _moveDirection = new Vector3(InputHelper.GetAxis(InputHelper.SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
+                _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
             } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
 
                 // Get input directions
-                _moveDirection = new Vector3(InputHelper.GetAxis(InputHelper.TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
+                _moveDirection = new Vector3(InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
             
             }
 
@@ -53,12 +54,12 @@ public class CameraController : RiseBehavior {
             if (this.name == "Squirrel Camera") {
 
                 // Get input directions
-                _moveDirection = new Vector3(InputHelper.GetAxis(InputHelper.SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
+                _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
             } else if (this.name == "Tree Camera") {
 
                 // Get input directions
-                _moveDirection = new Vector3(InputHelper.GetAxis(InputHelper.TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
+                _moveDirection = new Vector3(InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
             }
 

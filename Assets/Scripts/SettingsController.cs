@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using RiseExtensions;
 
 public class SettingsController : MonoBehaviour {
 
@@ -53,30 +54,30 @@ public class SettingsController : MonoBehaviour {
 
             } else {
 
-                InputHelper.ControlProfile profile = new InputHelper.ControlProfile("keyboard", InputHelper.InputType.KEYBOARD);
+                InputHelper.ControlProfile profile = new InputHelper.ControlProfile("keyboard", InputType.KEYBOARD);
 
                 // Squirrel Controls
-                profile.RegisterBinding(InputHelper.SquirrelInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
-                profile.RegisterBinding(InputHelper.SquirrelInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
-                profile.RegisterBinding(InputHelper.SquirrelInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
-                profile.RegisterBinding(InputHelper.SquirrelInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
-                profile.RegisterBinding(InputHelper.SquirrelInput.PAUSE, InputHelper.KEY_PAUSE);
-                profile.RegisterBinding(InputHelper.SquirrelInput.SWAP, InputHelper.KEY_SWAP);
+                profile.RegisterBinding(SquirrelInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
+                profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
+                profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
+                profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
+                profile.RegisterBinding(SquirrelInput.PAUSE, InputHelper.KEY_PAUSE);
+                profile.RegisterBinding(SquirrelInput.SWAP, InputHelper.KEY_SWAP);
 
-                profile.RegisterBinding(InputHelper.SquirrelInput.JUMP, InputHelper.KEY_JUMP);
+                profile.RegisterBinding(SquirrelInput.JUMP, InputHelper.KEY_JUMP);
 
                 // Tree Controls
-                profile.RegisterBinding(InputHelper.TreeInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
-                profile.RegisterBinding(InputHelper.TreeInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
-                profile.RegisterBinding(InputHelper.TreeInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
-                profile.RegisterBinding(InputHelper.TreeInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
-                profile.RegisterBinding(InputHelper.TreeInput.PAUSE, InputHelper.KEY_PAUSE);
-                profile.RegisterBinding(InputHelper.TreeInput.SWAP, InputHelper.KEY_SWAP);
+                profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, InputHelper.KEY_MOVE_H);
+                profile.RegisterBinding(TreeInput.MOVE_VERTICAL, InputHelper.KEY_MOVE_V);
+                profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, InputHelper.KEY_CAMERA_H);
+                profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, InputHelper.KEY_CAMERA_V);
+                profile.RegisterBinding(TreeInput.PAUSE, InputHelper.KEY_PAUSE);
+                profile.RegisterBinding(TreeInput.SWAP, InputHelper.KEY_SWAP);
 
-                profile.RegisterBinding(InputHelper.TreeInput.BRANCH_PLACE, InputHelper.KEY_ACTION_1);
-                profile.RegisterBinding(InputHelper.TreeInput.BRANCH_REMOVE, InputHelper.KEY_ACTION_2);
+                profile.RegisterBinding(TreeInput.BRANCH_PLACE, InputHelper.KEY_ACTION_1);
+                profile.RegisterBinding(TreeInput.BRANCH_REMOVE, InputHelper.KEY_ACTION_2);
                 // profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
-                profile.RegisterBinding(InputHelper.TreeInput.SELECT_RIGHT, InputHelper.KEY_SELECT);
+                profile.RegisterBinding(TreeInput.SELECT_RIGHT, InputHelper.KEY_SELECT);
 
 
 
@@ -167,10 +168,10 @@ public class SettingsController : MonoBehaviour {
 
         if (GameModel.paused) {
 
-            if (((InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+            if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
                 _buttonSelected++;
                 _justSelected = true;
-            } else if (((InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) < 0) || (InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL) < 0)) && (_buttonSelected > 0) && !_justSelected) {
+            } else if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) < 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) < 0)) && (_buttonSelected > 0) && !_justSelected) {
                 _buttonSelected--;
                 _justSelected = true;
             }
@@ -179,11 +180,11 @@ public class SettingsController : MonoBehaviour {
                 Select(_buttonSelected);
             }
 
-            if ((InputHelper.GetAxis(InputHelper.SquirrelInput.MOVE_VERTICAL) == 0) || (InputHelper.GetAxis(InputHelper.TreeInput.MOVE_VERTICAL) == 0)) {
+            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) == 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) == 0)) {
                 _justSelected = false;
             }
 
-            if (InputHelper.GetButtonDown(InputHelper.SquirrelInput.JUMP) || InputHelper.GetButtonDown(InputHelper.TreeInput.BRANCH_PLACE)) {
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) || InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
                 _currentSelectAction();
             }
 
