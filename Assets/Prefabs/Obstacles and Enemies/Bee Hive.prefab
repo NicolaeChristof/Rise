@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e4ae596326abbe4ba49c86f008d5eff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hive: {fileID: 7008598541191849424}
 --- !u!136 &2788632372418932911
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -129,10 +130,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.6
-      objectReference: {fileID: 0}
-    - target: {fileID: 400000, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
       propertyPath: m_LocalScale.y
       value: 0.6
       objectReference: {fileID: 0}
@@ -140,19 +137,29 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.6
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: eaa7e83ccbfe222458103fdf1e23613e, type: 2}
+    - target: {fileID: 400000, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.6
+      objectReference: {fileID: 0}
     - target: {fileID: 2300002, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: e678c9853c3ff174d8db3a2380c83a54, type: 2}
+    - target: {fileID: 2300000, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: eaa7e83ccbfe222458103fdf1e23613e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 585f8f436821d114580c7f3d8b368581, type: 3}
 --- !u!4 &7008598541191363058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 585f8f436821d114580c7f3d8b368581,
+    type: 3}
+  m_PrefabInstance: {fileID: 7008598541191750514}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7008598541191849424 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100002, guid: 585f8f436821d114580c7f3d8b368581,
     type: 3}
   m_PrefabInstance: {fileID: 7008598541191750514}
   m_PrefabAsset: {fileID: 0}
