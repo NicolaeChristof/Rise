@@ -4,14 +4,18 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using RiseExtensions;
 
 public class SettingsController : MonoBehaviour {
 
+    // Public References
     public Camera squirrelCamera;
     public Camera treeCamera;
 
     // Start is called before the first frame update
     void Start() {
+
+        InputHelper.Initialize();
 
         // Can only use keyboard in single player mode
         if (!GameModel.inputGamePad) {
@@ -24,85 +28,22 @@ public class SettingsController : MonoBehaviour {
         if (GameModel.singlePlayer) {
 
             if (GameModel.inputGamePad) {
-
-                GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
-
-                GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
-
-                GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
-
-                GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
-
-                GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P1";
-
-                GameModel.VERTICAL_TREE_INPUT = "LS_v_P1";
-
-                GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P1";
-
-                GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P1";
-
-                GameModel.GROW = "RT_P1";
-
-                GameModel.SELECT = "RB_P1";
+			
+                // by default controls are set for game pad
 
             } else {
-
-                GameModel.HORIZONTAL_SQUIRREL_INPUT = "Keyboard_player_h";
-
-                GameModel.VERTICAL_SQUIRREL_INPUT = "Keyboard_player_v";
-
-                GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_h";
-
-                GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_v";
-
-                GameModel.HORIZONTAL_TREE_INPUT = "Keyboard_player_h";
-
-                GameModel.VERTICAL_TREE_INPUT = "Keyboard_player_v";
-
-                GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "Keyboard_camera_h";
-
-                GameModel.VERTICAL_TREE_CAMERA_INPUT = "Keyboard_camera_v";
-
-                GameModel.JUMP = "Keyboard_jump";
-
-                GameModel.SWAP = "Keyboard_swap_player";
-
-                GameModel.PAUSE = "Keyboard_pause";
-
-                GameModel.GROW = "Keyboard_trigger";
-
-                GameModel.SELECT = "Keyboard_next";
-
-				GameModel.BREAK = "Keyboard_break";
-
+				InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
 
         } else {
 
-            // Force split screen mode in multiplayer since swap is disabled
+            // Force GamePad input in multiplayer
+            GameModel.inputGamePad = true;
+
+            // Force split screen mode in multiplayer
             GameModel.splitScreen = true;
 
-            GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
-
-            GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
-
-            GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
-
-            GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
-
-            GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P2";
-
-            GameModel.VERTICAL_TREE_INPUT = "LS_v_P2";
-
-            GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P2";
-
-            GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
-
-            GameModel.GROW = "RT_P2";
-
-			GameModel.BREAK = "LT_P2";
-
-            GameModel.SELECT = "RB_P2";
+            // by default controls are set for game pad
 
         }
 
@@ -134,7 +75,16 @@ public class SettingsController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
+        InputHelper.Check();
+
+        // Listen for Pause
+        if (InputHelper.Pause()) {
+
+            pauseEvent();
+
+        }
+
+        if (InputHelper.Swap()) {
 
             GameModel.isSquirrel = !GameModel.isSquirrel;
 
