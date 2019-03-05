@@ -95,10 +95,10 @@ namespace RiseExtensions {
 		}
 
 		public static void Check() {
-			/* Handle Pause
+            /*
 			if (Pause()) {
 				GameModel.paused = !GameModel.paused;
-			} */
+			}*/
 
 			// Handle Swap
 			if (Swap()) {

@@ -327,6 +327,7 @@ public class TreeController : RiseBehavior {
     private void Select(int passedIndex) {
         sapBranchBars[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
+
         sapBranchBars[_selectedBranch].gameObject.SetActive(true);
 		// _uitext.text = _branches[_selectedBranch].GetComponent<BranchBehavior>().GetReadableName();
 	}
