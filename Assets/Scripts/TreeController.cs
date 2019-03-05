@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 using RiseExtensions;
 
 public class TreeController : RiseBehavior {
@@ -259,8 +260,14 @@ public class TreeController : RiseBehavior {
 			// TODO: Switch to growth over time, add vibration and 
 			float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 			_source.PlayOneShot(growSound, _volume);
-			Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
-			UpdateSap(-sapCost, _selectedBranch);
+			
+            GameObject newBranch = Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
+
+            newBranch.transform.DOScale(Vector3.zero, 0.75f)
+                // .SetEase(Ease.OutElastic)
+                .From();
+            
+            UpdateSap(-sapCost, _selectedBranch);
 		}
 		else {
 			// TODO: Feedback if we can't grow!
