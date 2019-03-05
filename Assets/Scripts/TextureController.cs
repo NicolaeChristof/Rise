@@ -25,8 +25,6 @@ public class TextureController : MonoBehaviour {
     // Use this for initialization
     void Start () {
 
-        Time.fixedDeltaTime = 0.25f;
-
         terrainWidth = (int)terrain.terrainData.size.x;
         terrainlength = (int)terrain.terrainData.size.z;
 

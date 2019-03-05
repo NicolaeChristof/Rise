@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
+using RiseExtensions;
 
 public class SettingsController : MonoBehaviour {
 
+    // Public References
     public Camera squirrelCamera;
     public Camera treeCamera;
     public PostProcessProfile postProcessProfile;
@@ -15,8 +17,12 @@ public class SettingsController : MonoBehaviour {
     public Image[] selectorArray = new Image[3];
     public GameObject pauseMenu;
 
+    // Public Fields
     public float pauseDOF;
 
+    // Private References
+
+    // Private Fields
     private int _buttonSelected = 0;
     private bool _justSelected;
 
@@ -30,6 +36,8 @@ public class SettingsController : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 
+        InputHelper.Initialize();
+
         // Can only use keyboard in single player mode
         if (!GameModel.inputGamePad) {
 
@@ -41,85 +49,22 @@ public class SettingsController : MonoBehaviour {
         if (GameModel.singlePlayer) {
 
             if (GameModel.inputGamePad) {
-
-                GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
-
-                GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
-
-                GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
-
-                GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
-
-                GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P1";
-
-                GameModel.VERTICAL_TREE_INPUT = "LS_v_P1";
-
-                GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P1";
-
-                GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P1";
-
-                GameModel.GROW = "RT_P1";
-
-                GameModel.SELECT = "RB_P1";
+			
+                // by default controls are set for game pad
 
             } else {
-
-                GameModel.HORIZONTAL_SQUIRREL_INPUT = "Keyboard_player_h";
-
-                GameModel.VERTICAL_SQUIRREL_INPUT = "Keyboard_player_v";
-
-                GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_h";
-
-                GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "Keyboard_camera_v";
-
-                GameModel.HORIZONTAL_TREE_INPUT = "Keyboard_player_h";
-
-                GameModel.VERTICAL_TREE_INPUT = "Keyboard_player_v";
-
-                GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "Keyboard_camera_h";
-
-                GameModel.VERTICAL_TREE_CAMERA_INPUT = "Keyboard_camera_v";
-
-                GameModel.JUMP = "Keyboard_jump";
-
-                GameModel.SWAP = "Keyboard_swap_player";
-
-                GameModel.PAUSE = "Keyboard_pause";
-
-                GameModel.GROW = "Keyboard_trigger";
-
-                GameModel.SELECT = "Keyboard_next";
-
-				GameModel.BREAK = "Keyboard_break";
-
+				InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
 
         } else {
 
-            // Force split screen mode in multiplayer since swap is disabled
+            // Force GamePad input in multiplayer
+            GameModel.inputGamePad = true;
+
+            // Force split screen mode in multiplayer
             GameModel.splitScreen = true;
 
-            GameModel.HORIZONTAL_SQUIRREL_INPUT = "LS_h_P1";
-
-            GameModel.VERTICAL_SQUIRREL_INPUT = "LS_v_P1";
-
-            GameModel.HORIZONTAL_SQUIRREL_CAMERA_INPUT = "RS_h_P1";
-
-            GameModel.VERTICAL_SQUIRREL_CAMERA_INPUT = "RS_v_P1";
-
-            GameModel.HORIZONTAL_TREE_INPUT = "LS_h_P2";
-
-            GameModel.VERTICAL_TREE_INPUT = "LS_v_P2";
-
-            GameModel.HORIZONTAL_TREE_CAMERA_INPUT = "RS_h_P2";
-
-            GameModel.VERTICAL_TREE_CAMERA_INPUT = "RS_v_P2";
-
-            GameModel.GROW = "RT_P2";
-
-			GameModel.BREAK = "LT_P2";
-
-            GameModel.SELECT = "RB_P2";
+            // by default controls are set for game pad
 
         }
 
@@ -146,7 +91,6 @@ public class SettingsController : MonoBehaviour {
 
         }
 
-
         GameModel.paused = false;
 
         _selectActions = new _selectAction[3] { pauseEvent, restartEvent, menuEvent };
@@ -162,14 +106,16 @@ public class SettingsController : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
+        InputHelper.Check();
+
         // Listen for Pause
-        if (Input.GetButtonDown(GameModel.PAUSE)) {
+        if (InputHelper.Pause()) {
 
             pauseEvent();
 
         }
 
-        if (Input.GetButtonDown(GameModel.SWAP) && GameModel.singlePlayer) {
+        if (InputHelper.Swap()) {
 
             GameModel.isSquirrel = !GameModel.isSquirrel;
 
@@ -195,10 +141,10 @@ public class SettingsController : MonoBehaviour {
 
         if (GameModel.paused) {
 
-            if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) < 0) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
+            if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
                 _buttonSelected++;
                 _justSelected = true;
-            } else if ((Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) > 0) && (_buttonSelected > 0) && !_justSelected) {
+            } else if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) < 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) < 0)) && (_buttonSelected > 0) && !_justSelected) {
                 _buttonSelected--;
                 _justSelected = true;
             }
@@ -207,11 +153,11 @@ public class SettingsController : MonoBehaviour {
                 Select(_buttonSelected);
             }
 
-            if (Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT) == 0) {
+            if ((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) == 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) == 0)) {
                 _justSelected = false;
             }
 
-            if (Input.GetButtonDown(GameModel.JUMP)) {
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) || InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
                 _currentSelectAction();
             }
 
@@ -226,7 +172,7 @@ public class SettingsController : MonoBehaviour {
     }
 
     void Select(int button) {
-        Debug.Log(button);
+        // Debug.Log(button);
 
         for(int i=0; i<buttonArray.Length; i++) {
             if (i == button) {

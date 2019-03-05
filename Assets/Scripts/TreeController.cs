@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RiseExtensions;
 
 public class TreeController : RiseBehavior {
 
@@ -41,6 +42,9 @@ public class TreeController : RiseBehavior {
 
     // Local Constants
     private const string BRANCH_TAG = "Branch";
+    private const string DEAD_ZONE_TAG = "Dead Zone";
+    private const string SAP_TAG = "Sap";
+    private const string PLAYER_TAG = "Player";
     private const float VERTICAL_SPEED = 2.15F;
     private const float LATERAL_SPEED = 6.30F;
     private const float EPSILON = 0.01F;
@@ -50,7 +54,7 @@ public class TreeController : RiseBehavior {
 
     void Start() {
         // Establish local references
-        _tree = GameObject.Find("Tree");
+        _tree = GameObject.FindGameObjectWithTag("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
 
         transform.Translate(0.0f, 3.0f, 0.0f);
@@ -96,10 +100,10 @@ public class TreeController : RiseBehavior {
             if (!GameModel.isSquirrel) {
 
                 // Poll Input
-                moveVertical = -Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
-                moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+                moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+                moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
 
-                grow = Input.GetAxis(GameModel.GROW);
+                grow = InputHelper.GetAxis(TreeInput.BRANCH_PLACE);
 
             } else {
 
@@ -112,10 +116,10 @@ public class TreeController : RiseBehavior {
         } else {
 
             // Poll Input
-            moveVertical = Input.GetAxis(GameModel.VERTICAL_TREE_INPUT);
-            moveLateral = Input.GetAxis(GameModel.HORIZONTAL_TREE_INPUT);
+            moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+            moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
 
-            grow = Input.GetAxis(GameModel.GROW);
+            grow = InputHelper.GetAxis(TreeInput.BRANCH_PLACE);
 
         }
 
@@ -164,13 +168,13 @@ public class TreeController : RiseBehavior {
         }
 
         // Handle Branch Selection
-        if (Input.GetButtonDown(GameModel.SELECT)) {
+        if (InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT)) {
 
             if (GameModel.singlePlayer) {
 
                 if (!GameModel.isSquirrel) {
 
-                    int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
+                    int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
                     int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                     Select(selected);
 
@@ -178,7 +182,7 @@ public class TreeController : RiseBehavior {
 
             } else {
 
-                int scrollDirection = Mathf.RoundToInt(Input.GetAxis(GameModel.SELECT));
+                int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
                 int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
                 Select(selected);
 
@@ -209,7 +213,7 @@ public class TreeController : RiseBehavior {
 
 		}
 		// Handle Break
-		if (CheckEpsilon(Input.GetAxis(GameModel.BREAK)) || (Input.GetButtonDown(GameModel.BREAK))) {
+		if (CheckEpsilon(InputHelper.GetAxis(TreeInput.BRANCH_REMOVE)) || (InputHelper.GetButtonDown(TreeInput.BRANCH_REMOVE))) {
 			float distance = float.MaxValue;
 			GameObject closestBranch = null;
 			Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
@@ -231,7 +235,7 @@ public class TreeController : RiseBehavior {
 
             if (!GameModel.isSquirrel) {
 
-                if (Input.GetButtonDown(GameModel.GROW)) {
+                if (InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
 					AttemptGrowBranch();
 				}
 
@@ -323,7 +327,11 @@ public class TreeController : RiseBehavior {
         // Check Branch Closeness (No Branch colliders in min distance)
         Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
         foreach (Collider iteratedCollider in colliders) {
-            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG)) {
+            if (iteratedCollider.gameObject.tag.Equals(BRANCH_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(DEAD_ZONE_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(SAP_TAG) ||
+                iteratedCollider.gameObject.tag.Equals(PLAYER_TAG))
+            {
                 return false;
             }
         }

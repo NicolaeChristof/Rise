@@ -1,7 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
+using RiseExtensions;
 
 public class PlayerController : RiseBehavior {
 
@@ -29,6 +28,9 @@ public class PlayerController : RiseBehavior {
 
     [Range(0.0f, 20.0f)]
     public float maxPlayerDistance;
+
+    [Range(0, 2)]
+    public int maxJumps;
 
     // The height of a real-life squirrel
     public float realSquirrelHeight;
@@ -65,6 +67,8 @@ public class PlayerController : RiseBehavior {
 
     private float _treeHeight;
 
+    private float _numJumps;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -76,15 +80,17 @@ public class PlayerController : RiseBehavior {
 
         _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
 
+        _numJumps = 0;
+
     }
 
     // Update is called once per frame
-    public override void UpdateTick() {
+    public override void UpdateTick () {
 
         if (GameModel.isSquirrel) {
 
             // Get input directions
-            _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
+            _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
 
             // Disable z axis movement
             _moveDirection.z = 1.0f;
@@ -126,13 +132,21 @@ public class PlayerController : RiseBehavior {
 
             _moveDirection.z *= speed;
 
-            if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
+            if (InputHelper.GetButton(SquirrelInput.JUMP) && _numJumps < maxJumps) {
+
+                _numJumps++;
 
                 _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 
                 _source.PlayOneShot(jumpSound, _volume);
 
                 _moveDirection.y = jumpSpeed;
+
+            }
+
+            if (_controller.isGrounded) {
+
+                _numJumps = 0;
 
             }
 
@@ -182,7 +196,7 @@ public class PlayerController : RiseBehavior {
 
     }
 
-    public override void UpdateAlways() {
+    public override void UpdateAlways () {
 
 
 
