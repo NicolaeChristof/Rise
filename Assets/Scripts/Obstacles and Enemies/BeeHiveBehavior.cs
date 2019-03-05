@@ -6,7 +6,7 @@ using DG.Tweening;
 public class BeeHiveBehavior : MonoBehaviour {
 
     // Public References
-    public GameObject _hive;
+    public GameObject hive;
 
     // Private Fields
     private Vector3 _originalScale;
@@ -16,7 +16,7 @@ public class BeeHiveBehavior : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 
-        _originalScale = _hive.transform.localScale;
+        _originalScale = hive.transform.localScale;
 
         _newScale = new Vector3(_originalScale.x + 0.1f, _originalScale.y, _originalScale.z + 0.1f);
         
@@ -35,7 +35,7 @@ public class BeeHiveBehavior : MonoBehaviour {
 
             // Push the player
 
-            _hive.transform.DOScale(_newScale, 2.0f)
+            hive.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
         }
@@ -56,7 +56,7 @@ public class BeeHiveBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            _hive.transform.DOScale(_originalScale, 2.0f)
+            hive.transform.DOScale(_originalScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
         }
