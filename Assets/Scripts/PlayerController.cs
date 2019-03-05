@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using RiseExtensions;
+using DG.Tweening;
 
 public class PlayerController : RiseBehavior {
 
@@ -69,6 +70,10 @@ public class PlayerController : RiseBehavior {
 
     private float _numJumps;
 
+    private Vector3 _originalScale;
+
+    private Vector3 _newScale;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -81,6 +86,10 @@ public class PlayerController : RiseBehavior {
         _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
 
         _numJumps = 0;
+
+        _originalScale = transform.localScale;
+
+        _newScale = new Vector3(_originalScale.x, _originalScale.y + 0.1f, _originalScale.z);
 
     }
 
@@ -141,6 +150,12 @@ public class PlayerController : RiseBehavior {
                 _source.PlayOneShot(jumpSound, _volume);
 
                 _moveDirection.y = jumpSpeed;
+
+                transform.DOScale(_newScale, 2.0f)
+                    .SetEase(Ease.OutElastic);
+
+                transform.DOScale(_originalScale, 2.0f)
+                    .SetEase(Ease.OutElastic);
 
             }
 
