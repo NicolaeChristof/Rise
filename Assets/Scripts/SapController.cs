@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SapController : MonoBehaviour {
 
@@ -18,13 +19,17 @@ public class SapController : MonoBehaviour {
 
     private SapType _sapType;
 
+    private Vector3 _newScale;
+
     void Start() {
 
         _source = GetComponent<AudioSource>();
 
         // Resolve local references
         _treeController = GameObject.Find("Tree Controller").GetComponent<TreeController>();
-    
+
+        _newScale = Vector3.zero;
+
     }
 
     private void Update() {
@@ -46,10 +51,19 @@ public class SapController : MonoBehaviour {
             float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
             _source.PlayOneShot(pickupSound, _volume);
 
-            // Remove sap object
-            other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
+            other.transform.DOScale(_newScale, 0.75f)
+                .OnComplete(()=>kill(other));
+
+            
         
         }
+    }
+
+    private void kill (Collider other) {
+
+        // Remove sap object
+        other.gameObject.SetActive(false);
+        Destroy(other.gameObject);
+
     }
 }
