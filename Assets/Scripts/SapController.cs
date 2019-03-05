@@ -54,8 +54,6 @@ public class SapController : MonoBehaviour {
             other.transform.DOScale(_newScale, 0.75f)
                 .OnComplete(()=>kill(other));
 
-            
-        
         }
     }
 
