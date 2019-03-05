@@ -40,6 +40,8 @@ public class TreeController : RiseBehavior {
     private float[] _currentSap;
     private int _selectedBranch;
     private GameObject[] _branches;
+    private Vector3 _originalScale;
+    private Vector3 _newScale;
 
     // Local Constants
     private const string BRANCH_TAG = "Branch";
@@ -57,6 +59,9 @@ public class TreeController : RiseBehavior {
         // Establish local references
         _tree = GameObject.FindGameObjectWithTag("Tree");
         _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
+
+        _originalScale = _reticle.transform.localScale;
+        _newScale = new Vector3(_originalScale.x, _originalScale.y, _originalScale.z + 0.1f);
 
         transform.Translate(0.0f, 3.0f, 0.0f);
 
@@ -257,7 +262,6 @@ public class TreeController : RiseBehavior {
 	/// </summary>
 	public void AttemptGrowBranch() {
 		if (CanGrow()) {
-			// TODO: Switch to growth over time, add vibration and 
 			float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
 			_source.PlayOneShot(growSound, _volume);
 			
@@ -270,8 +274,14 @@ public class TreeController : RiseBehavior {
             UpdateSap(-sapCost, _selectedBranch);
 		}
 		else {
-			// TODO: Feedback if we can't grow!
-		}
+
+            _reticle.transform.DOScale(_newScale, 2.0f)
+                .SetEase(Ease.OutElastic);
+
+            _reticle.transform.DOScale(_originalScale, 2.0f)
+                .SetEase(Ease.OutElastic);
+
+        }
 	}
 
 	/// <summary>
