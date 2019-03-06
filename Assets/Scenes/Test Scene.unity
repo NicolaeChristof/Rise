@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 248.59694
+  m_PathPosition: 249.9883
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3557,7 +3557,7 @@ MonoBehaviour:
   branch3: {fileID: 4352697463616401196, guid: 162dddf13a01e493191218dd257d319c, type: 3}
   branch4: {fileID: 4352697463616401196, guid: 02c9bf4a5fc7c4e92bb3a3ee29ede44a, type: 3}
   player: {fileID: 1273465451}
-  growSound: {fileID: 8300000, guid: 8cde2aa3b615f434a85bbb18066f3a4c, type: 3}
+  growSound: {fileID: 8300000, guid: d9a28f1e17cd58f4e80b040e43021011, type: 3}
   sapBranchBars:
   - {fileID: 789719658}
   - {fileID: 27682358}
@@ -5775,8 +5775,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.012123851, y: 0.23144558, z: 0.0029398638, w: 0.9727679}
-  m_LocalPosition: {x: 42.316055, y: 4.96201, z: 22.484295}
+  m_LocalRotation: {x: -0.010561319, y: -0.093928315, z: -0.0009812214, w: 0.9955225}
+  m_LocalPosition: {x: 71.883545, y: 5.0197334, z: 13.2170725}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -9861,10 +9861,10 @@ GameObject:
   - component: {fileID: 1273465452}
   - component: {fileID: 1273465454}
   - component: {fileID: 1273465455}
+  - component: {fileID: 1273465459}
   - component: {fileID: 1273465456}
   - component: {fileID: 1273465457}
   - component: {fileID: 1273465458}
-  - component: {fileID: 1273465459}
   m_Layer: 0
   m_Name: Squirrel
   m_TagString: Player
@@ -10433,7 +10433,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.012123851, y: 0.23144558, z: 0.0029398638, w: 0.9727679}
+  m_LocalRotation: {x: -0.010561319, y: -0.093928315, z: -0.0009812214, w: 0.9955225}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
