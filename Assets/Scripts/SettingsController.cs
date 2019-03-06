@@ -12,6 +12,28 @@ public class SettingsController : MonoBehaviour {
     public Camera squirrelCamera;
     public Camera treeCamera;
 
+    public PostProcessProfile postProcessProfile;
+
+    public Text[] buttonArray = new Text[3];
+    public Image[] selectorArray = new Image[3];
+    public GameObject pauseMenu;
+
+    // Public Fields
+    public float pauseDOF;
+
+    // Private References
+
+    // Private Fields
+    private int _buttonSelected = 0;
+    private bool _justSelected;
+
+    private delegate void _selectAction();
+    private _selectAction[] _selectActions;
+    private _selectAction _currentSelectAction;
+
+    private DepthOfField depthOfField;
+    private float defaultDOF;
+
     // Start is called before the first frame update
     void Start() {
 
