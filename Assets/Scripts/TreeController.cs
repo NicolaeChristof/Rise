@@ -15,7 +15,7 @@ public class TreeController : RiseBehavior {
     public GameObject branch4;
 
     public GameObject player;
-    public AudioClip growSound;
+    public AudioClip cantGrowSound;
     public Image[] sapBranchBars = new Image[4];
 
     // Public Fields
@@ -42,6 +42,7 @@ public class TreeController : RiseBehavior {
     private GameObject[] _branches;
     private Vector3 _originalScale;
     private Vector3 _newScale;
+    private bool _grow;
 
     // Local Constants
     private const string BRANCH_TAG = "Branch";
@@ -67,7 +68,9 @@ public class TreeController : RiseBehavior {
 
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
-        _source.spatialBlend = 1.0f;
+        _source.spatialBlend = 0.0f;
+        // _source.rolloffMode = AudioRolloffMode.Custom;
+        // _source.maxDistance = 10.0f;
 
         _branches = new GameObject[]{ branch1, branch2, branch3, branch4 };
 
@@ -99,7 +102,6 @@ public class TreeController : RiseBehavior {
 
         float moveVertical;
         float moveLateral;
-        float grow;
 
         if (GameModel.singlePlayer) {
 
@@ -109,13 +111,12 @@ public class TreeController : RiseBehavior {
                 moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
                 moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
 
-                grow = InputHelper.GetAxis(TreeInput.BRANCH_PLACE);
+                _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
 
             } else {
 
                 moveVertical = 0.0f;
                 moveLateral = 0.0f;
-                grow = 0.0f;
 
             }
 
@@ -125,7 +126,7 @@ public class TreeController : RiseBehavior {
             moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
             moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
 
-            grow = InputHelper.GetAxis(TreeInput.BRANCH_PLACE);
+            _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
 
         }
 
@@ -203,7 +204,7 @@ public class TreeController : RiseBehavior {
 
                 if (!GameModel.isSquirrel) {
 
-                    if (grow > 0) {
+                    if (_grow) {
 						AttemptGrowBranch();
 					}
 
@@ -211,7 +212,7 @@ public class TreeController : RiseBehavior {
 
             } else {
 
-                if (grow > 0) {
+                if (_grow) {
 					AttemptGrowBranch();
 				}
 
@@ -262,8 +263,6 @@ public class TreeController : RiseBehavior {
 	/// </summary>
 	public void AttemptGrowBranch() {
 		if (CanGrow()) {
-			float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-			_source.PlayOneShot(growSound, _volume);
 			
             GameObject newBranch = Instantiate(_branches[_selectedBranch], _reticle.transform.position, _reticle.transform.rotation);
 
@@ -274,6 +273,9 @@ public class TreeController : RiseBehavior {
             UpdateSap(-sapCost, _selectedBranch);
 		}
 		else {
+
+            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+            _source.PlayOneShot(cantGrowSound, _volume);
 
             _reticle.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
