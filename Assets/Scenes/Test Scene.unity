@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 212.83705
+  m_PathPosition: 213.43263
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5784,8 +5784,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.0027145064, y: 0.9944256, z: 0.025887316, w: -0.10217797}
-  m_LocalPosition: {x: 69.87629, y: 4.188796, z: 98.017746}
+  m_LocalRotation: {x: -0.0021974382, y: 0.9963879, z: 0.029036786, w: 0.07976996}
+  m_LocalPosition: {x: 57.527817, y: 4.258837, z: 93.350845}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6950,6 +6950,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: _trackCam
+      value: 
+      objectReference: {fileID: 593501732}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1001 &792401304
@@ -10477,7 +10481,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.0027145064, y: 0.9944256, z: 0.025887316, w: -0.10217797}
+  m_LocalRotation: {x: -0.0021974382, y: 0.9963879, z: 0.029036786, w: 0.07976996}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
