@@ -78,7 +78,7 @@ public class CameraControllerCentered : MonoBehaviour {
 
         _unalteredOffsetNew.z -= cameraDistance;
 
-        transform.position = Vector3.Slerp(transform.position, transform.TransformPoint(_unalteredOffsetNew), .35f);
+        transform.position = Vector3.Slerp(transform.position, transform.TransformPoint(_unalteredOffsetNew), .9f);
 
         transform.LookAt(new Vector3(treeTransform.position.x, playerTransform.position.y, treeTransform.position.z));
     
