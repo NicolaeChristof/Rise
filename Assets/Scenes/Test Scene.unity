@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 227.18605
+  m_PathPosition: 240.59413
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -4921,7 +4921,6 @@ GameObject:
   - component: {fileID: 534669906}
   - component: {fileID: 534669909}
   - component: {fileID: 534669904}
-  - component: {fileID: 534669903}
   - component: {fileID: 534669907}
   - component: {fileID: 534669908}
   - component: {fileID: 534669910}
@@ -4932,14 +4931,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &534669903
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
 --- !u!20 &534669904
 Camera:
   m_ObjectHideFlags: 0
@@ -5784,8 +5775,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.09121788, y: 0.6082395, z: -0.071058005, w: 0.7852865}
-  m_LocalPosition: {x: 21.556675, y: 16.06568, z: 51.922333}
+  m_LocalRotation: {x: -0.028802598, y: -0.42087546, z: -0.01330632, w: 0.90656346}
+  m_LocalPosition: {x: 90.921616, y: 3.7222595, z: 38.48729}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -9873,6 +9864,7 @@ GameObject:
   - component: {fileID: 1273465456}
   - component: {fileID: 1273465457}
   - component: {fileID: 1273465458}
+  - component: {fileID: 1273465459}
   m_Layer: 0
   m_Name: Squirrel
   m_TagString: Player
@@ -10081,6 +10073,14 @@ CapsuleCollider:
   m_Height: 1.7563126
   m_Direction: 1
   m_Center: {x: 0, y: 0.00010883808, z: 0}
+--- !u!81 &1273465459
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1273465451}
+  m_Enabled: 1
 --- !u!1001 &1275325931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10433,7 +10433,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.09121788, y: 0.6082395, z: -0.071058005, w: 0.7852865}
+  m_LocalRotation: {x: -0.028802598, y: -0.42087546, z: -0.01330632, w: 0.90656346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
