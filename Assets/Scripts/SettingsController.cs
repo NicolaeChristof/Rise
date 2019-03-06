@@ -11,6 +11,7 @@ public class SettingsController : MonoBehaviour {
     // Public References
     public Camera squirrelCamera;
     public Camera treeCamera;
+
     public PostProcessProfile postProcessProfile;
 
     public Text[] buttonArray = new Text[3];
@@ -49,10 +50,20 @@ public class SettingsController : MonoBehaviour {
         if (GameModel.singlePlayer) {
 
             if (GameModel.inputGamePad) {
+<<<<<<< HEAD
 			
                 // by default controls are set for game pad
 
             } else {
+=======
+
+                // by default controls are set for game pad
+
+                GameModel.singlePlayer = true;
+
+            } else {
+
+>>>>>>> develop
 				InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
 
@@ -91,6 +102,7 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+<<<<<<< HEAD
         GameModel.paused = false;
 
         _selectActions = new _selectAction[3] { pauseEvent, restartEvent, menuEvent };
@@ -101,12 +113,15 @@ public class SettingsController : MonoBehaviour {
 
         defaultDOF = depthOfField.focusDistance;
 
+=======
+>>>>>>> develop
     }
 
     // Update is called once per frame
     void Update() {
 
         InputHelper.Check();
+<<<<<<< HEAD
 
         // Listen for Pause
         if (InputHelper.Pause()) {
@@ -115,6 +130,9 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+=======
+
+>>>>>>> develop
         if (InputHelper.Swap()) {
 
             GameModel.isSquirrel = !GameModel.isSquirrel;
@@ -139,6 +157,7 @@ public class SettingsController : MonoBehaviour {
 
         }
 
+<<<<<<< HEAD
         if (GameModel.paused) {
 
             if (((InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL) > 0) || (InputHelper.GetAxis(TreeInput.MOVE_VERTICAL) > 0)) && (_buttonSelected < (buttonArray.Length - 1)) && !_justSelected) {
@@ -206,6 +225,8 @@ public class SettingsController : MonoBehaviour {
 
     void menuEvent() {
         Debug.Log("You hit the menu event");
+=======
+>>>>>>> develop
     }
 
 }

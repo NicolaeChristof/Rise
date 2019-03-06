@@ -17,6 +17,10 @@ public static class GameModel {
 
 	public static bool debugMode = false;
 
+    public static bool startAtMenu = true;
+
+    public static bool inMenu = true;
+
     // Sound Controls
     public static float volLowRange = 0.8f;
 
