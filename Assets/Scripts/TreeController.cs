@@ -235,7 +235,9 @@ public class TreeController : RiseBehavior {
 			}
 			if (closestBranch != null) {
 				closestBranch.GetComponent<BranchBehavior>().OnBreak();
-				Object.Destroy(closestBranch);
+				
+                closestBranch.transform.DOScale(Vector3.zero, 0.75f)
+                    .OnComplete(()=> Object.Destroy(closestBranch));
 			}
 		}
 		else {
