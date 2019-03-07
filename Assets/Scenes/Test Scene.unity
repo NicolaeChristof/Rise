@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 212.83705
+  m_PathPosition: 215.1393
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5680,7 +5680,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 593501733}
-  - component: {fileID: 593501731}
   - component: {fileID: 593501730}
   - component: {fileID: 593501732}
   - component: {fileID: 593501735}
@@ -5723,18 +5722,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: Cinemachine.CinemachineBrain+VcamEvent, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &593501731
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 593501729}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47f30ad0e983a3d4da8cec41130d76df, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!20 &593501732
 Camera:
   m_ObjectHideFlags: 0
@@ -5784,8 +5771,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.0027145064, y: 0.9944256, z: 0.025887316, w: -0.10217797}
-  m_LocalPosition: {x: 69.87629, y: 4.188796, z: 98.017746}
+  m_LocalRotation: {x: -0.02677324, y: 0.6824389, z: 0.025132855, w: 0.7300197}
+  m_LocalPosition: {x: 30.921774, y: 3.752882, z: 60.369686}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6950,6 +6937,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: _trackCam
+      value: 
+      objectReference: {fileID: 593501732}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1001 &792401304
@@ -9981,10 +9972,10 @@ MonoBehaviour:
   jumpSpeed: 10
   gravity: 20
   maxPlayerDistance: 15
-  maxJumps: 2
+  maxJumps: 1
   realSquirrelHeight: 1.2
   heightText: {fileID: 1260038881}
-  _heightOffset: -20
+  _heightOffset: 2
 --- !u!114 &1273465455
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10477,7 +10468,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.0027145064, y: 0.9944256, z: 0.025887316, w: -0.10217797}
+  m_LocalRotation: {x: -0.02677324, y: 0.6824389, z: 0.025132855, w: 0.7300197}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
