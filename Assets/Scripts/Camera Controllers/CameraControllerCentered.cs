@@ -29,7 +29,7 @@ public class CameraControllerCentered : MonoBehaviour {
         _camOffset = transform.position - playerTransform.position;
         _playerController = playerTransform.GetComponent<PlayerController>();
 
-        if (this.name == "Tree Camera") {
+        if (this.tag == "Tree Camera") {
             playerTransform = Tree_Controller.getReticleTransform();
         }
     }
@@ -39,11 +39,11 @@ public class CameraControllerCentered : MonoBehaviour {
         // Get input directions
         if (GameModel.singlePlayer) {
 
-            if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
+            if (this.tag == "Squirrel Camera" && GameModel.isSquirrel) {
 
                 _zoom = new Vector3(0.0f, 0.0f, InputHelper.GetAxis(SquirrelInput.CAMERA_VERTICAL));
 
-            } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
+            } else if (this.tag == "Tree Camera" && !GameModel.isSquirrel) {
 
                 _zoom = new Vector3(0.0f, 0.0f, InputHelper.GetAxis(TreeInput.CAMERA_VERTICAL));
         
@@ -51,11 +51,11 @@ public class CameraControllerCentered : MonoBehaviour {
 
         } else {
 
-            if (this.name == "Squirrel Camera") {
+            if (this.tag == "Squirrel Camera") {
 
                 _zoom = new Vector3(0.0f, 0.0f, InputHelper.GetAxis(SquirrelInput.CAMERA_VERTICAL));
 
-            } else if (this.name == "Tree Camera") {
+            } else if (this.tag == "Tree Camera") {
 
                 _zoom = new Vector3(0.0f, 0.0f, InputHelper.GetAxis(TreeInput.CAMERA_VERTICAL));
 

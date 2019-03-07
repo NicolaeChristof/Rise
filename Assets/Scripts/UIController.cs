@@ -85,7 +85,7 @@ public class UIController : RiseBehavior {
 
 
     public override void UpdateAlways() {
-        Debug.Log(GameModel.paused);
+        // Debug.Log(GameModel.paused);
 
         if (GameModel.isSquirrel) {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
