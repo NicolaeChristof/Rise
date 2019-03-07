@@ -37,12 +37,12 @@ public class CameraController : RiseBehavior {
 
         if (GameModel.singlePlayer) {
 
-            if (this.name == "Squirrel Camera" && GameModel.isSquirrel) {
+            if (this.tag == "Squirrel Camera" && GameModel.isSquirrel) {
 
                 // Get input directions
                 _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
-            } else if (this.name == "Tree Camera" && !GameModel.isSquirrel) {
+            } else if (this.tag == "Tree Camera" && !GameModel.isSquirrel) {
 
                 // Get input directions
                 _moveDirection = new Vector3(InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
@@ -51,12 +51,12 @@ public class CameraController : RiseBehavior {
 
         } else {
 
-            if (this.name == "Squirrel Camera") {
+            if (this.tag == "Squirrel Camera") {
 
                 // Get input directions
                 _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);
 
-            } else if (this.name == "Tree Camera") {
+            } else if (this.tag == "Tree Camera") {
 
                 // Get input directions
                 _moveDirection = new Vector3(InputHelper.GetAxis(TreeInput.CAMERA_HORIZONTAL), 0.0f, 0.0f);

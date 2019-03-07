@@ -141,7 +141,7 @@ public class PlayerController : RiseBehavior {
 
             _moveDirection.z *= speed;
 
-            if (InputHelper.GetButton(SquirrelInput.JUMP) && _numJumps < maxJumps) {
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps) {
 
                 _numJumps++;
 
