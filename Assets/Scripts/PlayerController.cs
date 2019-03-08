@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 using RiseExtensions;
 using DG.Tweening;
@@ -30,6 +31,9 @@ public class PlayerController : RiseBehavior {
 
     [Range(0, 2)]
     public int maxJumps;
+
+    [Range(0.0f, 5.0f)]
+    public float stunTime;
 
     // The height of a real-life squirrel
     public float realSquirrelHeight;
@@ -72,6 +76,8 @@ public class PlayerController : RiseBehavior {
 
     private Vector3 _newScale;
 
+    private bool _playerStunned;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -97,7 +103,15 @@ public class PlayerController : RiseBehavior {
         if (GameModel.isSquirrel) {
 
             // Get input directions
-            _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
+            if (!_playerStunned) {
+
+                _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
+
+            } else {
+
+                _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
+
+            }
 
             // Disable z axis movement
             _moveDirection.z = 1.0f;
@@ -228,31 +242,24 @@ public class PlayerController : RiseBehavior {
 
         _externalForce += force;
 
-        Debug.Log(_externalForce);
+        // Debug.Log(_externalForce);
 
     }
 
-	// public Vector3 GetMoveDirection() {
-	// 	return _moveDirection;
-	// }
+    public void stunPlayer () {
 
-	// public void SetVelocity(Vector3 passedVelocityVector) {
-	// 	_velocity = passedVelocityVector;
-	// }
+        StartCoroutine(stun());
 
-	// private void ApplyVelocity() {
-	// 	// Apply velocity to move direction vector
-	// 	_moveDirection = _moveDirection + (_velocity * Time.deltaTime);
+    }
 
-	// 	// Apply velocity falloff TODO: Fix me. This is currently tied to gravity.
-	// 	float falloff = (gravity * Time.deltaTime);
-	// 	_velocity.x = Mathf.Clamp(_velocity.x - (falloff * Mathf.Sign(_velocity.x)), 0, float.MaxValue);
-	// 	_velocity.y = Mathf.Clamp(_velocity.y - (falloff * Mathf.Sign(_velocity.y)), 0, float.MaxValue);
-	// 	_velocity.z = Mathf.Clamp(_velocity.z - (falloff * Mathf.Sign(_velocity.z)), 0, float.MaxValue);
-	// }
+    private IEnumerator stun () {
 
-	// private void ApplyMotion(Vector3 passedMotionVector) {
-	// 	_controller.Move(passedMotionVector * Time.deltaTime);
-	// }
+        _playerStunned = true;
+
+        yield return new WaitForSeconds(stunTime);
+
+        _playerStunned = false;
+
+    }
 
 }
