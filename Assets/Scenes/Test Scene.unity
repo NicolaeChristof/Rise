@@ -414,18 +414,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 6951204}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &27682358 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6462225557402143763, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &31388210 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6462225555729219406, guid: 02b191eae91d53d43ae5ecce0110924a,
@@ -2634,7 +2622,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 239.92848
+  m_PathPosition: 255.35353
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -2825,80 +2813,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17fd3d2564b2c23449e6553a59f7242c, type: 3}
---- !u!1 &289112939
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 289112940}
-  - component: {fileID: 289112942}
-  - component: {fileID: 289112941}
-  m_Layer: 5
-  m_Name: Fall Leaf
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &289112940
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289112939}
-  m_LocalRotation: {x: -0, y: 0, z: -0.50154334, w: 0.8651325}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60.204002}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 449, y: 89}
-  m_SizeDelta: {x: 198, y: 181}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &289112941
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289112939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &289112942
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 289112939}
-  m_CullTransparentMesh: 0
 --- !u!1 &293427350
 GameObject:
   m_ObjectHideFlags: 0
@@ -3323,18 +3237,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 338947000}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &339905409 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6462225555601085110, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &340982633
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3633,10 +3535,10 @@ MonoBehaviour:
   player: {fileID: 1273465451}
   growSound: {fileID: 8300000, guid: 8cde2aa3b615f434a85bbb18066f3a4c, type: 3}
   sapBranchBars:
-  - {fileID: 0}
-  - {fileID: 27682358}
-  - {fileID: 1913311828}
-  - {fileID: 339905409}
+  - {fileID: 1766194131}
+  - {fileID: 2027496785}
+  - {fileID: 1777417606}
+  - {fileID: 1185429924}
   maxSap: []
   minDistance: 0.5
   sapCost: 1
@@ -5858,8 +5760,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.037844602, y: -0.2974725, z: -0.011693535, w: 0.9539084}
-  m_LocalPosition: {x: 84.5004, y: 3.0086102, z: 30.657213}
+  m_LocalRotation: {x: -0.00092423655, y: 0.99850535, z: 0.01910587, w: 0.0511989}
+  m_LocalPosition: {x: 57.62364, y: 4.2662888, z: 109.91827}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6356,80 +6258,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1733428546}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &710169737
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 710169738}
-  - component: {fileID: 710169740}
-  - component: {fileID: 710169739}
-  m_Layer: 5
-  m_Name: Fall Leaf (4)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &710169738
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710169737}
-  m_LocalRotation: {x: -0, y: 0, z: 0.024193998, w: 0.9997073}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -357.227}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 56, y: 92}
-  m_SizeDelta: {x: 166.1, y: 151.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &710169739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710169737}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &710169740
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 710169737}
-  m_CullTransparentMesh: 0
 --- !u!1001 &727551242
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7090,41 +6918,6 @@ PrefabInstance:
       propertyPath: _trackCam
       value: 
       objectReference: {fileID: 593501732}
-    - target: {fileID: 6462225555601085108, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225556168496528, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225556192318086, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225557402143761, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225557402143760, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 18.800293
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225556168496531, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 18.800293
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225555601085111, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 16.199707
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1001 &792401304
@@ -8659,80 +8452,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 93378917}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1073700807
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1073700808}
-  - component: {fileID: 1073700810}
-  - component: {fileID: 1073700809}
-  m_Layer: 5
-  m_Name: Fall Leaf (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1073700808
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073700807}
-  m_LocalRotation: {x: -0, y: -0, z: 0.27526477, w: -0.9613685}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -31.956001}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 294, y: 229}
-  m_SizeDelta: {x: 166.1, y: 151.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &1073700809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073700807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &1073700810
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1073700807}
-  m_CullTransparentMesh: 0
 --- !u!1001 &1077727912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9513,80 +9232,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1119074134}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1161720930
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1161720931}
-  - component: {fileID: 1161720933}
-  - component: {fileID: 1161720932}
-  m_Layer: 5
-  m_Name: Fall Leaf (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1161720931
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161720930}
-  m_LocalRotation: {x: -0, y: 0, z: 0.9995936, w: 0.028506737}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -183.267}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7, y: 42}
-  m_SizeDelta: {x: 166.1, y: 151.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &1161720932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161720930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &1161720933
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1161720930}
-  m_CullTransparentMesh: 0
 --- !u!1001 &1167826260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9737,6 +9382,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2a52e0c2c9f1334c96beb3bfb0a46c7, type: 3}
+--- !u!114 &1185429924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1185429924, guid: 02b191eae91d53d43ae5ecce0110924a,
+    type: 3}
+  m_PrefabInstance: {fileID: 792013024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1185990425 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7150636402826049791, guid: 10edc1f688910604ba9cebe21eefa9e9,
@@ -10752,7 +10409,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.037844602, y: -0.2974725, z: -0.011693535, w: 0.9539084}
+  m_LocalRotation: {x: -0.00092423655, y: 0.99850535, z: 0.01910587, w: 0.0511989}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -12170,12 +11827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53d282ec192620348b199946b1685fc0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!224 &1477968653 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 6462225555944426797, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1478313344
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -12389,80 +12040,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 17fd3d2564b2c23449e6553a59f7242c, type: 3}
---- !u!1 &1480076706
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1480076707}
-  - component: {fileID: 1480076709}
-  - component: {fileID: 1480076708}
-  m_Layer: 5
-  m_Name: Fall Leaf (6)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1480076707
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480076706}
-  m_LocalRotation: {x: -0, y: 0, z: -0.22287679, w: -0.9748466}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 25.756}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -124, y: 115}
-  m_SizeDelta: {x: 166.1, y: 151.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &1480076708
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480076706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &1480076709
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1480076706}
-  m_CullTransparentMesh: 0
 --- !u!4 &1484696150 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2330307564692175988, guid: f5f00a030aaa0be488bf8773bdd74013,
@@ -13220,160 +12797,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1100323961}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1579719072
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1579719073}
-  - component: {fileID: 1579719075}
-  - component: {fileID: 1579719074}
-  m_Layer: 5
-  m_Name: Fall Leaf (5)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1579719073
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579719072}
-  m_LocalRotation: {x: -0, y: 0, z: -0.9987842, w: 0.049296927}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -534.349}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 172, y: 91}
-  m_SizeDelta: {x: 166.1, y: 151.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &1579719074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579719072}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &1579719075
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1579719072}
-  m_CullTransparentMesh: 0
 --- !u!1 &1581467212 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7988453567747118701, guid: f5f00a030aaa0be488bf8773bdd74013,
     type: 3}
   m_PrefabInstance: {fileID: 2023932110}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1583311752
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1583311753}
-  - component: {fileID: 1583311755}
-  - component: {fileID: 1583311754}
-  m_Layer: 5
-  m_Name: Fall Leaf (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &1583311753
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583311752}
-  m_LocalRotation: {x: -0, y: 0, z: -0.98686844, w: -0.16152622}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -198.59099}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 345, y: 76}
-  m_SizeDelta: {x: 176, y: 160.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &1583311754
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583311752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &1583311755
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1583311752}
-  m_CullTransparentMesh: 0
 --- !u!1001 &1583365232
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14460,6 +13889,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d72899f0bb555804cb9793538db0d3d1, type: 3}
+--- !u!114 &1766194131 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1766194131, guid: 02b191eae91d53d43ae5ecce0110924a,
+    type: 3}
+  m_PrefabInstance: {fileID: 792013024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1771799888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7150636402826049791, guid: c2a52e0c2c9f1334c96beb3bfb0a46c7,
@@ -14472,6 +13913,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 47509236}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1777417606 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1777417606, guid: 02b191eae91d53d43ae5ecce0110924a,
+    type: 3}
+  m_PrefabInstance: {fileID: 792013024}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1793441242 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2330307564692175988, guid: f5f00a030aaa0be488bf8773bdd74013,
@@ -15582,18 +15035,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 10edc1f688910604ba9cebe21eefa9e9, type: 3}
---- !u!114 &1913311828 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6462225556168496530, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1919091943
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -16756,88 +16197,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2026890780}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2027496783
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2027496784}
-  - component: {fileID: 2027496786}
-  - component: {fileID: 2027496785}
-  m_Layer: 5
-  m_Name: New Summer Bar
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2027496784
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027496783}
-  m_LocalRotation: {x: -0, y: -0, z: 0.0959728, w: 0.995384}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -0.25, y: 0.25, z: 0.99999803}
-  m_Children:
-  - {fileID: 289112940}
-  - {fileID: 1583311753}
-  - {fileID: 1073700808}
-  - {fileID: 1161720931}
-  - {fileID: 710169738}
-  - {fileID: 1579719073}
-  - {fileID: 1480076707}
-  - {fileID: 2143076108}
-  m_Father: {fileID: 1477968653}
-  m_RootOrder: 9
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 11.015}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -227.07, y: -29.1}
-  m_SizeDelta: {x: 1137, y: 547}
-  m_Pivot: {x: 1, y: 1}
---- !u!114 &2027496785
+--- !u!114 &2027496785 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 2027496785, guid: 02b191eae91d53d43ae5ecce0110924a,
+    type: 3}
+  m_PrefabInstance: {fileID: 792013024}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027496783}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: bd413ee9934fdeb479385d1bfb9121b8, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &2027496786
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2027496783}
-  m_CullTransparentMesh: 0
 --- !u!1 &2027915656
 GameObject:
   m_ObjectHideFlags: 0
@@ -17574,80 +16945,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2076220788}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &2143076107
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2143076108}
-  - component: {fileID: 2143076110}
-  - component: {fileID: 2143076109}
-  m_Layer: 5
-  m_Name: Fall Leaf (7)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &2143076108
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143076107}
-  m_LocalRotation: {x: -0, y: 0, z: -0.9798757, w: 0.19960862}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1.0000001}
-  m_Children: []
-  m_Father: {fileID: 2027496784}
-  m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -156.972}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -154, y: -46}
-  m_SizeDelta: {x: 166.1, y: 151.9}
-  m_Pivot: {x: 0.5458089, y: 0.000000006782301}
---- !u!114 &2143076109
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143076107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 1
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
---- !u!222 &2143076110
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2143076107}
-  m_CullTransparentMesh: 0
 --- !u!1001 &2143710242
 PrefabInstance:
   m_ObjectHideFlags: 0
