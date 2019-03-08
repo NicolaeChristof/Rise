@@ -15,7 +15,7 @@ public static class GameModel {
 
     public static bool isSquirrel = true;
 
-	public static bool debugMode = false;
+    public static bool debugMode = false;
 
     public static bool startAtMenu = true;
 
