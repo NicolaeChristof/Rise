@@ -180,9 +180,13 @@ public class PlayerController : RiseBehavior {
         _moveDirection.y -= gravity * Time.deltaTime;
 
         // Apply external force
-        _moveDirection += _externalForce;
+        if (_externalForce != Vector3.zero) {
 
-        _externalForce = new Vector3(0.0f, 0.0f, 0.0f);
+            _moveDirection = _externalForce;
+
+            _externalForce = Vector3.zero;
+
+        }
 
         // Maintains direction after movement stops
         _moveDirection = transform.TransformDirection(_moveDirection);
@@ -194,9 +198,8 @@ public class PlayerController : RiseBehavior {
 
         }
 
-		// Move the Controller
-		ApplyVelocity();
-		ApplyMotion(_moveDirection);
+        // Move the Controller
+        _controller.Move(_moveDirection * Time.deltaTime);
 
         _target = new Vector3(playerTarget.transform.position.x,
                              this.transform.position.y,
@@ -229,27 +232,27 @@ public class PlayerController : RiseBehavior {
 
     }
 
-	public Vector3 GetMoveDirection() {
-		return _moveDirection;
-	}
+	// public Vector3 GetMoveDirection() {
+	// 	return _moveDirection;
+	// }
 
-	public void SetVelocity(Vector3 passedVelocityVector) {
-		_velocity = passedVelocityVector;
-	}
+	// public void SetVelocity(Vector3 passedVelocityVector) {
+	// 	_velocity = passedVelocityVector;
+	// }
 
-	private void ApplyVelocity() {
-		// Apply velocity to move direction vector
-		_moveDirection = _moveDirection + (_velocity * Time.deltaTime);
+	// private void ApplyVelocity() {
+	// 	// Apply velocity to move direction vector
+	// 	_moveDirection = _moveDirection + (_velocity * Time.deltaTime);
 
-		// Apply velocity falloff TODO: Fix me. This is currently tied to gravity.
-		float falloff = (gravity * Time.deltaTime);
-		_velocity.x = Mathf.Clamp(_velocity.x - (falloff * Mathf.Sign(_velocity.x)), 0, float.MaxValue);
-		_velocity.y = Mathf.Clamp(_velocity.y - (falloff * Mathf.Sign(_velocity.y)), 0, float.MaxValue);
-		_velocity.z = Mathf.Clamp(_velocity.z - (falloff * Mathf.Sign(_velocity.z)), 0, float.MaxValue);
-	}
+	// 	// Apply velocity falloff TODO: Fix me. This is currently tied to gravity.
+	// 	float falloff = (gravity * Time.deltaTime);
+	// 	_velocity.x = Mathf.Clamp(_velocity.x - (falloff * Mathf.Sign(_velocity.x)), 0, float.MaxValue);
+	// 	_velocity.y = Mathf.Clamp(_velocity.y - (falloff * Mathf.Sign(_velocity.y)), 0, float.MaxValue);
+	// 	_velocity.z = Mathf.Clamp(_velocity.z - (falloff * Mathf.Sign(_velocity.z)), 0, float.MaxValue);
+	// }
 
-	private void ApplyMotion(Vector3 passedMotionVector) {
-		_controller.Move(passedMotionVector * Time.deltaTime);
-	}
+	// private void ApplyMotion(Vector3 passedMotionVector) {
+	// 	_controller.Move(passedMotionVector * Time.deltaTime);
+	// }
 
 }
