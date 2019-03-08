@@ -239,8 +239,7 @@ public class TreeController : RiseBehavior {
                 closestBranch.transform.DOScale(Vector3.zero, 0.75f)
                     .OnComplete(()=> Object.Destroy(closestBranch));
 			}
-		}
-		else {
+		} else {
 
             if (!GameModel.isSquirrel) {
 
