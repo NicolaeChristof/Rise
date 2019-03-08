@@ -81,6 +81,8 @@ public class UIController : RiseBehavior {
         } else {
             OpenMenu(1, false);
         }
+
+        TreeController.sapUpdated += UpdateSapBar;
     }
 
 
@@ -257,4 +259,7 @@ public class UIController : RiseBehavior {
         }
     }
 
+    public void UpdateSapBar(float sapValue, int branchType) {
+        Debug.Log(sapValue);
+    }
 }

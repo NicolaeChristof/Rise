@@ -55,6 +55,10 @@ public class TreeController : RiseBehavior {
 
     private List<GameObject>[] _branchLeaves;
 
+
+    public delegate void SapEvent(float sapValue, int branchType);
+    public static event SapEvent sapUpdated;
+
     void Start() {
         // Establish local references
         _tree = GameObject.FindGameObjectWithTag("Tree");
@@ -317,6 +321,10 @@ public class TreeController : RiseBehavior {
                 leaf.SetActive(false);
             }
             i++;
+        }
+
+        if (sapUpdated != null) {
+            sapUpdated(passedValue, branchType);
         }
     }
 
