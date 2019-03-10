@@ -107,7 +107,7 @@ public class PlayerController : RiseBehavior {
 
                 _walkSoundPlaying = true;
 
-                _source.Play();
+                // _source.Play();
 
             }
 
