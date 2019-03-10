@@ -14,11 +14,16 @@ public class BranchBehaviorBreaky : BranchBehavior {
 
         base.OnTriggerEnter(collider);
 
-		_landings += 1;
-		if (_landings > maxLandings) {
-			OnBreak();
-			Object.Destroy(gameObject);
-		}
+        if (collider.gameObject.tag.Equals("Player")) {
+
+            _landings += 1;
+            if (_landings > maxLandings) {
+                OnBreak();
+                Object.Destroy(gameObject);
+            }
+
+        }
+
 	}
 
     public override void OnTriggerStay (Collider collider) {
