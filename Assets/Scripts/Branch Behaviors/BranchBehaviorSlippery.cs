@@ -26,8 +26,6 @@ public class BranchBehaviorSlippery : BranchBehavior {
 
             }
 
-            Debug.Log(_slipDirection);
-
             collider.gameObject.GetComponent<PlayerController>().stunPlayer(0.25f);
 
             collider.gameObject.GetComponent<PlayerController>().addExternalForce(_slipDirection);
