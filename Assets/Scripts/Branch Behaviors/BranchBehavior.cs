@@ -8,6 +8,8 @@ public class BranchBehavior : MonoBehaviour {
     // Public References
     public AudioClip breakSound;
 
+    public AudioClip rustleSound;
+
     // Public Fields
     public string readableName = "Normal Branch";
     public GameObject knot;
@@ -39,6 +41,9 @@ public class BranchBehavior : MonoBehaviour {
     public virtual void OnTriggerEnter (Collider collider) {
 
         if (collider.gameObject.tag.Equals("Player")) {
+
+            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+            _source.PlayOneShot(rustleSound, _volume);
 
             transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
