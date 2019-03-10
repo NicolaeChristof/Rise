@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 293.64587
+  m_PathPosition: 294.31152
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -2856,7 +2856,7 @@ Transform:
   - {fileID: 330593639}
   - {fileID: 2027915657}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &296987890
 PrefabInstance:
@@ -5762,8 +5762,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.22215869, y: -0.5740227, z: 0.16419522, w: 0.7708329}
-  m_LocalPosition: {x: 94.14637, y: 26.770771, z: 53.05755}
+  m_LocalRotation: {x: 0.16533215, y: -0.7582721, z: 0.20940356, w: 0.59484357}
+  m_LocalPosition: {x: 95.17372, y: 26.25967, z: 70.527374}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -9957,7 +9957,7 @@ MonoBehaviour:
   playerModel: {fileID: 1156701056}
   squirrelCamera: {fileID: 534669904}
   treeCamera: {fileID: 1237406273}
-  jumpSound: {fileID: 8300000, guid: f27d0042c765d464ba10edb1a48bbff3, type: 3}
+  jumpSound: {fileID: 8300000, guid: 65afae3c30ff2fd44a6de00bf75ac9ef, type: 3}
   treeSlider: {fileID: 31388210}
   speed: 6
   jumpSpeed: 10
@@ -10467,7 +10467,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.22215869, y: -0.5740227, z: 0.16419522, w: 0.7708329}
+  m_LocalRotation: {x: 0.16533215, y: -0.7582721, z: 0.20940356, w: 0.59484357}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11801,7 +11801,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1476618799
 GameObject:
