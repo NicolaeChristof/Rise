@@ -253,6 +253,8 @@ public class PlayerController : RiseBehavior {
 
         _playerStunned = true;
 
+        _numJumps = maxJumps;
+
         yield return new WaitForSeconds(stunTime);
 
         _playerStunned = false;
