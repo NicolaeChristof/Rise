@@ -239,7 +239,7 @@ public class PlayerController : RiseBehavior {
 
         _externalForce += force;
 
-        Debug.Log(_externalForce);
+        // Debug.Log(_externalForce);
 
     }
 

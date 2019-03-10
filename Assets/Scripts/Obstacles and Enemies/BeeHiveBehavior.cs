@@ -44,12 +44,52 @@ public class BeeHiveBehavior : MonoBehaviour {
             _distance = _heading.magnitude;
             _direction = _heading / _distance;
 
+            _direction *= pushForce;
+
+            // Clamp x push
+            if (_direction.x > 0.0f) {
+
+                if (_direction.x > 10.0f) {
+
+                    _direction.x = 10.0f;
+
+                } else if (_direction.x < 4.0f) {
+
+                    _direction.x = 4.0f;
+
+                }
+
+            } else {
+
+                if (_direction.x < -10.0f) {
+
+                    _direction.x = -10.0f;
+
+                } else if (_direction.x > -4.0f) {
+
+                    _direction.x = -4.0f;
+
+                }
+
+            }
+
+            // Clamp y push
+            if (_direction.y > 4.0f) {
+
+                _direction.y = 4.0f;
+
+            } else if (_direction.y < -4.0f) {
+
+                _direction.y = -4.0f;
+
+            }
+
             hive.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
             collider.gameObject.GetComponent<PlayerController>().stunPlayer(0.25f);
 
-            collider.gameObject.GetComponent<PlayerController>().addExternalForce(new Vector3(_direction.x * pushForce, _direction.y * pushForce, 0.0f));
+            collider.gameObject.GetComponent<PlayerController>().addExternalForce(new Vector3(_direction.x, _direction.y, 0.0f));
 
         }
 
