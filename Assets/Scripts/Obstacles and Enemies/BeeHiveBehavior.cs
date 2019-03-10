@@ -47,7 +47,7 @@ public class BeeHiveBehavior : MonoBehaviour {
             hive.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
-            collider.gameObject.GetComponent<PlayerController>().stunPlayer();
+            collider.gameObject.GetComponent<PlayerController>().stunPlayer(0.25f);
 
             collider.gameObject.GetComponent<PlayerController>().addExternalForce(new Vector3(_direction.x * pushForce, _direction.y * pushForce, 0.0f));
 

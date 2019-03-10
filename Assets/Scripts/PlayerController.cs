@@ -32,9 +32,6 @@ public class PlayerController : RiseBehavior {
     [Range(0, 2)]
     public int maxJumps;
 
-    [Range(0.0f, 5.0f)]
-    public float stunTime;
-
     // The height of a real-life squirrel
     public float realSquirrelHeight;
 
@@ -242,17 +239,17 @@ public class PlayerController : RiseBehavior {
 
         _externalForce += force;
 
-        // Debug.Log(_externalForce);
+        Debug.Log(_externalForce);
 
     }
 
-    public void stunPlayer () {
+    public void stunPlayer (float stunTime) {
 
-        StartCoroutine(stun());
+        StartCoroutine(stun(stunTime));
 
     }
 
-    private IEnumerator stun () {
+    private IEnumerator stun (float stunTime) {
 
         _playerStunned = true;
 
