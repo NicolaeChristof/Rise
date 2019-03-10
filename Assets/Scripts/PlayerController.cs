@@ -182,6 +182,10 @@ public class PlayerController : RiseBehavior {
 
         } else {
 
+            _source.Stop();
+
+            _walkSoundPlaying = false;
+
             // Drop player if they swapped to tree mode
             _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
 
