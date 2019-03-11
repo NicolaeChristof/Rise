@@ -8,8 +8,12 @@ public class BeeHiveBehavior : MonoBehaviour {
     // Public References
     public GameObject hive;
 
+    public GameObject referencePoint;
+
     // Public Fields
     public float pushForce;
+
+    // Private References
 
     // Private Fields
     private Vector3 _originalScale;
@@ -40,9 +44,11 @@ public class BeeHiveBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            _heading = collider.gameObject.transform.position - hive.transform.position;
+            _heading = collider.gameObject.transform.position - referencePoint.transform.position;
             _distance = _heading.magnitude;
             _direction = _heading / _distance;
+
+            _direction.z = 0.0f;
 
             _direction *= pushForce;
 
@@ -84,12 +90,14 @@ public class BeeHiveBehavior : MonoBehaviour {
 
             }
 
+            Debug.Log(_direction);
+
             hive.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
             collider.gameObject.GetComponent<PlayerController>().stunPlayer(0.25f);
 
-            collider.gameObject.GetComponent<PlayerController>().addExternalForce(new Vector3(_direction.x, _direction.y, 0.0f));
+            collider.gameObject.GetComponent<PlayerController>().addExternalForce(_direction);
 
         }
 
