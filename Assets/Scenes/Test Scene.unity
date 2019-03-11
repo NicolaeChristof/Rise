@@ -2634,7 +2634,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 362.26282
+  m_PathPosition: 366.3568
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5775,8 +5775,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.017579012, y: 0.38647267, z: 0.007462579, w: 0.9221031}
-  m_LocalPosition: {x: 40.656418, y: 4.908599, z: 41.018467}
+  m_LocalRotation: {x: -0.018722083, y: -0.861267, z: -0.031556666, w: 0.50682634}
+  m_LocalPosition: {x: 86.296, y: 4.079828, z: 75.717445}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -9929,8 +9929,10 @@ MonoBehaviour:
   gravity: 20
   maxPlayerDistance: 15
   maxJumps: 1
-  accelerationSpeed: 0.1
-  deaccelerationSpeed: 0.2
+  accelerationSpeed: 0.25
+  deaccelerationSpeed: 0.3
+  useAcceleration: 1
+  useDeacceleration: 1
   realSquirrelHeight: 1.2
   heightText: {fileID: 1260038881}
   _heightOffset: -20
@@ -10434,7 +10436,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.017579012, y: 0.38647267, z: 0.007462579, w: 0.9221031}
+  m_LocalRotation: {x: -0.018722083, y: -0.861267, z: -0.031556666, w: 0.50682634}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

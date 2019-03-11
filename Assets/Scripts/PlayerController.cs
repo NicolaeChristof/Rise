@@ -38,6 +38,10 @@ public class PlayerController : RiseBehavior {
     [Range(0.001f, 1.0f)]
     public float deaccelerationSpeed;
 
+    public bool useAcceleration;
+
+    public bool useDeacceleration;
+
     // The height of a real-life squirrel
     public float realSquirrelHeight;
 
@@ -85,6 +89,8 @@ public class PlayerController : RiseBehavior {
 
     private float _maxWalkSpeed = 1.0f;
 
+    private string _orientation = "center";
+
     // Start is called before the first frame update
     void Start() {
         
@@ -115,13 +121,27 @@ public class PlayerController : RiseBehavior {
                 // Accelerate up to full speed
                 if (_moveDirection.x > 0.0f) {
 
+                    if (_orientation == "left") {
+
+                        _walkSpeed = 0.0f;
+
+                    }
+
                     if (_walkSpeed < _maxWalkSpeed) {
 
                         _walkSpeed += accelerationSpeed;
 
                     }
 
+                    _orientation = "right";
+
                 } else if (_moveDirection.x < 0.0f) {
+
+                    if (_orientation == "right") {
+
+                        _walkSpeed = 0.0f;
+
+                    }
 
                     if (_walkSpeed > -_maxWalkSpeed) {
 
@@ -129,27 +149,43 @@ public class PlayerController : RiseBehavior {
 
                     }
 
+                    _orientation = "left";
+
                 } else {
 
-                    if (_walkSpeed > 0.1f) {
+                    if (useDeacceleration) {
 
-                        _walkSpeed -= deaccelerationSpeed;
+                        if (_walkSpeed > 0.15f) {
 
-                    } else if (_walkSpeed < -0.1f) {
+                            _walkSpeed -= deaccelerationSpeed;
 
-                        _walkSpeed += deaccelerationSpeed;
+                        } else if (_walkSpeed < -0.15f) {
+
+                            _walkSpeed += deaccelerationSpeed;
+
+                        } else {
+
+                            _walkSpeed = 0.0f;
+
+                            _orientation = "center";
+
+                        }
 
                     } else {
 
                         _walkSpeed = 0.0f;
 
+                        _orientation = "center";
+
                     }
 
                 }
 
-                _moveDirection.x = _walkSpeed;
+                if (useAcceleration) {
 
-                Debug.Log(_walkSpeed);
+                    _moveDirection.x = _walkSpeed;
+
+                }
 
             } else {
 
