@@ -159,14 +159,14 @@ public class BirdBehavior : RiseBehavior {
             // Face bird model to the left
             _birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
 
-            _trigger[1].center = new Vector3(-0.6f, 0.0f, 0.0f);
+            _trigger[1].center = new Vector3(-0.665f, 0.0f, 0.0f);
 
         } else if (speed < 0) {
 
             // Face bird model to the right
             _birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
-            _trigger[1].center = new Vector3(0.6f, 0.0f, 0.0f);
+            _trigger[1].center = new Vector3(0.665f, 0.0f, 0.0f);
 
         }
 
