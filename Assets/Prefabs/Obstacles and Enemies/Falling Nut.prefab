@@ -50,7 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   self: {fileID: 3551056811072294866}
   fallingSound: {fileID: 8300000, guid: 3799a7f3cb3718b41b351d56ee997ab5, type: 3}
-  thunkSound: {fileID: 8300000, guid: 25bcf4b28e6c6f9469aaaa6833cfffd9, type: 3}
+  thunkSound: {fileID: 8300000, guid: 4798e9e159fed474c9d01567932bd935, type: 3}
 --- !u!54 &4162224168858243211
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -91,7 +91,7 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 8
+  m_Radius: 6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &2624857904829256410
 AudioSource:
@@ -114,7 +114,7 @@ AudioSource:
   Priority: 128
   DopplerLevel: 1
   MinDistance: 2
-  MaxDistance: 8
+  MaxDistance: 6
   Pan2D: 0
   rolloffMode: 2
   BypassEffects: 0

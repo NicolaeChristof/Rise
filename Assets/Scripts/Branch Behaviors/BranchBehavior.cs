@@ -6,9 +6,11 @@ using DG.Tweening;
 public class BranchBehavior : MonoBehaviour {
 
     // Public References
+    public GameObject knot;
+
     public AudioClip breakSound;
 
-    public GameObject knot;
+    public AudioClip rustleSound;
 
     // Public Fields
     public string readableName = "Normal Branch";
@@ -46,6 +48,11 @@ public class BranchBehavior : MonoBehaviour {
         if (collider.gameObject.tag.Equals("Player")) {
 
             _branchModel.transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
+
+            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+            _source.PlayOneShot(rustleSound, _volume);
+
+            transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
 
         }
