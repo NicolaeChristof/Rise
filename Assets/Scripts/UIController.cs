@@ -66,7 +66,7 @@ public class UIController : RiseBehavior {
     private bool _pressedPause = false;
 
     //--------Sap UI---------
-    public Image[] sapBranchBars = new Image[4];
+    public GameObject[] sapBranchBars = new GameObject[4];
 
     private List<GameObject>[] _branchLeaves;
     private int _currentBranchSelected;
@@ -320,8 +320,8 @@ public class UIController : RiseBehavior {
     private List<GameObject> SetBranchLeaves(int branch) {
         List<GameObject> leaves = new List<GameObject>();
 
-        for (int j = 0; j < sapBranchBars[branch].transform.childCount; j++) {
-            leaves.Add(sapBranchBars[branch].transform.GetChild(j).gameObject);
+        for (int j = 0; j < sapBranchBars[branch].transform.GetChild(0).childCount; j++) {
+            leaves.Add(sapBranchBars[branch].transform.GetChild(0).GetChild(j).gameObject);
         }
 
         leaves.Reverse();
