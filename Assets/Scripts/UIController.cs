@@ -13,14 +13,20 @@ public class UIController : RiseBehavior {
     public GameObject mainMenuObject;
     public GameObject pauseMenuObject;
     public GameObject optionsMenuObject;
+    private List<GameObject> menuObjects;
 
-    public PostProcessProfile postProcessProfile;
+    // A pointer to the currently selected menu
+    private static int currentMenu = 0;
 
+    // The Options within each Menu GameObject
     public List<List<GameObject>> listsOfOptionLists;
     private List<GameObject> _optionList;
 
-    private List<GameObject> menuObjects;
-    private static int currentMenu = 0;
+    // The post-processing profile that's currently being used
+    public PostProcessProfile postProcessProfile;
+
+    // The tracking camera on the main menu
+    public Camera _trackCam;
 
     // Select Actions are the functions that get called
     // when you hit a menu option. You pass in a bool
@@ -30,25 +36,41 @@ public class UIController : RiseBehavior {
     private delegate void _selectAction(bool isTrue);
     private _selectAction _currentSelectAction;
 
+    // A list of all the functions that are called once the player
+    // selects a button
     private List<List<_selectAction>> _listsOfSelectActions;
     private List<_selectAction> _selectActionsList;
 
+    // A pointer to the current button selected
     private int _buttonSelected = 0;
-    private bool _justSelected = false;
 
+    // A pointer that _buttonSelected will point to once
+    // calculations have been made
     private int _buttonToSelect = 0;
 
+    // A boolean that ensures that holding the joystick up/down
+    // doesn't rapidly select options
+    private bool _justSelected = false;
+
+    // Depth of field settings for when a menu is pulled up
     public float pauseDOF;
     private DepthOfField depthOfField;
     private float defaultDOF = 2.94f;
 
-    public Camera _trackCam;
-
+    // Unsure if still using this
     private bool justPaused = false;
 
+    // Still unsure if using these
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
     private bool _pressedPause = false;
+
+    //--------Sap UI---------
+    public Image[] sapBranchBars = new Image[4];
+
+    private List<GameObject>[] _branchLeaves;
+    private int _currentBranchSelected;
+    //-----------------------
 
     private void Start() {
         // Setting menuObjects to store all the menus in the game
@@ -82,7 +104,14 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
+        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
+
+        for(int k=0; k<sapBranchBars.Length; k++) {
+            _branchLeaves[k] = SetBranchLeaves(k);
+        }
+
         TreeController.sapUpdated += UpdateSapBar;
+        TreeController.branchUpdated += UpdateBranchSelected;
     }
 
 
@@ -179,6 +208,9 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
+        for(int i = 0; i < sapBranchBars.Length; i++) {
+            sapBranchBars[i].gameObject.SetActive(false);
+        }
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
     }
@@ -187,12 +219,14 @@ public class UIController : RiseBehavior {
         GameModel.singlePlayer = true;
         OpenMenu(1, false);
         GameModel.paused = false;
+        UpdateBranchSelected(_currentBranchSelected);
     }
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
         OpenMenu(1, false);
         GameModel.paused = false;
+        UpdateBranchSelected(_currentBranchSelected);
     }
 
     public void OptionsEvent(bool isTrue) {
@@ -260,6 +294,38 @@ public class UIController : RiseBehavior {
     }
 
     public void UpdateSapBar(float sapValue, int branchType) {
-        Debug.Log(sapValue);
+        int i = 0;
+
+        foreach(GameObject leaf in _branchLeaves[branchType]) {
+            if(i < sapValue) {
+                leaf.SetActive(true);
+            } else {
+                leaf.SetActive(false);
+            }
+            i++;
+        }
+    }
+
+    public void UpdateBranchSelected(int branchSelected) {
+        if (currentMenu != 0) {
+            sapBranchBars[_currentBranchSelected].gameObject.SetActive(false);
+            sapBranchBars[branchSelected].gameObject.SetActive(true);
+            _currentBranchSelected = branchSelected;
+        }
+    }
+
+    /// <summary>
+    /// Assigns a list of leaf Game Objects to each UI branch.
+    /// </summary>
+    private List<GameObject> SetBranchLeaves(int branch) {
+        List<GameObject> leaves = new List<GameObject>();
+
+        for (int j = 0; j < sapBranchBars[branch].transform.childCount; j++) {
+            leaves.Add(sapBranchBars[branch].transform.GetChild(j).gameObject);
+        }
+
+        leaves.Reverse();
+
+        return leaves;
     }
 }
