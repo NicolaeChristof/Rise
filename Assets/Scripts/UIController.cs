@@ -44,8 +44,6 @@ public class UIController : RiseBehavior {
 
     public Camera _trackCam;
 
-    private bool justPaused = false;
-
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
     private bool _pressedPause = false;

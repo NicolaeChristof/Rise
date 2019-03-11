@@ -77,6 +77,26 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.6, y: 0.3, z: 6.5}
   m_Center: {x: 0, y: 0.95, z: 2}
+<<<<<<< HEAD
+=======
+--- !u!114 &1172142945960087680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949a632686ecf441cb3994185b394677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakSound: {fileID: 8300000, guid: 190940e6c6b90e440a7fb55da93d33dd, type: 3}
+  rustleSound: {fileID: 8300000, guid: 2c6265f966eef2d4ea6b4bef801326a0, type: 3}
+  readableName: Breaky Branch
+  knot: {fileID: 7787768055099848696, guid: a0c3b6db0d03344cabd4cbe73caae481, type: 3}
+  maxLandings: 3
+>>>>>>> 38eb56f879835af62604c759ac9a7930b33de200
 --- !u!82 &7123377194617786912
 AudioSource:
   m_ObjectHideFlags: 0
@@ -186,6 +206,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   breakSound: {fileID: 0}
+  rustleSound: {fileID: 0}
   readableName: Normal Branch
   knot: {fileID: 0}
   maxLandings: 3

@@ -6,9 +6,11 @@ using DG.Tweening;
 public class BranchBehavior : MonoBehaviour {
 
     // Public References
+    public GameObject knot;
+
     public AudioClip breakSound;
 
-    public GameObject knot;
+    public AudioClip rustleSound;
 
     // Public Fields
     public string readableName = "Normal Branch";
