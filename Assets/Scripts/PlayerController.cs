@@ -75,6 +75,10 @@ public class PlayerController : RiseBehavior {
 
     private bool _playerStunned;
 
+    private float _walkSpeed;
+
+    private float _maxWalkSpeed;
+
     // Start is called before the first frame update
     void Start() {
         
@@ -103,6 +107,8 @@ public class PlayerController : RiseBehavior {
             if (!_playerStunned) {
 
                 _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
+
+                Debug.Log(_moveDirection);
 
             } else {
 
@@ -192,7 +198,11 @@ public class PlayerController : RiseBehavior {
         }
 
         // Apply gravity
-        _moveDirection.y -= gravity * Time.deltaTime;
+        if (!_controller.isGrounded) {
+
+            _moveDirection.y -= gravity * Time.deltaTime;
+
+        }
 
         // Apply external force
         if (_externalForce != Vector3.zero) {
