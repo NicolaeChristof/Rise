@@ -32,6 +32,12 @@ public class PlayerController : RiseBehavior {
     [Range(0, 2)]
     public int maxJumps;
 
+    [Range(0.001f, 1.0f)]
+    public float accelerationSpeed;
+
+    [Range(0.001f, 1.0f)]
+    public float deaccelerationSpeed;
+
     // The height of a real-life squirrel
     public float realSquirrelHeight;
 
@@ -67,17 +73,17 @@ public class PlayerController : RiseBehavior {
 
     private float _treeHeight;
 
-    private float _numJumps;
+    private float _numJumps = 0;
 
     private Vector3 _originalScale;
 
     private Vector3 _newScale;
 
-    private bool _playerStunned;
+    private bool _playerStunned = false;
 
-    private float _walkSpeed;
+    private float _walkSpeed = 0.0f;
 
-    private float _maxWalkSpeed;
+    private float _maxWalkSpeed = 1.0f;
 
     // Start is called before the first frame update
     void Start() {
@@ -89,8 +95,6 @@ public class PlayerController : RiseBehavior {
         _realToVirtualRatio = realSquirrelHeight / _controller.height;
 
         _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
-
-        _numJumps = 0;
 
         _originalScale = transform.localScale;
 
@@ -108,7 +112,44 @@ public class PlayerController : RiseBehavior {
 
                 _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
 
-                Debug.Log(_moveDirection);
+                // Accelerate up to full speed
+                if (_moveDirection.x > 0.0f) {
+
+                    if (_walkSpeed < _maxWalkSpeed) {
+
+                        _walkSpeed += accelerationSpeed;
+
+                    }
+
+                } else if (_moveDirection.x < 0.0f) {
+
+                    if (_walkSpeed > -_maxWalkSpeed) {
+
+                        _walkSpeed -= accelerationSpeed;
+
+                    }
+
+                } else {
+
+                    if (_walkSpeed > 0.1f) {
+
+                        _walkSpeed -= deaccelerationSpeed;
+
+                    } else if (_walkSpeed < -0.1f) {
+
+                        _walkSpeed += deaccelerationSpeed;
+
+                    } else {
+
+                        _walkSpeed = 0.0f;
+
+                    }
+
+                }
+
+                _moveDirection.x = _walkSpeed;
+
+                Debug.Log(_walkSpeed);
 
             } else {
 
