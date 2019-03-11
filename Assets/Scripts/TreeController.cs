@@ -16,7 +16,6 @@ public class TreeController : RiseBehavior {
 
     public GameObject player;
     public AudioClip growSound;
-    public Image[] sapBranchBars = new Image[4];
 
     // Public Fields
     public float[] maxSap;
@@ -53,9 +52,6 @@ public class TreeController : RiseBehavior {
     private const float EPSILON = 0.01F;
     private const float DISTANCE = 2.0F;
 
-    private List<GameObject>[] _branchLeaves;
-
-
     public delegate void SapChangeEvent(float sapValue, int branchType);
     public static event SapChangeEvent sapUpdated;
 
@@ -82,27 +78,11 @@ public class TreeController : RiseBehavior {
 
         maxSap = new float[] { 8f, 10f, 8f, 9f };
 
-        /*
-        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
-
-        for (int i = 0; i < sapBranchBars.Length; i++) {
-            _branchLeaves[i] = SetBranchLeaves(i);
-        }*/
-
-        /*
-        Select(0);
-        */
-
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
-            /*if (_selectedBranch != i) {
-                sapBranchBars[i].gameObject.SetActive(false);
-            }*/
         }
 
         branchUpdated(0);
-
-        //Select(0);
 
         UpdateReticle();
     }
@@ -325,32 +305,19 @@ public class TreeController : RiseBehavior {
     public void UpdateSap(float passedValue, int branchType) {
         _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
 
-        /*
-        int i = 0;
-        foreach (GameObject leaf in _branchLeaves[branchType]) {
-            if (i < _currentSap[branchType]) {
-                leaf.SetActive(true);
-            } else {
-                leaf.SetActive(false);
-            }
-            i++;
-        }*/
-
         if (sapUpdated != null) {
             sapUpdated(_currentSap[branchType], branchType);
         }
     }
 
+
+    // This can probably be deleted now
     /// <summary>
     /// Handles changes when a branch is selected.
     /// </summary>
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
-        sapBranchBars[_selectedBranch].gameObject.SetActive(false);
         _selectedBranch = passedIndex;
-
-        sapBranchBars[_selectedBranch].gameObject.SetActive(true);
-		// _uitext.text = _branches[_selectedBranch].GetComponent<BranchBehavior>().GetReadableName();
 	}
 
 	/// <summary>
@@ -408,20 +375,5 @@ public class TreeController : RiseBehavior {
     /// <param name="passedValue">Passed value.</param>
     private bool CheckEpsilon(float passedValue) {
         return (System.Math.Abs(passedValue) > EPSILON);
-    }
-
-    /// <summary>
-    /// Assigns a list of leaf Game Objects to each UI branch.
-    /// </summary>
-    private List<GameObject> SetBranchLeaves(int branch) {
-        List<GameObject> leaves = new List<GameObject>();
-
-        for(int j = 0; j < sapBranchBars[branch].transform.childCount; j++) {
-            leaves.Add(sapBranchBars[branch].transform.GetChild(j).gameObject);
-        }
-
-        leaves.Reverse();
-
-        return leaves;
     }
 }
