@@ -48,11 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f181e8b51bc99439b04562c0710300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdTarget: {fileID: 0}
-  birdModel: {fileID: 0}
-  player: {fileID: 0}
   speed: 2.5
   maxDistance: 5
+  pushForce: 10
 --- !u!54 &2330307564692175989
 Rigidbody:
   m_ObjectHideFlags: 0

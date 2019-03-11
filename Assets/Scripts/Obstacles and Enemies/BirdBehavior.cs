@@ -13,6 +13,8 @@ public class BirdBehavior : RiseBehavior {
     [Range(0.0f, 7.0f)]
     public float maxDistance;
 
+    public float pushForce;
+
     // Private References
     private PlayerController _playerController;
 
@@ -30,6 +32,8 @@ public class BirdBehavior : RiseBehavior {
     private Vector3 _heading;
 
     private float _distance;
+
+    private Vector3 _pushDirection;
 
     // Start is called before the first frame update
     void Start() {
@@ -56,7 +60,7 @@ public class BirdBehavior : RiseBehavior {
     public override void UpdateTick() {
 
         // Move the bird
-        _heading = this.transform.position - _target;
+        _heading = transform.position - _target;
 
         _distance = _heading.magnitude;
 
@@ -83,11 +87,23 @@ public class BirdBehavior : RiseBehavior {
 
     void OnTriggerEnter (Collider collider) {
 
-        if (collider.gameObject.tag == "Squirrel") {
+        if (collider.gameObject.tag.Equals("Player")) {
 
-            Debug.Log("Player Detected! (Bird)");
+            _playerController.stunPlayer(0.25f);
 
-            // Push the player
+            if (speed > 0) {
+
+                _pushDirection = new Vector3(-pushForce, 0.0f, 0.0f);
+
+            } else {
+
+                _pushDirection = new Vector3(pushForce, 0.0f, 0.0f);
+
+            }
+
+            _playerController.addExternalForce(_pushDirection);
+
+            invertDirection();
 
         }
 
@@ -107,7 +123,7 @@ public class BirdBehavior : RiseBehavior {
 
     void OnCollisionEnter (Collision collision) {
 
-        if (collision.gameObject.tag != "Tree" && collision.gameObject.tag != "Squirrel") {
+        if (!(GetComponent<Collider>().gameObject.tag.Equals("Tree") || collision.gameObject.tag.Equals("Player"))) {
 
             invertDirection();
 
