@@ -5,9 +5,17 @@ using DG.Tweening;
 
 public class BranchBehavior : MonoBehaviour {
 
+    // Public References
+    public AudioClip breakSound;
+
+    public AudioClip rustleSound;
+
     // Public Fields
     public string readableName = "Normal Branch";
     public GameObject knot;
+
+    // Private References
+    private AudioSource _source;
 
     // Private fields
     private Vector3 _originalRotation;
@@ -15,6 +23,8 @@ public class BranchBehavior : MonoBehaviour {
     private Vector3 _newRotation;
 
     void Start() {
+
+        _source = GetComponent<AudioSource>();
 
         _originalRotation = transform.localEulerAngles;
 
@@ -31,6 +41,9 @@ public class BranchBehavior : MonoBehaviour {
     public virtual void OnTriggerEnter (Collider collider) {
 
         if (collider.gameObject.tag.Equals("Player")) {
+
+            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+            _source.PlayOneShot(rustleSound, _volume);
 
             transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
@@ -57,7 +70,9 @@ public class BranchBehavior : MonoBehaviour {
     }
 
     public virtual void OnBreak () {
-        // TODO: Play break sound
+        float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+        _source.PlayOneShot(breakSound, _volume);
+
         Instantiate(knot, transform.position, transform.rotation);
     }
 

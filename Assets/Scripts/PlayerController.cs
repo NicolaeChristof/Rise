@@ -16,8 +16,6 @@ public class PlayerController : RiseBehavior {
 
     public AudioClip jumpSound;
 
-    public AudioClip walkSound;
-
     public Slider treeSlider;
 
     // Public Fields
@@ -56,7 +54,7 @@ public class PlayerController : RiseBehavior {
 
     private float _volume;
 
-    private bool _moving = false;
+    private bool _walkSoundPlaying = false;
 
     private float _realToVirtualRatio;
 
@@ -105,13 +103,19 @@ public class PlayerController : RiseBehavior {
             _moveDirection.z = 1.0f;
 
             // Walking sound
-            if (_moveDirection.x != 0 && !_moving) {
+            if (_moveDirection.x != 0 && !_walkSoundPlaying && _controller.isGrounded) {
 
-                _moving = true;
+                _walkSoundPlaying = true;
 
-                _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                // _source.Play();
 
-                _source.PlayOneShot(walkSound, _volume);
+            }
+
+            if (_walkSoundPlaying && !_controller.isGrounded) {
+
+                _source.Stop();
+
+                _walkSoundPlaying = false;
 
             }
 
@@ -131,9 +135,9 @@ public class PlayerController : RiseBehavior {
                 // Face player model outwards towards camera
                 playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
 
-                // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+                _source.Stop();
 
-                _moving = false;
+                _walkSoundPlaying = false;
 
             }
 
