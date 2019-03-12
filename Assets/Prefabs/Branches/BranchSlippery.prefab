@@ -9,9 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6837279178405670046}
+  - component: {fileID: 1479208293667466247}
   - component: {fileID: 6463062467907235239}
   - component: {fileID: 3320312261608276469}
-  - component: {fileID: 1479208293667466247}
   - component: {fileID: 4418526288599109404}
   m_Layer: 0
   m_Name: BranchSlippery
@@ -35,6 +35,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1479208293667466247
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4352697463616401196}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0798fbfd3e340488db4224ab5c487cfc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  breakSound: {fileID: 8300000, guid: 8be8b4794e4f42a4da8690fc2edb57f1, type: 3}
+  readableName: Slippery Branch
+  knot: {fileID: 7787768055099848696, guid: a0c3b6db0d03344cabd4cbe73caae481, type: 3}
+  slipForce: 12
 --- !u!65 &6463062467907235239
 BoxCollider:
   m_ObjectHideFlags: 0

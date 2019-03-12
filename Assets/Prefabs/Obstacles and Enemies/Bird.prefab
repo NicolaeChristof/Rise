@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2330307564692175991}
   - component: {fileID: 2330307564692175989}
   - component: {fileID: 2330307564692175986}
+  - component: {fileID: 4193293151491189171}
   - component: {fileID: 27369330565720178}
   m_Layer: 0
   m_Name: Bird
@@ -27,8 +28,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2330307564692175993}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 67.99, y: 5.25, z: 57.57}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 7988453567747017293}
@@ -47,11 +48,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05f181e8b51bc99439b04562c0710300, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  birdTarget: {fileID: 0}
-  birdModel: {fileID: 0}
-  player: {fileID: 0}
   speed: 2.5
   maxDistance: 5
+  pushForce: 10
 --- !u!54 &2330307564692175989
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -81,6 +80,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1.2}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &4193293151491189171
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2330307564692175993}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 0.8, z: 1}
+  m_Center: {x: -0.665, y: 0, z: 0}
 --- !u!82 &27369330565720178
 AudioSource:
   m_ObjectHideFlags: 0
@@ -206,7 +218,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 834727265af2d784daa7b1c4a332eb66, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 1
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 834727265af2d784daa7b1c4a332eb66, type: 3}
       propertyPath: m_LocalRotation.z
@@ -214,7 +226,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 834727265af2d784daa7b1c4a332eb66, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.7071068
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 834727265af2d784daa7b1c4a332eb66, type: 3}
       propertyPath: m_RootOrder
@@ -226,7 +238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 834727265af2d784daa7b1c4a332eb66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 180
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 834727265af2d784daa7b1c4a332eb66, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

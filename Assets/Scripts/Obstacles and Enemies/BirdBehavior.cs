@@ -5,11 +5,6 @@ using UnityEngine;
 public class BirdBehavior : RiseBehavior {
 
     // Public References
-    public GameObject birdTarget;
-
-    public GameObject birdModel;
-
-    public GameObject player;
 
     // Public Fields
     [Range(-5.0f, 5.0f)]
@@ -18,8 +13,18 @@ public class BirdBehavior : RiseBehavior {
     [Range(0.0f, 7.0f)]
     public float maxDistance;
 
+    public float pushForce;
+
     // Private References
     private PlayerController _playerController;
+
+    private BoxCollider[] _trigger;
+
+    private GameObject _player;
+
+    private GameObject _tree;
+
+    private GameObject _birdModel;
 
     // Private Fields
     private Vector3 _target;
@@ -28,35 +33,34 @@ public class BirdBehavior : RiseBehavior {
 
     private float _distance;
 
+    private Vector3 _pushDirection;
+
     // Start is called before the first frame update
     void Start() {
 
-        _playerController = player.GetComponent<PlayerController>();
+        _player = GameObject.FindGameObjectWithTag("Player");
 
-        _target = new Vector3(birdTarget.transform.position.x,
+        _tree = GameObject.FindGameObjectWithTag("Tree");
+
+        _birdModel = gameObject.transform.GetChild(0).gameObject;
+
+        _playerController = _player.GetComponent<PlayerController>();
+
+        _trigger = GetComponents<BoxCollider>();
+
+        _target = new Vector3(_tree.transform.position.x,
                               this.transform.position.y,
-                              birdTarget.transform.position.z);
+                              _tree.transform.position.z);
+
+        orientObject();
 
     }
 
     // Update is called once per frame
     public override void UpdateTick() {
 
-        // Orient bird model
-        if (speed > 0) {
-
-            // Face bird model to the left
-            birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
-
-        } else if (speed < 0) {
-
-            // Face bird model to the right
-            birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
-
-        }
-
         // Move the bird
-        _heading = this.transform.position - _target;
+        _heading = transform.position - _target;
 
         _distance = _heading.magnitude;
 
@@ -81,19 +85,88 @@ public class BirdBehavior : RiseBehavior {
 
     }
 
-    void OnCollisionEnter (Collision collision) {
+    void OnTriggerEnter (Collider collider) {
 
-        if (collision.gameObject.name != "Tree") {
+        if (collider.gameObject.tag.Equals("Player")) {
 
-            if (collision.gameObject.name == "Squirrel") {
+            _playerController.stunPlayer(0.25f);
 
-                Debug.Log("Player Detected! (Bird)");
+            if (speed > 0) {
 
-                // Push the player
+                _pushDirection = new Vector3(-pushForce, 0.0f, 0.0f);
+
+            } else {
+
+                _pushDirection = new Vector3(pushForce, 0.0f, 0.0f);
 
             }
 
-            speed = -speed;
+            _playerController.addExternalForce(_pushDirection);
+
+            invertDirection();
+
+        }
+
+    }
+
+    void OnTriggerStay (Collider collider) {
+
+
+
+    }
+
+    void OnTriggerExit (Collider collider) {
+
+
+
+    }
+
+    void OnCollisionEnter (Collision collision) {
+
+        if (!(GetComponent<Collider>().gameObject.tag.Equals("Tree") || collision.gameObject.tag.Equals("Player"))) {
+
+            invertDirection();
+
+        }
+
+    }
+
+    void OnCollisionStay (Collision collision) {
+
+
+
+    }
+
+    void OnCollisionExit (Collision collision) {
+
+
+
+    }
+
+    private void invertDirection () {
+
+        speed = -speed;
+
+        orientObject();
+
+    }
+
+    private void orientObject () {
+
+        // Orient bird model
+        if (speed > 0) {
+
+            // Face bird model to the left
+            _birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
+
+            _trigger[1].center = new Vector3(-0.665f, 0.0f, 0.0f);
+
+        } else if (speed < 0) {
+
+            // Face bird model to the right
+            _birdModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
+
+            _trigger[1].center = new Vector3(0.665f, 0.0f, 0.0f);
 
         }
 

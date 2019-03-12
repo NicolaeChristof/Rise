@@ -6856,7 +6856,7 @@ PrefabInstance:
     - target: {fileID: 6462225555944426797, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 6462225555944426797, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
@@ -9902,9 +9902,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1273465453}
-  - component: {fileID: 1273465452}
   - component: {fileID: 1273465454}
   - component: {fileID: 1273465455}
+  - component: {fileID: 1273465452}
   - component: {fileID: 1273465459}
   - component: {fileID: 1273465456}
   - component: {fileID: 1273465457}
@@ -9973,6 +9973,10 @@ MonoBehaviour:
   gravity: 20
   maxPlayerDistance: 15
   maxJumps: 1
+  accelerationSpeed: 0.25
+  deaccelerationSpeed: 0.3
+  useAcceleration: 1
+  useDeacceleration: 1
   realSquirrelHeight: 1.2
   heightText: {fileID: 1260038881}
   _heightOffset: 2
@@ -10113,7 +10117,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 1.7563126
+  m_Height: 1.44
   m_Direction: 1
   m_Center: {x: 0, y: 0.00010883808, z: 0}
 --- !u!81 &1273465459
@@ -11810,7 +11814,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1476618799
 GameObject:
@@ -17087,7 +17091,7 @@ PrefabInstance:
     - target: {fileID: 7711375699527254704, guid: 6b2e6ecdab0b87e48be09ae59b308c3d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 14.5
+      value: 18.91
       objectReference: {fileID: 0}
     - target: {fileID: 7711375699527254704, guid: 6b2e6ecdab0b87e48be09ae59b308c3d,
         type: 3}
