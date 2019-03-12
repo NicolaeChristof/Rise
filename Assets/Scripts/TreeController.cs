@@ -76,11 +76,13 @@ public class TreeController : RiseBehavior {
 
         _currentSap = new float[_branches.Length];
 
-        maxSap = new float[] { 8f, 10f, 8f, 9f };
+        maxSap = new float[] { 8f, 8f, 8f, 8f };
 
         for (int i = 0; i < _branches.Length; i++) {
             UpdateSap(startingSap, i);
         }
+
+        Select(0);
 
         if (branchUpdated != null) {
             branchUpdated(0);

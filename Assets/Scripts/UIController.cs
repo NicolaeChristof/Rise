@@ -118,11 +118,11 @@ public class UIController : RiseBehavior {
             _branchLeaves[k] = SetBranchLeaves(k);
         }
 
-        TreeController.sapUpdated += UpdateSapBar;
-        TreeController.branchUpdated += UpdateBranchSelected;
-
         //heightUI = FindObjectOfType<HeightUIInfo>();
         heightUIText.gameObject.SetActive(false);
+
+        TreeController.sapUpdated += UpdateSapBar;
+        TreeController.branchUpdated += UpdateBranchSelected;
     }
 
 
@@ -253,6 +253,9 @@ public class UIController : RiseBehavior {
     }
 
     public void RestartEvent(bool isTrue) {
+        for(int i=0; i<sapBranchBars.Length; i++) {
+            UpdateSapBar(8f, i);
+        }
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
         GameModel.isSquirrel = true;
@@ -317,7 +320,7 @@ public class UIController : RiseBehavior {
         int i = 0;
 
         foreach(GameObject leaf in _branchLeaves[branchType]) {
-            if(i < sapValue) {
+            if (i < sapValue) {
                 leaf.SetActive(true);
             } else {
                 leaf.SetActive(false);
