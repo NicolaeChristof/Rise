@@ -82,7 +82,9 @@ public class TreeController : RiseBehavior {
             UpdateSap(startingSap, i);
         }
 
-        branchUpdated(0);
+        if (branchUpdated != null) {
+            branchUpdated(0);
+        }
 
         UpdateReticle();
     }

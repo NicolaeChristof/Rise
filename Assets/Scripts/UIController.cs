@@ -73,7 +73,7 @@ public class UIController : RiseBehavior {
     //-----------------------
 
     //------Height UI--------
-    private HeightUIInfo heightUI;
+    public HeightUIInfo heightUI;
 
     public Text heightUIText;
 
@@ -121,7 +121,7 @@ public class UIController : RiseBehavior {
         TreeController.sapUpdated += UpdateSapBar;
         TreeController.branchUpdated += UpdateBranchSelected;
 
-        heightUI = FindObjectOfType<HeightUIInfo>();
+        //heightUI = FindObjectOfType<HeightUIInfo>();
         heightUIText.gameObject.SetActive(false);
     }
 
@@ -231,6 +231,7 @@ public class UIController : RiseBehavior {
         }
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
+        heightUISlider.gameObject.SetActive(false);
     }
 
     public void SinglePlayerEvent(bool isTrue) {
@@ -308,6 +309,7 @@ public class UIController : RiseBehavior {
 
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
+            heightUISlider.gameObject.SetActive(true);
         }
     }
 
