@@ -34,9 +34,9 @@ public class PlayerController : RiseBehavior {
     public int maxJumps;
 
     // The height of a real-life squirrel
-    public float realSquirrelHeight;
+    //public float realSquirrelHeight;
 
-    public Text heightText;
+    //public Text heightText;
 
     // Private References
     private CharacterController _controller;
@@ -58,15 +58,15 @@ public class PlayerController : RiseBehavior {
 
     private bool _moving = false;
 
-    private float _realToVirtualRatio;
+    //private float _realToVirtualRatio;
 
-    public float _heightOffset = -20f;
+    //public float _heightOffset = -20f;
 
-    private float _currentHeight;
+    //private float _currentHeight;
 
-    private float _currentHeightActual;
+    //private float _currentHeightActual;
 
-    private float _treeHeight;
+    //private float _treeHeight;
 
     private float _numJumps;
 
@@ -81,9 +81,10 @@ public class PlayerController : RiseBehavior {
 
         _source = GetComponent<AudioSource>();
 
+        /*
         _realToVirtualRatio = realSquirrelHeight / _controller.height;
 
-        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
+        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;*/
 
         _numJumps = 0;
 
@@ -201,13 +202,14 @@ public class PlayerController : RiseBehavior {
         // face the player towards the target
         transform.LookAt(_target);
 
+        /*
         _currentHeight = transform.position.y - _heightOffset;
         _currentHeightActual =  _currentHeight * _realToVirtualRatio;
 
         // https://answers.unity.com/questions/50391/how-to-round-a-float-to-2-dp.html
         heightText.text = "Height: " + _currentHeightActual.ToString("F1") + "m";
 
-        treeSlider.value = _currentHeight / _treeHeight;
+        treeSlider.value = _currentHeight / _treeHeight;*/
 
     }
 

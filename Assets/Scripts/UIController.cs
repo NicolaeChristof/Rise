@@ -72,6 +72,14 @@ public class UIController : RiseBehavior {
     private int _currentBranchSelected;
     //-----------------------
 
+    //------Height UI--------
+    private HeightUIInfo heightUI;
+
+    public Text heightUIText;
+
+    public Slider heightUISlider;
+    //-----------------------
+
     private void Start() {
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject };
@@ -112,6 +120,9 @@ public class UIController : RiseBehavior {
 
         TreeController.sapUpdated += UpdateSapBar;
         TreeController.branchUpdated += UpdateBranchSelected;
+
+        heightUI = FindObjectOfType<HeightUIInfo>();
+        heightUIText.gameObject.SetActive(false);
     }
 
 
@@ -163,6 +174,11 @@ public class UIController : RiseBehavior {
                 _trackCam.depth = -2;
             }
         }
+
+        //---Height UI---
+        heightUIText.text = "Height: " + heightUI.currentHeight.ToString("F1") + "m";
+        heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
+        //---------------
     }
 
     public override void UpdateTick() {
@@ -200,10 +216,12 @@ public class UIController : RiseBehavior {
     public void PauseEvent(bool isTrue) {
         if (!GameModel.paused) {
             GameModel.paused = true;
+            heightUIText.gameObject.SetActive(true);
             OpenMenu(1, true);
         } else {
             GameModel.paused = false;
             OpenMenu(1, false);
+            heightUIText.gameObject.SetActive(false);
         }
     }
 
