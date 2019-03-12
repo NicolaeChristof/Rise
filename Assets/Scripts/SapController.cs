@@ -36,12 +36,16 @@ public class SapController : MonoBehaviour {
 
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider collider) {
 
-        if (other.tag == "Sap") {
+        if (collider.gameObject.tag.Equals("Sap") && collider.gameObject.GetComponent<SapType>().canCollect) {
 
-            if (other.GetComponent<SapType>() != null) {
-                _treeController.UpdateSap(other.GetComponent<SapType>().sapValue, other.GetComponent<SapType>().sapType);
+            collider.gameObject.GetComponent<SapType>().canCollect = false;
+
+            if (collider.GetComponent<SapType>() != null) {
+
+                _treeController.UpdateSap(collider.GetComponent<SapType>().sapValue, collider.GetComponent<SapType>().sapType);
+
             } else {
                 // Adjust held sap
                 _treeController.UpdateSap(sapPickup, 0);
@@ -51,17 +55,16 @@ public class SapController : MonoBehaviour {
             float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
             _source.PlayOneShot(pickupSound, _volume);
 
-            other.transform.DOScale(_newScale, 0.75f)
-                .OnComplete(()=>kill(other));
+            collider.transform.DOScale(_newScale, 0.75f)
+                .OnComplete(()=>kill(collider.gameObject));
 
         }
     }
 
-    private void kill (Collider other) {
+    private void kill (GameObject sap) {
 
         // Remove sap object
-        other.gameObject.SetActive(false);
-        Destroy(other.gameObject);
+        Destroy(sap);
 
     }
 }

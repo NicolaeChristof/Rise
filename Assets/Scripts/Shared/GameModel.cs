@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = false;
+    public static bool inputGamePad = true;
 
     public static bool singlePlayer = true;
 
@@ -15,7 +15,7 @@ public static class GameModel {
 
     public static bool isSquirrel = true;
 
-	public static bool debugMode = false;
+    public static bool debugMode = false;
 
     public static bool startAtMenu = true;
 

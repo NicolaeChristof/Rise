@@ -8,10 +8,23 @@ public class BeeHiveBehavior : MonoBehaviour {
     // Public References
     public GameObject hive;
 
+    public GameObject referencePoint;
+
+    // Public Fields
+    public float pushForce;
+
+    // Private References
+
     // Private Fields
     private Vector3 _originalScale;
 
     private Vector3 _newScale;
+
+    private Vector3 _heading;
+
+    private float _distance;
+
+    private Vector3 _direction;
 
     // Start is called before the first frame update
     void Start() {
@@ -31,12 +44,60 @@ public class BeeHiveBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            Debug.Log("Player Detected! (Bee Hive)");
+            _heading = collider.gameObject.transform.position - referencePoint.transform.position;
+            _distance = _heading.magnitude;
+            _direction = _heading / _distance;
 
-            // Push the player
+            _direction.z = 0.0f;
+
+            _direction *= pushForce;
+
+            // Clamp x push
+            if (_direction.x > 0.0f) {
+
+                if (_direction.x > 10.0f) {
+
+                    _direction.x = 10.0f;
+
+                } else if (_direction.x < 4.0f) {
+
+                    _direction.x = 4.0f;
+
+                }
+
+            } else {
+
+                if (_direction.x < -10.0f) {
+
+                    _direction.x = -10.0f;
+
+                } else if (_direction.x > -4.0f) {
+
+                    _direction.x = -4.0f;
+
+                }
+
+            }
+
+            // Clamp y push
+            if (_direction.y > 4.0f) {
+
+                _direction.y = 4.0f;
+
+            } else if (_direction.y < -4.0f) {
+
+                _direction.y = -4.0f;
+
+            }
+
+            Debug.Log(_direction);
 
             hive.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
+
+            collider.gameObject.GetComponent<PlayerController>().stunPlayer(0.25f);
+
+            collider.gameObject.GetComponent<PlayerController>().addExternalForce(_direction);
 
         }
 
