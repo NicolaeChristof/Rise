@@ -105,35 +105,17 @@ public class TreeController : RiseBehavior {
 
         bool moved = false;
 
-        // Keep tree player close to squirrel player and out of the ground
-        if ((transform.position.y - moveVertical > groundHeight) &&
-            (transform.position.y - moveVertical > player.transform.position.y - playerDistance) &&
-            (transform.position.y - moveVertical < player.transform.position.y + playerDistance)) {
-
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                moved = true;
+        // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+        if (CheckEpsilon(moveVertical)) {
+            float idealMove = (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1;
+            // Ensure reticle is out of the ground
+            if (idealMove + transform.position.y > groundHeight) {
+                // Ensure reticle is close to squirrel
+                if (System.Math.Abs((idealMove + transform.position.y) - player.transform.position.y) < playerDistance) {
+                    transform.Translate(Vector3.up * idealMove, Space.World);
+                    moved = true;
+                }
             }
-
-        } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
-                   (moveVertical > 0)) {
-
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                 moved = true;
-            }
-
-        } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
-                   (moveVertical < 0)) {
-
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                moved = true;
-            }
-
         }
 
         // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
