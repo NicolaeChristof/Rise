@@ -111,7 +111,9 @@ public class TreeController : RiseBehavior {
             // Ensure reticle is out of the ground
             if (idealMove + transform.position.y > groundHeight) {
                 // Ensure reticle is close to squirrel
-                if (System.Math.Abs((idealMove + transform.position.y) - player.transform.position.y) < playerDistance) {
+                bool verticallyClose = System.Math.Abs((idealMove + transform.position.y) - player.transform.position.y) < playerDistance;
+                bool squirrelBelow = (transform.position.y > player.transform.position.y) && (idealMove + transform.position.y < transform.position.y);
+                if (verticallyClose || squirrelBelow) {
                     transform.Translate(Vector3.up * idealMove, Space.World);
                     moved = true;
                 }
