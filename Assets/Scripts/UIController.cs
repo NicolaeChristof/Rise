@@ -315,9 +315,9 @@ public class UIController : RiseBehavior {
 
         foreach(GameObject leaf in _branchLeaves[branchType]) {
             if (i < sapValue) {
-                leaf.SetActive(true);
+                leaf?.SetActive(true);
             } else {
-                leaf.SetActive(false);
+                leaf?.SetActive(false);
             }
             i++;
         }
