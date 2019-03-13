@@ -73,7 +73,7 @@ public class FallingNutBehavior : MonoBehaviour {
         _source.PlayOneShot(thunkSound, _volume);
 
         transform.DOScale(_newScale, 0.75f)
-                .OnComplete(()=>selfDestruct());
+                .OnComplete(SelfDestruct);
 
     }
 
@@ -89,7 +89,7 @@ public class FallingNutBehavior : MonoBehaviour {
 
     }
 
-    private void selfDestruct () {
+    private void SelfDestruct () {
 
         Destroy(self);
 
