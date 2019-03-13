@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = true;
+    public static bool inputGamePad = false;
 
     public static bool singlePlayer = true;
 
@@ -20,6 +20,10 @@ public static class GameModel {
     public static bool startAtMenu = true;
 
     public static bool inMenu = true;
+
+    public static string gameMode = "Zen Mode"; // "Zen Mode" "Timed Mode"
+
+    public static float timer = 120.0f;
 
     // Sound Controls
     public static float volLowRange = 0.8f;

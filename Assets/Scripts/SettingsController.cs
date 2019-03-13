@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 using RiseExtensions;
 
-public class SettingsController : MonoBehaviour {
+public class SettingsController : RiseBehavior {
 
     // Public References
     public Camera squirrelCamera;
@@ -100,7 +100,7 @@ public class SettingsController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void UpdateTick() {
 
         InputHelper.Check();
 
@@ -127,6 +127,12 @@ public class SettingsController : MonoBehaviour {
             }
 
         }
+
+    }
+
+    public override void UpdateAlways() {
+
+
 
     }
 
