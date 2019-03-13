@@ -13,6 +13,7 @@ namespace RiseExtensions {
 		PAUSE,
 
 		JUMP,
+        ACTION_1,
 	};
 
 	public enum TreeInput {
@@ -95,10 +96,6 @@ namespace RiseExtensions {
 		}
 
 		public static void Check() {
-            /*
-			if (Pause()) {
-				GameModel.paused = !GameModel.paused;
-			}*/
 
 			// Handle Swap
 			if (Swap()) {
@@ -214,6 +211,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.SWAP, Y);
 
 			profile.RegisterBinding(SquirrelInput.JUMP, A);
+            profile.RegisterBinding(SquirrelInput.ACTION_1, X);
 
 			// Tree Controls
 			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, LS_h);
@@ -240,7 +238,9 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, KEY_CAMERA_V);
 			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_PAUSE);
 			profile.RegisterBinding(SquirrelInput.SWAP, KEY_SWAP);
+
 			profile.RegisterBinding(SquirrelInput.JUMP, KEY_JUMP);
+            profile.RegisterBinding(SquirrelInput.ACTION_1, KEY_SELECT);
 
 			// Tree Controls
 			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, KEY_MOVE_H);
