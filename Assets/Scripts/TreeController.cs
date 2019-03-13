@@ -166,9 +166,7 @@ public class TreeController : RiseBehavior {
         }
 
         // If the controller was actuated, move the reticle object
-        if (moved) {
-            UpdateReticle();
-        }
+        UpdateReticle();
 
         // Handle Branch Selection
         if (InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT)) {
@@ -254,8 +252,6 @@ public class TreeController : RiseBehavior {
     }
 
     public override void UpdateAlways() {
-
-
 
     }
 
