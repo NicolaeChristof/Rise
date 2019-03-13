@@ -44,6 +44,7 @@ namespace RiseExtensions {
 		// Public Fields
 		public static ControlProfile PlayerOne { get; private set; }
 		public static ControlProfile PlayerTwo { get; private set; }
+        public static float EPSILON = 0.01F;
 
 		// Local Fields
 
@@ -128,12 +129,28 @@ namespace RiseExtensions {
 			return GameModel.singlePlayer ? GetButtonDown(SquirrelInput.SWAP) || GetButtonDown(TreeInput.SWAP) : GetButton(SquirrelInput.SWAP) && GetButton(TreeInput.SWAP);
 		}
 
-		/// <summary>
-		/// Returns the axis actuation value for the passed Squirrel input. Use like Input.GetAxis.
-		/// </summary>
-		/// <returns>The axis.</returns>
-		/// <param name="input">The input.</param>
-		public static float GetAxis(SquirrelInput input) {
+        /// <summary>
+        /// Returns whether an axis OR a button is pressed corresponding to the Squirrel's passed input.
+        /// </summary>
+        /// <param name="input">Input.</param>
+        public static bool GetAny(SquirrelInput input) {
+            return CheckEpsilon(GetAxis(input)) || GetButton(input);
+        }
+
+        /// <summary>
+        /// Returns whether an axis OR a button is pressed corresponding to the Tree's passed input.
+        /// </summary>
+        /// <param name="input">Input.</param>
+        public static bool GetAny(TreeInput input) {
+            return CheckEpsilon(GetAxis(input)) || GetButton(input);
+        }
+
+        /// <summary>
+        /// Returns the axis actuation value for the passed Squirrel input. Use like Input.GetAxis.
+        /// </summary>
+        /// <returns>The axis.</returns>
+        /// <param name="input">The input.</param>
+        public static float GetAxis(SquirrelInput input) {
 			return GetSquirrelInput(Input.GetAxis, input, 0.0F);
 		}
 
@@ -298,9 +315,13 @@ namespace RiseExtensions {
 			}
 		}
 
-		/* ControlProfile Implementation */
+        private static bool CheckEpsilon(float passedValue) {
+            return Math.Abs(passedValue) > EPSILON;
+        }
 
-		public class ControlProfile {
+        /* ControlProfile Implementation */
+
+        public class ControlProfile {
 			// Public Fields
 			public InputMode mode;
 			public InputType type;
