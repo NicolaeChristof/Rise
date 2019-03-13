@@ -69,8 +69,6 @@ public class TreeController : RiseBehavior {
         _originalScale = _reticle.transform.localScale;
         _newScale = new Vector3(_originalScale.x, _originalScale.y, _originalScale.z + 0.1f);
 
-        transform.Translate(0.0f, 3.0f, 0.0f);
-
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
         _source.spatialBlend = 0.0f;
