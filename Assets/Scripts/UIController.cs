@@ -167,12 +167,6 @@ public class UIController : RiseBehavior {
             if (_pressedSelect) {
                 _currentSelectAction(true);
             }
-
-            if (currentMenu == 0 || currentMenu == 2) {
-                _trackCam.depth = 0;
-            } else {
-                _trackCam.depth = -2;
-            }
         }
 
         //---Height UI---
