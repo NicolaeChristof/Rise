@@ -16,7 +16,6 @@ public class CameraControllerCentered : MonoBehaviour {
     private Vector3 _camOffset;
     private Vector3 _treeToPlayerAngle;
     private Vector3 _unalteredOffset;
-    private Vector3 _unalteredOffsetNew;
     private Vector3 _zoom;
 
     //-----Subject to change-----
@@ -50,13 +49,11 @@ public class CameraControllerCentered : MonoBehaviour {
 
         _treeToPlayerAngle = cameraTarget.position - treeTransform.position;
 
-        _unalteredOffset = (_treeToPlayerAngle + treeTransform.position);
+        _unalteredOffset = transform.InverseTransformPoint(_treeToPlayerAngle + treeTransform.position);
 
-        _unalteredOffsetNew = transform.InverseTransformPoint(_unalteredOffset);
+        _unalteredOffset.z -= cameraDistance;
 
-        _unalteredOffsetNew.z -= cameraDistance;
-
-        transform.position = Vector3.Slerp(transform.position, transform.TransformPoint(_unalteredOffsetNew), .9f);
+        transform.position = Vector3.Slerp(transform.position, transform.TransformPoint(_unalteredOffset), .9f);
 
         transform.LookAt(new Vector3(treeTransform.position.x, cameraTarget.position.y, treeTransform.position.z));
     
