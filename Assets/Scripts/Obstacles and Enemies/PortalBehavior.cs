@@ -23,7 +23,11 @@ public class PortalBehavior : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
 
-        _portalExit = exitPortal.transform.GetChild(0).gameObject;
+        if (exitPortal != null) {
+
+            _portalExit = exitPortal.transform.GetChild(0).gameObject;
+
+        }
 
         _tree = GameObject.FindGameObjectWithTag("Tree");
 
@@ -44,9 +48,7 @@ public class PortalBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            // exitPortal.GetComponent<PortalBehavior>().ActivatePortal();
-
-            // _portalActive = true;
+            
 
         }
 
@@ -60,15 +62,15 @@ public class PortalBehavior : MonoBehaviour {
 
                 _portalActive = false;
 
-                exitPortal.GetComponent<PortalBehavior>().DeactivatePortal();
+                if (exitPortal != null) {
 
-                Debug.Log(this.name + " my location " + transform.position + " exit location " + _portalExit.transform.position);
+                    exitPortal.GetComponent<PortalBehavior>().DeactivatePortal();
 
-                collider.gameObject.transform.position = _portalExit.transform.position;
+                    Debug.Log(this.name + " my location " + transform.position + " exit location " + _portalExit.transform.position);
 
-                // exitPortal.GetComponent<PortalBehavior>().ActivatePortal();
+                    collider.gameObject.transform.position = _portalExit.transform.position;
 
-                // _portalActive = true;
+                }
 
             }
 
@@ -83,12 +85,6 @@ public class PortalBehavior : MonoBehaviour {
             _portalActive = true;
 
         }
-
-    }
-
-    public void ActivatePortal () {
-
-        _portalActive = true;
 
     }
 
