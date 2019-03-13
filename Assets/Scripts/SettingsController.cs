@@ -49,6 +49,8 @@ public class SettingsController : MonoBehaviour {
         // Single/Multi Player Settings
         if (GameModel.singlePlayer) {
 
+            GameModel.splitScreen = false;
+
             if (GameModel.inputGamePad) {
 
                 // by default controls are set for game pad
