@@ -99,32 +99,9 @@ public class TreeController : RiseBehavior {
         float moveVertical;
         float moveLateral;
 
-        if (GameModel.singlePlayer) {
-
-            if (!GameModel.isSquirrel) {
-
-                // Poll Input
-                moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
-                moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
-
-                _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
-
-            } else {
-
-                moveVertical = 0.0f;
-                moveLateral = 0.0f;
-
-            }
-
-        } else {
-
-            // Poll Input
-            moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
-            moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
-
-            _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
-
-        }
+        moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+        moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
+        _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
 
         bool moved = false;
 
@@ -170,53 +147,14 @@ public class TreeController : RiseBehavior {
 
         // Handle Branch Selection
         if (InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT)) {
-
-            if (GameModel.singlePlayer) {
-
-                if (!GameModel.isSquirrel) {
-
-                    int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
-                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                    _selectedBranch = selected;
-                    if (branchUpdated != null) {
-                        branchUpdated(_selectedBranch);
-                    }
-                }
-
-            } else {
-
-                int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
-                int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                _selectedBranch = selected;
-                if (branchUpdated != null) {
-                    branchUpdated(_selectedBranch);
-                }
+            int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
+            int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+            _selectedBranch = selected;
+            if (branchUpdated != null) {
+                branchUpdated(_selectedBranch);
             }
-
         }
 
-        // Handle Growth
-        if (GameModel.inputGamePad) {
-
-            if (GameModel.singlePlayer) {
-
-                if (!GameModel.isSquirrel) {
-
-                    if (_grow) {
-						AttemptGrowBranch();
-					}
-
-                }
-
-            } else {
-
-                if (_grow) {
-					AttemptGrowBranch();
-				}
-
-            }
-
-		}
 		// Handle Break
 		if (CheckEpsilon(InputHelper.GetAxis(TreeInput.BRANCH_REMOVE)) || (InputHelper.GetButtonDown(TreeInput.BRANCH_REMOVE))) {
 			float distance = float.MaxValue;
@@ -237,16 +175,11 @@ public class TreeController : RiseBehavior {
                 closestBranch.transform.DOScale(Vector3.zero, 0.75f)
                     .OnComplete(()=> Object.Destroy(closestBranch));
 			}
-		} else {
+		}
 
-            if (!GameModel.isSquirrel) {
-
-                if (InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
-					AttemptGrowBranch();
-				}
-
-            }
-
+        // Handle Growth 
+        else if (_grow) {
+            AttemptGrowBranch();
         }
 
     }
