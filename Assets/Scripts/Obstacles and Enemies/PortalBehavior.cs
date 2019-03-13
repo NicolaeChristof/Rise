@@ -66,7 +66,7 @@ public class PortalBehavior : MonoBehaviour {
 
                     exitPortal.GetComponent<PortalBehavior>().DeactivatePortal();
 
-                    Debug.Log(this.name + " my location " + transform.position + " exit location " + _portalExit.transform.position);
+                    // Debug.Log(this.name + " my location " + transform.position + " exit location " + _portalExit.transform.position);
 
                     collider.gameObject.transform.position = _portalExit.transform.position;
 
