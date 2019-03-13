@@ -128,6 +128,26 @@ public class SettingsController : RiseBehavior {
 
         }
 
+        if (GameModel.enableTimer) {
+
+            if (GameModel.timer > 0) {
+
+                GameModel.timer -= Time.deltaTime;
+
+                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + (GameModel.timer % 60).ToString("F0");
+
+                Debug.Log(GameModel.displayTime);
+
+            } else {
+
+                GameModel.displayTime = "0:0";
+
+                GameModel.paused = true;
+
+            }
+
+        }
+
     }
 
     public override void UpdateAlways() {

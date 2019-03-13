@@ -21,9 +21,13 @@ public static class GameModel {
 
     public static bool inMenu = true;
 
-    public static string gameMode = "Zen Mode"; // "Zen Mode" "Timed Mode"
+    public static string gameMode = "Timed Mode"; // "Zen Mode" "Timed Mode"
 
-    public static float timer = 120.0f;
+    public static bool enableTimer = true;
+
+    public static float timer = 300.0f;
+
+    public static string displayTime = "mm:ss";
 
     // Sound Controls
     public static float volLowRange = 0.8f;
