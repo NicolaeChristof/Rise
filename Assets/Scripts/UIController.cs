@@ -176,13 +176,7 @@ public class UIController : RiseBehavior {
     }
 
     public override void UpdateTick() {
-        if (GameModel.isSquirrel) {
-            _pressedPause = InputHelper.GetButtonDown(SquirrelInput.PAUSE);
-        } else {
-            _pressedPause = InputHelper.GetButtonDown(TreeInput.PAUSE);
-        }
-
-        if (_pressedPause) {
+        if (InputHelper.Pause()) {
             PauseEvent(true);
         }
 
