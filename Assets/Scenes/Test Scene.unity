@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 487.9054
+  m_PathPosition: 501.68384
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5043,7 +5043,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05157a5ff066ce344bcee87d36b77d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1273465453}
+  cameraTarget: {fileID: 1273465453}
   treeTransform: {fileID: 469670209}
   Tree_Controller: {fileID: 395999068}
   cameraDistance: 7
@@ -5652,8 +5652,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.037851024, y: -0.29166827, z: -0.011441573, w: 0.9557019}
-  m_LocalPosition: {x: 84.07356, y: 3.0218277, z: 30.448217}
+  m_LocalRotation: {x: -0.012535611, y: -0.859639, z: -0.020981235, w: 0.5103171}
+  m_LocalPosition: {x: 102.45441, y: 3.8636694, z: 84.2932}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6878,6 +6878,46 @@ PrefabInstance:
         type: 3}
       propertyPath: m_TagString
       value: Graphic
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599539346153614017, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -286.05957
+      objectReference: {fileID: 0}
+    - target: {fileID: 2599539346153614017, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -41.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681866645831212896, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -286.05957
+      objectReference: {fileID: 0}
+    - target: {fileID: 4681866645831212896, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -41.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823280536500908937, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -286.05957
+      objectReference: {fileID: 0}
+    - target: {fileID: 7823280536500908937, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -41.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323310058391704629, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -286.05957
+      objectReference: {fileID: 0}
+    - target: {fileID: 1323310058391704629, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -41.799805
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
@@ -9392,7 +9432,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 05157a5ff066ce344bcee87d36b77d7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerTransform: {fileID: 1273465453}
+  cameraTarget: {fileID: 1273465453}
   treeTransform: {fileID: 469670209}
   Tree_Controller: {fileID: 395999068}
   cameraDistance: 10
@@ -10324,7 +10364,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.037851024, y: -0.29166827, z: -0.011441573, w: 0.9557019}
+  m_LocalRotation: {x: -0.012535611, y: -0.859639, z: -0.020981235, w: 0.5103171}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16753,6 +16793,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Master Controller
       objectReference: {fileID: 0}
+    - target: {fileID: 2298827586616047074, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: player
+      value: 
+      objectReference: {fileID: 1273465451}
     - target: {fileID: 2298827586175594233, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -16863,11 +16908,6 @@ PrefabInstance:
       propertyPath: nightLight
       value: 
       objectReference: {fileID: 1890061014}
-    - target: {fileID: 2298827586616047074, guid: 954646146aff04c9c80c9dc838056fcc,
-        type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1273465451}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 954646146aff04c9c80c9dc838056fcc, type: 3}
 --- !u!1001 &2330307565315178926
