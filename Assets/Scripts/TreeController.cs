@@ -101,7 +101,7 @@ public class TreeController : RiseBehavior {
 
         moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
         moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
-        _grow = InputHelper.GetAny(TreeInput.BRANCH_PLACE);
+        _grow = InputHelper.GetAnyDown(TreeInput.BRANCH_PLACE);
 
         bool moved = false;
 
@@ -134,7 +134,7 @@ public class TreeController : RiseBehavior {
         UpdateReticle();
 
         // Handle Branch Selection
-        if (InputHelper.GetAny(TreeInput.SELECT_RIGHT)) {
+        if (InputHelper.GetAnyDown(TreeInput.SELECT_RIGHT)) {
             int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
             int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
             _selectedBranch = selected;
@@ -144,7 +144,7 @@ public class TreeController : RiseBehavior {
         }
 
 		// Handle Break
-		if (InputHelper.GetAny(TreeInput.BRANCH_REMOVE)) {
+		if (InputHelper.GetAnyDown(TreeInput.BRANCH_REMOVE)) {
 			float distance = float.MaxValue;
 			GameObject closestBranch = null;
 			Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
