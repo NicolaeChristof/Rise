@@ -13,6 +13,8 @@ public class PortalBehavior : MonoBehaviour {
     // Private References
     private GameObject _portalExit;
 
+    private PortalBehavior _exitPortalReference;
+
     private GameObject _tree;
 
     // Private Fields
@@ -26,6 +28,8 @@ public class PortalBehavior : MonoBehaviour {
         if (exitPortal != null) {
 
             _portalExit = exitPortal.transform.GetChild(0).gameObject;
+
+            _exitPortalReference = exitPortal.GetComponent<PortalBehavior>();
 
         }
 
@@ -64,7 +68,7 @@ public class PortalBehavior : MonoBehaviour {
 
                 if (exitPortal != null) {
 
-                    exitPortal.GetComponent<PortalBehavior>().DeactivatePortal();
+                    _exitPortalReference.DeactivatePortal();
 
                     // Debug.Log(this.name + " my location " + transform.position + " exit location " + _portalExit.transform.position);
 
