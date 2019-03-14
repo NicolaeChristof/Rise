@@ -146,6 +146,24 @@ namespace RiseExtensions {
         }
 
         /// <summary>
+        /// Returns the raw axis actuation value for the passed Squirrel input. Use like Input.GetAxisRaw.
+        /// </summary>
+        /// <returns>The axis.</returns>
+        /// <param name="input">The input.</param>
+        public static float GetAxisRaw(SquirrelInput input) {
+            return GetSquirrelInput(Input.GetAxisRaw, input, 0.0F);
+        }
+
+        /// <summary>
+        /// Returns the raw axis actuation value for the passed Tree input. Use like Input.GetAxisRaw.
+        /// </summary>
+        /// <returns>The axis.</returns>
+        /// <param name="input">The input.</param>
+        public static float GetAxisRaw(TreeInput input) {
+            return GetTreeInput(Input.GetAxisRaw, input, 0.0F);
+        }
+
+        /// <summary>
         /// Returns the axis actuation value for the passed Squirrel input. Use like Input.GetAxis.
         /// </summary>
         /// <returns>The axis.</returns>
