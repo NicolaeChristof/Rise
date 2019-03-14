@@ -140,6 +140,8 @@ public class SettingsController : RiseBehavior {
 
             } else {
 
+                Debug.Log("GAME OVER!");
+
                 GameModel.displayTime = "0:0";
 
                 GameModel.paused = true;
