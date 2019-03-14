@@ -128,4 +128,8 @@ public class SettingsController : MonoBehaviour {
 
     }
 
+    void LateUpdate() {
+        InputHelper.LateCheck();
+    }
+
 }
