@@ -13,7 +13,8 @@ namespace RiseExtensions {
 		PAUSE,
 
 		JUMP,
-	};
+        ACTION_1,
+    };
 
 	public enum TreeInput {
 		MOVE_HORIZONTAL,
@@ -325,9 +326,10 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.SWAP, Y);
 
 			profile.RegisterBinding(SquirrelInput.JUMP, A);
+            profile.RegisterBinding(SquirrelInput.ACTION_1, X);
 
-			// Tree Controls
-			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, LS_h);
+            // Tree Controls
+            profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, LS_h);
 			profile.RegisterBinding(TreeInput.MOVE_VERTICAL, LS_v);
 			profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
 			profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);

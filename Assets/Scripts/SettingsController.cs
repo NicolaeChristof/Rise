@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.Rendering.PostProcessing;
 using RiseExtensions;
 
-public class SettingsController : MonoBehaviour {
+public class SettingsController : RiseBehavior {
 
     // Public References
     public Camera squirrelCamera;
@@ -48,6 +48,8 @@ public class SettingsController : MonoBehaviour {
 
         // Single/Multi Player Settings
         if (GameModel.singlePlayer) {
+
+            GameModel.splitScreen = false;
 
             if (GameModel.inputGamePad) {
 
@@ -98,7 +100,7 @@ public class SettingsController : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void UpdateTick() {
 
         InputHelper.Check();
 
@@ -125,6 +127,34 @@ public class SettingsController : MonoBehaviour {
             }
 
         }
+
+        if (GameModel.enableTimer) {
+
+            if (GameModel.timer > 0) {
+
+                GameModel.timer -= Time.deltaTime;
+
+                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + (GameModel.timer % 60).ToString("F0");
+
+                Debug.Log(GameModel.displayTime);
+
+            } else {
+
+                Debug.Log("GAME OVER!");
+
+                GameModel.displayTime = "0:0";
+
+                GameModel.paused = true;
+
+            }
+
+        }
+
+    }
+
+    public override void UpdateAlways() {
+
+
 
     }
 
