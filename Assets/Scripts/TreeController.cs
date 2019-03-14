@@ -56,10 +56,10 @@ public class TreeController : RiseBehavior {
     private const float DISTANCE = 2.0F;
 
     public delegate void SapChangeEvent(float sapValue, int branchType);
-    public static event SapChangeEvent sapUpdated;
+    public event SapChangeEvent sapUpdated;
 
     public delegate void BranchChangeEvent(int branchType);
-    public static event BranchChangeEvent branchUpdated;
+    public event BranchChangeEvent branchUpdated;
 
     void Start() {
         // Establish local references
@@ -229,9 +229,7 @@ public class TreeController : RiseBehavior {
     public void UpdateSap(float passedValue, int branchType) {
         _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
 
-        if (sapUpdated != null) {
-            sapUpdated(_currentSap[branchType], branchType);
-        }
+        sapUpdated?.Invoke(_currentSap[branchType], branchType);
     }
 
 

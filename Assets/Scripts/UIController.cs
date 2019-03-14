@@ -28,6 +28,9 @@ public class UIController : RiseBehavior {
     // The tracking camera on the main menu
     public Camera _trackCam;
 
+    // A reference to the TreeController
+    public TreeController treeController;
+
     // Select Actions are the functions that get called
     // when you hit a menu option. You pass in a bool
     // that indicates whether you want to perform this
@@ -121,8 +124,8 @@ public class UIController : RiseBehavior {
         //heightUI = FindObjectOfType<HeightUIInfo>();
         heightUIText.gameObject.SetActive(false);
 
-        TreeController.sapUpdated += UpdateSapBar;
-        TreeController.branchUpdated += UpdateBranchSelected;
+        treeController.sapUpdated += UpdateSapBar;
+        treeController.branchUpdated += UpdateBranchSelected;
     }
 
 

@@ -2551,7 +2551,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 508.5055
+  m_PathPosition: 544.6958
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5652,8 +5652,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.24174096, y: 0.023266157, z: -0.0063129226, w: 0.97004133}
-  m_LocalPosition: {x: 60.865227, y: 24.333462, z: 28.224188}
+  m_LocalRotation: {x: -0.013670245, y: 0.9768559, z: -0.20413662, w: -0.06240231}
+  m_LocalPosition: {x: 67.106255, y: 21.940878, z: 98.491325}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6838,6 +6838,10 @@ PrefabInstance:
       propertyPath: heightUI
       value: 
       objectReference: {fileID: 1273465460}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 395999068}
     - target: {fileID: 6462225557133089122, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -10053,7 +10057,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.24174096, y: 0.023266157, z: -0.0063129226, w: 0.97004133}
+  m_LocalRotation: {x: -0.013670245, y: 0.9768559, z: -0.20413662, w: -0.06240231}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16449,6 +16453,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 475141408096447652, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+        type: 3}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 469670205}
     - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: playerTarget
@@ -16469,11 +16478,6 @@ PrefabInstance:
       propertyPath: treeSlider
       value: 
       objectReference: {fileID: 31388210}
-    - target: {fileID: 475141408096447652, guid: dd6885b7ff2e94e4cb846c0e367c226d,
-        type: 3}
-      propertyPath: tree
-      value: 
-      objectReference: {fileID: 469670205}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6885b7ff2e94e4cb846c0e367c226d, type: 3}
 --- !u!4 &2191876718553261900 stripped
