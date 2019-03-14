@@ -4,25 +4,37 @@ using UnityEngine;
 
 public class BranchBehaviorBreaky : BranchBehavior {
 
-	// Public Fields
-	public int maxLandings;
+    // Public Fields
+    public int maxLandings;
 
-	// Local Fields
-	private int _landings;
+    // Local Fields
+    private int _landings;
 
-	void Start() {
+	public override void OnTriggerEnter (Collider collider) {
+
+        base.OnTriggerEnter(collider);
+
+        if (collider.gameObject.tag.Equals("Player")) {
+
+            _landings += 1;
+            if (_landings > maxLandings) {
+                OnBreak();
+                Object.Destroy(gameObject);
+            }
+
+        }
 
 	}
 
-	void Update() {
+    public override void OnTriggerStay (Collider collider) {
 
-	}
+        base.OnTriggerStay(collider);
 
-	public override void OnTriggerEnter(Collider collision) {
-		_landings += 1;
-		if (_landings > maxLandings) {
-			OnBreak();
-			Object.Destroy(gameObject);
-		}
-	}
+    }
+
+    public override void OnTriggerExit (Collider collider) {
+
+        base.OnTriggerExit(collider);
+
+    }
 }

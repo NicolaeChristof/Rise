@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SapController : MonoBehaviour {
 
@@ -18,25 +19,33 @@ public class SapController : MonoBehaviour {
 
     private SapType _sapType;
 
+    private Vector3 _newScale;
+
     void Start() {
 
         _source = GetComponent<AudioSource>();
 
         // Resolve local references
         _treeController = GameObject.Find("Tree Controller").GetComponent<TreeController>();
-    
+
+        _newScale = Vector3.zero;
+
     }
 
     private void Update() {
 
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter(Collider collider) {
 
-        if (other.tag == "Sap") {
+        if (collider.gameObject.tag.Equals("Sap") && collider.gameObject.GetComponent<SapType>().canCollect) {
 
-            if (other.GetComponent<SapType>() != null) {
-                _treeController.UpdateSap(other.GetComponent<SapType>().sapValue, other.GetComponent<SapType>().sapType);
+            collider.gameObject.GetComponent<SapType>().canCollect = false;
+
+            if (collider.GetComponent<SapType>() != null) {
+
+                _treeController.UpdateSap(collider.GetComponent<SapType>().sapValue, collider.GetComponent<SapType>().sapType);
+
             } else {
                 // Adjust held sap
                 _treeController.UpdateSap(sapPickup, 0);
@@ -46,10 +55,16 @@ public class SapController : MonoBehaviour {
             float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
             _source.PlayOneShot(pickupSound, _volume);
 
-            // Remove sap object
-            other.gameObject.SetActive(false);
-            Destroy(other.gameObject);
-        
+            collider.transform.DOScale(_newScale, 0.75f)
+                .OnComplete(()=>kill(collider.gameObject));
+
         }
+    }
+
+    private void kill (GameObject sap) {
+
+        // Remove sap object
+        Destroy(sap);
+
     }
 }

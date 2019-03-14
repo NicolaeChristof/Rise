@@ -1,9 +1,10 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using RiseExtensions;
+using DG.Tweening;
 
-public class PlayerController : MonoBehaviour {
+public class PlayerController : RiseBehavior {
 
     // Public References
     public GameObject playerTarget;
@@ -15,8 +16,6 @@ public class PlayerController : MonoBehaviour {
     public Camera treeCamera;
 
     public AudioClip jumpSound;
-
-    public AudioClip walkSound;
 
     public Slider treeSlider;
 
@@ -30,10 +29,23 @@ public class PlayerController : MonoBehaviour {
     [Range(0.0f, 20.0f)]
     public float maxPlayerDistance;
 
-    // The height of a real-life squirrel
-    public float realSquirrelHeight;
+    [Range(0, 2)]
+    public int maxJumps;
 
-    public Text heightText;
+    [Range(0.001f, 1.0f)]
+    public float accelerationSpeed;
+
+    [Range(0.001f, 1.0f)]
+    public float deaccelerationSpeed;
+
+    public bool useAcceleration;
+
+    public bool useDeacceleration;
+
+    // The height of a real-life squirrel
+    //public float realSquirrelHeight;
+
+    //public Text heightText;
 
     // Private References
     private CharacterController _controller;
@@ -53,17 +65,31 @@ public class PlayerController : MonoBehaviour {
 
     private float _volume;
 
-    private bool _moving = false;
+    private bool _walkSoundPlaying = false;
 
-    private float _realToVirtualRatio;
+    //private float _realToVirtualRatio;
 
-    public float _heightOffset = -20f;
+    //public float _heightOffset = -20f;
 
-    private float _currentHeight;
+    //private float _currentHeight;
 
-    private float _currentHeightActual;
+    //private float _currentHeightActual;
 
-    private float _treeHeight;
+    //private float _treeHeight;
+
+    private float _numJumps = 0;
+
+    private Vector3 _originalScale;
+
+    private Vector3 _newScale;
+
+    private bool _playerStunned = false;
+
+    private float _walkSpeed = 0.0f;
+
+    private float _maxWalkSpeed = 1.0f;
+
+    private string _orientation = "center";
 
     // Start is called before the first frame update
     void Start() {
@@ -72,117 +98,233 @@ public class PlayerController : MonoBehaviour {
 
         _source = GetComponent<AudioSource>();
 
+        /*
         _realToVirtualRatio = realSquirrelHeight / _controller.height;
 
-        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;
+        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;*/
+
+        _originalScale = transform.localScale;
+
+        _newScale = new Vector3(_originalScale.x, _originalScale.y + 0.1f, _originalScale.z);
 
     }
 
     // Update is called once per frame
-    void Update() {
+    public override void UpdateTick () {
 
-        if (!GameModel.paused) {
+        if (GameModel.isSquirrel) {
 
-            if (GameModel.isSquirrel) {
+            // Get input directions
+            if (!_playerStunned) {
 
-                // Get input directions
-                _moveDirection = new Vector3(Input.GetAxis(GameModel.HORIZONTAL_SQUIRREL_INPUT), _moveDirection.y, Input.GetAxis(GameModel.VERTICAL_SQUIRREL_INPUT));
+                _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
 
-                // Disable z axis movement
-                _moveDirection.z = 1.0f;
+                // Accelerate up to full speed
+                if (_moveDirection.x > 0.0f) {
 
-                // Walking sound
-                if (_moveDirection.x != 0 && !_moving) {
+                    if (_orientation == "left") {
 
-                    _moving = true;
+                        _walkSpeed = 0.0f;
 
-                    _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+                    }
 
-                    _source.PlayOneShot(walkSound, _volume);
+                    if (_walkSpeed < _maxWalkSpeed) {
 
-                }
+                        _walkSpeed += accelerationSpeed;
 
-                // Orient player model
-                if (_moveDirection.x < 0) {
+                    }
 
-                    // Face player model to the left
-                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
+                    _orientation = "right";
 
-                } else if (_moveDirection.x > 0) {
+                } else if (_moveDirection.x < 0.0f) {
 
-                    // Face player model to the right
-                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
+                    if (_orientation == "right") {
+
+                        _walkSpeed = 0.0f;
+
+                    }
+
+                    if (_walkSpeed > -_maxWalkSpeed) {
+
+                        _walkSpeed -= accelerationSpeed;
+
+                    }
+
+                    _orientation = "left";
 
                 } else {
 
-                    // Face player model outwards towards camera
-                    playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+                    if (useDeacceleration) {
 
-                    // _source.Stop(); // temporarily disabled. trying to figure out how to stop only one audioclip at a time without having multiple audio sources.
+                        if (_walkSpeed > 0.15f) {
 
-                    _moving = false;
+                            _walkSpeed -= deaccelerationSpeed;
+
+                        } else if (_walkSpeed < -0.15f) {
+
+                            _walkSpeed += deaccelerationSpeed;
+
+                        } else {
+
+                            _walkSpeed = 0.0f;
+
+                            _orientation = "center";
+
+                        }
+
+                    } else {
+
+                        _walkSpeed = 0.0f;
+
+                        _orientation = "center";
+
+                    }
 
                 }
 
-                _moveDirection.x *= speed;
+                if (useAcceleration) {
 
-                _moveDirection.z *= speed;
-
-                if (Input.GetButton(GameModel.JUMP) && _controller.isGrounded) {
-
-                    _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-
-                    _source.PlayOneShot(jumpSound, _volume);
-
-                    _moveDirection.y = jumpSpeed;
+                    _moveDirection.x = _walkSpeed;
 
                 }
 
             } else {
 
-                // Drop player if they swapped to tree mode
                 _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
 
             }
 
-            // Apply gravity
-            _moveDirection.y -= gravity * Time.deltaTime;
+            // Disable z axis movement
+            _moveDirection.z = 1.0f;
 
-            // Apply external force
-            _moveDirection += _externalForce;
+            // Walking sound
+            if (_moveDirection.x != 0 && !_walkSoundPlaying && _controller.isGrounded) {
 
-            _externalForce = new Vector3(0.0f, 0.0f, 0.0f);
+                _walkSoundPlaying = true;
 
-            // Maintains direction after movement stops
-            _moveDirection = transform.TransformDirection(_moveDirection);
-
-            if (_moveDirection != Vector3.zero) {
-
-                // Faces player towards movement direction
-                transform.forward = _moveDirection;
+                // _source.Play();
 
             }
 
-			// Move the Controller
-			ApplyVelocity();
-			ApplyMotion(_moveDirection);
+            if (_walkSoundPlaying && !_controller.isGrounded) {
 
-            _target = new Vector3(playerTarget.transform.position.x,
-                                  this.transform.position.y,
-                                  playerTarget.transform.position.z);
+                _source.Stop();
 
-            // face the player towards the target
-            transform.LookAt(_target);
+                _walkSoundPlaying = false;
+
+            }
+
+            // Orient player model
+            if (_moveDirection.x < 0) {
+
+                // Face player model to the left
+                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
+
+            } else if (_moveDirection.x > 0) {
+
+                // Face player model to the right
+                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
+
+            } else {
+
+                // Face player model outwards towards camera
+                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+
+                _source.Stop();
+
+                _walkSoundPlaying = false;
+
+            }
+
+            _moveDirection.x *= speed;
+
+            _moveDirection.z *= speed;
+
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps) {
+
+                _numJumps++;
+
+                _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+                _source.PlayOneShot(jumpSound, _volume);
+
+                _moveDirection.y = jumpSpeed;
+
+                transform.DOScale(_newScale, 2.0f)
+                    .SetEase(Ease.OutElastic);
+
+                transform.DOScale(_originalScale, 2.0f)
+                    .SetEase(Ease.OutElastic);
+
+            }
+
+            if (_controller.isGrounded) {
+
+                _numJumps = 0;
+
+            }
+
+        } else {
+
+            _source.Stop();
+
+            _walkSoundPlaying = false;
+
+            // Drop player if they swapped to tree mode
+            _moveDirection = new Vector3(0.0f, _moveDirection.y, 0.0f);
 
         }
 
+        // Apply gravity
+        if (!_controller.isGrounded) {
+
+            _moveDirection.y -= gravity * Time.deltaTime;
+
+        }
+
+        // Apply external force
+        if (_externalForce != Vector3.zero) {
+
+            _moveDirection = _externalForce;
+
+            _externalForce = Vector3.zero;
+
+        }
+
+        // Maintains direction after movement stops
+        _moveDirection = transform.TransformDirection(_moveDirection);
+
+        if (_moveDirection != Vector3.zero) {
+
+            // Faces player towards movement direction
+            transform.forward = _moveDirection;
+
+        }
+
+        // Move the Controller
+        _controller.Move(_moveDirection * Time.deltaTime);
+
+        _target = new Vector3(playerTarget.transform.position.x,
+                             this.transform.position.y,
+                             playerTarget.transform.position.z);
+
+        // face the player towards the target
+        transform.LookAt(_target);
+
+        /*
         _currentHeight = transform.position.y - _heightOffset;
         _currentHeightActual =  _currentHeight * _realToVirtualRatio;
 
         // https://answers.unity.com/questions/50391/how-to-round-a-float-to-2-dp.html
         heightText.text = "Height: " + _currentHeightActual.ToString("F1") + "m";
 
-        treeSlider.value = _currentHeight / _treeHeight;
+        treeSlider.value = _currentHeight / _treeHeight;*/
+
+    }
+
+    public override void UpdateAlways () {
+
+
 
     }
 
@@ -190,31 +332,26 @@ public class PlayerController : MonoBehaviour {
 
         _externalForce += force;
 
-        Debug.Log(_externalForce);
+        // Debug.Log(_externalForce);
 
     }
 
-	public Vector3 GetMoveDirection() {
-		return _moveDirection;
-	}
+    public void stunPlayer (float stunTime) {
 
-	public void SetVelocity(Vector3 passedVelocityVector) {
-		_velocity = passedVelocityVector;
-	}
+        StartCoroutine(stun(stunTime));
 
-	private void ApplyVelocity() {
-		// Apply velocity to move direction vector
-		_moveDirection = _moveDirection + (_velocity * Time.deltaTime);
+    }
 
-		// Apply velocity falloff TODO: Fix me. This is currently tied to gravity.
-		float falloff = (gravity * Time.deltaTime);
-		_velocity.x = Mathf.Clamp(_velocity.x - (falloff * Mathf.Sign(_velocity.x)), 0, float.MaxValue);
-		_velocity.y = Mathf.Clamp(_velocity.y - (falloff * Mathf.Sign(_velocity.y)), 0, float.MaxValue);
-		_velocity.z = Mathf.Clamp(_velocity.z - (falloff * Mathf.Sign(_velocity.z)), 0, float.MaxValue);
-	}
+    private IEnumerator stun (float stunTime) {
 
-	private void ApplyMotion(Vector3 passedMotionVector) {
-		_controller.Move(passedMotionVector * Time.deltaTime);
-	}
+        _playerStunned = true;
+
+        _numJumps = maxJumps;
+
+        yield return new WaitForSeconds(stunTime);
+
+        _playerStunned = false;
+
+    }
 
 }

@@ -542,13 +542,13 @@ PlayerSettings:
   apiCompatibilityLevelPerPlatform: {}
   m_RenderingPath: 1
   m_MobileRenderingPath: 1
-  metroPackageName: Template_3D
+  metroPackageName: 40675WinterGames.RiseSquirrel
   metroPackageVersion: 
-  metroCertificatePath: 
+  metroCertificatePath: 40675WinterGames.RiseSquirrel_StoreKey.pfx
   metroCertificatePassword: 
-  metroCertificateSubject: 
-  metroCertificateIssuer: 
-  metroCertificateNotAfter: 0000000000000000
+  metroCertificateSubject: 16944C02-2BF2-404F-94DA-4A0059955F7A
+  metroCertificateIssuer: 16944C02-2BF2-404F-94DA-4A0059955F7A
+  metroCertificateNotAfter: 005782e65ad6d501
   metroApplicationDescription: Template_3D
   wsaImages: {}
   metroTileShortName: 
@@ -564,7 +564,9 @@ PlayerSettings:
   metroSplashScreenBackgroundColor: {r: 0.12941177, g: 0.17254902, b: 0.21568628,
     a: 1}
   metroSplashScreenUseBackgroundColor: 0
-  platformCapabilities: {}
+  platformCapabilities:
+    WindowsStoreApps:
+      InternetClient: True
   metroTargetDeviceFamilies: {}
   metroFTAName: 
   metroFTAFileTypes: []

@@ -3,17 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class BranchBehaviorBouncy : BranchBehavior {
-	void Start() {
 
-	}
+    private Vector3 _bounceHeight = new Vector3(0.0f, 10.0f, 0.0f);
 
-	public override void OnTriggerEnter(Collider collision) {
-		if (collision.gameObject.tag.Equals("Player")) {
-			// TODO: Add acceleration using only instantaneousy velocity! Whee!
-		}
-	}
+    public override void OnTriggerEnter (Collider collider) {
 
-	void Update() {
+        base.OnTriggerEnter(collider);
 
-	}
+        if (collider.gameObject.tag.Equals("Player")) {
+
+            collider.gameObject.GetComponent<PlayerController>().addExternalForce(_bounceHeight);
+
+        }
+    }
+
+    public override void OnTriggerStay (Collider collider) {
+
+        base.OnTriggerStay(collider);
+
+    }
+
+    public override void OnTriggerExit (Collider collider) {
+
+        base.OnTriggerExit(collider);
+
+    }
 }
