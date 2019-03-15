@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 515.9728
+  m_PathPosition: 517.56934
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5230,7 +5230,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b43e16f5283e473a9cc7520cd2a7767, type: 3}
   m_Name: 
@@ -6099,8 +6099,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.050064437, y: 0.6960063, z: -0.04912694, w: 0.7146016}
-  m_LocalPosition: {x: 31.800343, y: 10.425153, z: 61.689102}
+  m_LocalRotation: {x: -0.019995, y: 0.24361455, z: 0.0051315296, w: 0.9696524}
+  m_LocalPosition: {x: 47.84133, y: 4.801075, z: 35.16828}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -9910,7 +9910,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1237406268}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3b43e16f5283e473a9cc7520cd2a7767, type: 3}
   m_Name: 
@@ -10528,7 +10528,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.050064437, y: 0.6960063, z: -0.04912694, w: 0.7146016}
+  m_LocalRotation: {x: -0.019995, y: 0.24361455, z: 0.0051315296, w: 0.9696524}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17226,7 +17226,7 @@ PrefabInstance:
         type: 3}
       propertyPath: treeController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 577484134}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6885b7ff2e94e4cb846c0e367c226d, type: 3}
 --- !u!4 &2191876718553261900 stripped
