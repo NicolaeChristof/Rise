@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using DG.Tweening;
+using RiseExtensions;
 
 [RequireComponent(typeof(TreeController))]
 public abstract class BranchProvider : RiseBehavior {
@@ -12,6 +13,7 @@ public abstract class BranchProvider : RiseBehavior {
     public Sprite leafSprite;
     public AudioClip growSound;
     public AudioClip cantGrowSound;
+    public float minDistance;
 
     // Internal Fields
     protected float _currentSap;
@@ -70,7 +72,35 @@ public abstract class BranchProvider : RiseBehavior {
     /// <param name="position">Position.</param>
     /// <param name="rotation">Rotation.</param>
     public virtual bool CanPlaceBranch(Vector3 position, Quaternion rotation) {
+        return CheckSap() && CheckCollision(position, rotation);
+    }
+
+    /// <summary>
+    /// Checks whether there is enough sap to place this branch.
+    /// </summary>
+    /// <returns><c>true</c>, if sap level is sufficient, <c>false</c> otherwise.</returns>
+    public virtual bool CheckSap() {
         return (_currentSap >= sapCost);
+    }
+
+    /// <summary>
+    /// Checks whether there is enough space to place the branch at the passed position and rotation.
+    /// </summary>
+    /// <returns><c>true</c>, if there is enough space, <c>false</c> otherwise.</returns>
+    /// <param name="position">The position the branch could be placed at.</param>
+    /// <param name="rotation">The rotation the branch could be placed at.</param>
+    public virtual bool CheckCollision(Vector3 position, Quaternion rotation) {
+        // Check Branch Closeness (No Branch colliders in min distance)
+        Collider[] colliders = Physics.OverlapSphere(position, minDistance);
+        foreach (Collider iteratedCollider in colliders) {
+            if (iteratedCollider.gameObject.tag.Equals(Tags.BRANCH) ||
+                iteratedCollider.gameObject.tag.Equals(Tags.DEADZONE) ||
+                iteratedCollider.gameObject.tag.Equals(Tags.SAP) ||
+                iteratedCollider.gameObject.tag.Equals(Tags.PLAYER)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /// <summary>
