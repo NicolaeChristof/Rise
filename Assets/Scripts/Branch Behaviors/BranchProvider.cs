@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using DG.Tweening;
 using RiseExtensions;
 
@@ -14,6 +15,7 @@ public abstract class BranchProvider : RiseBehavior {
     public AudioClip growSound;
     public AudioClip cantGrowSound;
     public float minDistance;
+    public List<SapType> sapTypes;
 
     // Internal Fields
     protected float _currentSap;
