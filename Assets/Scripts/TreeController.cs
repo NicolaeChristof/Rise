@@ -181,7 +181,7 @@ public class TreeController : RiseBehavior {
         // Horizontal-only raycast
         Vector3 position = tree.transform.position;
         position.y = transform.position.y;
-        _tree.GetComponent<Collider>().Raycast(new Ray(transform.position, position - transform.position), out RaycastHit raycast, 500F);
+        tree.GetComponent<Collider>().Raycast(new Ray(transform.position, position - transform.position), out RaycastHit raycast, 500F);
 
         // Resolve position and facing
         transform.position = ((transform.position - raycast.point).normalized * DISTANCE) + raycast.point;
