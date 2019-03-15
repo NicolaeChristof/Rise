@@ -2,6 +2,7 @@
 using UnityEngine;
 using DG.Tweening;
 using RiseExtensions;
+using System;
 
 public class TreeController : RiseBehavior {
 
@@ -32,17 +33,31 @@ public class TreeController : RiseBehavior {
     private const float EPSILON = 0.01F;
     private const float DISTANCE = 2.0F;
 
+    public delegate void UIUpdateEvent(BranchProvider provider);
+    public event UIUpdateEvent uiUpdateEvent;
+
+    #region DEPRECATED
+    /************* vvvv TODO: REMOVE PENDING UI OVERHAUL vvvv *************/
+    private const string obsoleteMessage = "Prefer UIUpdateEvent";
+    [Obsolete(obsoleteMessage)]
     public delegate void SapChangeEvent(float sapValue, int branchType);
+    [Obsolete(obsoleteMessage)]
     public event SapChangeEvent sapUpdated;
 
+    [Obsolete(obsoleteMessage)]
     public delegate void BranchChangeEvent(int branchType);
+    [Obsolete(obsoleteMessage)]
     public event BranchChangeEvent branchUpdated;
+    /**********************************************************************/
+    #endregion DEPRECATED
+
 
     void Start() {
         _reticleInstance = Instantiate(reticle, transform.position, Quaternion.identity);
-        Select(0);
+
         UpdateReticle();
         UpdateComponents();
+        Select(0);
     }
 
     public override void UpdateTick() {
@@ -117,6 +132,7 @@ public class TreeController : RiseBehavior {
             provider.UpdateSap(type, quantity);
             sapUpdated?.Invoke(quantity, (int)type);
         }
+        UpdateUI();
     }
 
     /// <summary>
@@ -125,7 +141,8 @@ public class TreeController : RiseBehavior {
     public void AttemptGrowBranch() {
         GameObject newBranch = GetSelectedBranch().PlaceBranch(_reticleInstance.transform.position, _reticleInstance.transform.rotation);
         AudioClip feedbackSound = (newBranch is null) ? GetSelectedBranch().cantGrowSound : GetSelectedBranch().growSound;
-        _reticleInstance.GetComponent<AudioSource>()?.PlayOneShot(feedbackSound, Random.Range(GameModel.volLowRange, GameModel.volHighRange));
+        _reticleInstance.GetComponent<AudioSource>()?.PlayOneShot(feedbackSound, UnityEngine.Random.Range(GameModel.volLowRange, GameModel.volHighRange));
+        UpdateUI();
 	}
 
     /// <summary>
@@ -145,6 +162,7 @@ public class TreeController : RiseBehavior {
             }
         }
         closestBranch?.GetComponent<BranchBehavior>().OnBreak();
+        UpdateUI();
     }
 
     /// <summary>
@@ -168,10 +186,7 @@ public class TreeController : RiseBehavior {
     /// If BranchProvider instances are added to or removed from the parent Object at runtime, this method MUST be called, otherwise silly things will happen.
     /// </summary>
     public void UpdateComponents() {
-        branches = new List<BranchProvider>();
-        foreach (BranchProvider provider in GetComponents<BranchProvider>()) {
-            branches.Add(provider);
-        }
+        branches = new List<BranchProvider>(GetComponents<BranchProvider>());
         branches.Sort();
     }
 
@@ -204,6 +219,7 @@ public class TreeController : RiseBehavior {
             _selectedBranch = passedIndex.Clamp(0, branches.Count - 1);
             branchUpdated?.Invoke(passedIndex);
         }
+        UpdateUI();
 	}
 
     /// <summary>
@@ -222,5 +238,9 @@ public class TreeController : RiseBehavior {
         // Resolve Reticle position and facing
         _reticleInstance.transform.position = raycast.point;
         _reticleInstance.transform.LookAt(raycast.point + (raycast.normal * 2.0F));
+    }
+
+    private void UpdateUI() {
+        uiUpdateEvent?.Invoke(GetSelectedBranch());
     }
 }
