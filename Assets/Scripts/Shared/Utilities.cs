@@ -45,4 +45,15 @@ namespace RiseExtensions {
         public static readonly string PLAYER = "Player";
     }
 
+    public enum SapType {
+        SPRING,
+        SUMMER,
+        AUTUMN,
+        WINTER
+    }
+
+    public enum GameMode {
+        TIMED,
+        ZEN,
+    }
 }
