@@ -14,7 +14,7 @@ public abstract class BranchProvider : RiseBehavior {
     public Sprite leafSprite;
     public AudioClip growSound;
     public AudioClip cantGrowSound;
-    public float minDistance;
+    public float minDistance = 0.5F;
 
     // Internal Fields
     protected float _currentSap;
