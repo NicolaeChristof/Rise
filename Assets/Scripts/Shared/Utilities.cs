@@ -24,7 +24,7 @@ namespace RiseExtensions {
         /// <param name="val">Value.</param>
         /// <param name="epsilon">Epsilon.</param>
         public static bool CheckEpsilon(this float val, float epsilon) {
-            return Math.Abs(val) > 0;
+            return Math.Abs(val) > epsilon;
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace RiseExtensions {
         /// <param name="val">Value.</param>
         /// <param name="epsilon">Epsilon.</param>
         public static bool CheckEpsilon(this double val, double epsilon) {
-            return Math.Abs(val) > 0;
+            return Math.Abs(val) > epsilon;
         }
     }
 
