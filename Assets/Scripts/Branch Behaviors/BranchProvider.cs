@@ -15,10 +15,19 @@ public abstract class BranchProvider : RiseBehavior {
     public AudioClip growSound;
     public AudioClip cantGrowSound;
     public float minDistance;
-    public List<SapType> sapTypes;
 
     // Internal Fields
     protected float _currentSap;
+
+    // Properties
+
+    /// <summary>
+    /// Gets or sets the quantity of sap directly, bypassing any potential type-sensitive logic.
+    /// 
+    /// When setting, the value is clamped to [0.0F, maxSap].
+    /// </summary>
+    /// <value>The sap.</value>
+    public float Sap { get => _currentSap; set => _currentSap = value.Clamp(0.0F, maxSap); }
 
     public virtual void Start() {
         _currentSap = startingSap;
@@ -27,11 +36,14 @@ public abstract class BranchProvider : RiseBehavior {
     public virtual void Update() { }
 
     /// <summary>
-    /// This method is called to update the currently held sap quantity by the passed value.
+    /// Updates the sap.
+    /// 
+    /// This method should be used or overridden for type-sensitive logic.
     /// </summary>
-    /// <param name="passedValue">The value to change the sap quantity by.</param>
-    public virtual void UpdateSap(float passedValue) {
-        _currentSap = Mathf.Clamp(_currentSap + passedValue, 0.0F, maxSap);
+    /// <param name="type">Type.</param>
+    /// <param name="quantity">Quantity.</param>
+    public virtual void UpdateSap(SapType type, float quantity) {
+        Sap += quantity;
     }
 
     /// <summary>
@@ -40,7 +52,7 @@ public abstract class BranchProvider : RiseBehavior {
     /// <param name="placedBranch">The placed branch.</param>
     public virtual void OnBranchPlaced(GameObject placedBranch) {
         // Update held Sap
-        UpdateSap(-sapCost);
+        Sap -= sapCost;
 
         // Perform tween effect
         placedBranch.transform.DOScale(Vector3.zero, 0.75f)
