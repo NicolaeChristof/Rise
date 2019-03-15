@@ -125,6 +125,12 @@ public class SettingsController : RiseBehavior {
 
     }
 
+    void LateUpdate() {
+        InputHelper.LateCheck();
+    }
+
+    // Internal Methods
+
     private void EnforceModes() {
         // Can only use keyboard in single player mode
         if (!GameModel.inputGamePad) {
