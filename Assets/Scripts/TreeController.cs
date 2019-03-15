@@ -7,7 +7,7 @@ public class TreeController : RiseBehavior {
 
     // Public references
     public GameObject reticle;
-    public GameObject player;
+    public GameObject squirrel;
     public GameObject tree;
 
     // Public Fields
@@ -22,8 +22,7 @@ public class TreeController : RiseBehavior {
     public float playerDistance;
 
     // Local References
-    private GameObject _tree;
-    private GameObject _reticle;
+    private GameObject _reticleInstance;
 
     // Local Fields
     private int _selectedBranch;
@@ -39,7 +38,7 @@ public class TreeController : RiseBehavior {
     public event BranchChangeEvent branchUpdated;
 
     void Start() {
-        _reticle = Instantiate(reticle, Vector3.zero, Quaternion.identity);
+        _reticleInstance = Instantiate(reticle, transform.position, Quaternion.identity);
         Select(0);
         UpdateReticle();
     }
@@ -62,11 +61,11 @@ public class TreeController : RiseBehavior {
             if (idealMove + transform.position.y > groundHeight) {
                 // Ensure reticle is close to squirrel
                 // Case 1: verticallyClose - If ideal move doesn't put the reticle out of range
-                bool verticallyClose = System.Math.Abs((idealMove + transform.position.y) - player.transform.position.y) < playerDistance;
+                bool verticallyClose = System.Math.Abs((idealMove + transform.position.y) - squirrel.transform.position.y) < playerDistance;
                 // Case 2: If squirrel is out of range below reticle, but reticle is moving downwards towards squirrel, permit motion
-                bool squirrelBelow = (transform.position.y > player.transform.position.y) && (idealMove + transform.position.y < transform.position.y);
+                bool squirrelBelow = (transform.position.y > squirrel.transform.position.y) && (idealMove + transform.position.y < transform.position.y);
                 // Case 3: if squirrel is out of range above reticle, but reticle is moving upwards towards squirrel, permit motion
-                bool squirrelAbove = (transform.position.y < player.transform.position.y) && (idealMove + transform.position.y > transform.position.y);
+                bool squirrelAbove = (transform.position.y < squirrel.transform.position.y) && (idealMove + transform.position.y > transform.position.y);
                 if (verticallyClose || squirrelBelow || squirrelAbove) {
                     transform.Translate(Vector3.up * idealMove, Space.World);
                     moved = true;
@@ -122,9 +121,9 @@ public class TreeController : RiseBehavior {
     /// Attempts to grow a branch.
     /// </summary>
     public void AttemptGrowBranch() {
-        GameObject newBranch = GetSelectedBranch().PlaceBranch(_reticle.transform.position, _reticle.transform.rotation);
+        GameObject newBranch = GetSelectedBranch().PlaceBranch(_reticleInstance.transform.position, _reticleInstance.transform.rotation);
         AudioClip feedbackSound = (newBranch is null) ? GetSelectedBranch().cantGrowSound : GetSelectedBranch().growSound;
-        _reticle.GetComponent<AudioSource>()?.PlayOneShot(feedbackSound, Random.Range(GameModel.volLowRange, GameModel.volHighRange));
+        _reticleInstance.GetComponent<AudioSource>()?.PlayOneShot(feedbackSound, Random.Range(GameModel.volLowRange, GameModel.volHighRange));
 	}
 
     /// <summary>
@@ -133,10 +132,10 @@ public class TreeController : RiseBehavior {
     public void AttemptBreakBranch() {
         float distance = float.MaxValue;
         GameObject closestBranch = null;
-        Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
+        Collider[] colliders = Physics.OverlapSphere(_reticleInstance.transform.position, minDistance);
         foreach (Collider iteratedCollider in colliders) {
             if (iteratedCollider.CompareTag(Tags.BRANCH)) {
-                float currentDistance = Vector3.Distance(iteratedCollider.transform.position, _reticle.transform.position);
+                float currentDistance = Vector3.Distance(iteratedCollider.transform.position, _reticleInstance.transform.position);
                 if (currentDistance < distance) {
                     distance = currentDistance;
                     closestBranch = iteratedCollider.gameObject;
@@ -150,7 +149,7 @@ public class TreeController : RiseBehavior {
     /// Returns the current reticle transform
     /// </summary>
     public Transform getReticleTransform () {
-        return _reticle.transform;
+        return _reticleInstance.transform;
     }
 
     public BranchProvider GetSelectedBranch() {
@@ -180,16 +179,16 @@ public class TreeController : RiseBehavior {
     /// </summary>
     private void UpdateReticle() {
         // Horizontal-only raycast
-        Vector3 position = _tree.transform.position;
+        Vector3 position = tree.transform.position;
         position.y = transform.position.y;
         _tree.GetComponent<Collider>().Raycast(new Ray(transform.position, position - transform.position), out RaycastHit raycast, 500F);
 
         // Resolve position and facing
         transform.position = ((transform.position - raycast.point).normalized * DISTANCE) + raycast.point;
-        transform.LookAt(_tree.transform.position);
+        transform.LookAt(tree.transform.position);
 
         // Resolve Reticle position and facing
-        _reticle.transform.position = raycast.point;
-        _reticle.transform.LookAt(raycast.point + (raycast.normal * 2.0F));
+        _reticleInstance.transform.position = raycast.point;
+        _reticleInstance.transform.LookAt(raycast.point + (raycast.normal * 2.0F));
     }
 }
