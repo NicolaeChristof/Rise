@@ -36,14 +36,16 @@ public abstract class BranchProvider : RiseBehavior {
     public virtual void Update() { }
 
     /// <summary>
-    /// Updates the sap.
+    /// Updates the sap using type-sensitive logic.
     /// 
-    /// This method should be used or overridden for type-sensitive logic.
+    /// This method should be overridden if type-sensitive logic is needed, and should return <c>true</c> if the sap value was updated, and <c>false</c> otherwise.
     /// </summary>
+    /// <returns><c>true</c>, if sap was updated, <c>false</c> otherwise.</returns>
     /// <param name="type">Type.</param>
     /// <param name="quantity">Quantity.</param>
-    public virtual void UpdateSap(SapType type, float quantity) {
+    public virtual bool UpdateSap(SapType type, float quantity) {
         Sap += quantity;
+        return true;
     }
 
     /// <summary>

@@ -20,10 +20,12 @@ public class BranchProviderSimple : BranchProvider {
         return branch;
     }
 
-    public override void UpdateSap(SapType type, float quantity) {
+    public override bool UpdateSap(SapType type, float quantity) {
         if (type == sapType) {
             base.UpdateSap(type, quantity);
+            return true;
         }
+        return false;
     }
 
     public override void OnBranchPlaced(GameObject placedBranch) {
