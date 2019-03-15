@@ -86,8 +86,7 @@ public class TreeController : RiseBehavior {
 
         // Handle Branch Selection
         if (InputHelper.GetAnyDown(TreeInput.SELECT_RIGHT)) {
-            int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
-            Scroll(scrollDirection);
+            Scroll(Mathf.RoundToInt(InputHelper.GetAxisRaw(TreeInput.SELECT_RIGHT)));
         }
 
 		// Handle Break
