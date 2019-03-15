@@ -26,6 +26,7 @@ public class TreeController : RiseBehavior {
 
     // Local Fields
     private int _selectedBranch;
+    private List<BranchProvider> branches;
 
     // Local Constants
     private const float EPSILON = 0.01F;
@@ -41,6 +42,7 @@ public class TreeController : RiseBehavior {
         _reticleInstance = Instantiate(reticle, transform.position, Quaternion.identity);
         Select(0);
         UpdateReticle();
+        UpdateComponents();
     }
 
     public override void UpdateTick() {
@@ -111,7 +113,7 @@ public class TreeController : RiseBehavior {
     /// <param name="type">The sap type to update.</param>
     /// <param name="quantity">The quantity to modify by.</param>
     public void UpdateSap(SapType type, float quantity) {
-        foreach (BranchProvider provider in GetComponents<BranchProvider>()) {
+        foreach (BranchProvider provider in branches) {
             provider.UpdateSap(type, quantity);
             sapUpdated?.Invoke(quantity, (int)type);
         }
@@ -153,14 +155,35 @@ public class TreeController : RiseBehavior {
     }
 
     public BranchProvider GetSelectedBranch() {
-        return GetComponents<BranchProvider>()[_selectedBranch];
+        return branches[_selectedBranch];
+    }
+
+    public void UpdateComponents() {
+        branches = new List<BranchProvider>();
+        foreach (BranchProvider provider in GetComponents<BranchProvider>()) {
+            branches.Add(provider);
+        }
+        branches.Sort();
     }
 
     // Internal Methods
 
+    /// <summary>
+    /// Scrolls by the passed value to the next non-null and enabled BranchProvider.
+    /// 
+    /// The method will make at most branches.Count attempts to find the next non-null, enabled BranchProvider in the "direction" of scrollValue.
+    /// </summary>
+    /// <param name="scrollValue">Scroll value.</param>
     private void Scroll(int scrollValue) {
-        BranchProvider[] branches = GetComponents<BranchProvider>();
-        Select(Mathf.Abs((branches.Length + scrollValue + _selectedBranch) % branches.Length));
+        for (int attempts = 0; attempts < branches.Count; attempts += 1) {
+            Select(Mathf.Abs((scrollValue + attempts + _selectedBranch) % branches.Count));
+            BranchProvider selectedBranch = GetSelectedBranch();
+            if (!(selectedBranch is null) && selectedBranch.enabled) {
+                // If the BranchProvider is not null and is enabled, that's that
+                return;
+            }
+        }
+        Debug.Log("No enabled BranchProviders on TreeController Instance!");
     }
 
     /// <summary>
@@ -169,7 +192,7 @@ public class TreeController : RiseBehavior {
     /// <param name="passedIndex">Passed index.</param>
     private void Select(int passedIndex) {
         if (passedIndex != _selectedBranch) {
-            _selectedBranch = passedIndex.Clamp(0, GetComponents<BranchProvider>().Length - 1);
+            _selectedBranch = passedIndex.Clamp(0, branches.Count - 1);
             branchUpdated?.Invoke(passedIndex);
         }
 	}
