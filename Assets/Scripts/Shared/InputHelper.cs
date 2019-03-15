@@ -120,7 +120,7 @@ namespace RiseExtensions {
             foreach (SquirrelInput input in (SquirrelInput[])Enum.GetValues(typeof(SquirrelInput))) {
                 PREVIOUS_SQUIRREL_INPUT[input] = GetAxisRaw(input);
             }
-            foreach (TreeInput input in (TreeInput[])Enum.GetValues(typeof(SquirrelInput))) {
+            foreach (TreeInput input in (TreeInput[])Enum.GetValues(typeof(TreeInput))) {
                 PREVIOUS_TREE_INPUT[input] = GetAxisRaw(input);
             }
         }
