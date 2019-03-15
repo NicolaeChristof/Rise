@@ -338,6 +338,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
+      propertyPath: m_Name
+      value: WaterProDaytime
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalPosition.x
       value: 60.78
@@ -393,10 +397,6 @@ PrefabInstance:
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalScale.z
       value: 12.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-      propertyPath: m_Name
-      value: WaterProDaytime
       objectReference: {fileID: 0}
     - target: {fileID: 11400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: waterMode
@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 641.20496
+  m_PathPosition: 641.275
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -6169,8 +6169,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.016794134, y: 0.4102524, z: 0.0076447874, w: 0.91178536}
-  m_LocalPosition: {x: 39.503674, y: 4.944921, z: 42.118404}
+  m_LocalRotation: {x: -0.017791912, y: 0.38128608, z: 0.0074352445, w: 0.924256}
+  m_LocalPosition: {x: 40.908882, y: 4.901947, z: 40.78418}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -7225,6 +7225,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 2935658018826482390, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6462225555944426797, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7451,6 +7456,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: -41.799805
+      objectReference: {fileID: 0}
+    - target: {fileID: 7799953760928355461, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6867217701145749296, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9186092732260608626, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
@@ -10598,7 +10618,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.016794134, y: 0.4102524, z: 0.0076447874, w: 0.91178536}
+  m_LocalRotation: {x: -0.017791912, y: 0.38128608, z: 0.0074352445, w: 0.924256}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
