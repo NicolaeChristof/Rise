@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 507.04407
+  m_PathPosition: 515.9728
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3198,6 +3198,34 @@ PrefabInstance:
       objectReference: {fileID: 1273465451}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c527457510c84374bc39a0955f5116a, type: 3}
+--- !u!1 &317536447 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 791684158068344546, guid: 6c527457510c84374bc39a0955f5116a,
+    type: 3}
+  m_PrefabInstance: {fileID: 317536446}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &317536448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 317536447}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3d91ade7473f432b9817f83c8805ddc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSap: 8
+  startingSap: 5
+  sapCost: 1
+  branchSprite: {fileID: 21300000, guid: bd413ee9934fdeb479385d1bfb9121b8, type: 3}
+  leafSprite: {fileID: 21300000, guid: 40993389a2c45084d9a503394c218aa8, type: 3}
+  growSound: {fileID: 8300000, guid: d9a28f1e17cd58f4e80b040e43021011, type: 3}
+  cantGrowSound: {fileID: 8300000, guid: 64c274f08f634d04680ac89f3b22beb8, type: 3}
+  minDistance: 0.5
+  branch: {fileID: 4352697463616401196, guid: 59a92ea29efd54ad9810fb5b811ac9f0, type: 3}
+  sapType: 1
 --- !u!1001 &317714687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5810,7 +5838,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 317536446}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 317536447}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eeef18cca6ac64daca93236c41a85ec6, type: 3}
@@ -6071,8 +6099,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.1571761, y: 0.35640267, z: -0.061539993, w: 0.918959}
-  m_LocalPosition: {x: 38.938457, y: 18.417368, z: 36.682526}
+  m_LocalRotation: {x: 0.050064437, y: 0.6960063, z: -0.04912694, w: 0.7146016}
+  m_LocalPosition: {x: 31.800343, y: 10.425153, z: 61.689102}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10500,7 +10528,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.1571761, y: 0.35640267, z: -0.061539993, w: 0.918959}
+  m_LocalRotation: {x: 0.050064437, y: 0.6960063, z: -0.04912694, w: 0.7146016}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17109,11 +17137,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 475141408096447652, guid: dd6885b7ff2e94e4cb846c0e367c226d,
-        type: 3}
-      propertyPath: tree
-      value: 
-      objectReference: {fileID: 469670205}
     - target: {fileID: 475141408096447675, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: m_Name
@@ -17174,6 +17197,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 475141408096447652, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+        type: 3}
+      propertyPath: tree
+      value: 
+      objectReference: {fileID: 469670205}
     - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: playerTarget
@@ -17214,6 +17242,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2298827586175594235, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: m_Name
+      value: Master Controller
+      objectReference: {fileID: 0}
     - target: {fileID: 2298827586175594228, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: squirrelCamera
@@ -17323,11 +17356,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2298827586175594235, guid: 954646146aff04c9c80c9dc838056fcc,
-        type: 3}
-      propertyPath: m_Name
-      value: Master Controller
       objectReference: {fileID: 0}
     - target: {fileID: 2298827586616047074, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
