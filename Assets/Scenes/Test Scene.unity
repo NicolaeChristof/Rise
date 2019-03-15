@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 496.46375
+  m_PathPosition: 507.04407
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3191,6 +3191,11 @@ PrefabInstance:
       propertyPath: tree
       value: 
       objectReference: {fileID: 469670205}
+    - target: {fileID: 791684158068344548, guid: 6c527457510c84374bc39a0955f5116a,
+        type: 3}
+      propertyPath: squirrel
+      value: 
+      objectReference: {fileID: 1273465451}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6c527457510c84374bc39a0955f5116a, type: 3}
 --- !u!1001 &317714687
@@ -5447,7 +5452,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 1273465453}
   treeTransform: {fileID: 469670209}
-  Tree_Controller: {fileID: 0}
+  Tree_Controller: {fileID: 577484134}
   cameraDistance: 7
 --- !u!114 &534669910
 MonoBehaviour:
@@ -5799,6 +5804,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 577035354}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &577484134 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 791684158068344548, guid: 6c527457510c84374bc39a0955f5116a,
+    type: 3}
+  m_PrefabInstance: {fileID: 317536446}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeef18cca6ac64daca93236c41a85ec6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &582561960
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6054,8 +6071,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.01060269, y: 0.2876713, z: 0.0032357888, w: 0.9576651}
-  m_LocalPosition: {x: 37.914513, y: 5.089073, z: 25.268843}
+  m_LocalRotation: {x: 0.1571761, y: 0.35640267, z: -0.061539993, w: 0.918959}
+  m_LocalPosition: {x: 38.938457, y: 18.417368, z: 36.682526}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -7255,7 +7272,7 @@ PrefabInstance:
     - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
       propertyPath: treeController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 577484134}
     - target: {fileID: 6462225557133089122, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_FontData.m_Font
@@ -9779,7 +9796,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 1273465453}
   treeTransform: {fileID: 469670209}
-  Tree_Controller: {fileID: 0}
+  Tree_Controller: {fileID: 577484134}
   cameraDistance: 10
 --- !u!114 &1237406270
 MonoBehaviour:
@@ -10483,7 +10500,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.01060269, y: 0.2876713, z: 0.0032357888, w: 0.9576651}
+  m_LocalRotation: {x: 0.1571761, y: 0.35640267, z: -0.061539993, w: 0.918959}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
