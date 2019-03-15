@@ -18,4 +18,11 @@ namespace RiseExtensions {
         }
     }
 
+    public static class Tags {
+        public static readonly string BRANCH = "Branch";
+        public static readonly string DEADZONE = "Dead Zone";
+        public static readonly string SAP = "Sap";
+        public static readonly string PLAYER = "Player";
+    }
+
 }
