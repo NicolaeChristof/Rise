@@ -154,10 +154,19 @@ public class TreeController : RiseBehavior {
         return _reticleInstance.transform;
     }
 
+    /// <summary>
+    /// Returns the currently-selected BranchProvider.
+    /// </summary>
+    /// <returns>The selected branch.</returns>
     public BranchProvider GetSelectedBranch() {
         return branches[_selectedBranch];
     }
 
+    /// <summary>
+    /// Updates the internally-maintained list of BranchProvider components.
+    /// 
+    /// If BranchProvider instances are added to or removed from the parent Object at runtime, this method MUST be called, otherwise silly things will happen.
+    /// </summary>
     public void UpdateComponents() {
         branches = new List<BranchProvider>();
         foreach (BranchProvider provider in GetComponents<BranchProvider>()) {
