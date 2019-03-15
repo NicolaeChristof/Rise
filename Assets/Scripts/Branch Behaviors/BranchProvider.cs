@@ -2,9 +2,10 @@
 using UnityEngine;
 using DG.Tweening;
 using RiseExtensions;
+using System;
 
 [RequireComponent(typeof(TreeController))]
-public abstract class BranchProvider : RiseBehavior {
+public abstract class BranchProvider : RiseBehavior, IComparable<BranchProvider> {
 
     // Public Fields
     public float maxSap = 8.0F;
@@ -15,6 +16,7 @@ public abstract class BranchProvider : RiseBehavior {
     public AudioClip growSound;
     public AudioClip cantGrowSound;
     public float minDistance = 0.5F;
+    public int sortOrder;
 
     // Internal Fields
     protected float _currentSap;
@@ -119,9 +121,17 @@ public abstract class BranchProvider : RiseBehavior {
         return true;
     }
 
+    // Abstract Methods
+
     /// <summary>
     /// This method should return the branch GameObject that will be placed by this BranchProvider instance.
     /// </summary>
     /// <returns>The branch to be placed.</returns>
     public abstract GameObject GetBranch();
+
+    // IComparable Compliance Method
+
+    public int CompareTo(BranchProvider other) {
+        return sortOrder.CompareTo(other.sortOrder);
+    }
 }
