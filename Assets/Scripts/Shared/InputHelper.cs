@@ -26,7 +26,7 @@ namespace RiseExtensions {
 
 		BRANCH_PLACE,
 		BRANCH_REMOVE,
-		SELECT_LEFT,
+		// SELECT_LEFT,
 		SELECT_RIGHT,
 	};
 
