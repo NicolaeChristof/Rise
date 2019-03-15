@@ -113,6 +113,7 @@ public class TreeController : RiseBehavior {
     public void UpdateSap(SapType type, float quantity) {
         foreach (BranchProvider provider in GetComponents<BranchProvider>()) {
             provider.UpdateSap(type, quantity);
+            sapUpdated?.Invoke(quantity, (int)type);
         }
     }
 
