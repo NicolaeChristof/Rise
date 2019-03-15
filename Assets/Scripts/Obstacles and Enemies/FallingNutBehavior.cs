@@ -30,7 +30,7 @@ public class FallingNutBehavior : MonoBehaviour {
 
         if (transform.position.y < 3) {
 
-            Invoke("SelfDestruct", 0.2f);
+            Destroy(this);
 
         }
         
