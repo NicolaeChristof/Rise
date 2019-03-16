@@ -354,6 +354,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_PAUSE);
 			profile.RegisterBinding(SquirrelInput.SWAP, KEY_SWAP);
 			profile.RegisterBinding(SquirrelInput.JUMP, KEY_JUMP);
+            profile.RegisterBinding(SquirrelInput.ACTION_1, KEY_ACTION_1);
 
 			// Tree Controls
 			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, KEY_MOVE_H);
