@@ -158,4 +158,8 @@ public class SettingsController : RiseBehavior {
 
     }
 
+    void LateUpdate() {
+        InputHelper.LateCheck();
+    }
+
 }

@@ -28,6 +28,9 @@ public class UIController : RiseBehavior {
     // The tracking camera on the main menu
     public Camera _trackCam;
 
+    // A reference to the TreeController
+    public TreeController treeController;
+
     // Select Actions are the functions that get called
     // when you hit a menu option. You pass in a bool
     // that indicates whether you want to perform this
@@ -121,8 +124,8 @@ public class UIController : RiseBehavior {
         //heightUI = FindObjectOfType<HeightUIInfo>();
         heightUIText.gameObject.SetActive(false);
 
-        TreeController.sapUpdated += UpdateSapBar;
-        TreeController.branchUpdated += UpdateBranchSelected;
+        treeController.sapUpdated += UpdateSapBar;
+        treeController.branchUpdated += UpdateBranchSelected;
     }
 
 
@@ -167,12 +170,6 @@ public class UIController : RiseBehavior {
             if (_pressedSelect) {
                 _currentSelectAction(true);
             }
-
-            if (currentMenu == 0 || currentMenu == 2) {
-                _trackCam.depth = 0;
-            } else {
-                _trackCam.depth = -2;
-            }
         }
 
         //---Height UI---
@@ -182,13 +179,7 @@ public class UIController : RiseBehavior {
     }
 
     public override void UpdateTick() {
-        if (GameModel.isSquirrel) {
-            _pressedPause = InputHelper.GetButtonDown(SquirrelInput.PAUSE);
-        } else {
-            _pressedPause = InputHelper.GetButtonDown(TreeInput.PAUSE);
-        }
-
-        if (_pressedPause) {
+        if (InputHelper.Pause()) {
             PauseEvent(true);
         }
 
@@ -321,9 +312,9 @@ public class UIController : RiseBehavior {
 
         foreach(GameObject leaf in _branchLeaves[branchType]) {
             if (i < sapValue) {
-                leaf.SetActive(true);
+                leaf?.SetActive(true);
             } else {
-                leaf.SetActive(false);
+                leaf?.SetActive(false);
             }
             i++;
         }
