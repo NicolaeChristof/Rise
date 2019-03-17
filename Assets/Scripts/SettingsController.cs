@@ -39,40 +39,7 @@ public class SettingsController : RiseBehavior {
 
         InputHelper.Initialize();
 
-        // Can only use keyboard in single player mode
-        if (!GameModel.inputGamePad) {
-
-            GameModel.singlePlayer = true;
-
-        }
-
-        // Single/Multi Player Settings
-        if (GameModel.singlePlayer) {
-
-            GameModel.splitScreen = false;
-
-            if (GameModel.inputGamePad) {
-
-                // by default controls are set for game pad
-
-                GameModel.singlePlayer = true;
-
-            } else {
-
-				InputHelper.SetKeyboard(InputHelper.PlayerOne);
-            }
-
-        } else {
-
-            // Force GamePad input in multiplayer
-            GameModel.inputGamePad = true;
-
-            // Force split screen mode in multiplayer
-            GameModel.splitScreen = true;
-
-            // by default controls are set for game pad
-
-        }
+        EnforceModes();
 
         // Split Screen Settings
         if (GameModel.splitScreen) {
@@ -136,7 +103,7 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + (GameModel.timer % 60).ToString("F0");
 
-                Debug.Log(GameModel.displayTime);
+                // Debug.Log(GameModel.displayTime);
 
             } else {
 
@@ -160,6 +127,47 @@ public class SettingsController : RiseBehavior {
 
     void LateUpdate() {
         InputHelper.LateCheck();
+    }
+
+    // Internal Methods
+
+    private void EnforceModes() {
+        // Can only use keyboard in single player mode
+        if (!GameModel.inputGamePad) {
+
+            GameModel.singlePlayer = true;
+
+        }
+
+        // Single/Multi Player Settings
+        if (GameModel.singlePlayer) {
+
+            GameModel.splitScreen = false;
+
+            if (GameModel.inputGamePad) {
+
+                // by default controls are set for game pad
+
+                GameModel.singlePlayer = true;
+
+            }
+            else {
+
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+            }
+
+        }
+        else {
+
+            // Force GamePad input in multiplayer
+            GameModel.inputGamePad = true;
+
+            // Force split screen mode in multiplayer
+            GameModel.splitScreen = true;
+
+            // by default controls are set for game pad
+
+        }
     }
 
 }
