@@ -6,8 +6,6 @@ using DG.Tweening;
 public class FallingNutBehavior : MonoBehaviour {
 
     // Public References
-    public GameObject self;
-
     public AudioClip fallingSound;
 
     public AudioClip thunkSound;
@@ -73,7 +71,7 @@ public class FallingNutBehavior : MonoBehaviour {
         _source.PlayOneShot(thunkSound, _volume);
 
         transform.DOScale(_newScale, 0.75f)
-                .OnComplete(()=>selfDestruct());
+                .OnComplete(()=>Destroy(this));
 
     }
 
@@ -86,12 +84,6 @@ public class FallingNutBehavior : MonoBehaviour {
     void OnCollisionExit (Collision collision) {
 
 
-
-    }
-
-    private void selfDestruct () {
-
-        Destroy(self);
 
     }
 }

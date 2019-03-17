@@ -56,10 +56,10 @@ public class TreeController : RiseBehavior {
     private const float DISTANCE = 2.0F;
 
     public delegate void SapChangeEvent(float sapValue, int branchType);
-    public static event SapChangeEvent sapUpdated;
+    public event SapChangeEvent sapUpdated;
 
     public delegate void BranchChangeEvent(int branchType);
-    public static event BranchChangeEvent branchUpdated;
+    public event BranchChangeEvent branchUpdated;
 
     void Start() {
         // Establish local references
@@ -68,8 +68,6 @@ public class TreeController : RiseBehavior {
 
         _originalScale = _reticle.transform.localScale;
         _newScale = new Vector3(_originalScale.x, _originalScale.y, _originalScale.z + 0.1f);
-
-        transform.Translate(0.0f, 3.0f, 0.0f);
 
         _source = _reticle.AddComponent<AudioSource>() as AudioSource;
         _source.playOnAwake = false;
@@ -101,64 +99,29 @@ public class TreeController : RiseBehavior {
         float moveVertical;
         float moveLateral;
 
-        if (GameModel.singlePlayer) {
-
-            if (!GameModel.isSquirrel) {
-
-                // Poll Input
-                moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
-                moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
-
-                _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
-
-            } else {
-
-                moveVertical = 0.0f;
-                moveLateral = 0.0f;
-
-            }
-
-        } else {
-
-            // Poll Input
-            moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
-            moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
-
-            _grow = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
-
-        }
+        moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+        moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
+        _grow = InputHelper.GetAnyDown(TreeInput.BRANCH_PLACE);
 
         bool moved = false;
 
-        // Keep tree player close to squirrel player and out of the ground
-        if ((transform.position.y - moveVertical > groundHeight) &&
-            (transform.position.y - moveVertical > player.transform.position.y - playerDistance) &&
-            (transform.position.y - moveVertical < player.transform.position.y + playerDistance)) {
-
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                moved = true;
+        // If vertical axis is actuated beyond epsilon value, translate reticle vertically
+        if (CheckEpsilon(moveVertical)) {
+            float idealMove = (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1;
+            // Ensure reticle is out of the ground
+            if (idealMove + transform.position.y > groundHeight) {
+                // Ensure reticle is close to squirrel
+                // Case 1: verticallyClose - If ideal move doesn't put the reticle out of range
+                bool verticallyClose = System.Math.Abs((idealMove + transform.position.y) - player.transform.position.y) < playerDistance;
+                // Case 2: If squirrel is out of range below reticle, but reticle is moving downwards towards squirrel, permit motion
+                bool squirrelBelow = (transform.position.y > player.transform.position.y) && (idealMove + transform.position.y < transform.position.y);
+                // Case 3: if squirrel is out of range above reticle, but reticle is moving upwards towards squirrel, permit motion
+                bool squirrelAbove = (transform.position.y < player.transform.position.y) && (idealMove + transform.position.y > transform.position.y);
+                if (verticallyClose || squirrelBelow || squirrelAbove) {
+                    transform.Translate(Vector3.up * idealMove, Space.World);
+                    moved = true;
+                }
             }
-
-        } else if ((transform.position.y > player.transform.position.y + playerDistance) &&
-                   (moveVertical > 0)) {
-
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                 moved = true;
-            }
-
-        } else if ((transform.position.y < player.transform.position.y - playerDistance) &&
-                   (moveVertical < 0)) {
-
-            // If vertical axis is actuated beyond epsilon value, translate reticle vertically
-            if (CheckEpsilon(moveVertical)) {
-                transform.Translate(Vector3.up * (moveVertical * Time.deltaTime * VERTICAL_SPEED) * -1, Space.World);
-                moved = true;
-            }
-
         }
 
         // If horizontal axis is actuated beyond epsilon value, translate reticle horizontally
@@ -168,61 +131,20 @@ public class TreeController : RiseBehavior {
         }
 
         // If the controller was actuated, move the reticle object
-        if (moved) {
-            UpdateReticle();
-        }
+        UpdateReticle();
 
         // Handle Branch Selection
-        if (InputHelper.GetButtonDown(TreeInput.SELECT_RIGHT)) {
-
-            if (GameModel.singlePlayer) {
-
-                if (!GameModel.isSquirrel) {
-
-                    int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
-                    int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                    _selectedBranch = selected;
-                    if (branchUpdated != null) {
-                        branchUpdated(_selectedBranch);
-                    }
-                }
-
-            } else {
-
-                int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
-                int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
-                _selectedBranch = selected;
-                if (branchUpdated != null) {
-                    branchUpdated(_selectedBranch);
-                }
+        if (InputHelper.GetAnyDown(TreeInput.SELECT_RIGHT)) {
+            int scrollDirection = Mathf.RoundToInt(InputHelper.GetAxis(TreeInput.SELECT_RIGHT));
+            int selected = Mathf.Abs((_branches.Length + scrollDirection + _selectedBranch) % _branches.Length);
+            _selectedBranch = selected;
+            if (branchUpdated != null) {
+                branchUpdated(_selectedBranch);
             }
-
         }
 
-        // Handle Growth
-        if (GameModel.inputGamePad) {
-
-            if (GameModel.singlePlayer) {
-
-                if (!GameModel.isSquirrel) {
-
-                    if (_grow) {
-						AttemptGrowBranch();
-					}
-
-                }
-
-            } else {
-
-                if (_grow) {
-					AttemptGrowBranch();
-				}
-
-            }
-
-		}
 		// Handle Break
-		if (CheckEpsilon(InputHelper.GetAxis(TreeInput.BRANCH_REMOVE)) || (InputHelper.GetButtonDown(TreeInput.BRANCH_REMOVE))) {
+		if (InputHelper.GetAnyDown(TreeInput.BRANCH_REMOVE)) {
 			float distance = float.MaxValue;
 			GameObject closestBranch = null;
 			Collider[] colliders = Physics.OverlapSphere(_reticle.transform.position, minDistance);
@@ -241,23 +163,16 @@ public class TreeController : RiseBehavior {
                 closestBranch.transform.DOScale(Vector3.zero, 0.75f)
                     .OnComplete(()=> Object.Destroy(closestBranch));
 			}
-		} else {
+		}
 
-            if (!GameModel.isSquirrel) {
-
-                if (InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE)) {
-					AttemptGrowBranch();
-				}
-
-            }
-
+        // Handle Growth 
+        else if (_grow) {
+            AttemptGrowBranch();
         }
 
     }
 
     public override void UpdateAlways() {
-
-
 
     }
 
@@ -314,9 +229,7 @@ public class TreeController : RiseBehavior {
     public void UpdateSap(float passedValue, int branchType) {
         _currentSap[branchType] = Mathf.Clamp(_currentSap[branchType] + passedValue, 0.0F, maxSap[_selectedBranch]);
 
-        if (sapUpdated != null) {
-            sapUpdated(_currentSap[branchType], branchType);
-        }
+        sapUpdated?.Invoke(_currentSap[branchType], branchType);
     }
 
 
