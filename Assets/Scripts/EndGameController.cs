@@ -29,9 +29,15 @@ public class EndGameController : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            Debug.Log("hello");
+            Debug.Log("YOU WIN!");
+
+            GameModel.enableTimer = false;
 
             GameModel.endGame = true;
+
+            vcam1.SetActive(false);
+
+            vcam2.SetActive(true);
 
         }
 
