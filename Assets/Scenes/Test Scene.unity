@@ -2685,7 +2685,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 717.97986
+  m_PathPosition: 718.8657
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -4637,7 +4637,6 @@ GameObject:
   - component: {fileID: 469670208}
   - component: {fileID: 469670207}
   - component: {fileID: 469670206}
-  - component: {fileID: 469670210}
   m_Layer: 0
   m_Name: Tree
   m_TagString: Tree
@@ -4722,19 +4721,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &469670210
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 469670205}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1, z: 1.0000002}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &473404585
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6200,8 +6186,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.024545556, y: -0.7482948, z: -0.02757012, w: 0.66233855}
-  m_LocalPosition: {x: 105.58988, y: 2.8661199, z: 67.771286}
+  m_LocalRotation: {x: 0.010006272, y: 0.8859717, z: 0.018990846, w: -0.46324217}
+  m_LocalPosition: {x: 100.14358, y: 4.120771, z: 88.65688}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10842,7 +10828,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.024545556, y: -0.7482948, z: -0.02757012, w: 0.66233855}
+  m_LocalRotation: {x: 0.010006272, y: 0.8859717, z: 0.018990846, w: -0.46324217}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
