@@ -13,6 +13,8 @@ public static class GameModel {
 
     public static bool paused = false;
 
+    public static bool endGame = false;
+
     public static bool isSquirrel = true;
 
     public static bool debugMode = false;
