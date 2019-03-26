@@ -252,6 +252,7 @@ public class UIController : RiseBehavior {
         GameModel.isSquirrel = true;
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.endGame = false;
     }
 
     public void QualityEvent(bool isTrue) {
@@ -280,6 +281,12 @@ public class UIController : RiseBehavior {
     public void OpenMenu(int menu, bool inMenu) {
         menuObjects[currentMenu].SetActive(false);
         currentMenu = menu;
+
+        if(currentMenu == 1) {
+            GameModel.menuCameraEnabled = false;
+        } else {
+            GameModel.menuCameraEnabled = true;
+        }
 
         if (inMenu) {
             GameModel.inMenu = true;
