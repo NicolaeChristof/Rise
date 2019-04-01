@@ -68,15 +68,6 @@ public class UIController : RiseBehavior {
     private bool _pressedSelect = false;
     private bool _pressedPause = false;
 
-    //--------Sap UI---------
-    /* -o-
-    public GameObject[] sapBranchBars = new GameObject[4];
-
-    private List<GameObject>[] _branchLeaves;
-    private int _currentBranchSelected;
-    -o-*/
-    //-----------------------
-
     //------Height UI--------
     public HeightUIInfo heightUI;
 
@@ -117,27 +108,11 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
-        /*-o-
-        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
-
-        for(int k=0; k<sapBranchBars.Length; k++) {
-            _branchLeaves[k] = SetBranchLeaves(k);
-        }
-        -o-*/
-
-    //heightUI = FindObjectOfType<HeightUIInfo>();
-    heightUIText.gameObject.SetActive(false);
-
-        /*-o-
-        treeController.sapUpdated += UpdateSapBar;
-        treeController.branchUpdated += UpdateBranchSelected;
-        -o-*/
+        heightUIText.gameObject.SetActive(false);
     }
 
 
     public override void UpdateAlways() {
-        // Debug.Log(GameModel.paused);
-
         if (GameModel.isSquirrel) {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
             _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
@@ -223,11 +198,6 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
-        /*-o-
-        for (int i = 0; i < sapBranchBars.Length; i++) {
-            sapBranchBars[i].gameObject.SetActive(false);
-        }
-        */
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
         heightUISlider.gameObject.SetActive(false);
@@ -237,18 +207,13 @@ public class UIController : RiseBehavior {
         GameModel.singlePlayer = true;
         OpenMenu(1, false);
         GameModel.paused = false;
-        /*-o-
-        UpdateBranchSelected(_currentBranchSelected);
-        -o-*/
     }
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
         OpenMenu(1, false);
         GameModel.paused = false;
-        /*-o-
-        UpdateBranchSelected(_currentBranchSelected);
-        -o-*/
+
     }
 
     public void OptionsEvent(bool isTrue) {
@@ -256,11 +221,6 @@ public class UIController : RiseBehavior {
     }
 
     public void RestartEvent(bool isTrue) {
-        /*-o-
-        for(int i=0; i<sapBranchBars.Length; i++) {
-            UpdateSapBar(8f, i);
-        }
-        -o-*/
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
         GameModel.isSquirrel = true;
@@ -320,42 +280,4 @@ public class UIController : RiseBehavior {
             heightUISlider.gameObject.SetActive(true);
         }
     }
-
-    /* -o-
-    public void UpdateSapBar(float sapValue, int branchType) {
-        int i = 0;
-
-        foreach(GameObject leaf in _branchLeaves[branchType]) {
-            if (i < sapValue) {
-                leaf?.SetActive(true);
-            } else {
-                leaf?.SetActive(false);
-            }
-            i++;
-        }
-    }
-
-    public void UpdateBranchSelected(int branchSelected) {
-        if (currentMenu != 0) {
-            sapBranchBars[_currentBranchSelected].gameObject.SetActive(false);
-            sapBranchBars[branchSelected].gameObject.SetActive(true);
-            _currentBranchSelected = branchSelected;
-        }
-    }
-
-    /// <summary>
-    /// Assigns a list of leaf Game Objects to each UI branch.
-    /// </summary>
-    private List<GameObject> SetBranchLeaves(int branch) {
-        List<GameObject> leaves = new List<GameObject>();
-
-        for (int j = 0; j < sapBranchBars[branch].transform.GetChild(0).childCount; j++) {
-            leaves.Add(sapBranchBars[branch].transform.GetChild(0).GetChild(j).gameObject);
-        }
-
-        leaves.Reverse();
-
-        return leaves;
-    }
-    -o- */
-    }
+}
