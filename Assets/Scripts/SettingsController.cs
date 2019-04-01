@@ -20,6 +20,7 @@ public class SettingsController : RiseBehavior {
 
     // Public Fields
     public float pauseDOF;
+    public bool enforceModes;
 
     // Private References
 
@@ -39,30 +40,15 @@ public class SettingsController : RiseBehavior {
 
         InputHelper.Initialize();
 
-        EnforceModes();
-
-        // Split Screen Settings
-        if (GameModel.splitScreen) {
-
-            squirrelCamera.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
-
-            treeCamera.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
-
-            squirrelCamera.enabled = true;
-
-            treeCamera.enabled = true;
-
+        if (enforceModes) {
+            EnforceModes();
         } else {
-
-            squirrelCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-
-            treeCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-
-            squirrelCamera.enabled = true;
-
-            treeCamera.enabled = false;
-
+            if (!GameModel.inputGamePad) {
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+            }
         }
+
+        SetCameras();
 
     }
 
@@ -119,6 +105,31 @@ public class SettingsController : RiseBehavior {
 
     }
 
+    public void SetCameras() {
+        // Split Screen Settings
+        if (GameModel.splitScreen) {
+
+            squirrelCamera.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+
+            treeCamera.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+
+            squirrelCamera.enabled = true;
+
+            treeCamera.enabled = true;
+
+        } else {
+
+            squirrelCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
+            treeCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
+            squirrelCamera.enabled = true;
+
+            treeCamera.enabled = false;
+
+        }
+    }
+
     public override void UpdateAlways() {
 
 
@@ -150,14 +161,12 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.singlePlayer = true;
 
-            }
-            else {
+            } else {
 
                 InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
 
-        }
-        else {
+        } else {
 
             // Force GamePad input in multiplayer
             GameModel.inputGamePad = true;

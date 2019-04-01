@@ -9,6 +9,10 @@ using RiseExtensions;
 
 public class UIController : RiseBehavior {
 
+    // A reference to the settings controller for ensuring cameras
+    // are set up correctly
+    public SettingsController settingsController;
+
     // The Game Objects that hold each menu
     public GameObject mainMenuObject;
     public GameObject pauseMenuObject;
@@ -161,6 +165,7 @@ public class UIController : RiseBehavior {
         heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
+
     }
 
     public override void UpdateTick() {
@@ -226,6 +231,11 @@ public class UIController : RiseBehavior {
 
     public void SinglePlayerEvent(bool isTrue) {
         GameModel.singlePlayer = true;
+        GameModel.splitScreen = false;
+
+        if (settingsController != null) {
+            settingsController.SetCameras();
+        }
 
         List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
         List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
@@ -237,6 +247,11 @@ public class UIController : RiseBehavior {
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
+        GameModel.splitScreen = true;
+
+        if (settingsController != null) {
+            settingsController.SetCameras();
+        }
 
         List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
         List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
@@ -258,11 +273,13 @@ public class UIController : RiseBehavior {
     public void RestartEvent(bool isTrue) {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
-        GameModel.isSquirrel = true;
 
-        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
-        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-        SetActiveInactive(active, inactive);
+        if (GameModel.singlePlayer) {
+            GameModel.isSquirrel = true;
+            SinglePlayerEvent(true);
+        } else {
+            TwoPlayerEvent(true);
+        }
 
         OpenMenu(1, false);
         GameModel.paused = false;
