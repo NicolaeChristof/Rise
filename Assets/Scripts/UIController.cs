@@ -187,13 +187,17 @@ public class UIController : RiseBehavior {
     void Select(int button) {
         for(int i = 0; i < listsOfOptionLists[currentMenu].Count; i++) {
             for (int j = 0; j < listsOfOptionLists[currentMenu][i].transform.childCount; j++) {
-                listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.SetActive(false);
+                if (listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.tag != "Static Option") {
+                    listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.SetActive(false);
+                }
             }
         }
 
         _buttonSelected = button;
         for (int l = 0; l < listsOfOptionLists[currentMenu][_buttonSelected].transform.childCount; l++) {
-            listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.SetActive(true);
+            if (listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.tag != "Static Option") {
+                listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.SetActive(true);
+            }
         }
         _currentSelectAction = _listsOfSelectActions[currentMenu][_buttonSelected];
     }
@@ -292,17 +296,26 @@ public class UIController : RiseBehavior {
     }
 
     public void ControllerEvent(bool isTrue) {
+        bool controllerConnected = (Input.GetJoystickNames().Length > 0);
+
         if (GameModel.inputGamePad) {
             GameModel.inputGamePad = false;
-            controllerText.text = "Control Method: Keyboard";
+            controllerText.text = "Keyboard";
+            InputHelper.SetKeyboard(InputHelper.PlayerOne);
         } else {
-            GameModel.inputGamePad = true;
-            controllerText.text = "Control Method: Controller";
+            if (controllerConnected) {
+                GameModel.inputGamePad = true;
+                controllerText.text = "Controller";
+                InputHelper.Initialize();
+            } else {
+                controllerText.text = "Keyboard (No Controller)";
+            }
         }
     }
 
     public void QualityEvent(bool isTrue) {
-        Debug.Log("Quality Activated");
+        string[] qualityOptions = new string[] { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
+        QualitySettings.DecreaseLevel();
     }
 
     public void ExitGameEvent(bool isTrue) {
