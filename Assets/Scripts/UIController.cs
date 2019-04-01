@@ -68,6 +68,10 @@ public class UIController : RiseBehavior {
     private bool _pressedSelect = false;
     private bool _pressedPause = false;
 
+    //------Branch UI--------
+    public GameObject uiBranches;
+    //-----------------------
+
     //------Height UI--------
     public HeightUIInfo heightUI;
 
@@ -154,7 +158,7 @@ public class UIController : RiseBehavior {
         }
 
         //---Height UI---
-        heightUIText.text = "Height: " + heightUI.currentHeight.ToString("F1") + "m";
+        heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
     }
@@ -186,37 +190,68 @@ public class UIController : RiseBehavior {
     }
 
     public void PauseEvent(bool isTrue) {
+        // Pause the game
         if (!GameModel.paused) {
+
             GameModel.paused = true;
-            heightUIText.gameObject.SetActive(true);
+
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { };
+            SetActiveInactive(active, inactive);
+
             OpenMenu(1, true);
+
+        // Unpause the game
         } else {
+
             GameModel.paused = false;
+
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+
             OpenMenu(1, false);
-            heightUIText.gameObject.SetActive(false);
+
         }
     }
 
     public void MenuEvent(bool isTrue) {
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
-        heightUISlider.gameObject.SetActive(false);
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
     }
 
     public void SinglePlayerEvent(bool isTrue) {
         GameModel.singlePlayer = true;
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
     }
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
 
     }
 
     public void OptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(2, true);
     }
 
@@ -224,6 +259,11 @@ public class UIController : RiseBehavior {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
         GameModel.isSquirrel = true;
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
     }
@@ -243,11 +283,20 @@ public class UIController : RiseBehavior {
     public void ExitFromPauseEvent(bool isTrue) {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = true;
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(0, true);
         GameModel.paused = true;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(0, true);
     }
 
@@ -278,6 +327,20 @@ public class UIController : RiseBehavior {
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
             heightUISlider.gameObject.SetActive(true);
+        }
+    }
+
+    private void SetActiveInactive(List<GameObject> activeObjects, List<GameObject> inactiveObjects) {
+        foreach(GameObject activeObject in activeObjects) {
+            if (!activeObject.activeSelf) {
+                activeObject.SetActive(true);
+            }
+        }
+
+        foreach (GameObject inactiveObject in inactiveObjects) {
+            if (inactiveObject.activeSelf) {
+                inactiveObject.SetActive(false);
+            }
         }
     }
 }
