@@ -1318,7 +1318,7 @@ GameObject:
   - component: {fileID: 1433311022587435874}
   - component: {fileID: 1307865615456694388}
   m_Layer: 5
-  m_Name: Credits Option
+  m_Name: Quality Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1385,7 +1385,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Credits (Unimplemented)
+  m_Text: 'Graphics Level: -----'
 --- !u!1 &1625937919834592736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1478,7 +1478,7 @@ GameObject:
   - component: {fileID: 6717503375149506081}
   - component: {fileID: 3125941555569735742}
   m_Layer: 5
-  m_Name: Quality Option
+  m_Name: Control Option
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1545,7 +1545,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Qualilty (Unimplemented)
+  m_Text: 'Control Method: -----'
 --- !u!1 &4453689805335904600
 GameObject:
   m_ObjectHideFlags: 0
@@ -2097,6 +2097,7 @@ MonoBehaviour:
   heightUI: {fileID: 0}
   heightUIText: {fileID: 6462225557133089122}
   heightUISlider: {fileID: 6462225555729219406}
+  controllerText: {fileID: 0}
 --- !u!1 &6462225557133089120
 GameObject:
   m_ObjectHideFlags: 0

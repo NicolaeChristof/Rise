@@ -84,6 +84,10 @@ public class UIController : RiseBehavior {
     public Slider heightUISlider;
     //-----------------------
 
+    //------Options UI-----
+    public Text controllerText;
+    //---------------------
+
     private void Start() {
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject };
@@ -92,7 +96,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions = new List<List<_selectAction>>();
         _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, OptionsEvent, ExitGameEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, RestartEvent, ExitFromPauseEvent });
-        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, CreditsEvent, ExitFromOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { ControllerEvent, QualityEvent, ExitFromOptionsEvent });
 
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
@@ -287,12 +291,18 @@ public class UIController : RiseBehavior {
         GameModel.paused = false;
     }
 
-    public void QualityEvent(bool isTrue) {
-        Debug.Log("Quality Activated");
+    public void ControllerEvent(bool isTrue) {
+        if (GameModel.inputGamePad) {
+            GameModel.inputGamePad = false;
+            controllerText.text = "Control Method: Keyboard";
+        } else {
+            GameModel.inputGamePad = true;
+            controllerText.text = "Control Method: Controller";
+        }
     }
 
-    public void CreditsEvent(bool isTrue) {
-        Debug.Log("Credits Activated");
+    public void QualityEvent(bool isTrue) {
+        Debug.Log("Quality Activated");
     }
 
     public void ExitGameEvent(bool isTrue) {
