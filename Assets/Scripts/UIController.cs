@@ -247,7 +247,9 @@ public class UIController : RiseBehavior {
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
-        GameModel.splitScreen = true;
+        if (!settingsController.enforceModes) {
+            GameModel.splitScreen = true;
+        }
 
         if (settingsController != null) {
             settingsController.SetCameras();

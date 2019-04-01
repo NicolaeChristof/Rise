@@ -2709,7 +2709,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 652.6311
+  m_PathPosition: 652.7312
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -6175,8 +6175,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.008936722, y: -0.04293447, z: -0.00037094866, w: 0.99903786}
-  m_LocalPosition: {x: 66.75605, y: 5.209156, z: 13.089548}
+  m_LocalRotation: {x: -0.008585484, y: -0.05746259, z: -0.00048191744, w: 0.9983106}
+  m_LocalPosition: {x: 68.20325, y: 5.229779, z: 13.1268425}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10666,7 +10666,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.008936722, y: -0.04293447, z: -0.00037094866, w: 0.99903786}
+  m_LocalRotation: {x: -0.008585484, y: -0.05746259, z: -0.00048191744, w: 0.9983106}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17454,6 +17454,11 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1734308155}
+    - target: {fileID: 2298827586175594228, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: enforceModes
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2298827586175594230, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: dayLight
