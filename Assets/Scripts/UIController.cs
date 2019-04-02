@@ -86,6 +86,9 @@ public class UIController : RiseBehavior {
 
     //------Options UI-----
     public Text controllerText;
+    public Text qualityText;
+
+    public OptionsUI optionsUI;
     //---------------------
 
     private void Start() {
@@ -314,8 +317,8 @@ public class UIController : RiseBehavior {
     }
 
     public void QualityEvent(bool isTrue) {
-        string[] qualityOptions = new string[] { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
-        QualitySettings.DecreaseLevel();
+        optionsUI.ChangeQuality(true);
+        qualityText.text = optionsUI.GetCurrentQuality();
     }
 
     public void ExitGameEvent(bool isTrue) {

@@ -1384,7 +1384,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: Controller
+  m_Text: '-----'
 --- !u!1 &1052201281703762651
 GameObject:
   m_ObjectHideFlags: 0
@@ -1421,7 +1421,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -117.1, y: -60}
+  m_AnchoredPosition: {x: -30.87, y: -60}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &1433311022587435874
@@ -1582,7 +1582,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -117.1, y: 40}
+  m_AnchoredPosition: {x: -30.87, y: 40}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6717503375149506081
@@ -2179,6 +2179,8 @@ MonoBehaviour:
   heightUIText: {fileID: 6462225557133089122}
   heightUISlider: {fileID: 6462225555729219406}
   controllerText: {fileID: 0}
+  qualityText: {fileID: 0}
+  optionsUI: {fileID: 0}
 --- !u!1 &6462225557133089120
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,11 +2511,11 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 0dba26caad0583849ab1f02bd5fe1071, type: 3}
-    m_FontSize: 56
+    m_FontSize: 42
     m_FontStyle: 0
     m_BestFit: 1
-    m_MinSize: 5
-    m_MaxSize: 56
+    m_MinSize: 4
+    m_MaxSize: 42
     m_Alignment: 3
     m_AlignByGeometry: 0
     m_RichText: 1
