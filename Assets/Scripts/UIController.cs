@@ -67,7 +67,6 @@ public class UIController : RiseBehavior {
     // Unsure if still using this
     private bool justPaused = false;
 
-    // Still unsure if using these
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
     private bool _pressedPause = false;
@@ -172,6 +171,10 @@ public class UIController : RiseBehavior {
         heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
+
+        //---Options UI---
+        List<string> currentScrollable;
+        //----------------
 
     }
 
@@ -319,6 +322,7 @@ public class UIController : RiseBehavior {
     public void QualityEvent(bool isTrue) {
         optionsUI.ChangeQuality(true);
         qualityText.text = optionsUI.GetCurrentQuality();
+        optionsUI.currentScrollable = optionsUI.qualityScrollable;
     }
 
     public void ExitGameEvent(bool isTrue) {
