@@ -103,8 +103,6 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + (GameModel.timer % 60).ToString("F0");
 
-                // Debug.Log(GameModel.displayTime);
-
             } else {
 
                 Debug.Log("GAME OVER!");
@@ -114,6 +112,8 @@ public class SettingsController : RiseBehavior {
                 GameModel.paused = true;
 
             }
+
+            // Debug.Log(GameModel.displayTime);
 
         }
 

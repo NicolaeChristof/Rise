@@ -13,7 +13,7 @@ namespace RiseExtensions {
 		PAUSE,
 
 		JUMP,
-        ACTION_1,
+        INTERACT,
     };
 
 	public enum TreeInput {
@@ -78,12 +78,12 @@ namespace RiseExtensions {
         public readonly static string[] KEY_MOVE_V = { "Keyboard_player_v", "Keyboard_player_v" };
         public readonly static string[] KEY_CAMERA_H = { "Keyboard_camera_h", "Keyboard_camera_h" };
         public readonly static string[] KEY_CAMERA_V = { "Keyboard_camera_v", "Keyboard_camera_v" };
-        public readonly static string[] KEY_JUMP = { "Keyboard_jump", "Keyboard_jump" };
-        public readonly static string[] KEY_SELECT = { "Keyboard_next", "Keyboard_next" };
-        public readonly static string[] KEY_ACTION_1 = { "Keyboard_trigger", "Keyboard_trigger" };
-        public readonly static string[] KEY_ACTION_2 = { "Keyboard_break", "Keyboard_break" };
-        public readonly static string[] KEY_SWAP = { "Keyboard_swap_player", "Keyboard_swap_player" };
-        public readonly static string[] KEY_PAUSE = { "Keyboard_pause", "Keyboard_pause" };
+        public readonly static string[] KEY_JUMP = { "Keyboard_space", "Keyboard_space" };
+        public readonly static string[] KEY_SELECT = { "Keyboard_e", "Keyboard_e" };
+        public readonly static string[] KEY_ACTION_1 = { "Keyboard_space", "Keyboard_space" };
+        public readonly static string[] KEY_ACTION_2 = { "Keyboard_f", "Keyboard_f" };
+        public readonly static string[] KEY_SWAP = { "Keyboard_r", "Keyboard_r" };
+        public readonly static string[] KEY_PAUSE = { "Keyboard_esc", "Keyboard_esc" };
 
         public static void Initialize() {
             // Initialize Control Profiles
@@ -326,7 +326,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.SWAP, Y);
 
 			profile.RegisterBinding(SquirrelInput.JUMP, A);
-            profile.RegisterBinding(SquirrelInput.ACTION_1, X);
+            profile.RegisterBinding(SquirrelInput.INTERACT, X);
 
             // Tree Controls
             profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, LS_h);
@@ -354,7 +354,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_PAUSE);
 			profile.RegisterBinding(SquirrelInput.SWAP, KEY_SWAP);
 			profile.RegisterBinding(SquirrelInput.JUMP, KEY_JUMP);
-            profile.RegisterBinding(SquirrelInput.ACTION_1, KEY_ACTION_1);
+            profile.RegisterBinding(SquirrelInput.INTERACT, KEY_ACTION_2);
 
 			// Tree Controls
 			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, KEY_MOVE_H);
