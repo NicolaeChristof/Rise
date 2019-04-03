@@ -10,6 +10,7 @@ public class CameraPauseHandler : RiseBehavior {
     public bool enableOnSingleplayer;
     public bool enableOnPause;
     public bool enableOnPlay;
+    public bool enableOnEnd;
 
     void Start() {
         if (GameModel.singlePlayer) {
@@ -18,11 +19,14 @@ public class CameraPauseHandler : RiseBehavior {
     }
 
     public override void UpdateAlways() {
-        if (GameModel.paused) {
-            SetComponentStatus(enableOnPause);
-        }
-        else {
-            SetComponentStatus(enableOnPlay);
+        if (GameModel.endGame) {
+            SetComponentStatus(enableOnEnd);
+        } else {
+            if (GameModel.paused) {
+                SetComponentStatus(enableOnPause);
+            } else {
+                SetComponentStatus(enableOnPlay);
+            }
         }
     }
 

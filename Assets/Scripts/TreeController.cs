@@ -65,9 +65,19 @@ public class TreeController : RiseBehavior {
         float moveVertical, moveLateral;
         bool grow;
 
-        moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
-        moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
-        grow = InputHelper.GetAnyDown(TreeInput.BRANCH_PLACE);
+        if (!GameModel.endGame) {
+
+            moveVertical = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+            moveLateral = InputHelper.GetAxis(TreeInput.MOVE_HORIZONTAL);
+            grow = InputHelper.GetAnyDown(TreeInput.BRANCH_PLACE);
+
+        } else {
+
+            moveVertical = 0.0f;
+            moveLateral = 0.0f;
+            grow = false;
+
+        }
 
         bool moved = false;
 
