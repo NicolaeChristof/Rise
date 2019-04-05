@@ -355,7 +355,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, KEY_CAMERA_H);
 			profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, KEY_CAMERA_V);
 			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_ESC);
-			profile.RegisterBinding(SquirrelInput.SWAP, KEY_Q);
+			profile.RegisterBinding(SquirrelInput.SWAP, KEY_R);
 			profile.RegisterBinding(SquirrelInput.JUMP, KEY_SPACE);
             profile.RegisterBinding(SquirrelInput.INTERACT, KEY_F);
 
@@ -365,12 +365,12 @@ namespace RiseExtensions {
 			profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, KEY_CAMERA_H);
 			profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, KEY_CAMERA_V);
 			profile.RegisterBinding(TreeInput.PAUSE, KEY_ESC);
-			profile.RegisterBinding(TreeInput.SWAP, KEY_Q);
+			profile.RegisterBinding(TreeInput.SWAP, KEY_R);
 
 			profile.RegisterBinding(TreeInput.BRANCH_PLACE, KEY_SPACE);
 			profile.RegisterBinding(TreeInput.BRANCH_REMOVE, KEY_F);
 			profile.RegisterBinding(TreeInput.SELECT_RIGHT, KEY_E);
-            profile.RegisterBinding(TreeInput.TELEPORT, KEY_R);
+            profile.RegisterBinding(TreeInput.TELEPORT, KEY_Q);
 		}
 
 		/* Internal Methods */
