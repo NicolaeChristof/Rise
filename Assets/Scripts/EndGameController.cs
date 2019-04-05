@@ -9,9 +9,9 @@ public class EndGameController : MonoBehaviour {
 
     public GameObject vcam2;
 
-    // Private References
-
     // Public Fields
+
+    // Private References
 
     // Private Fields
 
