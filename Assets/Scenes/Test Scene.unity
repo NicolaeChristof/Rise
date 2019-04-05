@@ -2616,7 +2616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 12.890247
+  m_PathPosition: 13.125253
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3140,75 +3140,6 @@ MonoBehaviour:
   sortOrder: 0
   branch: {fileID: 4352697463616401196, guid: 59a92ea29efd54ad9810fb5b811ac9f0, type: 3}
   sapType: 1
---- !u!114 &317536449
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317536447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3d91ade7473f432b9817f83c8805ddc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSap: 8
-  startingSap: 5
-  sapCost: 1
-  branchSprite: {fileID: 21300000, guid: bd413ee9934fdeb479385d1bfb9121b8, type: 3}
-  leafSprite: {fileID: 21300000, guid: 024e37fa1c388374eb15552ec5116b6b, type: 3}
-  growSound: {fileID: 8300000, guid: fe4bbc386cfb61b44b73ac696e7c2da3, type: 3}
-  cantGrowSound: {fileID: 8300000, guid: 64c274f08f634d04680ac89f3b22beb8, type: 3}
-  minDistance: 0.5
-  sortOrder: 0
-  branch: {fileID: 4352697463616401196, guid: e6ec3a68a50424134a12aebb21766730, type: 3}
-  sapType: 0
---- !u!114 &317536450
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317536447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3d91ade7473f432b9817f83c8805ddc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSap: 8
-  startingSap: 5
-  sapCost: 1
-  branchSprite: {fileID: 21300000, guid: bd413ee9934fdeb479385d1bfb9121b8, type: 3}
-  leafSprite: {fileID: 21300000, guid: 645a16be1fdc39a4986bcf8a1d62c72f, type: 3}
-  growSound: {fileID: 8300000, guid: d9a28f1e17cd58f4e80b040e43021011, type: 3}
-  cantGrowSound: {fileID: 8300000, guid: 64c274f08f634d04680ac89f3b22beb8, type: 3}
-  minDistance: 0.5
-  sortOrder: 0
-  branch: {fileID: 4352697463616401196, guid: 162dddf13a01e493191218dd257d319c, type: 3}
-  sapType: 2
---- !u!114 &317536451
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 317536447}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a3d91ade7473f432b9817f83c8805ddc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSap: 8
-  startingSap: 5
-  sapCost: 1
-  branchSprite: {fileID: 21300000, guid: bd413ee9934fdeb479385d1bfb9121b8, type: 3}
-  leafSprite: {fileID: 21300000, guid: 16d199c42ecbd8d4b893e86f88e892c9, type: 3}
-  growSound: {fileID: 8300000, guid: d9a28f1e17cd58f4e80b040e43021011, type: 3}
-  cantGrowSound: {fileID: 8300000, guid: 64c274f08f634d04680ac89f3b22beb8, type: 3}
-  minDistance: 0.5
-  sortOrder: 0
-  branch: {fileID: 4352697463616401196, guid: 02c9bf4a5fc7c4e92bb3a3ee29ede44a, type: 3}
-  sapType: 3
 --- !u!1001 &317714687
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5973,8 +5904,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.2488331, y: -0.07333471, z: 0.018306427, w: 0.9655926}
-  m_LocalPosition: {x: 67.519, y: 24.388256, z: 29.7273}
+  m_LocalRotation: {x: 0.24984013, y: -0.13538578, z: 0.034692917, w: 0.9581477}
+  m_LocalPosition: {x: 71.675095, y: 24.59794, z: 30.725262}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10604,7 +10535,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.2488331, y: -0.07333471, z: 0.018306427, w: 0.9655926}
+  m_LocalRotation: {x: 0.24984013, y: -0.13538578, z: 0.034692917, w: 0.9581477}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
