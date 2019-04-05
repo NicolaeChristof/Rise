@@ -30,7 +30,7 @@ public class FallingNutBehavior : MonoBehaviour {
 
         if (transform.position.y < 3) {
 
-            Invoke("SelfDestruct", 0.2f);
+            Destroy(gameObject);
 
         }
         
@@ -71,7 +71,7 @@ public class FallingNutBehavior : MonoBehaviour {
         _source.PlayOneShot(thunkSound, _volume);
 
         transform.DOScale(_newScale, 0.75f)
-                .OnComplete(()=>Destroy(this));
+                .OnComplete(()=>Destroy(gameObject));
 
     }
 

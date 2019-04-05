@@ -6,8 +6,15 @@ public class HeightUIInfo : MonoBehaviour {
 
     public float realSquirrelHeight;
     public float heightOffset;
+
+    [HideInInspector]
     public float treeHeight;
+
+    [HideInInspector]
     public float currentHeight;
+
+    [HideInInspector]
+    public float currentHeightInMeters;
 
     public GameObject tree;
 
@@ -26,6 +33,7 @@ public class HeightUIInfo : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        currentHeight = (transform.position.y - heightOffset) * _realToVirtualRatio;
+        currentHeight = transform.position.y - heightOffset;
+        currentHeightInMeters = currentHeight * _realToVirtualRatio;
     }
 }

@@ -115,7 +115,7 @@ public class PlayerController : RiseBehavior {
         if (GameModel.isSquirrel) {
 
             // Get input directions
-            if (!_playerStunned) {
+            if (!_playerStunned  && !GameModel.endGame) {
 
                 _moveDirection = new Vector3(InputHelper.GetAxis(SquirrelInput.MOVE_HORIZONTAL), _moveDirection.y, InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL));
 
@@ -194,8 +194,12 @@ public class PlayerController : RiseBehavior {
 
             }
 
-            // Disable z axis movement
-            _moveDirection.z = 1.0f;
+            if (!GameModel.endGame) {
+
+                // Disable z axis movement
+                _moveDirection.z = 1.0f;
+
+            }
 
             // Walking sound
             if (_moveDirection.x != 0 && !_walkSoundPlaying && _controller.isGrounded) {
@@ -240,7 +244,7 @@ public class PlayerController : RiseBehavior {
 
             _moveDirection.z *= speed;
 
-            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps) {
+            if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps && !GameModel.endGame) {
 
                 _numJumps++;
 

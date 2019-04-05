@@ -32,7 +32,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2298827587787684349}
-  - {fileID: 2298827586616047077}
   - {fileID: 2298827586871164544}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -126,66 +125,6 @@ MonoBehaviour:
   dayNightSpeed: 0.1
   rotationSpeed: 0
   cycle: 0
---- !u!1 &2298827586616047076
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2298827586616047077}
-  - component: {fileID: 2298827586616047074}
-  m_Layer: 0
-  m_Name: Tree Controller
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &2298827586616047077
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2298827586616047076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 62.5, y: 3, z: 56.21}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2298827586175594233}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2298827586616047074
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2298827586616047076}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eeef18cca6ac64daca93236c41a85ec6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  reticle: {fileID: 2774237375221577641, guid: 692bea41bedc84137a4d8fcb5fde2281, type: 3}
-  branch1: {fileID: 4352697463616401196, guid: 59a92ea29efd54ad9810fb5b811ac9f0, type: 3}
-  branch2: {fileID: 4352697463616401196, guid: e6ec3a68a50424134a12aebb21766730, type: 3}
-  branch3: {fileID: 4352697463616401196, guid: 162dddf13a01e493191218dd257d319c, type: 3}
-  branch4: {fileID: 4352697463616401196, guid: 02c9bf4a5fc7c4e92bb3a3ee29ede44a, type: 3}
-  player: {fileID: 0}
-  cantGrowSound: {fileID: 8300000, guid: 64c274f08f634d04680ac89f3b22beb8, type: 3}
-  maxSap:
-  - 8
-  - 8
-  - 8
-  - 8
-  minDistance: 0.5
-  sapCost: 1
-  startingSap: 5
-  groundHeight: 1.5
-  playerDistance: 4.5
 --- !u!1 &2298827587787684350
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,7 +245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

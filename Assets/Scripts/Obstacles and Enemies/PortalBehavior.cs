@@ -62,7 +62,7 @@ public class PortalBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            if (InputHelper.GetButtonDown(SquirrelInput.ACTION_1) && _portalActive) {
+            if (InputHelper.GetButtonDown(SquirrelInput.INTERACT) && _portalActive) {
 
                 _portalActive = false;
 
