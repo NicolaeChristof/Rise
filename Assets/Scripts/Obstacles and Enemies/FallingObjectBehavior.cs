@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class FallingNutBehavior : MonoBehaviour {
+public class FallingObjectBehavior : MonoBehaviour {
 
     // Public References
     public AudioClip fallingSound;
