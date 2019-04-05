@@ -22,11 +22,13 @@ public class SapController : MonoBehaviour {
         if (otherCollider.CompareTag(Tags.SAP)) {
             SapBehavior sap = otherCollider.GetComponent<SapBehavior>();
             if (!(sap is null)) {
+                // Update Tree Sap
+                if (!sap.hasTouched) {
+                    treeController.UpdateSap(sap.sapType, sap.sapValue);
+                }
+
                 // Call Sap-Specific OnCollected Effect
                 sap.OnSapCollected();
-
-                // Update Tree Sap
-                treeController.UpdateSap(sap.sapType, sap.sapValue);
 
                 // Play Pickup Sound
                 float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);

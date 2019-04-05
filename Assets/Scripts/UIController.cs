@@ -9,6 +9,10 @@ using RiseExtensions;
 
 public class UIController : RiseBehavior {
 
+    // A reference to the settings controller for ensuring cameras
+    // are set up correctly
+    public SettingsController settingsController;
+
     // The Game Objects that hold each menu
     public GameObject mainMenuObject;
     public GameObject pauseMenuObject;
@@ -68,11 +72,8 @@ public class UIController : RiseBehavior {
     private bool _pressedSelect = false;
     private bool _pressedPause = false;
 
-    //--------Sap UI---------
-    public GameObject[] sapBranchBars = new GameObject[4];
-
-    private List<GameObject>[] _branchLeaves;
-    private int _currentBranchSelected;
+    //------Branch UI--------
+    public GameObject uiBranches;
     //-----------------------
 
     //------Height UI--------
@@ -115,23 +116,11 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
-        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
-
-        for(int k=0; k<sapBranchBars.Length; k++) {
-            _branchLeaves[k] = SetBranchLeaves(k);
-        }
-
-        //heightUI = FindObjectOfType<HeightUIInfo>();
         heightUIText.gameObject.SetActive(false);
-
-        treeController.sapUpdated += UpdateSapBar;
-        treeController.branchUpdated += UpdateBranchSelected;
     }
 
 
     public override void UpdateAlways() {
-        // Debug.Log(GameModel.paused);
-
         if (GameModel.isSquirrel) {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
             _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
@@ -173,9 +162,10 @@ public class UIController : RiseBehavior {
         }
 
         //---Height UI---
-        heightUIText.text = "Height: " + heightUI.currentHeight.ToString("F1") + "m";
+        heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
+
     }
 
     public override void UpdateTick() {
@@ -205,51 +195,94 @@ public class UIController : RiseBehavior {
     }
 
     public void PauseEvent(bool isTrue) {
+        // Pause the game
         if (!GameModel.paused) {
+
             GameModel.paused = true;
-            heightUIText.gameObject.SetActive(true);
+
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { };
+            SetActiveInactive(active, inactive);
+
             OpenMenu(1, true);
+
+        // Unpause the game
         } else {
+
             GameModel.paused = false;
+
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+
             OpenMenu(1, false);
-            heightUIText.gameObject.SetActive(false);
+
         }
     }
 
     public void MenuEvent(bool isTrue) {
-        for(int i = 0; i < sapBranchBars.Length; i++) {
-            sapBranchBars[i].gameObject.SetActive(false);
-        }
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
-        heightUISlider.gameObject.SetActive(false);
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
     }
 
     public void SinglePlayerEvent(bool isTrue) {
         GameModel.singlePlayer = true;
+        GameModel.splitScreen = false;
+
+        if (settingsController != null) {
+            settingsController.SetCameras();
+        }
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
-        UpdateBranchSelected(_currentBranchSelected);
     }
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
+        if (!settingsController.enforceModes) {
+            GameModel.splitScreen = true;
+        }
+
+        if (settingsController != null) {
+            settingsController.SetCameras();
+        }
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
-        UpdateBranchSelected(_currentBranchSelected);
+
     }
 
     public void OptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(2, true);
     }
 
     public void RestartEvent(bool isTrue) {
-        for(int i=0; i<sapBranchBars.Length; i++) {
-            UpdateSapBar(8f, i);
-        }
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
-        GameModel.isSquirrel = true;
+
+        if (GameModel.singlePlayer) {
+            GameModel.isSquirrel = true;
+            SinglePlayerEvent(true);
+        } else {
+            TwoPlayerEvent(true);
+        }
+
         OpenMenu(1, false);
         GameModel.paused = false;
         GameModel.endGame = false;
@@ -270,11 +303,20 @@ public class UIController : RiseBehavior {
     public void ExitFromPauseEvent(bool isTrue) {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = true;
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(0, true);
         GameModel.paused = true;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(0, true);
     }
 
@@ -314,39 +356,17 @@ public class UIController : RiseBehavior {
         }
     }
 
-    public void UpdateSapBar(float sapValue, int branchType) {
-        int i = 0;
-
-        foreach(GameObject leaf in _branchLeaves[branchType]) {
-            if (i < sapValue) {
-                leaf?.SetActive(true);
-            } else {
-                leaf?.SetActive(false);
+    private void SetActiveInactive(List<GameObject> activeObjects, List<GameObject> inactiveObjects) {
+        foreach(GameObject activeObject in activeObjects) {
+            if (!activeObject.activeSelf) {
+                activeObject.SetActive(true);
             }
-            i++;
-        }
-    }
-
-    public void UpdateBranchSelected(int branchSelected) {
-        if (currentMenu != 0) {
-            sapBranchBars[_currentBranchSelected].gameObject.SetActive(false);
-            sapBranchBars[branchSelected].gameObject.SetActive(true);
-            _currentBranchSelected = branchSelected;
-        }
-    }
-
-    /// <summary>
-    /// Assigns a list of leaf Game Objects to each UI branch.
-    /// </summary>
-    private List<GameObject> SetBranchLeaves(int branch) {
-        List<GameObject> leaves = new List<GameObject>();
-
-        for (int j = 0; j < sapBranchBars[branch].transform.GetChild(0).childCount; j++) {
-            leaves.Add(sapBranchBars[branch].transform.GetChild(0).GetChild(j).gameObject);
         }
 
-        leaves.Reverse();
-
-        return leaves;
+        foreach (GameObject inactiveObject in inactiveObjects) {
+            if (inactiveObject.activeSelf) {
+                inactiveObject.SetActive(false);
+            }
+        }
     }
 }
