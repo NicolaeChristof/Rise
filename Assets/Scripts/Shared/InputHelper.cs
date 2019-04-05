@@ -28,6 +28,7 @@ namespace RiseExtensions {
 		BRANCH_REMOVE,
 		// SELECT_LEFT,
 		SELECT_RIGHT,
+        TELEPORT,
 	};
 
 	public enum InputMode {
@@ -68,8 +69,10 @@ namespace RiseExtensions {
         public readonly static string[] DP_v = { "DP_v_P1", "DP_v_P2", "360_DP_v_P1", "360_DP_v_P2" };
         public readonly static string[] RS_h = { "RS_h_P1", "RS_h_P2", "360_RS_h_P1", "360_RS_h_P2" };
         public readonly static string[] RS_v = { "RS_v_P1", "RS_v_P2", "360_RS_v_P1", "360_RS_v_P2" };
+        public readonly static string[] RS_B = { "RS_B_P1", "RS_B_P2", "360_RS_B_P1", "360_RS_B_P2" };
         public readonly static string[] LS_h = { "LS_h_P1", "LS_h_P2", "360_LS_h_P1", "360_LS_h_P2" };
         public readonly static string[] LS_v = { "LS_v_P1", "LS_v_P2", "360_LS_v_P1", "360_LS_v_P2" };
+        public readonly static string[] LS_B = { "LS_B_P1", "LS_B_P2", "360_LS_B_P1", "360_LS_B_P2" };
         public readonly static string[] START = { "START_P1", "START_P2", "360_START_P1", "360_START_P2" };
         public readonly static string[] BACK = { "BACK_P1", "BACK_P2", "360_BACK_P1", "360_BACK_P2" };
 
@@ -78,12 +81,12 @@ namespace RiseExtensions {
         public readonly static string[] KEY_MOVE_V = { "Keyboard_player_v", "Keyboard_player_v" };
         public readonly static string[] KEY_CAMERA_H = { "Keyboard_camera_h", "Keyboard_camera_h" };
         public readonly static string[] KEY_CAMERA_V = { "Keyboard_camera_v", "Keyboard_camera_v" };
-        public readonly static string[] KEY_JUMP = { "Keyboard_space", "Keyboard_space" };
-        public readonly static string[] KEY_SELECT = { "Keyboard_e", "Keyboard_e" };
-        public readonly static string[] KEY_ACTION_1 = { "Keyboard_space", "Keyboard_space" };
-        public readonly static string[] KEY_ACTION_2 = { "Keyboard_f", "Keyboard_f" };
-        public readonly static string[] KEY_SWAP = { "Keyboard_r", "Keyboard_r" };
-        public readonly static string[] KEY_PAUSE = { "Keyboard_esc", "Keyboard_esc" };
+        public readonly static string[] KEY_SPACE = { "Keyboard_space", "Keyboard_space" };
+        public readonly static string[] KEY_E = { "Keyboard_e", "Keyboard_e" };
+        public readonly static string[] KEY_F = { "Keyboard_f", "Keyboard_f" };
+        public readonly static string[] KEY_Q = { "Keyboard_q", "Keyboard_q" };
+        public readonly static string[] KEY_ESC = { "Keyboard_esc", "Keyboard_esc" };
+        public readonly static string[] KEY_R = { "Keyboard_r", "Keyboard_r" };
 
         public static void Initialize() {
             // Initialize Control Profiles
@@ -323,7 +326,7 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, RS_h);
 			profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, RS_v);
 			profile.RegisterBinding(SquirrelInput.PAUSE, START);
-			profile.RegisterBinding(SquirrelInput.SWAP, Y);
+			profile.RegisterBinding(SquirrelInput.SWAP, RS_B);
 
 			profile.RegisterBinding(SquirrelInput.JUMP, A);
             profile.RegisterBinding(SquirrelInput.INTERACT, X);
@@ -334,12 +337,12 @@ namespace RiseExtensions {
 			profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, RS_h);
 			profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, RS_v);
 			profile.RegisterBinding(TreeInput.PAUSE, START);
-			profile.RegisterBinding(TreeInput.SWAP, Y);
+			profile.RegisterBinding(TreeInput.SWAP, RS_B);
 
 			profile.RegisterBinding(TreeInput.BRANCH_PLACE, A);
 			profile.RegisterBinding(TreeInput.BRANCH_REMOVE, B);
-			// profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
-			profile.RegisterBinding(TreeInput.SELECT_RIGHT, X);
+            profile.RegisterBinding(TreeInput.SELECT_RIGHT, X);
+            profile.RegisterBinding(TreeInput.TELEPORT, Y);
 		}
 
 		public static void SetKeyboard(ControlProfile profile) {
@@ -351,23 +354,23 @@ namespace RiseExtensions {
 			profile.RegisterBinding(SquirrelInput.MOVE_VERTICAL, KEY_MOVE_V);
 			profile.RegisterBinding(SquirrelInput.CAMERA_HORIZONTAL, KEY_CAMERA_H);
 			profile.RegisterBinding(SquirrelInput.CAMERA_VERTICAL, KEY_CAMERA_V);
-			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_PAUSE);
-			profile.RegisterBinding(SquirrelInput.SWAP, KEY_SWAP);
-			profile.RegisterBinding(SquirrelInput.JUMP, KEY_JUMP);
-            profile.RegisterBinding(SquirrelInput.INTERACT, KEY_ACTION_2);
+			profile.RegisterBinding(SquirrelInput.PAUSE, KEY_ESC);
+			profile.RegisterBinding(SquirrelInput.SWAP, KEY_Q);
+			profile.RegisterBinding(SquirrelInput.JUMP, KEY_SPACE);
+            profile.RegisterBinding(SquirrelInput.INTERACT, KEY_F);
 
 			// Tree Controls
 			profile.RegisterBinding(TreeInput.MOVE_HORIZONTAL, KEY_MOVE_H);
 			profile.RegisterBinding(TreeInput.MOVE_VERTICAL, KEY_MOVE_V);
 			profile.RegisterBinding(TreeInput.CAMERA_HORIZONTAL, KEY_CAMERA_H);
 			profile.RegisterBinding(TreeInput.CAMERA_VERTICAL, KEY_CAMERA_V);
-			profile.RegisterBinding(TreeInput.PAUSE, KEY_PAUSE);
-			profile.RegisterBinding(TreeInput.SWAP, KEY_SWAP);
+			profile.RegisterBinding(TreeInput.PAUSE, KEY_ESC);
+			profile.RegisterBinding(TreeInput.SWAP, KEY_Q);
 
-			profile.RegisterBinding(TreeInput.BRANCH_PLACE, KEY_ACTION_1);
-			profile.RegisterBinding(TreeInput.BRANCH_REMOVE, KEY_ACTION_2);
-			// profile.RegisterBinding(TreeInput.SELECT_LEFT, LB); // temporarily trying out face button only interface
-			profile.RegisterBinding(TreeInput.SELECT_RIGHT, KEY_SELECT);
+			profile.RegisterBinding(TreeInput.BRANCH_PLACE, KEY_SPACE);
+			profile.RegisterBinding(TreeInput.BRANCH_REMOVE, KEY_F);
+			profile.RegisterBinding(TreeInput.SELECT_RIGHT, KEY_E);
+            profile.RegisterBinding(TreeInput.TELEPORT, KEY_R);
 		}
 
 		/* Internal Methods */
