@@ -6,13 +6,14 @@ using DG.Tweening;
 public class CheckpointBehavior : MonoBehaviour {
 
     // Public References
-    public GameObject web;
 
     // Public Fields
     [Range(0, 3)]
     public int misletoeNeeded;
 
     // Private References
+    private GameObject _web;
+
     private GameObject _tree;
 
     private Collider _trigger;
@@ -26,13 +27,15 @@ public class CheckpointBehavior : MonoBehaviour {
 
     void Start() {
 
+        _web = transform.GetChild(0).gameObject;
+
         _tree = GameObject.FindGameObjectWithTag("Tree");
 
         _trigger = GetComponent<BoxCollider>();
 
         transform.position = new Vector3(_tree.transform.position.x, transform.position.y, _tree.transform.position.z);
 
-        _originalScale = web.transform.localScale;
+        _originalScale = _web.transform.localScale;
 
         _newScale = new Vector3(_originalScale.x + 0.1f, _originalScale.y, _originalScale.z + 0.1f);
 
@@ -52,16 +55,16 @@ public class CheckpointBehavior : MonoBehaviour {
 
             if (!_activated) {
 
-                web.SetActive(true);
+                _web.SetActive(true);
 
                 _activated = true;
 
             }
 
-            web.transform.DOScale(_newScale, 2.0f)
+            _web.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
-            web.transform.DOScale(_originalScale, 2.0f)
+            _web.transform.DOScale(_originalScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
         }
@@ -85,6 +88,12 @@ public class CheckpointBehavior : MonoBehaviour {
 
 
         }
+
+    }
+
+    public void DeactivateWeb () {
+
+        _web.SetActive(false);
 
     }
 
