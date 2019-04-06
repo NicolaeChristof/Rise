@@ -105,8 +105,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b09fad6818818a49aa136ecea9fbb71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  web: {fileID: 8047336854365457105}
-  misletoeNeeded: 1
+  mistletoeNeeded: 0
 --- !u!65 &8543832995455228306
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -187,7 +186,7 @@ Transform:
   m_GameObject: {fileID: 8047336854365457105}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.75, y: 1, z: 2.75}
+  m_LocalScale: {x: 3, y: 1, z: 3}
   m_Children:
   - {fileID: 2555464790066864316}
   m_Father: {fileID: 6837279178405670046}
@@ -218,7 +217,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3b0d782feb23f747b60a01c2439d70f, type: 2}
+  - {fileID: 2100000, guid: f69746dcb35671f478e779193d974334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -323,7 +322,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b3b0d782feb23f747b60a01c2439d70f, type: 2}
+  - {fileID: 2100000, guid: f69746dcb35671f478e779193d974334, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
