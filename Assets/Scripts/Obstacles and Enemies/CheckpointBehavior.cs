@@ -8,11 +8,16 @@ public class CheckpointBehavior : MonoBehaviour {
     // Public References
     public GameObject web;
 
+    // Public Fields
+    [Range(0, 3)]
+    public int misletoeNeeded;
+
     // Private References
     private GameObject _tree;
 
     private Collider _trigger;
 
+    // Private Fields
     private Vector3 _originalScale;
 
     private Vector3 _newScale;
