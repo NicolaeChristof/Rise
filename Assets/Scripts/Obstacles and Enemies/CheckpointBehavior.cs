@@ -25,6 +25,8 @@ public class CheckpointBehavior : MonoBehaviour {
 
     private bool _activated;
 
+    private int _misletoeCollected;
+
     void Start() {
 
         _web = transform.GetChild(0).gameObject;
@@ -40,6 +42,8 @@ public class CheckpointBehavior : MonoBehaviour {
         _newScale = new Vector3(_originalScale.x + 0.1f, _originalScale.y, _originalScale.z + 0.1f);
 
         _activated = false;
+
+        _misletoeCollected = 0;
 
     }
 
@@ -93,7 +97,13 @@ public class CheckpointBehavior : MonoBehaviour {
 
     public void DeactivateWeb () {
 
-        _web.SetActive(false);
+        _misletoeCollected++;
+
+        if (_misletoeCollected >= misletoeNeeded) {
+
+            _web.SetActive(false);
+
+        }
 
     }
 

@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef22ad876a3f8445882b28c72cc5f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectSound: {fileID: 0}
+  collectSound: {fileID: 8300000, guid: 4f9712e09272d28409eb888762e88c75, type: 3}
 --- !u!135 &4905599723291470265
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -71,7 +71,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 25bcf4b28e6c6f9469aaaa6833cfffd9, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

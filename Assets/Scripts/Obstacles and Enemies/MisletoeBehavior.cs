@@ -6,6 +6,8 @@ using DG.Tweening;
 public class MisletoeBehavior : MonoBehaviour {
 
     // Public References
+    public GameObject checkPoint;
+
     public AudioClip collectSound;
 
     // Public Fields
@@ -37,6 +39,8 @@ public class MisletoeBehavior : MonoBehaviour {
         if (collider.gameObject.tag.Equals("Player") && _canCollect) {
 
             _canCollect = false;
+
+            checkPoint.GetComponent<CheckpointBehavior>().DeactivateWeb();
 
             float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
             _source.PlayOneShot(collectSound, _volume);
