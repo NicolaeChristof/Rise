@@ -9,7 +9,7 @@ public class CheckpointBehavior : MonoBehaviour {
 
     // Public Fields
     [Range(0, 3)]
-    public int misletoeNeeded;
+    public int mistletoeNeeded;
 
     // Private References
     private GameObject _web;
@@ -25,7 +25,7 @@ public class CheckpointBehavior : MonoBehaviour {
 
     private bool _activated;
 
-    private int _misletoeCollected;
+    private int _mistletoeCollected;
 
     void Start() {
 
@@ -43,7 +43,7 @@ public class CheckpointBehavior : MonoBehaviour {
 
         _activated = false;
 
-        _misletoeCollected = 0;
+        _mistletoeCollected = 0;
 
     }
 
@@ -97,9 +97,9 @@ public class CheckpointBehavior : MonoBehaviour {
 
     public void DeactivateWeb () {
 
-        _misletoeCollected++;
+        _mistletoeCollected++;
 
-        if (_misletoeCollected >= misletoeNeeded) {
+        if (_mistletoeCollected >= mistletoeNeeded) {
 
             _web.SetActive(false);
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class MisletoeBehavior : MonoBehaviour {
+public class MistletoeBehavior : MonoBehaviour {
 
     // Public References
     public GameObject checkPoint;
