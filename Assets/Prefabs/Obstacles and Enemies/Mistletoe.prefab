@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1622863229194070192}
   - component: {fileID: 2965896752654697340}
-  - component: {fileID: 4905599723291470265}
+  - component: {fileID: 4882853676271169786}
   - component: {fileID: 1285881754497469767}
   m_Layer: 0
-  m_Name: Misletoe
+  m_Name: Mistletoe
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,9 +47,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ef22ad876a3f8445882b28c72cc5f25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  checkPoint: {fileID: 0}
   collectSound: {fileID: 8300000, guid: 4f9712e09272d28409eb888762e88c75, type: 3}
---- !u!135 &4905599723291470265
-SphereCollider:
+--- !u!136 &4882853676271169786
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -58,9 +59,10 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 2
   m_Radius: 1
-  m_Center: {x: 0, y: 0, z: 1.15}
+  m_Height: 3
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: 0.5}
 --- !u!82 &1285881754497469767
 AudioSource:
   m_ObjectHideFlags: 0
