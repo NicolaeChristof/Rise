@@ -678,7 +678,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Keyboard_jump
+    m_Name: Keyboard_space
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -694,7 +694,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Keyboard_next
+    m_Name: Keyboard_e
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -710,23 +710,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Keyboard_trigger
-    descriptiveName: 
-    descriptiveNegativeName: 
-    negativeButton: 
-    positiveButton: space
-    altNegativeButton: 
-    altPositiveButton: 
-    gravity: 1000
-    dead: 0.001
-    sensitivity: 1000
-    snap: 0
-    invert: 0
-    type: 0
-    axis: 0
-    joyNum: 0
-  - serializedVersion: 3
-    m_Name: Keyboard_swap_player
+    m_Name: Keyboard_r
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -742,7 +726,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Keyboard_pause
+    m_Name: Keyboard_esc
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
@@ -758,7 +742,7 @@ InputManager:
     axis: 0
     joyNum: 0
   - serializedVersion: 3
-    m_Name: Keyboard_break
+    m_Name: Keyboard_f
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
