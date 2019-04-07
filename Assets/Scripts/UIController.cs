@@ -303,27 +303,11 @@ public class UIController : RiseBehavior {
     }
 
     public void ControllerEvent(bool isTrue) {
-        bool controllerConnected = (Input.GetJoystickNames().Length > 0);
-
-        if (GameModel.inputGamePad) {
-            GameModel.inputGamePad = false;
-            controllerText.text = "Keyboard";
-            InputHelper.SetKeyboard(InputHelper.PlayerOne);
-        } else {
-            if (controllerConnected) {
-                GameModel.inputGamePad = true;
-                controllerText.text = "Controller";
-                InputHelper.Initialize();
-            } else {
-                controllerText.text = "Keyboard (No Controller)";
-            }
-        }
+        optionsUI.SelectOption(0);
     }
 
     public void QualityEvent(bool isTrue) {
-        optionsUI.ChangeQuality(true);
-        qualityText.text = optionsUI.GetCurrentQuality();
-        optionsUI.currentScrollable = optionsUI.qualityScrollable;
+        optionsUI.SelectOption(1);
     }
 
     public void ExitGameEvent(bool isTrue) {
