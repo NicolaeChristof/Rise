@@ -19,6 +19,7 @@ public class UIController : RiseBehavior {
     public GameObject optionsMenuObject;
     public GameObject levelSelectMenuObject;
     public GameObject endGameMenuObject;
+    public GameObject gameOverMenuObject;
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -88,7 +89,7 @@ public class UIController : RiseBehavior {
 
     private void Start() {
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
 
         // For each option on each menu, we're adding its function to _listsOfSelectActions
         _listsOfSelectActions = new List<List<_selectAction>>();
@@ -97,6 +98,8 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, CreditsEvent, ExitFromOptionsEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { NextLevelEvent, ExitEndGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
+
 
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
@@ -178,6 +181,15 @@ public class UIController : RiseBehavior {
         }
         if (GameModel.endGame){
             EndGameEvent(true);
+        }
+        if (GameModel.squirrelHealth <= 0)
+        {
+            //quick fix for game over, will need to be changed
+            
+            Debug.Log("Game Over! You Died!");
+            GameOverEvent(true);
+            GameModel.paused = true;
+            GameModel.squirrelHealth = 10; //Leads to constant gameovers if this isn't set back to default value
         }
 
     }
@@ -415,11 +427,23 @@ public class UIController : RiseBehavior {
 
     public void ExitEndGameEvent(bool isTrue) {
         Debug.Log("Exit to Main Menu");
+        GameModel.endGame = false;
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
+    }
+
+    public void GameOverEvent(bool isTrue)
+    {
+        Debug.Log("Game Over");
+        List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(5, true);
     }
 
     public void OpenMenu(int menu, bool inMenu) {

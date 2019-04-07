@@ -103,13 +103,7 @@ public class SettingsController : RiseBehavior {
 
         }
 
-        if (GameModel.squirrelHealth <= 0) {
-
-            Debug.Log("Game Over! You Died!");
-
-            GameModel.paused = true;
-
-        }
+        
 
     }
 
