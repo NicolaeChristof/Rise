@@ -18,6 +18,7 @@ public class UIController : RiseBehavior {
     public GameObject pauseMenuObject;
     public GameObject optionsMenuObject;
     public GameObject levelSelectMenuObject;
+    public GameObject endGameMenuObject;
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -87,7 +88,7 @@ public class UIController : RiseBehavior {
 
     private void Start() {
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject };
 
         // For each option on each menu, we're adding its function to _listsOfSelectActions
         _listsOfSelectActions = new List<List<_selectAction>>();
@@ -95,6 +96,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, RestartEvent, ExitFromPauseEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, CreditsEvent, ExitFromOptionsEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { NextLevelEvent, ExitEndGameEvent });
 
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
@@ -173,6 +175,9 @@ public class UIController : RiseBehavior {
     public override void UpdateTick() {
         if (InputHelper.Pause()) {
             PauseEvent(true);
+        }
+        if (GameModel.endGame){
+            EndGameEvent(true);
         }
 
     }
@@ -362,6 +367,54 @@ public class UIController : RiseBehavior {
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+    }
+
+    public void EndGameEvent(bool isTrue) {
+        // Pause the game
+        if (!GameModel.paused)
+        {
+
+            GameModel.paused = true;
+
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { };
+            SetActiveInactive(active, inactive);
+
+            OpenMenu(4, true);
+
+        }
+    }
+
+    public void NextLevelEvent(bool isTrue) {
+        Debug.Log("Next Level");
+        GameModel.paused = false;
+        GameModel.endGame = false;
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == ("Test Scene")){
+            SpringEvent(true);
+        }
+        else if(currentScene.name == ("Spring Template")){
+            SummerEvent(true);
+        }
+        else if (currentScene.name == ("Summer Template")){
+            FallEvent(true);
+        }
+        else if (currentScene.name == ("Fall Template")){
+            WinterEvent(true);
+        }
+        else if (currentScene.name == ("Winter Template")){
+            SpringEvent(true);
+        }
+
+    }
+
+    public void ExitEndGameEvent(bool isTrue) {
+        Debug.Log("Exit to Main Menu");
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
         SetActiveInactive(active, inactive);
