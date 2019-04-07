@@ -17,6 +17,7 @@ public class UIController : RiseBehavior {
     public GameObject mainMenuObject;
     public GameObject pauseMenuObject;
     public GameObject optionsMenuObject;
+    public GameObject levelSelectMenuObject;
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -86,7 +87,7 @@ public class UIController : RiseBehavior {
 
     private void Start() {
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject };
 
         // For each option on each menu, we're adding its function to _listsOfSelectActions
         _listsOfSelectActions = new List<List<_selectAction>>();
@@ -280,26 +281,35 @@ public class UIController : RiseBehavior {
     public void SpringEvent(bool isTrue)
     {
         Debug.Log("Spring Activated");
+        SceneManager.LoadScene("Spring Template");
     }
 
     public void SummerEvent(bool isTrue)
     {
         Debug.Log("Summer Activated");
+        SceneManager.LoadScene("Summer Template");
     }
 
     public void FallEvent(bool isTrue)
     {
         Debug.Log("Fall Activated");
+        SceneManager.LoadScene("Fall Template");
     }
 
     public void WinterEvent(bool isTrue)
     {
         Debug.Log("Winter Activated");
+        SceneManager.LoadScene("Winter Template");
     }
 
     public void ExitLevelSelectEvent(bool isTrue)
     {
         Debug.Log("Exit Level Select Activated");
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
     }
 
 
