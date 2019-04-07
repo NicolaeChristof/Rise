@@ -90,9 +90,10 @@ public class UIController : RiseBehavior {
 
         // For each option on each menu, we're adding its function to _listsOfSelectActions
         _listsOfSelectActions = new List<List<_selectAction>>();
-        _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, OptionsEvent, ExitGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, RestartEvent, ExitFromPauseEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, CreditsEvent, ExitFromOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
 
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
@@ -264,12 +265,50 @@ public class UIController : RiseBehavior {
 
     }
 
+    //level select event
+    public void LevelSelectEvent(bool isTrue)
+    {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(3, true);
+
+    }
+
+    //level select menu events
+    public void SpringEvent(bool isTrue)
+    {
+        Debug.Log("Spring Activated");
+    }
+
+    public void SummerEvent(bool isTrue)
+    {
+        Debug.Log("Summer Activated");
+    }
+
+    public void FallEvent(bool isTrue)
+    {
+        Debug.Log("Fall Activated");
+    }
+
+    public void WinterEvent(bool isTrue)
+    {
+        Debug.Log("Winter Activated");
+    }
+
+    public void ExitLevelSelectEvent(bool isTrue)
+    {
+        Debug.Log("Exit Level Select Activated");
+    }
+
+
     public void OptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
         SetActiveInactive(active, inactive);
 
-        OpenMenu(2, true);
+        OpenMenu(3, true);
     }
 
     public void RestartEvent(bool isTrue) {
