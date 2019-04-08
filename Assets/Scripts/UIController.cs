@@ -303,11 +303,11 @@ public class UIController : RiseBehavior {
     }
 
     public void ControllerEvent(bool isTrue) {
-        optionsUI.SelectOption(0);
+        controllerText.text = optionsUI.SelectOption(0);
     }
 
     public void QualityEvent(bool isTrue) {
-        optionsUI.SelectOption(1);
+        qualityText.text = optionsUI.SelectOption(1);
     }
 
     public void ExitGameEvent(bool isTrue) {
