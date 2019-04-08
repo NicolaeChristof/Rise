@@ -144,7 +144,9 @@ MonoBehaviour:
   pickupSound: {fileID: 8300000, guid: 4f9712e09272d28409eb888762e88c75, type: 3}
   sapType: 3
   sapValue: 1
+  scaleFactor: 0.6
   canCollect: 1
+  hasTouched: 0
 --- !u!1001 &8633931033465264311
 PrefabInstance:
   m_ObjectHideFlags: 0

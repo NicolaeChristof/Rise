@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NutSpawnerBehavior : MonoBehaviour {
+public class FallingObjectSpawnerBehavior : MonoBehaviour {
 
     // Public References
     public GameObject nut;

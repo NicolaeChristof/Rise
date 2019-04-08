@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-public class FallingNutBehavior : MonoBehaviour {
+public class FallingObjectBehavior : MonoBehaviour {
 
     // Public References
     public AudioClip fallingSound;
@@ -64,6 +64,10 @@ public class FallingNutBehavior : MonoBehaviour {
         if (collision.gameObject.tag.Equals("Player")) {
 
             collision.gameObject.GetComponent<PlayerController>().stunPlayer(0.5f);
+
+            GameModel.squirrelHealth--;
+
+            Debug.Log(GameModel.squirrelHealth);
 
         }
 

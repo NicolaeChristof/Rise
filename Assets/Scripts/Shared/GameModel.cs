@@ -31,6 +31,8 @@ public static class GameModel {
 
     public static string displayTime = "mm:ss";
 
+    public static int squirrelHealth = 10;
+
     // Sound Controls
     public static float volLowRange = 0.8f;
 

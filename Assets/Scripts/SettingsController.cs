@@ -91,7 +91,7 @@ public class SettingsController : RiseBehavior {
 
             } else {
 
-                Debug.Log("GAME OVER!");
+                Debug.Log("GAME OVER! You Ran Out Of Time!!");
 
                 GameModel.displayTime = "0:0";
 
@@ -100,6 +100,14 @@ public class SettingsController : RiseBehavior {
             }
 
             // Debug.Log(GameModel.displayTime);
+
+        }
+
+        if (GameModel.squirrelHealth <= 0) {
+
+            Debug.Log("Game Over! You Died!");
+
+            GameModel.paused = true;
 
         }
 
