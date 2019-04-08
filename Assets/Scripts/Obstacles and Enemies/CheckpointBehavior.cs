@@ -6,20 +6,30 @@ using DG.Tweening;
 public class CheckpointBehavior : MonoBehaviour {
 
     // Public References
-    public GameObject web;
+
+    // Public Fields
+    [Range(0, 3)]
+    public int mistletoeNeeded;
 
     // Private References
+    private GameObject _web;
+
     private GameObject _tree;
 
     private Collider _trigger;
 
+    // Private Fields
     private Vector3 _originalScale;
 
     private Vector3 _newScale;
 
     private bool _activated;
 
+    private int _mistletoeCollected;
+
     void Start() {
+
+        _web = transform.GetChild(0).gameObject;
 
         _tree = GameObject.FindGameObjectWithTag("Tree");
 
@@ -27,11 +37,13 @@ public class CheckpointBehavior : MonoBehaviour {
 
         transform.position = new Vector3(_tree.transform.position.x, transform.position.y, _tree.transform.position.z);
 
-        _originalScale = web.transform.localScale;
+        _originalScale = _web.transform.localScale;
 
         _newScale = new Vector3(_originalScale.x + 0.1f, _originalScale.y, _originalScale.z + 0.1f);
 
         _activated = false;
+
+        _mistletoeCollected = 0;
 
     }
 
@@ -47,16 +59,16 @@ public class CheckpointBehavior : MonoBehaviour {
 
             if (!_activated) {
 
-                web.SetActive(true);
+                _web.SetActive(true);
 
                 _activated = true;
 
             }
 
-            web.transform.DOScale(_newScale, 2.0f)
+            _web.transform.DOScale(_newScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
-            web.transform.DOScale(_originalScale, 2.0f)
+            _web.transform.DOScale(_originalScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
         }
@@ -78,6 +90,18 @@ public class CheckpointBehavior : MonoBehaviour {
         if (collider.gameObject.tag.Equals("Player")) {
 
 
+
+        }
+
+    }
+
+    public void DeactivateWeb () {
+
+        _mistletoeCollected++;
+
+        if (_mistletoeCollected >= mistletoeNeeded) {
+
+            _web.SetActive(false);
 
         }
 
