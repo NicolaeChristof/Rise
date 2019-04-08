@@ -87,7 +87,8 @@ public class UIController : RiseBehavior {
     public Text controllerText;
     public Text qualityText;
 
-    public OptionsUI optionsUI;
+    private int qualityCursor;
+    private string[] qualityStrings;
     //---------------------
 
     private void Start() {
@@ -123,6 +124,11 @@ public class UIController : RiseBehavior {
         }
 
         heightUIText.gameObject.SetActive(false);
+
+        qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
+        qualityCursor = QualitySettings.GetQualityLevel();
+
+        UpdateQuality();
     }
 
 
@@ -171,10 +177,6 @@ public class UIController : RiseBehavior {
         heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
-
-        //---Options UI---
-        List<string> currentScrollable;
-        //----------------
 
     }
 
@@ -303,13 +305,26 @@ public class UIController : RiseBehavior {
     }
 
     public void ControllerEvent(bool isTrue) {
-        optionsUI.currentObjectToDisplayText = controllerText;
-        controllerText.text = optionsUI.SelectOption(0);
+        bool controllerConnected = (Input.GetJoystickNames().Length > 0);
+
+        if (GameModel.inputGamePad) {
+            GameModel.inputGamePad = false;
+            controllerText.text = "Keyboard";
+            InputHelper.SetKeyboard(InputHelper.PlayerOne);
+        } else {
+            if (controllerConnected) {
+                GameModel.inputGamePad = true;
+                controllerText.text = "Controller";
+                InputHelper.Initialize();
+            } else {
+                controllerText.text = "Keyboard (No Controller)";
+            }
+        }
     }
 
     public void QualityEvent(bool isTrue) {
-        optionsUI.currentObjectToDisplayText = qualityText;
-        qualityText.text = optionsUI.SelectOption(1);
+        qualityCursor = (qualityCursor + 1) % qualityStrings.Length;
+        UpdateQuality();
     }
 
     public void ExitGameEvent(bool isTrue) {
@@ -384,5 +399,10 @@ public class UIController : RiseBehavior {
                 inactiveObject.SetActive(false);
             }
         }
+    }
+
+    private void UpdateQuality() {
+        QualitySettings.SetQualityLevel(qualityCursor);
+        qualityText.text = qualityStrings[qualityCursor];
     }
 }
