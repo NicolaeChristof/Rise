@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using RiseExtensions;
 
 public class OptionsUI : RiseBehavior {
@@ -21,6 +22,8 @@ public class OptionsUI : RiseBehavior {
     // This is the scrollable list of labels for quality presets
     public List<string> qualityScrollable = new List<string> { "Very Low", "Low", "Medium", "High", "Very High", "Ultra" };
     public List<string> controllerScrollable = new List<string> { };
+
+    public Text currentObjectToDisplayText;
 
     private bool _currentAxis;
 
@@ -52,6 +55,9 @@ public class OptionsUI : RiseBehavior {
 
         if(_currentAxis) {
             incrementCurrentOption(1);
+            if(currentObjectToDisplayText != null) {
+                currentObjectToDisplayText.text = currentDisplayText;
+            }
         }/* else if (_currentAxis > 0f) {
             incrementCurrentOption(1);
             cursors[currentOptionSelected] = (cursors[currentOptionSelected] - 1) % scrollables[currentOptionSelected].Count;

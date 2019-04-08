@@ -303,10 +303,12 @@ public class UIController : RiseBehavior {
     }
 
     public void ControllerEvent(bool isTrue) {
+        optionsUI.currentObjectToDisplayText = controllerText;
         controllerText.text = optionsUI.SelectOption(0);
     }
 
     public void QualityEvent(bool isTrue) {
+        optionsUI.currentObjectToDisplayText = qualityText;
         qualityText.text = optionsUI.SelectOption(1);
     }
 
