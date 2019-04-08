@@ -335,7 +335,7 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
         SetActiveInactive(active, inactive);
 
-        OpenMenu(3, true);
+        OpenMenu(2, true);
     }
 
     public void RestartEvent(bool isTrue) {
