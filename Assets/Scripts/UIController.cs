@@ -20,6 +20,7 @@ public class UIController : RiseBehavior {
     public GameObject levelSelectMenuObject;
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
+    
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -87,6 +88,11 @@ public class UIController : RiseBehavior {
     public Slider heightUISlider;
     //-----------------------
 
+    //------Timer UI---------
+    public GameObject timerUI;
+    private Text timerUIText;
+    //-----------------------
+
     private void Start() {
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
@@ -100,7 +106,8 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { NextLevelEvent, ExitEndGameEvent });
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
 
-
+        //get UI timer text
+        timerUIText = timerUI.GetComponent<Text>();
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
         // option
@@ -192,6 +199,7 @@ public class UIController : RiseBehavior {
             GameModel.squirrelHealth = 10; //Leads to constant gameovers if this isn't set back to default value
         }
 
+        timerUIText.text = "Timer: " + GameModel.displayTime;
     }
 
     public void OnApplicationQuit() {
@@ -349,8 +357,10 @@ public class UIController : RiseBehavior {
             TwoPlayerEvent(true);
         }
 
+
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.timer = 300.0f;
         GameModel.endGame = false;
     }
 
@@ -376,6 +386,7 @@ public class UIController : RiseBehavior {
 
         OpenMenu(0, true);
         GameModel.paused = true;
+        GameModel.timer = 300.0f;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
