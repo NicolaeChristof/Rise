@@ -39,6 +39,8 @@ public class EndGameController : MonoBehaviour {
 
             vcam2.SetActive(true);
 
+
+
         }
 
     }
