@@ -8,7 +8,7 @@ public class CheckpointBehavior : MonoBehaviour {
     // Public References
 
     // Public Fields
-    [Range(0, 3)]
+    [Range(0, 5)]
     public int mistletoeNeeded;
 
     // Private References
@@ -44,6 +44,16 @@ public class CheckpointBehavior : MonoBehaviour {
         _activated = false;
 
         _mistletoeCollected = 0;
+
+        if (mistletoeNeeded > 0) {
+
+            _web.SetActive(true);
+
+        } else {
+
+            _web.SetActive(false);
+
+        }
 
     }
 
