@@ -126,6 +126,17 @@ public class TreeController : RiseBehavior {
             AttemptGrowBranch();
         }
 
+        // Handle Teleport
+        if (InputHelper.GetAnyDown(TreeInput.TELEPORT)) {
+
+            Debug.Log("TELEPORT");
+
+            transform.position = squirrel.transform.position;
+
+            UpdateReticle();
+
+        }
+
     }
 
     public override void UpdateAlways() {

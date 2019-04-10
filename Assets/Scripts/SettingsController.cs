@@ -87,11 +87,13 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.timer -= Time.deltaTime;
 
-                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + (GameModel.timer % 60).ToString("F0");
+                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
+                //Debug.Log(GameModel.displayTime);
+                
 
             } else {
 
-                Debug.Log("GAME OVER!");
+                Debug.Log("GAME OVER! You Ran Out Of Time!!");
 
                 GameModel.displayTime = "0:0";
 
@@ -102,6 +104,8 @@ public class SettingsController : RiseBehavior {
             // Debug.Log(GameModel.displayTime);
 
         }
+
+        
 
     }
 
