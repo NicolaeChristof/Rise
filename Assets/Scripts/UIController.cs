@@ -129,6 +129,8 @@ public class UIController : RiseBehavior {
         qualityCursor = QualitySettings.GetQualityLevel();
 
         UpdateQuality();
+
+        ConfigureController(GameModel.inputGamePad, (Input.GetJoystickNames()[0] != ""));
     }
 
 
@@ -178,6 +180,7 @@ public class UIController : RiseBehavior {
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
 
+        Debug.Log(Input.GetJoystickNames().Length);
     }
 
     public override void UpdateTick() {
@@ -305,20 +308,10 @@ public class UIController : RiseBehavior {
     }
 
     public void ControllerEvent(bool isTrue) {
-        bool controllerConnected = (Input.GetJoystickNames().Length > 0);
-
         if (GameModel.inputGamePad) {
-            GameModel.inputGamePad = false;
-            controllerText.text = "Keyboard";
-            InputHelper.SetKeyboard(InputHelper.PlayerOne);
+            ConfigureController(false, (Input.GetJoystickNames()[0] != ""));
         } else {
-            if (controllerConnected) {
-                GameModel.inputGamePad = true;
-                controllerText.text = "Controller";
-                InputHelper.Initialize();
-            } else {
-                controllerText.text = "Keyboard (No Controller)";
-            }
+            ConfigureController(true, (Input.GetJoystickNames()[0] != ""));
         }
     }
 
@@ -404,5 +397,23 @@ public class UIController : RiseBehavior {
     private void UpdateQuality() {
         QualitySettings.SetQualityLevel(qualityCursor);
         qualityText.text = qualityStrings[qualityCursor];
+    }
+
+    private void ConfigureController(bool useController, bool controllerConnected) {
+        if (useController) {
+            if (controllerConnected) {
+                GameModel.inputGamePad = true;
+                controllerText.text = "Controller";
+                InputHelper.Initialize();
+            } else {
+                GameModel.inputGamePad = false;
+                controllerText.text = "Keyboard (No Controller Detected)";
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+            }
+        } else {
+            GameModel.inputGamePad = false;
+            controllerText.text = "Keyboard";
+            InputHelper.SetKeyboard(InputHelper.PlayerOne);
+        }
     }
 }
