@@ -88,12 +88,19 @@ public class UIController : RiseBehavior {
     //-----------------------
 
     //------Options UI-----
+
+    // The Text labels that correspond to the control method
+    // and graphics level we're using, respectively
     public Text controllerText;
     public Text qualityText;
 
+    // qualityStrings is a string that holds the possible labels
+    // for each graphic level. qualityCursor holds the index of the
+    // current label
     private int qualityCursor;
     private string[] qualityStrings;
     //---------------------
+
     //------Timer UI---------
     public GameObject timerUI;
     private Text timerUIText;
@@ -103,17 +110,34 @@ public class UIController : RiseBehavior {
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
 
-        // For each option on each menu, we're adding its function to _listsOfSelectActions
+        //-----Menu Functionality List-----
+
+        // Declaring our menu functionality list
         _listsOfSelectActions = new List<List<_selectAction>>();
+
+        // Main Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
+
+        // Pause Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
+
+        // Options Menu
         _listsOfSelectActions.Add(new List<_selectAction> { ControllerEvent, QualityEvent, ExitFromOptionsEvent });
+
+        // Level Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
+
+        // Level End Menu
         _listsOfSelectActions.Add(new List<_selectAction> { NextLevelEvent, ExitEndGameEvent });
+
+        // Game Over Menu
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
 
-        //get UI timer text
+        //-------------------------------
+
+        // Get UI timer text
         timerUIText = timerUI.GetComponent<Text>();
+
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
         // option
@@ -129,6 +153,8 @@ public class UIController : RiseBehavior {
             }
         }
 
+        // This ensures that you don't have to go through the main menu
+        // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
             GameModel.paused = true;
             MenuEvent(true);
@@ -136,8 +162,7 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
-        heightUIText.gameObject.SetActive(false);
-
+        //-----Options UI----
         qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         qualityCursor = QualitySettings.GetQualityLevel();
 
@@ -145,10 +170,13 @@ public class UIController : RiseBehavior {
 
         ConfigureController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
             false);
+        //-------------------
     }
 
 
     public override void UpdateAlways() {
+        // Setting _currentAxis and _pressedSelect depending on whether the player is currently
+        // a tree or a squirrel
         if (GameModel.isSquirrel) {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
             _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
@@ -158,7 +186,6 @@ public class UIController : RiseBehavior {
         }
 
         if (GameModel.paused) {
-
             // Here we're testing which option in the current menu the
             // user has select and storing it in the _buttonSelected variable
             if ((_currentAxis > 0f) && !_justSelected) {
@@ -196,12 +223,16 @@ public class UIController : RiseBehavior {
     }
 
     public override void UpdateTick() {
+        // We can just check for the pause button without checking the state
+        // of the game since this is in UpdateTick()
         if (InputHelper.Pause()) {
             PauseEvent(true);
         }
-        if (GameModel.endGame){
+
+        if (GameModel.endGame) {
             EndGameEvent(true);
         }
+
         if (GameModel.squirrelHealth <= 0)
         {
             //quick fix for game over, will need to be changed
@@ -215,12 +246,17 @@ public class UIController : RiseBehavior {
         timerUIText.text = "Timer: " + GameModel.displayTime;
     }
 
+    // This ensures that the depth of field returns to its initial
+    // settings once the game is restarted
     public void OnApplicationQuit() {
         postProcessProfile.TryGetSettings(out depthOfField);
         depthOfField.focusDistance.value = defaultDOF;
     }
 
+    // The function that gets called once you select an option
+    // in any menu
     void Select(int button) {
+        // Make the selection cursor for the last option invisible
         for(int i = 0; i < listsOfOptionLists[currentMenu].Count; i++) {
             for (int j = 0; j < listsOfOptionLists[currentMenu][i].transform.childCount; j++) {
                 if (listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.tag != "Static Option") {
@@ -229,15 +265,22 @@ public class UIController : RiseBehavior {
             }
         }
 
+        // Change _buttonSelected to point to the new option
         _buttonSelected = button;
+
+        // Make the selection cursor for the new option visible
         for (int l = 0; l < listsOfOptionLists[currentMenu][_buttonSelected].transform.childCount; l++) {
             if (listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.tag != "Static Option") {
                 listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.SetActive(true);
             }
         }
+
+        // Set the function that will be called when 
+        // the player hits the confirmation button
         _currentSelectAction = _listsOfSelectActions[currentMenu][_buttonSelected];
     }
 
+    //----------MENU FUNCTIONS----------
     public void PauseEvent(bool isTrue) {
         // Pause the game
         if (!GameModel.paused) {
@@ -481,39 +524,64 @@ public class UIController : RiseBehavior {
         OpenMenu(5, true);
     }
 
-    public void OpenMenu(int menu, bool inMenu) {
+    //----------MENU FUNCTIONS----------
+
+    //----------PRIVATE HELPER FUNCTIONS----------
+    private void OpenMenu(int menu, bool inMenu) {
+        // Make the last menu invisible
         menuObjects[currentMenu].SetActive(false);
+
+        // Set currentMenu to point to the just selected menu 
         currentMenu = menu;
 
+        // If the current menu is the pause menu, don't set the tracking
+        // camera to be the active camera (although this function isn't
+        // currently working)
         if(currentMenu == 1) {
             GameModel.menuCameraEnabled = false;
         } else {
             GameModel.menuCameraEnabled = true;
         }
 
+        // This is true if you want to access a menu
         if (inMenu) {
+            // Sets the inMenu flag to true (this variable isn't currently used
+            // in this script)
             GameModel.inMenu = true;
+
+            // Set the text options in the current menu active,
+            // tell the current menu what functions it can potentially call,
+            // and match the current text fields to their corresponding functions
             menuObjects[currentMenu].SetActive(true);
             _selectActionsList = _listsOfSelectActions[menu];
             _optionList = listsOfOptionLists[currentMenu];
 
+            // Make sure that all the selection cursors are invisible
             for (int i = 0; i < _optionList.Count; i++) {
                 _optionList[i].transform.GetChild(0).gameObject.SetActive(false);
             }
 
+            // Make the active opiton the topmost option in the current menu
             _buttonToSelect = 0;
-
             Select(_buttonToSelect);
 
+            // Since the game is paused, we're going to make the depth of field
+            // deeper
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = pauseDOF;
+
+        // This is true if you want to return to activel playing the game
         } else {
+            // Set the inMenu and paused variables to false,
+            // since we're no longer in a menu and the game is actively
+            // being played
             GameModel.inMenu = false;
             GameModel.paused = false;
 
+            // Since the game's no longer paused, we'll
+            // make the depth of field shallow
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
-            heightUISlider.gameObject.SetActive(true);
         }
     }
 
@@ -553,4 +621,5 @@ public class UIController : RiseBehavior {
             InputHelper.SetKeyboard(InputHelper.PlayerOne);
         }
     }
+    //--------------------------------------------
 }
