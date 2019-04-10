@@ -143,7 +143,8 @@ public class UIController : RiseBehavior {
 
         UpdateQuality();
 
-        ConfigureController(GameModel.inputGamePad, (Input.GetJoystickNames()[0] != ""));
+        ConfigureController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+            false);
     }
 
 
@@ -192,8 +193,6 @@ public class UIController : RiseBehavior {
         heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
-
-        Debug.Log(Input.GetJoystickNames().Length);
     }
 
     public override void UpdateTick() {
@@ -384,9 +383,11 @@ public class UIController : RiseBehavior {
 
     public void ControllerEvent(bool isTrue) {
         if (GameModel.inputGamePad) {
-            ConfigureController(false, (Input.GetJoystickNames()[0] != ""));
+            ConfigureController(false, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+                false);
         } else {
-            ConfigureController(true, (Input.GetJoystickNames()[0] != ""));
+            ConfigureController(true, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+                false);
         }
     }
 

@@ -2451,7 +2451,7 @@ GameObject:
   - component: {fileID: 3389307797167506457}
   m_Layer: 5
   m_Name: Controller Text
-  m_TagString: Untagged
+  m_TagString: Static Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2642,7 +2642,7 @@ GameObject:
   - component: {fileID: 88283026818335800}
   m_Layer: 5
   m_Name: Quality Text
-  m_TagString: Untagged
+  m_TagString: Static Option
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3701,6 +3701,9 @@ MonoBehaviour:
   mainMenuObject: {fileID: 1432050083}
   pauseMenuObject: {fileID: 1874433054}
   optionsMenuObject: {fileID: 5737707754222980247}
+  levelSelectMenuObject: {fileID: 0}
+  endGameMenuObject: {fileID: 0}
+  gameOverMenuObject: {fileID: 0}
   postProcessProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
   _trackCam: {fileID: 0}
   treeController: {fileID: 0}
@@ -3711,6 +3714,7 @@ MonoBehaviour:
   heightUISlider: {fileID: 6462225555729219406}
   controllerText: {fileID: 0}
   qualityText: {fileID: 0}
+  timerUI: {fileID: 0}
 --- !u!1 &6462225557133089120
 GameObject:
   m_ObjectHideFlags: 0
@@ -4561,6 +4565,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2660507254430891218}
     m_Modifications:
+    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
+        type: 3}
+      propertyPath: m_Name
+      value: UIBranchElement
+      objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4680,11 +4689,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
-        type: 3}
-      propertyPath: m_Name
-      value: UIBranchElement
       objectReference: {fileID: 0}
     - target: {fileID: 5390275804387599201, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
