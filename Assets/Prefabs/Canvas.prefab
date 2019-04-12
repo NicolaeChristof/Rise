@@ -2896,7 +2896,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 590, y: 520}
+  m_AnchoredPosition: {x: 596, y: 547}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4747811010387419549
@@ -3552,7 +3552,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2089564308118673720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3613,7 +3613,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -540.155, y: -256.24002}
+  m_AnchoredPosition: {x: -549, y: -277}
   m_SizeDelta: {x: 25, y: 180}
   m_Pivot: {x: 0, y: 0}
 --- !u!114 &6462225555729219406
@@ -3816,7 +3816,7 @@ MonoBehaviour:
   m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1080, y: 720}
+  m_ReferenceResolution: {x: 1280, y: 720}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
@@ -3856,9 +3856,9 @@ MonoBehaviour:
   mainMenuObject: {fileID: 1432050083}
   pauseMenuObject: {fileID: 1874433054}
   optionsMenuObject: {fileID: 5737707754222980247}
-  levelSelectMenuObject: {fileID: 0}
-  endGameMenuObject: {fileID: 0}
-  gameOverMenuObject: {fileID: 0}
+  levelSelectMenuObject: {fileID: 1323046279477320704}
+  endGameMenuObject: {fileID: 1331010429358596035}
+  gameOverMenuObject: {fileID: 3543302297264031453}
   postProcessProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
   _trackCam: {fileID: 0}
   treeController: {fileID: 0}
@@ -3867,9 +3867,9 @@ MonoBehaviour:
   heightUI: {fileID: 0}
   heightUIText: {fileID: 6462225557133089122}
   heightUISlider: {fileID: 6462225555729219406}
-  controllerText: {fileID: 0}
-  qualityText: {fileID: 0}
-  timerUI: {fileID: 0}
+  controllerText: {fileID: 3389307797167506457}
+  qualityText: {fileID: 88283026818335800}
+  timerUI: {fileID: 4276388968899245417}
 --- !u!1 &6462225557133089120
 GameObject:
   m_ObjectHideFlags: 0
@@ -3904,7 +3904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -455.15497, y: -259.24002}
+  m_AnchoredPosition: {x: -463.99994, y: -280}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0, y: 0}
 --- !u!222 &6462225557133089125
@@ -4863,12 +4863,12 @@ PrefabInstance:
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 384.7
+      value: 475
       objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 177.3
+      value: 185
       objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
