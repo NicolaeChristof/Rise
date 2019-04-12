@@ -38,7 +38,7 @@ public class OptionsUI : RiseBehavior {
 
     private void Start() {
         listOfIncrementFunctions = new IncrementFunction[] { ChangeController, ChangeQuality };
-        scrollables = new List<List<string>> { new List<string> { "Thingy" }, qualityScrollable };
+        scrollables = new List<List<string>> { new List<string> { "First Entry" }, qualityScrollable };
         cursors = new List<int>();
 
         for (int i = 0; i < listOfIncrementFunctions.Length; i++) {

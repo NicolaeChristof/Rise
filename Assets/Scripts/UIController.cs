@@ -94,11 +94,16 @@ public class UIController : RiseBehavior {
     public Text controllerText;
     public Text qualityText;
 
-    // qualityStrings is a string that holds the possible labels
-    // for each graphic level. qualityCursor holds the index of the
+    // _qualityStrings is a string that holds the possible labels
+    // for each graphic level. _qualityCursor holds the index of the
     // current label
-    private int qualityCursor;
-    private string[] qualityStrings;
+    private int _qualityCursor;
+    private string[] _qualityStrings;
+
+    // The functionality for the controller swap is similar to that
+    // of the quality options
+    private int _controllerCursor;
+    private string[] _controllerStrings;
     //---------------------
 
     //------Timer UI---------
@@ -163,16 +168,19 @@ public class UIController : RiseBehavior {
         }
 
         //-----Options UI----
-        qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
-        qualityCursor = QualitySettings.GetQualityLevel();
+        _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
+        _qualityCursor = QualitySettings.GetQualityLevel();
+
+        _controllerStrings = new string[] { "Keyboard", "Controller", "Keyboard (No Controller Detected)" };
 
         UpdateQuality();
 
-        ConfigureController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+        PrepareController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
             false);
+
+        ChangeController(_controllerCursor);
         //-------------------
     }
-
 
     public override void UpdateAlways() {
         // Setting _currentAxis and _pressedSelect depending on whether the player is currently
@@ -426,16 +434,16 @@ public class UIController : RiseBehavior {
 
     public void ControllerEvent(bool isTrue) {
         if (GameModel.inputGamePad) {
-            ConfigureController(false, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+            PrepareController(false, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
                 false);
         } else {
-            ConfigureController(true, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+            PrepareController(true, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
                 false);
         }
     }
 
     public void QualityEvent(bool isTrue) {
-        qualityCursor = (qualityCursor + 1) % qualityStrings.Length;
+        _qualityCursor = (_qualityCursor + 1) % _qualityStrings.Length;
         UpdateQuality();
     }
 
@@ -460,6 +468,8 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
         SetActiveInactive(active, inactive);
+
+        ChangeController(_controllerCursor);
 
         OpenMenu(0, true);
     }
@@ -600,25 +610,48 @@ public class UIController : RiseBehavior {
     }
 
     private void UpdateQuality() {
-        QualitySettings.SetQualityLevel(qualityCursor);
-        qualityText.text = qualityStrings[qualityCursor];
+        QualitySettings.SetQualityLevel(_qualityCursor);
+        qualityText.text = _qualityStrings[_qualityCursor];
     }
 
-    private void ConfigureController(bool useController, bool controllerConnected) {
+    // A function that sets the controller cursor accordingly.
+    // It doesn't actually change the control method (it just tells
+    // ExitFromOptionsEvent what control methods we're going to switch to)
+    private void PrepareController(bool useController, bool controllerConnected) {
         if (useController) {
             if (controllerConnected) {
-                GameModel.inputGamePad = true;
-                controllerText.text = "Controller";
-                InputHelper.Initialize();
+                _controllerCursor = 1;
             } else {
-                GameModel.inputGamePad = false;
-                controllerText.text = "Keyboard (No Controller Detected)";
-                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                _controllerCursor = 2;
             }
         } else {
-            GameModel.inputGamePad = false;
-            controllerText.text = "Keyboard";
-            InputHelper.SetKeyboard(InputHelper.PlayerOne);
+            _controllerCursor = 0;
+        }
+
+        controllerText.text = _controllerStrings[_controllerCursor];
+    }
+
+    // This function takes the controller cursor and uses it
+    // to actually set your input method. It's mainly called
+    // from the ExitFromOptionsEvent function
+    private void ChangeController(int controllerOption) {
+        switch (controllerOption) {
+            case 0:
+                GameModel.inputGamePad = false;
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                break;
+            case 1:
+                GameModel.inputGamePad = true;
+                InputHelper.Initialize();
+                break;
+            case 2:
+                GameModel.inputGamePad = false;
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                break;
+            default:
+                GameModel.inputGamePad = false;
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                break;
         }
     }
     //--------------------------------------------
