@@ -33,10 +33,12 @@ public class SapBehavior : RiseBehavior {
     }
 
     public virtual void OnSapCollected() {
-        hasTouched = true;
+        if (!hasTouched) {
+            Vector3 collisionLocation = transform.position;
+            uiBranchManager.MoveLeaf(collisionLocation);
+        }
 
-        Vector3 collisionLocation = transform.position;
-        uiBranchManager.MoveLeaf(collisionLocation);
+        hasTouched = true;
 
         transform.DOScale(Vector3.zero, 0.75f).OnComplete(() => Destroy(this));
     }

@@ -11,7 +11,6 @@ public class UIBranchManager : RiseBehavior {
     public TreeController treeController;
     public Image branch;
     public List<Image> leaves;
-    public Image moveableLeaf;
     public Camera cam;
 
     // Internal Fields
@@ -19,9 +18,10 @@ public class UIBranchManager : RiseBehavior {
 
     private Tween currentTweenable;
 
+    public Image moveableLeaf;
+
     void Start() {
         treeController.uiUpdateEvent += OnUpdateElement;
-        moveableLeaf.enabled = false;
     }
 
     void Update() {
@@ -48,15 +48,10 @@ public class UIBranchManager : RiseBehavior {
     }
 
     public void MoveLeaf(Vector3 startPos) {
-        if (currentTweenable != null) {
-            currentTweenable.Kill();
-        }
-
-        moveableLeaf.enabled = true;
-
         Vector3 uiPos = cam.WorldToScreenPoint(startPos);
-        moveableLeaf.transform.position = uiPos;
+        Image currentMoveableLeaf = GameObject.Instantiate(moveableLeaf, uiPos, Quaternion.identity, transform);
 
-        currentTweenable = moveableLeaf.transform.DOMove(transform.position, 2f, false).OnComplete(() => moveableLeaf.enabled = false);
+        currentMoveableLeaf.transform.DOMove(transform.position, 2f, false).OnComplete(() => currentMoveableLeaf.enabled = false);
+        currentMoveableLeaf.transform.DOScale(transform.localScale * .3f, 2f);
     }
 }
