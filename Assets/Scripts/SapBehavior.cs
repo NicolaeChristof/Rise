@@ -11,7 +11,7 @@ public class SapBehavior : RiseBehavior {
     public float scaleFactor = 0.6F;
     public bool canCollect = true;
 
-    private UILeafMover uiLeafMover;
+    private UIBranchManager uiBranchManager;
 
     // This is set to true when the player has touched the sap
     // (to ensure the sap doesn't continue to provide resources
@@ -21,7 +21,7 @@ public class SapBehavior : RiseBehavior {
     public void Start() {
         float scale = (sapValue > 1.0F) ? 1 + (scaleFactor * sapValue) : 1.0F;
         transform.localScale.Set(scale, scale, scale);
-        uiLeafMover = FindObjectOfType<UILeafMover>();
+        uiBranchManager = FindObjectOfType<UIBranchManager>();
     }
 
     public override void UpdateAlways() {
@@ -36,7 +36,7 @@ public class SapBehavior : RiseBehavior {
         hasTouched = true;
 
         Vector3 collisionLocation = transform.position;
-        uiLeafMover.MoveLeaf(collisionLocation);
+        uiBranchManager.MoveLeaf(collisionLocation);
 
         transform.DOScale(Vector3.zero, 0.75f).OnComplete(() => Destroy(this));
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RiseExtensions;
+using DG.Tweening;
 
 public class UIBranchManager : RiseBehavior {
 
@@ -10,12 +11,17 @@ public class UIBranchManager : RiseBehavior {
     public TreeController treeController;
     public Image branch;
     public List<Image> leaves;
+    public Image moveableLeaf;
+    public Camera cam;
 
     // Internal Fields
     private static System.Action<MonoBehaviour> pauseComponent = (component) => { component.enabled = GameModel.paused; };
 
+    private Tween currentTweenable;
+
     void Start() {
         treeController.uiUpdateEvent += OnUpdateElement;
+        moveableLeaf.enabled = false;
     }
 
     void Update() {
@@ -39,5 +45,18 @@ public class UIBranchManager : RiseBehavior {
             iteratedLeaf.sprite = provider.leafSprite;
             iteratedLeaf.enabled = (index < enabledSprites);
         }
+    }
+
+    public void MoveLeaf(Vector3 startPos) {
+        if (currentTweenable != null) {
+            currentTweenable.Kill();
+        }
+
+        moveableLeaf.enabled = true;
+
+        Vector3 uiPos = cam.WorldToScreenPoint(startPos);
+        moveableLeaf.transform.position = uiPos;
+
+        currentTweenable = moveableLeaf.transform.DOMove(transform.position, 2f, false).OnComplete(() => moveableLeaf.enabled = false);
     }
 }
