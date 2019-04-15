@@ -107,14 +107,15 @@ public class BeeHiveBehavior : MonoBehaviour {
 
     void OnTriggerStay (Collider collider) {
 
-        if (collider.gameObject.tag.Equals("Player")) {
+        if (collider.gameObject.tag.Equals("Player") && !(GameModel.paused)) {
 
             if (_canDamage) {
 
                 DisableDamage(1.0f);
 
                 GameModel.squirrelHealth--;
-
+                GameObject Health = GameObject.Find("Health Bar");
+                Health.GetComponent<HealthUI>().UpdateHealth();
                 Debug.Log(GameModel.squirrelHealth);
 
             }
