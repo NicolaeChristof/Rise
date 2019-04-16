@@ -79,8 +79,8 @@ GameObject:
   m_Component:
   - component: {fileID: 8054649134457348853}
   - component: {fileID: 4239923448075859978}
-  - component: {fileID: 6958240571181792006}
   - component: {fileID: 5595360454811416224}
+  - component: {fileID: 4445745250295663003}
   m_Layer: 0
   m_Name: Sap_Blue
   m_TagString: Sap
@@ -117,20 +117,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.75, y: 0.75, z: 0.75}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6958240571181792006
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4092395956840239951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd57f85280045a447a1e4c85f14c7ae3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sapType: 3
-  sapValue: 1
 --- !u!114 &5595360454811416224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +129,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2816ec3594e6b664aaaaec1c6198e1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &4445745250295663003
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4092395956840239951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 534b5b21be0774a75aedd9322d18463f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pickupSound: {fileID: 8300000, guid: 4f9712e09272d28409eb888762e88c75, type: 3}
+  sapType: 3
+  sapValue: 1
+  scaleFactor: 0.6
+  canCollect: 1
+  hasTouched: 0
 --- !u!1001 &8633931033465264311
 PrefabInstance:
   m_ObjectHideFlags: 0

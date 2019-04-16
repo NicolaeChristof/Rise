@@ -20,6 +20,7 @@ public class SettingsController : RiseBehavior {
 
     // Public Fields
     public float pauseDOF;
+    public bool enforceModes;
 
     // Private References
 
@@ -39,63 +40,15 @@ public class SettingsController : RiseBehavior {
 
         InputHelper.Initialize();
 
-        // Can only use keyboard in single player mode
-        if (!GameModel.inputGamePad) {
-
-            GameModel.singlePlayer = true;
-
-        }
-
-        // Single/Multi Player Settings
-        if (GameModel.singlePlayer) {
-
-            GameModel.splitScreen = false;
-
-            if (GameModel.inputGamePad) {
-
-                // by default controls are set for game pad
-
-                GameModel.singlePlayer = true;
-
-            } else {
-
-				InputHelper.SetKeyboard(InputHelper.PlayerOne);
+        if (enforceModes) {
+            EnforceModes();
+        } else {
+            if (!GameModel.inputGamePad) {
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
             }
-
-        } else {
-
-            // Force GamePad input in multiplayer
-            GameModel.inputGamePad = true;
-
-            // Force split screen mode in multiplayer
-            GameModel.splitScreen = true;
-
-            // by default controls are set for game pad
-
         }
 
-        // Split Screen Settings
-        if (GameModel.splitScreen) {
-
-            squirrelCamera.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
-
-            treeCamera.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
-
-            squirrelCamera.enabled = true;
-
-            treeCamera.enabled = true;
-
-        } else {
-
-            squirrelCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-
-            treeCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
-
-            squirrelCamera.enabled = true;
-
-            treeCamera.enabled = false;
-
-        }
+        SetCameras();
 
     }
 
@@ -134,13 +87,13 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.timer -= Time.deltaTime;
 
-                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + (GameModel.timer % 60).ToString("F0");
-
-                Debug.Log(GameModel.displayTime);
+                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
+                //Debug.Log(GameModel.displayTime);
+                
 
             } else {
 
-                Debug.Log("GAME OVER!");
+                Debug.Log("GAME OVER! You Ran Out Of Time!!");
 
                 GameModel.displayTime = "0:0";
 
@@ -148,14 +101,86 @@ public class SettingsController : RiseBehavior {
 
             }
 
+            // Debug.Log(GameModel.displayTime);
+
         }
 
+        
+
+    }
+
+    public void SetCameras() {
+        // Split Screen Settings
+        if (GameModel.splitScreen) {
+
+            squirrelCamera.rect = new Rect(0.0f, 0.0f, 0.5f, 1.0f);
+
+            treeCamera.rect = new Rect(0.5f, 0.0f, 0.5f, 1.0f);
+
+            squirrelCamera.enabled = true;
+
+            treeCamera.enabled = true;
+
+        } else {
+
+            squirrelCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
+            treeCamera.rect = new Rect(0.0f, 0.0f, 1.0f, 1.0f);
+
+            squirrelCamera.enabled = true;
+
+            treeCamera.enabled = false;
+
+        }
     }
 
     public override void UpdateAlways() {
 
 
 
+    }
+
+    void LateUpdate() {
+        InputHelper.LateCheck();
+    }
+
+    // Internal Methods
+
+    private void EnforceModes() {
+        // Can only use keyboard in single player mode
+        if (!GameModel.inputGamePad) {
+
+            GameModel.singlePlayer = true;
+
+        }
+
+        // Single/Multi Player Settings
+        if (GameModel.singlePlayer) {
+
+            GameModel.splitScreen = false;
+
+            if (GameModel.inputGamePad) {
+
+                // by default controls are set for game pad
+
+                GameModel.singlePlayer = true;
+
+            } else {
+
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+            }
+
+        } else {
+
+            // Force GamePad input in multiplayer
+            GameModel.inputGamePad = true;
+
+            // Force split screen mode in multiplayer
+            GameModel.splitScreen = true;
+
+            // by default controls are set for game pad
+
+        }
     }
 
 }

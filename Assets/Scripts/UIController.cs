@@ -9,10 +9,18 @@ using RiseExtensions;
 
 public class UIController : RiseBehavior {
 
+    // A reference to the settings controller for ensuring cameras
+    // are set up correctly
+    public SettingsController settingsController;
+
     // The Game Objects that hold each menu
     public GameObject mainMenuObject;
     public GameObject pauseMenuObject;
     public GameObject optionsMenuObject;
+    public GameObject levelSelectMenuObject;
+    public GameObject endGameMenuObject;
+    public GameObject gameOverMenuObject;
+    
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -27,6 +35,9 @@ public class UIController : RiseBehavior {
 
     // The tracking camera on the main menu
     public Camera _trackCam;
+
+    // A reference to the TreeController
+    public TreeController treeController;
 
     // Select Actions are the functions that get called
     // when you hit a menu option. You pass in a bool
@@ -60,16 +71,12 @@ public class UIController : RiseBehavior {
     // Unsure if still using this
     private bool justPaused = false;
 
-    // Still unsure if using these
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
     private bool _pressedPause = false;
 
-    //--------Sap UI---------
-    public GameObject[] sapBranchBars = new GameObject[4];
-
-    private List<GameObject>[] _branchLeaves;
-    private int _currentBranchSelected;
+    //------Branch UI--------
+    public GameObject uiBranches;
     //-----------------------
 
     //------Height UI--------
@@ -80,15 +87,61 @@ public class UIController : RiseBehavior {
     public Slider heightUISlider;
     //-----------------------
 
+    //------Options UI-----
+
+    // The Text labels that correspond to the control method
+    // and graphics level we're using, respectively
+    public Text controllerText;
+    public Text qualityText;
+
+    // _qualityStrings is a string that holds the possible labels
+    // for each graphic level. _qualityCursor holds the index of the
+    // current label
+    private int _qualityCursor;
+    private string[] _qualityStrings;
+
+    // The functionality for the controller swap is similar to that
+    // of the quality options
+    private int _controllerCursor;
+    private string[] _controllerStrings;
+    //---------------------
+
+    //------Timer UI---------
+    public GameObject timerUI;
+    private Text timerUIText;
+    //-----------------------
+
     private void Start() {
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
 
-        // For each option on each menu, we're adding its function to _listsOfSelectActions
+        //-----Menu Functionality List-----
+
+        // Declaring our menu functionality list
         _listsOfSelectActions = new List<List<_selectAction>>();
-        _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, OptionsEvent, ExitGameEvent });
-        _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, RestartEvent, ExitFromPauseEvent });
-        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, CreditsEvent, ExitFromOptionsEvent });
+
+        // Main Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
+
+        // Pause Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
+
+        // Options Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { ControllerEvent, QualityEvent, ExitFromOptionsEvent });
+
+        // Level Select Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
+
+        // Level End Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { NextLevelEvent, ExitEndGameEvent });
+
+        // Game Over Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
+
+        //-------------------------------
+
+        // Get UI timer text
+        timerUIText = timerUI.GetComponent<Text>();
 
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
@@ -105,6 +158,8 @@ public class UIController : RiseBehavior {
             }
         }
 
+        // This ensures that you don't have to go through the main menu
+        // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
             GameModel.paused = true;
             MenuEvent(true);
@@ -112,23 +167,24 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
-        _branchLeaves = new List<GameObject>[sapBranchBars.Length];
+        //-----Options UI----
+        _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
+        _qualityCursor = QualitySettings.GetQualityLevel();
 
-        for(int k=0; k<sapBranchBars.Length; k++) {
-            _branchLeaves[k] = SetBranchLeaves(k);
-        }
+        _controllerStrings = new string[] { "Keyboard", "Controller", "Keyboard (No Controller Detected)" };
 
-        //heightUI = FindObjectOfType<HeightUIInfo>();
-        heightUIText.gameObject.SetActive(false);
+        UpdateQuality();
 
-        TreeController.sapUpdated += UpdateSapBar;
-        TreeController.branchUpdated += UpdateBranchSelected;
+        PrepareController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+            false);
+
+        ChangeController(_controllerCursor);
+        //-------------------
     }
 
-
     public override void UpdateAlways() {
-        // Debug.Log(GameModel.paused);
-
+        // Setting _currentAxis and _pressedSelect depending on whether the player is currently
+        // a tree or a squirrel
         if (GameModel.isSquirrel) {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
             _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
@@ -138,7 +194,6 @@ public class UIController : RiseBehavior {
         }
 
         if (GameModel.paused) {
-
             // Here we're testing which option in the current menu the
             // user has select and storing it in the _buttonSelected variable
             if ((_currentAxis > 0f) && !_justSelected) {
@@ -167,108 +222,229 @@ public class UIController : RiseBehavior {
             if (_pressedSelect) {
                 _currentSelectAction(true);
             }
-
-            if (currentMenu == 0 || currentMenu == 2) {
-                _trackCam.depth = 0;
-            } else {
-                _trackCam.depth = -2;
-            }
         }
 
         //---Height UI---
-        heightUIText.text = "Height: " + heightUI.currentHeight.ToString("F1") + "m";
+        heightUIText.text = "Height: " + heightUI.currentHeightInMeters.ToString("F1") + "m";
         heightUISlider.value = heightUI.currentHeight / heightUI.treeHeight;
         //---------------
     }
 
     public override void UpdateTick() {
-        if (GameModel.isSquirrel) {
-            _pressedPause = InputHelper.GetButtonDown(SquirrelInput.PAUSE);
-        } else {
-            _pressedPause = InputHelper.GetButtonDown(TreeInput.PAUSE);
-        }
-
-        if (_pressedPause) {
+        // We can just check for the pause button without checking the state
+        // of the game since this is in UpdateTick()
+        if (InputHelper.Pause()) {
             PauseEvent(true);
         }
 
+        if (GameModel.endGame) {
+            EndGameEvent(true);
+        }
+
+        if (GameModel.squirrelHealth <= 0)
+        {
+            //quick fix for game over, will need to be changed
+            
+            Debug.Log("Game Over! You Died!");
+            GameOverEvent(true);
+            GameModel.paused = true;
+            GameModel.squirrelHealth = 10; //Leads to constant gameovers if this isn't set back to default value
+        }
+
+        timerUIText.text = "Timer: " + GameModel.displayTime;
     }
 
+    // This ensures that the depth of field returns to its initial
+    // settings once the game is restarted
     public void OnApplicationQuit() {
         postProcessProfile.TryGetSettings(out depthOfField);
         depthOfField.focusDistance.value = defaultDOF;
     }
 
+    // The function that gets called once you select an option
+    // in any menu
     void Select(int button) {
+        // Make the selection cursor for the last option invisible
         for(int i = 0; i < listsOfOptionLists[currentMenu].Count; i++) {
             for (int j = 0; j < listsOfOptionLists[currentMenu][i].transform.childCount; j++) {
-                listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.SetActive(false);
+                if (listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.tag != "Static Option") {
+                    listsOfOptionLists[currentMenu][i].transform.GetChild(j).gameObject.SetActive(false);
+                }
             }
         }
 
+        // Change _buttonSelected to point to the new option
         _buttonSelected = button;
+
+        // Make the selection cursor for the new option visible
         for (int l = 0; l < listsOfOptionLists[currentMenu][_buttonSelected].transform.childCount; l++) {
-            listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.SetActive(true);
+            if (listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.tag != "Static Option") {
+                listsOfOptionLists[currentMenu][_buttonSelected].transform.GetChild(l).gameObject.SetActive(true);
+            }
         }
+
+        // Set the function that will be called when 
+        // the player hits the confirmation button
         _currentSelectAction = _listsOfSelectActions[currentMenu][_buttonSelected];
     }
 
+    //----------MENU FUNCTIONS----------
     public void PauseEvent(bool isTrue) {
+        // Pause the game
         if (!GameModel.paused) {
+
             GameModel.paused = true;
-            heightUIText.gameObject.SetActive(true);
+
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { };
+            SetActiveInactive(active, inactive);
+
             OpenMenu(1, true);
+
+        // Unpause the game
         } else {
+
             GameModel.paused = false;
+
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+
             OpenMenu(1, false);
-            heightUIText.gameObject.SetActive(false);
+
         }
     }
 
     public void MenuEvent(bool isTrue) {
-        for(int i = 0; i < sapBranchBars.Length; i++) {
-            sapBranchBars[i].gameObject.SetActive(false);
-        }
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
-        heightUISlider.gameObject.SetActive(false);
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
     }
 
     public void SinglePlayerEvent(bool isTrue) {
         GameModel.singlePlayer = true;
+        GameModel.splitScreen = false;
+
+        if (settingsController != null) {
+            settingsController.SetCameras();
+        }
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
-        UpdateBranchSelected(_currentBranchSelected);
     }
 
     public void TwoPlayerEvent(bool isTrue) {
         GameModel.singlePlayer = false;
+        if (!settingsController.enforceModes) {
+            GameModel.splitScreen = true;
+        }
+
+        if (settingsController != null) {
+            settingsController.SetCameras();
+        }
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         GameModel.paused = false;
-        UpdateBranchSelected(_currentBranchSelected);
+
     }
 
+    //level select event
+    public void LevelSelectEvent(bool isTrue)
+    {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(3, true);
+
+    }
+
+    //level select menu events
+    public void SpringEvent(bool isTrue)
+    {
+        Debug.Log("Spring Activated");
+        SceneManager.LoadScene("Spring Template");
+    }
+
+    public void SummerEvent(bool isTrue)
+    {
+        Debug.Log("Summer Activated");
+        SceneManager.LoadScene("Summer Template");
+    }
+
+    public void FallEvent(bool isTrue)
+    {
+        Debug.Log("Fall Activated");
+        SceneManager.LoadScene("Fall Template");
+    }
+
+    public void WinterEvent(bool isTrue)
+    {
+        Debug.Log("Winter Activated");
+        SceneManager.LoadScene("Winter Template");
+    }
+
+    public void ExitLevelSelectEvent(bool isTrue)
+    {
+        Debug.Log("Exit Level Select Activated");
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+    }
+
+
     public void OptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(2, true);
     }
 
     public void RestartEvent(bool isTrue) {
-        for(int i=0; i<sapBranchBars.Length; i++) {
-            UpdateSapBar(8f, i);
-        }
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
-        GameModel.isSquirrel = true;
+
+        if (GameModel.singlePlayer) {
+            GameModel.isSquirrel = true;
+            SinglePlayerEvent(true);
+        } else {
+            TwoPlayerEvent(true);
+        }
+
+
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.timer = 300.0f;
+        GameModel.endGame = false;
+    }
+
+    public void ControllerEvent(bool isTrue) {
+        if (GameModel.inputGamePad) {
+            PrepareController(false, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+                false);
+        } else {
+            PrepareController(true, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
+                false);
+        }
     }
 
     public void QualityEvent(bool isTrue) {
-        Debug.Log("Quality Activated");
-    }
-
-    public void CreditsEvent(bool isTrue) {
-        Debug.Log("Credits Activated");
+        _qualityCursor = (_qualityCursor + 1) % _qualityStrings.Length;
+        UpdateQuality();
     }
 
     public void ExitGameEvent(bool isTrue) {
@@ -278,77 +454,205 @@ public class UIController : RiseBehavior {
     public void ExitFromPauseEvent(bool isTrue) {
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = true;
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(0, true);
         GameModel.paused = true;
+        GameModel.timer = 300.0f;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        ChangeController(_controllerCursor);
+
         OpenMenu(0, true);
     }
 
-    public void OpenMenu(int menu, bool inMenu) {
+    public void EndGameEvent(bool isTrue) {
+        // Pause the game
+        if (!GameModel.paused)
+        {
+
+            GameModel.paused = true;
+
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+            List<GameObject> inactive = new List<GameObject> { };
+            SetActiveInactive(active, inactive);
+
+            OpenMenu(4, true);
+
+        }
+    }
+
+    public void NextLevelEvent(bool isTrue) {
+        Debug.Log("Next Level");
+        GameModel.paused = false;
+        GameModel.endGame = false;
+        Scene currentScene = SceneManager.GetActiveScene();
+        if (currentScene.name == ("Test Scene")){
+            SpringEvent(true);
+        }
+        else if(currentScene.name == ("Spring Template")){
+            SummerEvent(true);
+        }
+        else if (currentScene.name == ("Summer Template")){
+            FallEvent(true);
+        }
+        else if (currentScene.name == ("Fall Template")){
+            WinterEvent(true);
+        }
+        else if (currentScene.name == ("Winter Template")){
+            SpringEvent(true);
+        }
+
+    }
+
+    public void ExitEndGameEvent(bool isTrue) {
+        Debug.Log("Exit to Main Menu");
+        GameModel.endGame = false;
+        SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+    }
+
+    public void GameOverEvent(bool isTrue)
+    {
+        Debug.Log("Game Over");
+        List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches };
+        List<GameObject> inactive = new List<GameObject> { };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(5, true);
+    }
+
+    //----------MENU FUNCTIONS----------
+
+    //----------PRIVATE HELPER FUNCTIONS----------
+    private void OpenMenu(int menu, bool inMenu) {
+        // Make the last menu invisible
         menuObjects[currentMenu].SetActive(false);
+
+        // Set currentMenu to point to the just selected menu 
         currentMenu = menu;
 
+        // If the current menu is the pause menu, don't set the tracking
+        // camera to be the active camera (although this function isn't
+        // currently working)
+        if(currentMenu == 1) {
+            GameModel.menuCameraEnabled = false;
+        } else {
+            GameModel.menuCameraEnabled = true;
+        }
+
+        // This is true if you want to access a menu
         if (inMenu) {
+            // Sets the inMenu flag to true (this variable isn't currently used
+            // in this script)
             GameModel.inMenu = true;
+
+            // Set the text options in the current menu active,
+            // tell the current menu what functions it can potentially call,
+            // and match the current text fields to their corresponding functions
             menuObjects[currentMenu].SetActive(true);
             _selectActionsList = _listsOfSelectActions[menu];
             _optionList = listsOfOptionLists[currentMenu];
 
+            // Make sure that all the selection cursors are invisible
             for (int i = 0; i < _optionList.Count; i++) {
                 _optionList[i].transform.GetChild(0).gameObject.SetActive(false);
             }
 
+            // Make the active opiton the topmost option in the current menu
             _buttonToSelect = 0;
-
             Select(_buttonToSelect);
 
+            // Since the game is paused, we're going to make the depth of field
+            // deeper
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = pauseDOF;
+
+        // This is true if you want to return to activel playing the game
         } else {
+            // Set the inMenu and paused variables to false,
+            // since we're no longer in a menu and the game is actively
+            // being played
             GameModel.inMenu = false;
             GameModel.paused = false;
 
+            // Since the game's no longer paused, we'll
+            // make the depth of field shallow
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
-            heightUISlider.gameObject.SetActive(true);
         }
     }
 
-    public void UpdateSapBar(float sapValue, int branchType) {
-        int i = 0;
-
-        foreach(GameObject leaf in _branchLeaves[branchType]) {
-            if (i < sapValue) {
-                leaf.SetActive(true);
-            } else {
-                leaf.SetActive(false);
+    private void SetActiveInactive(List<GameObject> activeObjects, List<GameObject> inactiveObjects) {
+        foreach(GameObject activeObject in activeObjects) {
+            if (!activeObject.activeSelf) {
+                activeObject.SetActive(true);
             }
-            i++;
+        }
+
+        foreach (GameObject inactiveObject in inactiveObjects) {
+            if (inactiveObject.activeSelf) {
+                inactiveObject.SetActive(false);
+            }
         }
     }
 
-    public void UpdateBranchSelected(int branchSelected) {
-        if (currentMenu != 0) {
-            sapBranchBars[_currentBranchSelected].gameObject.SetActive(false);
-            sapBranchBars[branchSelected].gameObject.SetActive(true);
-            _currentBranchSelected = branchSelected;
-        }
+    private void UpdateQuality() {
+        QualitySettings.SetQualityLevel(_qualityCursor);
+        qualityText.text = _qualityStrings[_qualityCursor];
     }
 
-    /// <summary>
-    /// Assigns a list of leaf Game Objects to each UI branch.
-    /// </summary>
-    private List<GameObject> SetBranchLeaves(int branch) {
-        List<GameObject> leaves = new List<GameObject>();
-
-        for (int j = 0; j < sapBranchBars[branch].transform.GetChild(0).childCount; j++) {
-            leaves.Add(sapBranchBars[branch].transform.GetChild(0).GetChild(j).gameObject);
+    // A function that sets the controller cursor accordingly.
+    // It doesn't actually change the control method (it just tells
+    // ExitFromOptionsEvent what control methods we're going to switch to)
+    private void PrepareController(bool useController, bool controllerConnected) {
+        if (useController) {
+            if (controllerConnected) {
+                _controllerCursor = 1;
+            } else {
+                _controllerCursor = 2;
+            }
+        } else {
+            _controllerCursor = 0;
         }
 
-        leaves.Reverse();
-
-        return leaves;
+        controllerText.text = _controllerStrings[_controllerCursor];
     }
+
+    // This function takes the controller cursor and uses it
+    // to actually set your input method. It's mainly called
+    // from the ExitFromOptionsEvent function
+    private void ChangeController(int controllerOption) {
+        switch (controllerOption) {
+            case 0:
+                GameModel.inputGamePad = false;
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                break;
+            case 1:
+                GameModel.inputGamePad = true;
+                InputHelper.Initialize();
+                break;
+            case 2:
+                GameModel.inputGamePad = false;
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                break;
+            default:
+                GameModel.inputGamePad = false;
+                InputHelper.SetKeyboard(InputHelper.PlayerOne);
+                break;
+        }
+    }
+    //--------------------------------------------
 }

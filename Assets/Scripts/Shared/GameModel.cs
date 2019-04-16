@@ -13,6 +13,8 @@ public static class GameModel {
 
     public static bool paused = false;
 
+    public static bool endGame = false;
+
     public static bool isSquirrel = true;
 
     public static bool debugMode = false;
@@ -21,13 +23,15 @@ public static class GameModel {
 
     public static bool inMenu = true;
 
-    public static string gameMode = "Timed Mode"; // "Zen Mode" "Timed Mode"
-
     public static bool enableTimer = true;
+
+    public static bool menuCameraEnabled = true;
 
     public static float timer = 300.0f;
 
     public static string displayTime = "mm:ss";
+
+    public static int squirrelHealth = 10;
 
     // Sound Controls
     public static float volLowRange = 0.8f;

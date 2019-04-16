@@ -74,8 +74,8 @@ public class BranchBehavior : MonoBehaviour {
     public virtual void OnBreak () {
         float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
         _source.PlayOneShot(breakSound, _volume);
-
         Instantiate(knot, transform.position, transform.rotation);
+        transform.DOScale(Vector3.zero, 0.75f).OnComplete(() => Object.Destroy(this));
     }
 
     // TODO: Internalize? I18n?
