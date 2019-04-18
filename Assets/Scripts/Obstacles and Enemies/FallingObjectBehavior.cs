@@ -66,8 +66,8 @@ public class FallingObjectBehavior : MonoBehaviour {
             collision.gameObject.GetComponent<PlayerController>().stunPlayer(0.5f);
 
             GameModel.squirrelHealth--;
-
-            Debug.Log(GameModel.squirrelHealth);
+            GameObject Health = GameObject.Find("Health Bar");
+            Health.GetComponent<HealthUI>().UpdateHealth();
 
         }
 

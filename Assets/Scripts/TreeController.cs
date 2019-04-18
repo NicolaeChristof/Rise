@@ -153,6 +153,12 @@ public class TreeController : RiseBehavior {
             provider.UpdateSap(type, quantity);
             sapUpdated?.Invoke(quantity, (int)type);
         }
+        if(GameModel.squirrelHealth < 10)
+        {
+            GameModel.squirrelHealth++;
+            GameObject Health = GameObject.Find("Health Bar");
+            Health.GetComponent<HealthUI>().UpdateHealth();
+        }
         UpdateUI();
     }
 
