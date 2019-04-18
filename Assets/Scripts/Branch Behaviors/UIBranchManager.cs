@@ -61,7 +61,7 @@ public class UIBranchManager : RiseBehavior {
 
         currentMoveableLeaf.transform.DOLocalRotate(leaves[sap].transform.localEulerAngles, 2f).OnComplete(() => leaves[sap].enabled = true);
         currentMoveableLeaf.transform.DOMove(leaves[sap].transform.position, 2f, false).OnComplete(() => currentMoveableLeaf.enabled = false);
-        currentMoveableLeaf.transform.DOScale(.2f, 2f);
+        currentMoveableLeaf.transform.DOScale(currentMoveableLeaf.transform.localScale * .7f, 2f);
     }
 
     private void BranchFullyUpdated(Image currentLeaf, int currentSap) {
