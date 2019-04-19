@@ -32,6 +32,9 @@ public class UIBranchManager : RiseBehavior {
     }
 
     public override void UpdateAlways() {
+        if(currentProvider == null && treeController.GetSelectedBranch() != null) {
+            Debug.Log("thing");
+        }
         pauseComponent(branch);
         leaves.ForEach(pauseComponent);
     }
@@ -41,7 +44,6 @@ public class UIBranchManager : RiseBehavior {
     }
 
     public void OnUpdateElement(BranchProvider provider) {
-        currentProvider = provider;
         branch.sprite = provider.branchSprite;
         int enabledSprites = Mathf.RoundToInt((provider.Sap / provider.maxSap) * leaves.Count);
         for (int index = 0; index < leaves.Count; index += 1) {
@@ -52,7 +54,9 @@ public class UIBranchManager : RiseBehavior {
     }
 
     public void MoveLeaf(Vector3 startPos) {
+        currentProvider = treeController.GetSelectedBranch();
         Vector3 uiPos = cam.WorldToScreenPoint(startPos);
+        moveableLeaf.sprite = currentProvider.leafSprite;
         Image currentMoveableLeaf = GameObject.Instantiate(moveableLeaf, uiPos, Quaternion.identity, transform);
 
         int sap = (int)currentProvider.Sap - 1;
