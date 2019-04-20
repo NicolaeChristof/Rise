@@ -12,6 +12,7 @@ public class SapBehavior : RiseBehavior {
     public bool canCollect = true;
 
     private UIBranchManager uiBranchManager;
+    private HealthUI healthUI;
 
     // This is set to true when the player has touched the sap
     // (to ensure the sap doesn't continue to provide resources
@@ -22,6 +23,7 @@ public class SapBehavior : RiseBehavior {
         float scale = (sapValue > 1.0F) ? 1 + (scaleFactor * sapValue) : 1.0F;
         transform.localScale.Set(scale, scale, scale);
         uiBranchManager = FindObjectOfType<UIBranchManager>();
+        healthUI = FindObjectOfType<HealthUI>();
     }
 
     public override void UpdateAlways() {
@@ -36,6 +38,7 @@ public class SapBehavior : RiseBehavior {
         if (!hasTouched) {
             Vector3 collisionLocation = transform.position;
             uiBranchManager.MoveLeaf(collisionLocation);
+            healthUI.MoveAcorn(collisionLocation);
         }
 
         hasTouched = true;

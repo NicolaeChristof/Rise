@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RiseExtensions;
+using DG.Tweening;
 
 public class HealthUI : MonoBehaviour
 {
@@ -10,9 +11,14 @@ public class HealthUI : MonoBehaviour
     public Sprite full;
     public Sprite half;
     public Sprite empty;
+
+    public Image moveableAcorn;
+
+    private Camera cam;
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<Camera>();
         UpdateHealth();
     }
 
@@ -122,5 +128,13 @@ public class HealthUI : MonoBehaviour
 
         }
         
+    }
+
+    public void MoveAcorn(Vector3 startPos) {
+        Vector3 uiPos = cam.WorldToScreenPoint(startPos);
+        Image currentAcorn = GameObject.Instantiate(moveableAcorn, uiPos, Random.rotation, transform);
+
+        currentAcorn.transform.DOMove(transform.position, 2f, false).OnComplete(() => currentAcorn.enabled = false);
+        currentAcorn.transform.DOLocalRotate(transform.localEulerAngles, 2f);
     }
 }
