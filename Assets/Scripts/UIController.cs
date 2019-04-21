@@ -20,7 +20,7 @@ public class UIController : RiseBehavior {
     public GameObject levelSelectMenuObject;
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
-    
+    private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -91,6 +91,12 @@ public class UIController : RiseBehavior {
     public GameObject healthUI;
     //-----------------------
 
+    //------Misletoe UI--------
+    public GameObject misletoeUI;
+    private Text misletoeText;
+    private int misletoeIndex = 0;
+    //-----------------------
+
     //------Options UI-----
 
     // The Text labels that correspond to the control method
@@ -146,7 +152,7 @@ public class UIController : RiseBehavior {
 
         // Get UI timer text
         timerUIText = timerUI.GetComponent<Text>();
-
+        
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
         // option
@@ -162,6 +168,13 @@ public class UIController : RiseBehavior {
             }
         }
 
+        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        if(checkpoints.Length != 0)
+        {
+            misletoeText = misletoeUI.GetComponent<Text>();
+            misletoeText.text = "Misletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MisletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
+        }
+        
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
@@ -661,4 +674,22 @@ public class UIController : RiseBehavior {
         }
     }
     //--------------------------------------------
+
+    public void UpdateMisletoe()
+    {
+        CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
+        misletoeText = misletoeUI.GetComponent<Text>();
+        misletoeText.text = "Misletoe: " + temp.MisletoeCount() + "/" + temp.mistletoeNeeded;
+        
+    }
+
+    public void NextCheckpoint()
+    {
+        CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
+        if (temp.MisletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length)
+        {
+            misletoeIndex++;
+        }
+        UpdateMisletoe();
+    }
 }
