@@ -185,6 +185,7 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
+        GameModel.squirrelHealth = 10;
         //-----Options UI----
         _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         _qualityCursor = QualitySettings.GetQualityLevel();
@@ -438,6 +439,7 @@ public class UIController : RiseBehavior {
     }
 
     public void RestartEvent(bool isTrue) {
+        GameModel.squirrelHealth = 10;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
 
@@ -485,6 +487,7 @@ public class UIController : RiseBehavior {
         OpenMenu(0, true);
         GameModel.paused = true;
         GameModel.timer = 300.0f;
+        GameModel.squirrelHealth = 10;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
@@ -519,7 +522,8 @@ public class UIController : RiseBehavior {
         GameModel.timer = 300.0f;
         GameModel.endGame = false;
         Scene currentScene = SceneManager.GetActiveScene();
-        
+        GameModel.squirrelHealth = 10;
+
         if (currentScene.name == ("Test Scene")){
             SpringEvent(true);
         }
