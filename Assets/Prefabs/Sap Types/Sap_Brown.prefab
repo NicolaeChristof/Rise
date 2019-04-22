@@ -78,7 +78,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8054649134457348853}
-  - component: {fileID: 4239923448075859978}
+  - component: {fileID: 3949972724952654330}
   - component: {fileID: 4288429023950921289}
   - component: {fileID: 4041569967481555979}
   m_Layer: 0
@@ -104,8 +104,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!65 &4239923448075859978
-BoxCollider:
+--- !u!135 &3949972724952654330
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -115,7 +115,7 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.75, y: 0.75, z: 0.75}
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4288429023950921289
 MonoBehaviour:
@@ -141,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 534b5b21be0774a75aedd9322d18463f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSound: {fileID: 8300000, guid: 4f9712e09272d28409eb888762e88c75, type: 3}
+  pickupSound: {fileID: 8300000, guid: 189de564f58b0c04ca1a96e45227ad71, type: 3}
   sapType: 1
   sapValue: 1
   scaleFactor: 0.6
