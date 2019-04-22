@@ -171,6 +171,7 @@ public class UIController : RiseBehavior {
         checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
         if(checkpoints.Length != 0)
         {
+            misletoeIndex = 0;
             misletoeText = misletoeUI.GetComponent<Text>();
             misletoeText.text = "Misletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MisletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
         }
@@ -197,6 +198,7 @@ public class UIController : RiseBehavior {
 
         ChangeController(_controllerCursor);
         //-------------------
+        
     }
 
     public override void UpdateAlways() {
@@ -271,6 +273,7 @@ public class UIController : RiseBehavior {
         }
 
         timerUIText.text = "Timer: " + GameModel.displayTime;
+        Debug.Log(GameModel.timer);
     }
 
     // This ensures that the depth of field returns to its initial
@@ -357,6 +360,7 @@ public class UIController : RiseBehavior {
 
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.enableTimer = true;
     }
 
     public void TwoPlayerEvent(bool isTrue) {
@@ -375,6 +379,7 @@ public class UIController : RiseBehavior {
 
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.enableTimer = true;
 
     }
 
@@ -512,8 +517,10 @@ public class UIController : RiseBehavior {
     public void NextLevelEvent(bool isTrue) {
         Debug.Log("Next Level");
         GameModel.paused = false;
+        GameModel.timer = 300.0f;
         GameModel.endGame = false;
         Scene currentScene = SceneManager.GetActiveScene();
+        
         if (currentScene.name == ("Test Scene")){
             SpringEvent(true);
         }
@@ -549,7 +556,7 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { };
         SetActiveInactive(active, inactive);
-
+        GameModel.timer = 300.0f;
         OpenMenu(5, true);
     }
 
@@ -686,10 +693,12 @@ public class UIController : RiseBehavior {
     public void NextCheckpoint()
     {
         CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
-        if (temp.MisletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length)
+        if (temp.MisletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length-1)
         {
+            Debug.Log(checkpoints.Length);
             misletoeIndex++;
+            UpdateMisletoe();
         }
-        UpdateMisletoe();
+        
     }
 }
