@@ -173,7 +173,7 @@ public class UIController : RiseBehavior {
         {
             misletoeIndex = 0;
             misletoeText = misletoeUI.GetComponent<Text>();
-            misletoeText.text = "Misletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MisletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
+            misletoeText.text = "Mistletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MistletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
         }
         
         // This ensures that you don't have to go through the main menu
@@ -681,22 +681,22 @@ public class UIController : RiseBehavior {
     }
     //--------------------------------------------
 
-    public void UpdateMisletoe()
+    public void UpdateMistletoe()
     {
         CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
         misletoeText = misletoeUI.GetComponent<Text>();
-        misletoeText.text = "Misletoe: " + temp.MisletoeCount() + "/" + temp.mistletoeNeeded;
+        misletoeText.text = "Mistletoe: " + temp.MistletoeCount() + "/" + temp.mistletoeNeeded;
         
     }
 
     public void NextCheckpoint()
     {
         CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
-        if (temp.MisletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length-1)
+        if (temp.MistletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length-1)
         {
             Debug.Log(checkpoints.Length);
             misletoeIndex++;
-            UpdateMisletoe();
+            UpdateMistletoe();
         }
         
     }

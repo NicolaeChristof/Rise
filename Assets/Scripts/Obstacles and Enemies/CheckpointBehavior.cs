@@ -111,7 +111,7 @@ public class CheckpointBehavior : MonoBehaviour {
     public void DeactivateWeb () {
 
         _mistletoeCollected++;
-        UI.UpdateMisletoe();
+        UI.UpdateMistletoe();
         if (_mistletoeCollected >= mistletoeNeeded) {
 
             _web.SetActive(false);
@@ -120,7 +120,7 @@ public class CheckpointBehavior : MonoBehaviour {
 
     }
 
-    public int MisletoeCount ()
+    public int MistletoeCount ()
     {
         return _mistletoeCollected;
     }
