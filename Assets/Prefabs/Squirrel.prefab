@@ -138,7 +138,12 @@ MonoBehaviour:
   playerModel: {fileID: 475141407950985062}
   squirrelCamera: {fileID: 0}
   treeCamera: {fileID: 0}
-  jumpSound: {fileID: 8300000, guid: 65afae3c30ff2fd44a6de00bf75ac9ef, type: 3}
+  jumpSound: {fileID: 8300000, guid: d0b2c6e21acb9644985bf9428856a9a3, type: 3}
+  doubleJumpSound: {fileID: 8300000, guid: 2d91c0c5e873542408f1ea5826d5c9b3, type: 3}
+  groundWalk: {fileID: 8300000, guid: 673c95fbb8669974ca86a73c85f29c5b, type: 3}
+  branchWalk: {fileID: 8300000, guid: 591993742deecd64395418350c821b3f, type: 3}
+  idleSound: {fileID: 8300000, guid: 38f7329b90562fd4abb86032aa8dc511, type: 3}
+  impactSound: {fileID: 8300000, guid: f419ccd3844c572438059dc842502efb, type: 3}
   treeSlider: {fileID: 0}
   speed: 6
   jumpSpeed: 10
@@ -161,8 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a374df31ac0fc334e9fd4ce616c97c7d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupSound: {fileID: 8300000, guid: 4f9712e09272d28409eb888762e88c75, type: 3}
-  sapPickup: 1
+  treeController: {fileID: 0}
 --- !u!143 &475141408096447676
 CharacterController:
   m_ObjectHideFlags: 0
@@ -331,6 +335,7 @@ MonoBehaviour:
   heightOffset: 2
   treeHeight: 0
   currentHeight: 0
+  currentHeightInMeters: 0
   tree: {fileID: 0}
 --- !u!1001 &475141407950950790
 PrefabInstance:
