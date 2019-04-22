@@ -33,6 +33,8 @@ public static class GameModel {
 
     public static int squirrelHealth = 10;
 
+    public static float tweenTime = 1.5f;
+
     // Sound Controls
     public static float volLowRange = 0.8f;
 

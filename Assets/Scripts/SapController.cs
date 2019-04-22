@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using RiseExtensions;
+using System.Collections;
 
 [RequireComponent(typeof(AudioSource))]
 public class SapController : MonoBehaviour {
@@ -24,7 +25,7 @@ public class SapController : MonoBehaviour {
             if (!(sap is null)) {
                 // Update Tree Sap
                 if (!sap.hasTouched) {
-                    treeController.UpdateSap(sap.sapType, sap.sapValue);
+                    StartCoroutine(WaitToUpdateSap(sap));
                 }
 
                 // Call Sap-Specific OnCollected Effect
@@ -35,5 +36,10 @@ public class SapController : MonoBehaviour {
                 _source.PlayOneShot(sap.pickupSound, _volume);
             }
         }
+    }
+
+    private IEnumerator WaitToUpdateSap(SapBehavior sap) {
+        yield return new WaitForSeconds(GameModel.tweenTime-.1f);
+        treeController.UpdateSap(sap.sapType, sap.sapValue);
     }
 }

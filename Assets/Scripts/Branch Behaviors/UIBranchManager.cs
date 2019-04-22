@@ -11,6 +11,7 @@ public class UIBranchManager : RiseBehavior {
     public TreeController treeController;
     public Image branch;
     public List<Image> leaves;
+    // public List<bool> leavesEnabled;
     private Camera cam;
 
     // Internal Fields
@@ -21,6 +22,10 @@ public class UIBranchManager : RiseBehavior {
     public Image moveableLeaf;
 
     private BranchProvider currentProvider;
+
+    private int enabledSprites;
+
+    private int cursor = 0;
 
     void Start() {
         treeController.uiUpdateEvent += OnUpdateElement;
@@ -45,7 +50,7 @@ public class UIBranchManager : RiseBehavior {
 
     public void OnUpdateElement(BranchProvider provider) {
         branch.sprite = provider.branchSprite;
-        int enabledSprites = Mathf.RoundToInt((provider.Sap / provider.maxSap) * leaves.Count);
+        enabledSprites = Mathf.RoundToInt(((provider.Sap) / provider.maxSap) * leaves.Count);
         for (int index = 0; index < leaves.Count; index += 1) {
             Image iteratedLeaf = leaves[index];
             iteratedLeaf.sprite = provider.leafSprite;
@@ -55,21 +60,24 @@ public class UIBranchManager : RiseBehavior {
 
     public void MoveLeaf(Vector3 startPos) {
         currentProvider = treeController.GetSelectedBranch();
-        Vector3 uiPos = cam.WorldToScreenPoint(startPos);
-        moveableLeaf.sprite = currentProvider.leafSprite;
-        Image currentMoveableLeaf = GameObject.Instantiate(moveableLeaf, uiPos, Quaternion.identity, transform);
+        int currentSap = (int)currentProvider.Sap - 1;
 
-        int sap = (int)currentProvider.Sap - 1;
+        if (currentSap+cursor < (leaves.Count-1)) {
+            cursor++;
+            Vector3 uiPos = cam.WorldToScreenPoint(startPos);
+            moveableLeaf.sprite = currentProvider.leafSprite;
+            Image currentMoveableLeaf = GameObject.Instantiate(moveableLeaf, uiPos, Quaternion.identity, transform);
 
-        leaves[sap].enabled = false;
-
-        currentMoveableLeaf.transform.DOLocalRotate(leaves[sap].transform.localEulerAngles, 2f).OnComplete(() => leaves[sap].enabled = true);
-        currentMoveableLeaf.transform.DOMove(leaves[sap].transform.position, 2f, false).OnComplete(() => currentMoveableLeaf.enabled = false);
-        currentMoveableLeaf.transform.DOScale(currentMoveableLeaf.transform.localScale * .7f, 2f);
+            currentMoveableLeaf.transform.DOLocalRotate(leaves[currentSap+cursor].transform.localEulerAngles, GameModel.tweenTime).OnComplete(() => BranchFullyUpdated(currentMoveableLeaf));
+            currentMoveableLeaf.transform.DOMove(leaves[currentSap+cursor].transform.position, GameModel.tweenTime, false);
+            currentMoveableLeaf.transform.DOScale(currentMoveableLeaf.transform.localScale * .7f, GameModel.tweenTime);
+        }
     }
 
-    private void BranchFullyUpdated(Image currentLeaf, int currentSap) {
+    private void BranchFullyUpdated(Image currentLeaf) {
+        cursor--;
         currentLeaf.enabled = false;
-        leaves[currentSap].enabled = true;
+        OnUpdateElement(currentProvider);
+        transform.DOScale(transform.localScale * 1.1f, .15f).OnComplete(() => transform.DOScale(transform.localScale * (1f/1.1f), .15f));
     }
 }
