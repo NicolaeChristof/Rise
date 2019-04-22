@@ -273,7 +273,6 @@ public class UIController : RiseBehavior {
         }
 
         timerUIText.text = "Timer: " + GameModel.displayTime;
-        Debug.Log(GameModel.timer);
     }
 
     // This ensures that the depth of field returns to its initial
