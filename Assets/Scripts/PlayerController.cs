@@ -17,6 +17,16 @@ public class PlayerController : RiseBehavior {
 
     public AudioClip jumpSound;
 
+    public AudioClip doubleJumpSound;
+
+    public AudioClip groundWalk;
+
+    public AudioClip branchWalk;
+
+    public AudioClip idleSound;
+
+    public AudioClip impactSound;
+
     public Slider treeSlider;
 
     // Public Fields
