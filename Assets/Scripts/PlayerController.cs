@@ -372,6 +372,10 @@ public class PlayerController : RiseBehavior {
 
         _numJumps = maxJumps;
 
+        _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+        _source.PlayOneShot(impactSound, _volume);
+
         yield return new WaitForSeconds(stunTime);
 
         _playerStunned = false;
