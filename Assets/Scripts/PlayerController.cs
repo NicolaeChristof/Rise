@@ -216,7 +216,17 @@ public class PlayerController : RiseBehavior {
 
                 _walkSoundPlaying = true;
 
-                // _source.Play();
+                if (transform.position.y < 3.0f) {
+
+                    _source.clip = groundWalk;
+
+                } else {
+
+                    _source.clip = branchWalk;
+
+                }
+
+                _source.Play();
 
             }
 
