@@ -15,11 +15,19 @@ public class HealthUI : MonoBehaviour
     public Image moveableAcorn;
 
     private Camera cam;
+
+    private Vector3 heartLocation;
+
+    // These have the same utility as the corresponding variables in UIBranchManager
+    private Vector3 startingSize;
+    private float maxScaleUponImpact = 1.1f;
+
     // Start is called before the first frame update
     void Start()
     {
         cam = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<Camera>();
         UpdateHealth();
+        startingSize = transform.localScale;
     }
 
     // Update is called once per frame
@@ -40,6 +48,7 @@ public class HealthUI : MonoBehaviour
                     Image temp = Hearts[i].GetComponent<Image>();
                     temp.sprite = full;
                 }
+                heartLocation = Hearts[Hearts.Count - 1].transform.position;
                 break;
             case 9:
                 for (int i = 0; i < Hearts.Count - 1; i++)
@@ -48,6 +57,7 @@ public class HealthUI : MonoBehaviour
                     temp.sprite = full;
                 }
                 Hearts[4].GetComponent<Image>().sprite = half;
+                heartLocation = Hearts[Hearts.Count - 1].transform.position;
                 break;
             case 8:
                 for (int i = 0; i < Hearts.Count - 1; i++)
@@ -56,6 +66,7 @@ public class HealthUI : MonoBehaviour
                     temp.sprite = full;
                 }
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 1].transform.position;
                 break;
             case 7:
                 for (int i = 0; i < Hearts.Count - 2; i++)
@@ -65,6 +76,7 @@ public class HealthUI : MonoBehaviour
                 }
                 Hearts[3].GetComponent<Image>().sprite = half;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 2].transform.position;
                 break;
             case 6:
                 for (int i = 0; i < Hearts.Count - 2; i++)
@@ -74,6 +86,7 @@ public class HealthUI : MonoBehaviour
                 }
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 2].transform.position;
                 break;
             case 5:
                 for (int i = 0; i < Hearts.Count - 3; i++)
@@ -84,6 +97,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = half;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 3].transform.position;
                 break;
             case 4:
                 for (int i = 0; i < Hearts.Count - 2; i++)
@@ -94,6 +108,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 3].transform.position;
                 break;
             case 3:
                 Hearts[0].GetComponent<Image>().sprite = full;
@@ -101,6 +116,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 4].transform.position;
                 break;
             case 2:
                 Hearts[0].GetComponent<Image>().sprite = full;
@@ -108,6 +124,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 4].transform.position;
                 break;
             case 1:
                 Hearts[0].GetComponent<Image>().sprite = half;
@@ -115,6 +132,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 5].transform.position;
                 break;
             case 0:
                 Hearts[0].GetComponent<Image>().sprite = empty;
@@ -122,6 +140,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 5].transform.position;
                 break;
             default:
                 break;
@@ -130,11 +149,24 @@ public class HealthUI : MonoBehaviour
         
     }
 
+    // This is almost identical to the MoveLeaf function in
+    // UIBranchManager (except for the cursor logic and
+    // the need to get the current sap value, since the current
+    // health value is a GameModel variable)
     public void MoveAcorn(Vector3 startPos) {
-        Vector3 uiPos = cam.WorldToScreenPoint(startPos);
-        Image currentAcorn = GameObject.Instantiate(moveableAcorn, uiPos, Random.rotation, transform);
+        if (GameModel.squirrelHealth < 10) {
+            Vector3 uiPos = cam.WorldToScreenPoint(startPos);
+            Image currentAcorn = GameObject.Instantiate(moveableAcorn, uiPos, Quaternion.Euler(0f, 0f, Random.Range(0f, 359f)), transform);
 
-        currentAcorn.transform.DOMove(transform.position, 2f, false).OnComplete(() => currentAcorn.enabled = false);
-        currentAcorn.transform.DOLocalRotate(transform.localEulerAngles, 2f);
+            currentAcorn.transform.DOMove(heartLocation, GameModel.tweenTime, false).OnComplete(() => HealthFullyUpdated(currentAcorn));
+            currentAcorn.transform.DOLocalRotate(transform.localEulerAngles, 2f);
+        }
+    }
+
+    // This function is called once the movement and rotation tweens are done
+    // in MoveAcorn
+    private void HealthFullyUpdated(Image currentAcorn) {
+        currentAcorn.enabled = false;
+        transform.DOScale(startingSize * maxScaleUponImpact, .15f).OnComplete(() => transform.DOScale(startingSize, .15f));
     }
 }

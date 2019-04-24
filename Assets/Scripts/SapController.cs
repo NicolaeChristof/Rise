@@ -25,6 +25,8 @@ public class SapController : MonoBehaviour {
             if (!(sap is null)) {
                 // Update Tree Sap
                 if (!sap.hasTouched) {
+                    // We'll wait until the tweens are just about done
+                    // to actually update the values of health and sap
                     StartCoroutine(WaitToUpdateSap(sap));
                 }
 
@@ -39,7 +41,9 @@ public class SapController : MonoBehaviour {
     }
 
     private IEnumerator WaitToUpdateSap(SapBehavior sap) {
-        yield return new WaitForSeconds(GameModel.tweenTime-.1f);
+        // The .05f is included to ensure that there's a bit of wiggle room
+        // so that the leaves/health indicators don't disappear for a frame
+        yield return new WaitForSeconds(GameModel.tweenTime-.05f);
         treeController.UpdateSap(sap.sapType, sap.sapValue);
     }
 }

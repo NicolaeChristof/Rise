@@ -11,7 +11,7 @@ public class UIBranchManager : RiseBehavior {
     public TreeController treeController;
     public Image branch;
     public List<Image> leaves;
-    // public List<bool> leavesEnabled;
+
     private Camera cam;
 
     // Internal Fields
@@ -27,9 +27,19 @@ public class UIBranchManager : RiseBehavior {
 
     private int cursor = 0;
 
+    // This is what the size of the bar should usually be,
+    // and is determined by whatever local size the bar is
+    // when you first hit play in the editor
+    private Vector3 startingSize;
+
+    // This is the size of the bar when it inflates
+    private float maxScaleUponImpact = 1.1f;
+
+
     void Start() {
         treeController.uiUpdateEvent += OnUpdateElement;
         cam = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<Camera>();
+        startingSize = transform.localScale;
     }
 
     void Update() {
@@ -58,6 +68,10 @@ public class UIBranchManager : RiseBehavior {
         }
     }
 
+    // This function takes a location in world space,
+    // transforms it into screen space, and sets tweens
+    // that instantiate and transport the moveableLeaf picture
+    // to the branch UI bar
     public void MoveLeaf(Vector3 startPos) {
         currentProvider = treeController.GetSelectedBranch();
         int currentSap = (int)currentProvider.Sap - 1;
@@ -74,10 +88,13 @@ public class UIBranchManager : RiseBehavior {
         }
     }
 
+    // This function is called when all the tweens are done.
+    // It makes the branch inflate temporarily and disables
+    // the moving leaf.
     private void BranchFullyUpdated(Image currentLeaf) {
         cursor--;
         currentLeaf.enabled = false;
         OnUpdateElement(currentProvider);
-        transform.DOScale(transform.localScale * 1.1f, .15f).OnComplete(() => transform.DOScale(transform.localScale * (1f/1.1f), .15f));
+        transform.DOScale(startingSize * maxScaleUponImpact, .15f).OnComplete(() => transform.DOScale(startingSize, .15f));
     }
 }
