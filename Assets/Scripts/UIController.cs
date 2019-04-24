@@ -20,7 +20,7 @@ public class UIController : RiseBehavior {
     public GameObject levelSelectMenuObject;
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
-    
+    private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
 
     // A pointer to the currently selected menu
@@ -91,6 +91,12 @@ public class UIController : RiseBehavior {
     public GameObject healthUI;
     //-----------------------
 
+    //------Misletoe UI--------
+    public GameObject misletoeUI;
+    private Text misletoeText;
+    private int misletoeIndex = 0;
+    //-----------------------
+
     //------Options UI-----
 
     // The Text labels that correspond to the control method
@@ -146,7 +152,7 @@ public class UIController : RiseBehavior {
 
         // Get UI timer text
         timerUIText = timerUI.GetComponent<Text>();
-
+        
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
         // option
@@ -162,6 +168,14 @@ public class UIController : RiseBehavior {
             }
         }
 
+        checkpoints = GameObject.FindGameObjectsWithTag("Checkpoint");
+        if(checkpoints.Length != 0)
+        {
+            misletoeIndex = 0;
+            misletoeText = misletoeUI.GetComponent<Text>();
+            misletoeText.text = "Mistletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MistletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
+        }
+        
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
@@ -171,6 +185,7 @@ public class UIController : RiseBehavior {
             OpenMenu(1, false);
         }
 
+        GameModel.squirrelHealth = 10;
         //-----Options UI----
         _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         _qualityCursor = QualitySettings.GetQualityLevel();
@@ -184,6 +199,7 @@ public class UIController : RiseBehavior {
 
         ChangeController(_controllerCursor);
         //-------------------
+        
     }
 
     public override void UpdateAlways() {
@@ -344,6 +360,7 @@ public class UIController : RiseBehavior {
 
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.enableTimer = true;
     }
 
     public void TwoPlayerEvent(bool isTrue) {
@@ -362,6 +379,7 @@ public class UIController : RiseBehavior {
 
         OpenMenu(1, false);
         GameModel.paused = false;
+        GameModel.enableTimer = true;
 
     }
 
@@ -421,6 +439,7 @@ public class UIController : RiseBehavior {
     }
 
     public void RestartEvent(bool isTrue) {
+        GameModel.squirrelHealth = 10;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
 
@@ -468,6 +487,7 @@ public class UIController : RiseBehavior {
         OpenMenu(0, true);
         GameModel.paused = true;
         GameModel.timer = 300.0f;
+        GameModel.squirrelHealth = 10;
     }
 
     public void ExitFromOptionsEvent(bool isTrue) {
@@ -499,8 +519,11 @@ public class UIController : RiseBehavior {
     public void NextLevelEvent(bool isTrue) {
         Debug.Log("Next Level");
         GameModel.paused = false;
+        GameModel.timer = 300.0f;
         GameModel.endGame = false;
         Scene currentScene = SceneManager.GetActiveScene();
+        GameModel.squirrelHealth = 10;
+
         if (currentScene.name == ("Test Scene")){
             SpringEvent(true);
         }
@@ -536,7 +559,7 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { };
         SetActiveInactive(active, inactive);
-
+        GameModel.timer = 300.0f;
         OpenMenu(5, true);
     }
 
@@ -661,4 +684,24 @@ public class UIController : RiseBehavior {
         }
     }
     //--------------------------------------------
+
+    public void UpdateMistletoe()
+    {
+        CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
+        misletoeText = misletoeUI.GetComponent<Text>();
+        misletoeText.text = "Mistletoe: " + temp.MistletoeCount() + "/" + temp.mistletoeNeeded;
+        
+    }
+
+    public void NextCheckpoint()
+    {
+        CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
+        if (temp.MistletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length-1)
+        {
+            Debug.Log(checkpoints.Length);
+            misletoeIndex++;
+            UpdateMistletoe();
+        }
+        
+    }
 }
