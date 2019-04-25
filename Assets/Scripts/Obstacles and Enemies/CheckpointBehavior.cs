@@ -26,12 +26,14 @@ public class CheckpointBehavior : MonoBehaviour {
     private bool _activated;
 
     private int _mistletoeCollected;
-
+    private UIController UI;
     void Start() {
 
         _web = transform.GetChild(0).gameObject;
 
         _tree = GameObject.FindGameObjectWithTag("Tree");
+
+        UI = GameObject.Find("Canvas").GetComponent<UIController>();
 
         _trigger = GetComponent<BoxCollider>();
 
@@ -81,6 +83,7 @@ public class CheckpointBehavior : MonoBehaviour {
             _web.transform.DOScale(_originalScale, 2.0f)
                 .SetEase(Ease.OutElastic);
 
+            UI.NextCheckpoint();
         }
 
     }
@@ -108,13 +111,18 @@ public class CheckpointBehavior : MonoBehaviour {
     public void DeactivateWeb () {
 
         _mistletoeCollected++;
-
+        UI.UpdateMistletoe();
         if (_mistletoeCollected >= mistletoeNeeded) {
 
             _web.SetActive(false);
 
         }
 
+    }
+
+    public int MistletoeCount ()
+    {
+        return _mistletoeCollected;
     }
 
 }
