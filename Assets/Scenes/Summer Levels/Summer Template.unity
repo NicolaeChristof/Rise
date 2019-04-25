@@ -2478,7 +2478,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 0.96999925
+  m_PathPosition: 2.9150193
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -2909,7 +2909,7 @@ PrefabInstance:
     - target: {fileID: 791684158068344547, guid: 6c527457510c84374bc39a0955f5116a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 791684158068344547, guid: 6c527457510c84374bc39a0955f5116a,
         type: 3}
@@ -2935,7 +2935,7 @@ PrefabInstance:
         type: 3}
       propertyPath: tree
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 989948968}
     - target: {fileID: 791684158068344548, guid: 6c527457510c84374bc39a0955f5116a,
         type: 3}
       propertyPath: squirrel
@@ -4421,7 +4421,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a9cfe48434a0145ae8b02c825f09b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTarget: {fileID: 0}
+  cameraTarget: {fileID: 989948968}
   cameraSpeed_h: 3
   cameraSpeed_v: 0.2
 --- !u!82 &534669907
@@ -4593,7 +4593,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 1273465453}
-  treeTransform: {fileID: 0}
+  treeTransform: {fileID: 989948967}
   Tree_Controller: {fileID: 577484134}
   cameraDistance: 7
 --- !u!114 &534669910
@@ -4788,7 +4788,7 @@ Transform:
   - {fileID: 533677436}
   - {fileID: 1432297016}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &569542951 stripped
 Transform:
@@ -5214,8 +5214,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.012921191, y: 0.18912801, z: 0.0024888972, w: 0.9818643}
-  m_LocalPosition: {x: 53.812542, y: 4.752547, z: 16.199512}
+  m_LocalRotation: {x: -0.033348616, y: -0.24103163, z: -0.00821941, w: 0.9699093}
+  m_LocalPosition: {x: 87.72027, y: 2.3677464, z: 14.892591}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -7661,8 +7661,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7547524579061912130, guid: 28db81526914ec54b97ae8891ff80a07,
+        type: 3}
+      propertyPath: vcam1
+      value: 
+      objectReference: {fileID: 1295323379}
+    - target: {fileID: 7547524579061912130, guid: 28db81526914ec54b97ae8891ff80a07,
+        type: 3}
+      propertyPath: vcam2
+      value: 
+      objectReference: {fileID: 1291820219}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28db81526914ec54b97ae8891ff80a07, type: 3}
+--- !u!4 &989948967 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7547524578722158623, guid: 28db81526914ec54b97ae8891ff80a07,
+    type: 3}
+  m_PrefabInstance: {fileID: 989948966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &989948968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7547524578722158691, guid: 28db81526914ec54b97ae8891ff80a07,
+    type: 3}
+  m_PrefabInstance: {fileID: 989948966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &989948969 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7547524579612279300, guid: 28db81526914ec54b97ae8891ff80a07,
+    type: 3}
+  m_PrefabInstance: {fileID: 989948966}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &989948970 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7547524578611019527, guid: 28db81526914ec54b97ae8891ff80a07,
+    type: 3}
+  m_PrefabInstance: {fileID: 989948966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1012855235 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7150636402826049791, guid: d72899f0bb555804cb9793538db0d3d1,
@@ -8852,7 +8886,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cameraTarget: {fileID: 1273465453}
-  treeTransform: {fileID: 0}
+  treeTransform: {fileID: 989948967}
   Tree_Controller: {fileID: 577484134}
   cameraDistance: 10
 --- !u!114 &1237406270
@@ -9003,7 +9037,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a9cfe48434a0145ae8b02c825f09b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cameraTarget: {fileID: 0}
+  cameraTarget: {fileID: 989948968}
   cameraSpeed_h: 3
   cameraSpeed_v: 0.2
 --- !u!4 &1237406275
@@ -9545,7 +9579,7 @@ MonoBehaviour:
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
   m_Priority: 10
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 989948969}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
@@ -9588,7 +9622,7 @@ MonoBehaviour:
   m_LockStageInInspector: 
   m_StreamingVersion: 20170927
   m_Priority: 10
-  m_LookAt: {fileID: 0}
+  m_LookAt: {fileID: 989948970}
   m_Follow: {fileID: 0}
   m_Lens:
     FieldOfView: 40
@@ -9604,7 +9638,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.012911021, y: 0.1891287, z: 0.002541693, w: 0.98186415}
+  m_LocalRotation: {x: -0.033348616, y: -0.24103163, z: -0.00821941, w: 0.9699093}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15873,7 +15907,7 @@ PrefabInstance:
     - target: {fileID: 475141408096447677, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 475141408096447677, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
@@ -15894,12 +15928,12 @@ PrefabInstance:
         type: 3}
       propertyPath: tree
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 989948968}
     - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: playerTarget
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 989948968}
     - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: squirrelCamera
