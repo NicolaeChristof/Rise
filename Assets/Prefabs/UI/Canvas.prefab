@@ -1962,7 +1962,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -617.5, y: 332}
+  m_AnchoredPosition: {x: -102.5, y: -4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5541879867711259644
@@ -2476,7 +2476,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -496, y: 319}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &5268615986255850803
@@ -2881,7 +2881,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -514.1, y: 331.99997}
+  m_AnchoredPosition: {x: 0.9000244, y: -4.0000305}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8981579331260765841
@@ -3029,7 +3029,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -410, y: 331.99997}
+  m_AnchoredPosition: {x: 105, y: -4}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1736818764227516579
@@ -3525,7 +3525,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -565.9, y: 331.99997}
+  m_AnchoredPosition: {x: -50.900024, y: -4.0000305}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2713931621256999098
@@ -4007,7 +4007,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -461.7, y: 331.99997}
+  m_AnchoredPosition: {x: 53.299988, y: -4.0000305}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8611075823973005491
@@ -5353,6 +5353,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2660507254430891218}
     m_Modifications:
+    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
+        type: 3}
+      propertyPath: m_Name
+      value: UIBranchElement
+      objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5472,11 +5477,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
-        type: 3}
-      propertyPath: m_Name
-      value: UIBranchElement
       objectReference: {fileID: 0}
     - target: {fileID: 5390275804387599201, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
