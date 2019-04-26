@@ -50,7 +50,6 @@ public class HealthUI : MonoBehaviour
                     Image temp = Hearts[i].GetComponent<Image>();
                     temp.sprite = full;
                 }
-                heartLocation = Hearts[Hearts.Count - 1 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 9:
                 for (int i = 0; i < Hearts.Count - 1; i++)
@@ -59,7 +58,6 @@ public class HealthUI : MonoBehaviour
                     temp.sprite = full;
                 }
                 Hearts[4].GetComponent<Image>().sprite = half;
-                heartLocation = Hearts[Hearts.Count - 1 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 8:
                 for (int i = 0; i < Hearts.Count - 1; i++)
@@ -68,7 +66,6 @@ public class HealthUI : MonoBehaviour
                     temp.sprite = full;
                 }
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 1 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 7:
                 for (int i = 0; i < Hearts.Count - 2; i++)
@@ -78,7 +75,6 @@ public class HealthUI : MonoBehaviour
                 }
                 Hearts[3].GetComponent<Image>().sprite = half;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 2 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 6:
                 for (int i = 0; i < Hearts.Count - 2; i++)
@@ -88,7 +84,6 @@ public class HealthUI : MonoBehaviour
                 }
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 2 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 5:
                 for (int i = 0; i < Hearts.Count - 3; i++)
@@ -99,7 +94,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = half;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 3 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 4:
                 for (int i = 0; i < Hearts.Count - 2; i++)
@@ -118,7 +112,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 4 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 2:
                 Hearts[0].GetComponent<Image>().sprite = full;
@@ -126,7 +119,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 4 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 1:
                 Hearts[0].GetComponent<Image>().sprite = half;
@@ -134,7 +126,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 5].transform.position;
                 break;
             case 0:
                 Hearts[0].GetComponent<Image>().sprite = empty;
@@ -142,7 +133,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 5].transform.position;
                 break;
             default:
                 break;
@@ -157,12 +147,13 @@ public class HealthUI : MonoBehaviour
     // health value is a GameModel variable)
     public void MoveAcorn(Vector3 startPos) {
         if (GameModel.squirrelHealth < 10) {
-            cursor++;
+            heartLocation = Hearts[Mathf.FloorToInt((GameModel.squirrelHealth + cursor)/2)].transform.position;
             Vector3 uiPos = cam.WorldToScreenPoint(startPos);
             Image currentAcorn = GameObject.Instantiate(moveableAcorn, uiPos, Quaternion.Euler(0f, 0f, Random.Range(0f, 359f)), transform);
 
             currentAcorn.transform.DOMove(heartLocation, GameModel.tweenTime, false).OnComplete(() => HealthFullyUpdated(currentAcorn));
             currentAcorn.transform.DOLocalRotate(transform.localEulerAngles, 2f);
+            cursor++;
         }
     }
 
