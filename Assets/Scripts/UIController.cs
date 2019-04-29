@@ -123,7 +123,7 @@ public class UIController : RiseBehavior {
     //-----------------------
 
     private bool isSinglePlayer;
-
+    private bool start = false;
     private void Start() {
         if (GameModel.singlePlayer)
         {
@@ -209,7 +209,6 @@ public class UIController : RiseBehavior {
             false);
 
         ChangeController(_controllerCursor);
-        //-------------------
         
     }
 
@@ -416,24 +415,28 @@ public class UIController : RiseBehavior {
     public void SpringEvent(bool isTrue)
     {
         Debug.Log("Spring Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Spring Template");
     }
 
     public void SummerEvent(bool isTrue)
     {
         Debug.Log("Summer Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Summer Template");
     }
 
     public void FallEvent(bool isTrue)
     {
         Debug.Log("Fall Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Fall Template");
     }
 
     public void WinterEvent(bool isTrue)
     {
         Debug.Log("Winter Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Winter Template");
     }
 
