@@ -125,14 +125,7 @@ public class UIController : RiseBehavior {
     private bool isSinglePlayer;
     private bool start = false;
     private void Start() {
-        if (GameModel.singlePlayer)
-        {
-            isSinglePlayer = true;
-        }
-        else
-        {
-            isSinglePlayer = false;
-        }
+
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
 
@@ -357,7 +350,7 @@ public class UIController : RiseBehavior {
     }
 
     public void PlayGameEvent(bool isTrue) {
-        if(isSinglePlayer)
+        if(GameModel.singlePlayer)
         {
             GameModel.singlePlayer = true;
             GameModel.splitScreen = false;
@@ -382,21 +375,20 @@ public class UIController : RiseBehavior {
         SetActiveInactive(active, inactive);
 
         OpenMenu(1, false);
-        GameModel.paused = false;
         GameModel.enableTimer = true;
     }
 
     public void GameModeEvent(bool isTrue)
     {
-        if (isSinglePlayer)
+        if (GameModel.singlePlayer)
         {
             gameModeText.text = "Two Players";
-            isSinglePlayer = false;
+            GameModel.singlePlayer = false;
         }
         else
         {
             gameModeText.text = "One Player";
-            isSinglePlayer = true;
+            GameModel.singlePlayer = true;
         }
     }
 
@@ -456,7 +448,7 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
         OpenMenu(2, true);
-        if (isSinglePlayer)
+        if (GameModel.singlePlayer)
         {
             gameModeText.text = "One Player";
         }
@@ -644,9 +636,31 @@ public class UIController : RiseBehavior {
             // being played
             GameModel.inMenu = false;
             GameModel.paused = false;
-
             // Since the game's no longer paused, we'll
             // make the depth of field shallow
+            if (GameModel.singlePlayer)
+            {
+                GameModel.singlePlayer = true;
+                GameModel.splitScreen = false;
+            }
+            else
+            {
+                GameModel.singlePlayer = false;
+                if (!settingsController.enforceModes)
+                {
+                    GameModel.splitScreen = true;
+                }
+            }
+
+
+            if (settingsController != null)
+            {
+                settingsController.SetCameras();
+            }
+
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
         }
