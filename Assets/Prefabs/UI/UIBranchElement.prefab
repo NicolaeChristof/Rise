@@ -99,13 +99,13 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2078093310688893019}
-  m_LocalRotation: {x: -0, y: 0, z: -0.51050824, w: 0.8598728}
+  m_LocalRotation: {x: -0, y: 0, z: 0.5029518, w: -0.8643145}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7503067964349272777}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -61.395004}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -60.391003}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 98.2, y: 93.7}
@@ -587,14 +587,16 @@ MonoBehaviour:
   treeController: {fileID: 0}
   branch: {fileID: 7961059641892440286}
   leaves:
-  - {fileID: 3641091811093058955}
-  - {fileID: 8519880694835905418}
-  - {fileID: 6459840875577050965}
-  - {fileID: 3203013489065308426}
-  - {fileID: 1122554348269884815}
-  - {fileID: 2192763320552140417}
-  - {fileID: 8864832901104432516}
   - {fileID: 1098806291154317901}
+  - {fileID: 3641091811093058955}
+  - {fileID: 8864832901104432516}
+  - {fileID: 8519880694835905418}
+  - {fileID: 2192763320552140417}
+  - {fileID: 6459840875577050965}
+  - {fileID: 1122554348269884815}
+  - {fileID: 3203013489065308426}
+  moveableLeaf: {fileID: 1758332638030542427, guid: 14cbf2eb461571f4d8df238a3e4a9601,
+    type: 3}
 --- !u!1 &8858243934085205280
 GameObject:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = true;
+    public static bool inputGamePad = false;
 
     public static bool singlePlayer = true;
 
@@ -32,6 +32,8 @@ public static class GameModel {
     public static string displayTime = "mm:ss";
 
     public static int squirrelHealth = 10;
+
+    public static float tweenTime = 1.5f;
 
     // Sound Controls
     public static float volLowRange = 0.8f;
