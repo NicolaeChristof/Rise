@@ -84,8 +84,26 @@ public class UIBranchManager : RiseBehavior {
 
             currentMoveableLeaf.transform.DOLocalRotate(leaves[currentSap+cursor].transform.localEulerAngles, GameModel.tweenTime).OnComplete(() => BranchFullyUpdated(currentMoveableLeaf));
             currentMoveableLeaf.transform.DOMove(leaves[currentSap+cursor].transform.position, GameModel.tweenTime, false);
-            currentMoveableLeaf.transform.DOScale(currentMoveableLeaf.transform.localScale * .7f, GameModel.tweenTime);
         }
+    }
+
+    public void DropLeaf() {
+        currentProvider = treeController.GetSelectedBranch();
+        int currentSap = (int)currentProvider.Sap;
+
+        moveableLeaf.sprite = currentProvider.leafSprite;
+        Image currentMoveableLeaf = GameObject.Instantiate(moveableLeaf, leaves[currentSap].transform.position, Quaternion.identity, transform);
+        currentMoveableLeaf.transform.localEulerAngles = leaves[currentSap].transform.localEulerAngles;
+
+        Vector3 lastDestination = leaves[currentSap].transform.position;
+        lastDestination.y -= 65f;
+
+        Vector3 lastRotation = leaves[currentSap].transform.localEulerAngles;
+        lastRotation.z += Random.Range(60f, 270f);
+
+        currentMoveableLeaf.transform.DOMove(lastDestination, GameModel.tweenTime, false).OnComplete(() => DestroyMovingLeaf(currentMoveableLeaf));
+        currentMoveableLeaf.transform.DOLocalRotate(lastRotation, GameModel.tweenTime);
+        DOTween.ToAlpha(() => currentMoveableLeaf.color, x => currentMoveableLeaf.color = x, 0f, GameModel.tweenTime);
     }
 
     // This function is called when all the tweens are done.
@@ -96,5 +114,9 @@ public class UIBranchManager : RiseBehavior {
         currentLeaf.enabled = false;
         OnUpdateElement(currentProvider);
         transform.DOScale(startingSize * maxScaleUponImpact, .15f).OnComplete(() => transform.DOScale(startingSize, .15f));
+    }
+
+    private void DestroyMovingLeaf(Image currentLeaf) {
+        currentLeaf.enabled = false;
     }
 }
