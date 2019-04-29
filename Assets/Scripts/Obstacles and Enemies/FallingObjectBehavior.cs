@@ -10,7 +10,6 @@ public class FallingObjectBehavior : MonoBehaviour {
 
     public AudioClip thunkSound;
     public Rigidbody rb;
-    public GameObject falling;
     // Private References
     private AudioSource _source;
 
