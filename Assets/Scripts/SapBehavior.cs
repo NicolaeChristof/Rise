@@ -4,12 +4,19 @@ using RiseExtensions;
 
 public class SapBehavior : RiseBehavior {
 
+    // Public References
+
     // Public Fields
     public AudioClip pickupSound;
     public SapType sapType;
     public int sapValue = 1;
     public float scaleFactor = 0.6F;
-    public bool canCollect = true;
+
+    // Private References
+    private AudioSource _source;
+    
+    // Private Fields
+    private bool _canCollect = true;
 
     // This is set to true when the player has touched the sap
     // (to ensure the sap doesn't continue to provide resources
@@ -19,6 +26,8 @@ public class SapBehavior : RiseBehavior {
     public void Start() {
         float scale = (sapValue > 1.0F) ? 1 + (scaleFactor * sapValue) : 1.0F;
         transform.localScale.Set(scale, scale, scale);
+
+        _source = GetComponent<AudioSource>();
     }
 
     public override void UpdateAlways() {
@@ -31,6 +40,14 @@ public class SapBehavior : RiseBehavior {
 
     public virtual void OnSapCollected() {
         hasTouched = true;
-        transform.DOScale(Vector3.zero, 0.75f).OnComplete(() => Destroy(this));
+        if (_canCollect) {
+            _canCollect = false;
+
+            // Play Pickup Sound
+            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+            _source.PlayOneShot(pickupSound, _volume);
+
+            transform.DOScale(Vector3.zero, 0.75f).OnComplete(() => Destroy(this));
+        }
     }
 }
