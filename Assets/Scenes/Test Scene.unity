@@ -2643,7 +2643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 253.52174
+  m_PathPosition: 271.15393
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5909,8 +5909,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.015572094, y: -0.83631796, z: -0.023650207, w: 0.54751295}
-  m_LocalPosition: {x: 103.806984, y: 3.5402727, z: 80.52748}
+  m_LocalRotation: {x: -0.036579654, y: -0.3463842, z: -0.013434809, w: 0.93728304}
+  m_LocalPosition: {x: 87.84875, y: 3.046651, z: 32.88933}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10645,7 +10645,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.015572094, y: -0.83631796, z: -0.023650207, w: 0.54751295}
+  m_LocalRotation: {x: -0.036579654, y: -0.3463842, z: -0.013434809, w: 0.93728304}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17704,6 +17704,16 @@ PrefabInstance:
       propertyPath: vcam2
       value: 
       objectReference: {fileID: 1291820219}
+    - target: {fileID: 7547524578084013687, guid: 28db81526914ec54b97ae8891ff80a07,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7547524578722158689, guid: 28db81526914ec54b97ae8891ff80a07,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 28db81526914ec54b97ae8891ff80a07, type: 3}
 --- !u!1001 &7711375700968315606

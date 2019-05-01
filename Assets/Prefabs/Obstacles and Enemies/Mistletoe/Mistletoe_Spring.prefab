@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4882853676271169786}
   - component: {fileID: 1285881754497469767}
   m_Layer: 0
-  m_Name: Mistletoe
+  m_Name: Mistletoe_Spring
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -301,18 +301,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.01
       objectReference: {fileID: 0}
-    - target: {fileID: 2300000, guid: 6ad0a5366ba02ba4ab9482019a03edcf, type: 3}
+    - target: {fileID: 2300004, guid: 6ad0a5366ba02ba4ab9482019a03edcf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: e678c9853c3ff174d8db3a2380c83a54, type: 2}
+      objectReference: {fileID: 2100000, guid: 47c905a959341c84da8f5b20d5fd83dc, type: 2}
     - target: {fileID: 2300002, guid: 6ad0a5366ba02ba4ab9482019a03edcf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 1fcf86673fc90564e9e2b3f6377ceaeb, type: 2}
-    - target: {fileID: 2300004, guid: 6ad0a5366ba02ba4ab9482019a03edcf, type: 3}
+    - target: {fileID: 2300000, guid: 6ad0a5366ba02ba4ab9482019a03edcf, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 0559754eda11c38438b23df20a7fe8df, type: 2}
+      objectReference: {fileID: 2100000, guid: e678c9853c3ff174d8db3a2380c83a54, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6ad0a5366ba02ba4ab9482019a03edcf, type: 3}
 --- !u!4 &2474670800306497126 stripped
