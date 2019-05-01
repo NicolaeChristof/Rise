@@ -2643,7 +2643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 209.84914
+  m_PathPosition: 221.96095
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5909,8 +5909,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.023772866, y: -0.4673613, z: -0.012503281, w: 0.8836583}
-  m_LocalPosition: {x: 91.46095, y: 4.1965666, z: 42.780373}
+  m_LocalRotation: {x: -0.024628682, y: -0.7446779, z: -0.027361857, w: 0.66640806}
+  m_LocalPosition: {x: 105.62303, y: 2.8774352, z: 67.29888}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6971,6 +6971,61 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: settingsController
+      value: 
+      objectReference: {fileID: 114770512}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: _trackCam
+      value: 
+      objectReference: {fileID: 593501732}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: heightUI
+      value: 
+      objectReference: {fileID: 1273465460}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: controllerText
+      value: 
+      objectReference: {fileID: 1659497235}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: qualityText
+      value: 
+      objectReference: {fileID: 424016573}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: timerUI
+      value: 
+      objectReference: {fileID: 1067474850}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: levelSelectMenuObject
+      value: 
+      objectReference: {fileID: 500541059}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: endGameMenuObject
+      value: 
+      objectReference: {fileID: 770858494}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: gameOverMenuObject
+      value: 
+      objectReference: {fileID: 1419635706}
+    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 5737707754222980247, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462225555930554043, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6462225555944426797, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7076,61 +7131,6 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: settingsController
-      value: 
-      objectReference: {fileID: 114770512}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: _trackCam
-      value: 
-      objectReference: {fileID: 593501732}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: treeController
-      value: 
-      objectReference: {fileID: 577484134}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: heightUI
-      value: 
-      objectReference: {fileID: 1273465460}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: controllerText
-      value: 
-      objectReference: {fileID: 1659497235}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: qualityText
-      value: 
-      objectReference: {fileID: 424016573}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: timerUI
-      value: 
-      objectReference: {fileID: 1067474850}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: levelSelectMenuObject
-      value: 
-      objectReference: {fileID: 500541059}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: endGameMenuObject
-      value: 
-      objectReference: {fileID: 770858494}
-    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
-      propertyPath: gameOverMenuObject
-      value: 
-      objectReference: {fileID: 1419635706}
-    - target: {fileID: 6462225555930554043, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: treeController
-      value: 
-      objectReference: {fileID: 577484134}
-    - target: {fileID: 5737707754222980247, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6462225555944426795, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_ReferenceResolution.x
@@ -7140,12 +7140,12 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3501530704558311451, guid: 02b191eae91d53d43ae5ecce0110924a,
+    - target: {fileID: 4020107077989297714, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_TagString
       value: Static Option
       objectReference: {fileID: 0}
-    - target: {fileID: 4020107077989297714, guid: 02b191eae91d53d43ae5ecce0110924a,
+    - target: {fileID: 3501530704558311451, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_TagString
       value: Static Option
@@ -10645,7 +10645,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.023772866, y: -0.4673613, z: -0.012503281, w: 0.8836583}
+  m_LocalRotation: {x: -0.024628682, y: -0.7446779, z: -0.027361857, w: 0.66640806}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
