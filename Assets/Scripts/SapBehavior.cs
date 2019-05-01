@@ -18,6 +18,9 @@ public class SapBehavior : RiseBehavior {
     // Private Fields
     private bool _canCollect = true;
 
+    private UIBranchManager uiBranchManager;
+    private HealthUI healthUI;
+
     // This is set to true when the player has touched the sap
     // (to ensure the sap doesn't continue to provide resources
     // while it's going through its animation)
@@ -28,6 +31,10 @@ public class SapBehavior : RiseBehavior {
         transform.localScale.Set(scale, scale, scale);
 
         _source = GetComponent<AudioSource>();
+
+        uiBranchManager = FindObjectOfType<UIBranchManager>();
+        healthUI = FindObjectOfType<HealthUI>();
+
     }
 
     public override void UpdateAlways() {
@@ -39,7 +46,14 @@ public class SapBehavior : RiseBehavior {
     }
 
     public virtual void OnSapCollected() {
+        if (!hasTouched) {
+            Vector3 collisionLocation = transform.position;
+            uiBranchManager.MoveLeaf(collisionLocation);
+            healthUI.MoveAcorn(collisionLocation);
+        }
+
         hasTouched = true;
+
         if (_canCollect) {
             _canCollect = false;
 
@@ -49,5 +63,6 @@ public class SapBehavior : RiseBehavior {
 
             transform.DOScale(Vector3.zero, 0.75f).OnComplete(() => Destroy(this));
         }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using RiseExtensions;
+using DG.Tweening;
 
 public class HealthUI : MonoBehaviour
 {
@@ -10,10 +11,25 @@ public class HealthUI : MonoBehaviour
     public Sprite full;
     public Sprite half;
     public Sprite empty;
+
+    public Image moveableAcorn;
+
+    private Camera cam;
+
+    private Vector3 heartLocation;
+
+    // These have the same utility as the corresponding variables in UIBranchManager
+    private Vector3 startingSize;
+    private float maxScaleUponImpact = 1.1f;
+
+    private float cursor = 0;
+
     // Start is called before the first frame update
     void Start()
     {
+        cam = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<Camera>();
         UpdateHealth();
+        startingSize = transform.localScale;
     }
 
     // Update is called once per frame
@@ -88,6 +104,7 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
+                heartLocation = Hearts[Hearts.Count - 3 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 3:
                 Hearts[0].GetComponent<Image>().sprite = full;
@@ -122,5 +139,29 @@ public class HealthUI : MonoBehaviour
 
         }
         
+    }
+
+    // This is almost identical to the MoveLeaf function in
+    // UIBranchManager (except for the cursor logic and
+    // the need to get the current sap value, since the current
+    // health value is a GameModel variable)
+    public void MoveAcorn(Vector3 startPos) {
+        if (GameModel.squirrelHealth < 10) {
+            heartLocation = Hearts[Mathf.FloorToInt((GameModel.squirrelHealth + cursor)/2)].transform.position;
+            Vector3 uiPos = cam.WorldToScreenPoint(startPos);
+            Image currentAcorn = GameObject.Instantiate(moveableAcorn, uiPos, Quaternion.Euler(0f, 0f, Random.Range(0f, 359f)), transform);
+
+            currentAcorn.transform.DOMove(heartLocation, GameModel.tweenTime, false).OnComplete(() => HealthFullyUpdated(currentAcorn));
+            currentAcorn.transform.DOLocalRotate(transform.localEulerAngles, 2f);
+            cursor++;
+        }
+    }
+
+    // This function is called once the movement and rotation tweens are done
+    // in MoveAcorn
+    private void HealthFullyUpdated(Image currentAcorn) {
+        cursor--;
+        currentAcorn.enabled = false;
+        transform.DOScale(startingSize * maxScaleUponImpact, .15f).OnComplete(() => transform.DOScale(startingSize, .15f));
     }
 }
