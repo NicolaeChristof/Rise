@@ -14,7 +14,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7547524578611019527
 Transform:
@@ -47,7 +47,7 @@ GameObject:
   m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7547524578722158623
 Transform:
@@ -142,7 +142,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7547524579061912132
 Transform:
@@ -199,7 +199,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &7547524579612279300
 Transform:
@@ -225,6 +225,10 @@ PrefabInstance:
     - target: {fileID: 100000, guid: 908b9cd1bcc145b40a4ed0126f9e181a, type: 3}
       propertyPath: m_Name
       value: Tree_Trunk
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 908b9cd1bcc145b40a4ed0126f9e181a, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 908b9cd1bcc145b40a4ed0126f9e181a, type: 3}
       propertyPath: m_LocalPosition.x
