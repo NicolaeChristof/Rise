@@ -96,7 +96,7 @@ public class UIBranchManager : RiseBehavior {
         currentMoveableLeaf.transform.localEulerAngles = leaves[currentSap].transform.localEulerAngles;
 
         Vector3 lastDestination = leaves[currentSap].transform.position;
-        lastDestination.y -= 65f;
+        lastDestination.y -= 200f;
 
         Vector3 lastRotation = leaves[currentSap].transform.localEulerAngles;
         lastRotation.z += Random.Range(60f, 270f);
