@@ -35,6 +35,8 @@ public class UIBranchManager : RiseBehavior {
     // This is the size of the bar when it inflates
     private float maxScaleUponImpact = 1.1f;
 
+    private float fallDistance = 150f;
+
 
     void Start() {
         treeController.uiUpdateEvent += OnUpdateElement;
@@ -96,7 +98,7 @@ public class UIBranchManager : RiseBehavior {
         currentMoveableLeaf.transform.localEulerAngles = leaves[currentSap].transform.localEulerAngles;
 
         Vector3 lastDestination = leaves[currentSap].transform.position;
-        lastDestination.y -= 200f;
+        lastDestination.y -= fallDistance;
 
         Vector3 lastRotation = leaves[currentSap].transform.localEulerAngles;
         lastRotation.z += Random.Range(60f, 270f);
