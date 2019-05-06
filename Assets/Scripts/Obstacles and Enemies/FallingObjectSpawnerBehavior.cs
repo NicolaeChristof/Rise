@@ -25,7 +25,11 @@ public class FallingObjectSpawnerBehavior : MonoBehaviour {
 
     private void SpawnNut () {
 
-        Instantiate(nut, transform.position, transform.rotation);
+        if(!GameModel.paused)
+        {
+            Instantiate(nut, transform.position, transform.rotation);
+        }
+        
 
     }
 }

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 73646369199273374}
   - component: {fileID: 382184284366571888}
-  - component: {fileID: 4162224168858243211}
+  - component: {fileID: 1363662537815355460}
   - component: {fileID: 305927156770188571}
   - component: {fileID: 4486613485765484819}
   - component: {fileID: 2624857904829256410}
@@ -49,8 +49,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fallingSound: {fileID: 8300000, guid: 3799a7f3cb3718b41b351d56ee997ab5, type: 3}
+  thunkSound: {fileID: 8300000, guid: 93e5faf6daf40f54f804250ec8483300, type: 3}
   thunkSound: {fileID: 8300000, guid: 4798e9e159fed474c9d01567932bd935, type: 3}
---- !u!54 &4162224168858243211
+  rb: {fileID: 1363662537815355460}
+  falling: {fileID: 0}
+--- !u!54 &1363662537815355460
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -119,7 +122,7 @@ AudioSource:
   rolloffMode: 2
   BypassEffects: 0
   BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:

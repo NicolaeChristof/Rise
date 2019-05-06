@@ -97,6 +97,7 @@ public class UIController : RiseBehavior {
 
     // The Text labels that correspond to the control method
     // and graphics level we're using, respectively
+    public Text gameModeText;
     public Text controllerText;
     public Text qualityText;
 
@@ -117,7 +118,10 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
+    private bool isSinglePlayer;
+    private bool start = false;
     private void Start() {
+
         // Setting menuObjects to store all the menus in the game
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
 
@@ -127,13 +131,13 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions = new List<List<_selectAction>>();
 
         // Main Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { SinglePlayerEvent, TwoPlayerEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
 
         // Pause Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
 
         // Options Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { ControllerEvent, QualityEvent, ExitFromOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { GameModeEvent, ControllerEvent, QualityEvent, ExitFromOptionsEvent });
 
         // Level Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
@@ -194,7 +198,6 @@ public class UIController : RiseBehavior {
             false);
 
         ChangeController(_controllerCursor);
-        //-------------------
         
     }
 
@@ -342,11 +345,24 @@ public class UIController : RiseBehavior {
         SetActiveInactive(active, inactive);
     }
 
-    public void SinglePlayerEvent(bool isTrue) {
-        GameModel.singlePlayer = true;
-        GameModel.splitScreen = false;
+    public void PlayGameEvent(bool isTrue) {
+        if(GameModel.singlePlayer)
+        {
+            GameModel.singlePlayer = true;
+            GameModel.splitScreen = false;
+        }
+        else
+        {
+            GameModel.singlePlayer = false;
+            if (!settingsController.enforceModes)
+            {
+                GameModel.splitScreen = true;
+            }
+        }
+        
 
-        if (settingsController != null) {
+        if (settingsController != null)
+        {
             settingsController.SetCameras();
         }
 
@@ -355,28 +371,21 @@ public class UIController : RiseBehavior {
         SetActiveInactive(active, inactive);
 
         OpenMenu(1, false);
-        GameModel.paused = false;
         GameModel.enableTimer = true;
     }
 
-    public void TwoPlayerEvent(bool isTrue) {
-        GameModel.singlePlayer = false;
-        if (!settingsController.enforceModes) {
-            GameModel.splitScreen = true;
+    public void GameModeEvent(bool isTrue)
+    {
+        if (GameModel.singlePlayer)
+        {
+            gameModeText.text = "Two Players";
+            GameModel.singlePlayer = false;
         }
-
-        if (settingsController != null) {
-            settingsController.SetCameras();
+        else
+        {
+            gameModeText.text = "One Player";
+            GameModel.singlePlayer = true;
         }
-
-        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-        SetActiveInactive(active, inactive);
-
-        OpenMenu(1, false);
-        GameModel.paused = false;
-        GameModel.enableTimer = true;
-
     }
 
     //level select event
@@ -394,24 +403,28 @@ public class UIController : RiseBehavior {
     public void SpringEvent(bool isTrue)
     {
         Debug.Log("Spring Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Spring Template");
     }
 
     public void SummerEvent(bool isTrue)
     {
         Debug.Log("Summer Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Summer Template");
     }
 
     public void FallEvent(bool isTrue)
     {
         Debug.Log("Fall Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Fall Template");
     }
 
     public void WinterEvent(bool isTrue)
     {
         Debug.Log("Winter Activated");
+        GameModel.startAtMenu = false;
         SceneManager.LoadScene("Winter Template");
     }
 
@@ -430,8 +443,15 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
-
         OpenMenu(2, true);
+        if (GameModel.singlePlayer)
+        {
+            gameModeText.text = "One Player";
+        }
+        else
+        {
+            gameModeText.text = "Two Players";
+        }
     }
 
     public void RestartEvent(bool isTrue) {
@@ -441,9 +461,9 @@ public class UIController : RiseBehavior {
 
         if (GameModel.singlePlayer) {
             GameModel.isSquirrel = true;
-            SinglePlayerEvent(true);
+            PlayGameEvent(true);
         } else {
-            TwoPlayerEvent(true);
+            PlayGameEvent(true);
         }
 
 
@@ -612,9 +632,31 @@ public class UIController : RiseBehavior {
             // being played
             GameModel.inMenu = false;
             GameModel.paused = false;
-
             // Since the game's no longer paused, we'll
             // make the depth of field shallow
+            if (GameModel.singlePlayer)
+            {
+                GameModel.singlePlayer = true;
+                GameModel.splitScreen = false;
+            }
+            else
+            {
+                GameModel.singlePlayer = false;
+                if (!settingsController.enforceModes)
+                {
+                    GameModel.splitScreen = true;
+                }
+            }
+
+
+            if (settingsController != null)
+            {
+                settingsController.SetCameras();
+            }
+
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
             postProcessProfile.TryGetSettings(out depthOfField);
             depthOfField.focusDistance.value = defaultDOF;
         }
