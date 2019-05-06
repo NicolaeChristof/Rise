@@ -104,7 +104,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 3 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 3:
                 Hearts[0].GetComponent<Image>().sprite = full;
@@ -136,7 +135,6 @@ public class HealthUI : MonoBehaviour
                 break;
             default:
                 break;
-
         }
         
     }
@@ -155,6 +153,15 @@ public class HealthUI : MonoBehaviour
             currentAcorn.transform.DOLocalRotate(transform.localEulerAngles, 2f);
             cursor++;
         }
+    }
+
+    public void DropAcorn() {
+        Image currentAcorn = GameObject.Instantiate(moveableAcorn, Hearts[Mathf.FloorToInt(GameModel.squirrelHealth)].transform.position, Quaternion.identity, transform);
+
+        Vector3 finalDestination = currentAcorn.transform.position;
+        finalDestination.y -= 150f;
+
+        currentAcorn.transform.DOMove(finalDestination, GameModel.tweenTime, false);
     }
 
     // This function is called once the movement and rotation tweens are done

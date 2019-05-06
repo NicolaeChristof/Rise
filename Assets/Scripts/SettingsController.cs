@@ -12,25 +12,12 @@ public class SettingsController : RiseBehavior {
     public Camera squirrelCamera;
     public Camera treeCamera;
 
-    public PostProcessProfile postProcessProfile;
-
-    public Text[] buttonArray = new Text[3];
-    public Image[] selectorArray = new Image[3];
-    public GameObject pauseMenu;
-
     // Public Fields
-    public float pauseDOF;
     public bool enforceModes;
 
     // Private References
 
     // Private Fields
-    private int _buttonSelected = 0;
-    private bool _justSelected;
-
-    private delegate void _selectAction();
-    private _selectAction[] _selectActions;
-    private _selectAction _currentSelectAction;
 
     private DepthOfField depthOfField;
     private float defaultDOF;
