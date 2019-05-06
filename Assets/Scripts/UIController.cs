@@ -118,6 +118,12 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
+    //----Sound Settings----
+    public AudioSource audioSource;
+
+    public AudioClip[] audioClips;
+    //----------------------
+
     private bool isSinglePlayer;
     private bool start = false;
     private void Start() {
@@ -198,7 +204,6 @@ public class UIController : RiseBehavior {
             false);
 
         ChangeController(_controllerCursor);
-        
     }
 
     public override void UpdateAlways() {
@@ -314,6 +319,9 @@ public class UIController : RiseBehavior {
         // Pause the game
         if (!GameModel.paused) {
 
+            audioSource.clip = audioClips[0];
+            audioSource.Play(0);
+
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
@@ -337,6 +345,8 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
+        audioSource.clip = audioClips[1];
+        audioSource.Play(0);
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
 

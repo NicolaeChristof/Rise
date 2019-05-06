@@ -2472,7 +2472,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 26.47356
+  m_PathPosition: 50.611607
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5196,8 +5196,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.0054630754, y: 0.9841591, z: 0.030421618, w: -0.17457265}
-  m_LocalPosition: {x: 74.00573, y: 4.0213113, z: 93.91319}
+  m_LocalRotation: {x: 0.07937655, y: 0.7938636, z: -0.10722505, w: 0.5932813}
+  m_LocalPosition: {x: 32.787025, y: 14.578323, z: 71.27101}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6000,6 +6000,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6462225555944426793, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_Name
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: audioClips.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
       propertyPath: _trackCam
       value: 
@@ -6068,6 +6077,22 @@ PrefabInstance:
       propertyPath: timerUI
       value: 
       objectReference: {fileID: 792013025}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 534669907}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: audioClips.Array.data[0]
+      value: 
+      objectReference: {fileID: 8300000, guid: 1fe1ad4a598267d4cb645c079b1b0425, type: 3}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: audioClips.Array.data[1]
+      value: 
+      objectReference: {fileID: 8300000, guid: ec650248f8c481945b9b54d3ed7d36fa, type: 3}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: audioClips.Array.data[2]
+      value: 
+      objectReference: {fileID: 8300000, guid: 4db56be3523be8849897aca1591b50c2, type: 3}
     - target: {fileID: 929931778804779067, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_TagString
@@ -6097,11 +6122,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6462225555944426793, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_Name
-      value: Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 6462225555944426797, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
@@ -7787,6 +7807,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7547524578722158691, guid: 28db81526914ec54b97ae8891ff80a07,
+        type: 3}
+      propertyPath: m_Name
+      value: Tree
+      objectReference: {fileID: 0}
     - target: {fileID: 7547524578722158623, guid: 28db81526914ec54b97ae8891ff80a07,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7841,11 +7866,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7547524578722158691, guid: 28db81526914ec54b97ae8891ff80a07,
-        type: 3}
-      propertyPath: m_Name
-      value: Tree
       objectReference: {fileID: 0}
     - target: {fileID: 7547524579061912130, guid: 28db81526914ec54b97ae8891ff80a07,
         type: 3}
@@ -9491,7 +9511,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.0054630754, y: 0.9841591, z: 0.030421618, w: -0.17457265}
+  m_LocalRotation: {x: 0.07937655, y: 0.7938636, z: -0.10722505, w: 0.5932813}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
