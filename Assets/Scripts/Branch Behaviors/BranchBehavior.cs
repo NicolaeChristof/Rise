@@ -47,6 +47,9 @@ public class BranchBehavior : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
+            float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+            _source.PlayOneShot(rustleSound, _volume);
+
             _branchModel.transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
 
