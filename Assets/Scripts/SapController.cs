@@ -2,17 +2,15 @@
 using RiseExtensions;
 using System.Collections;
 
-[RequireComponent(typeof(AudioSource))]
 public class SapController : MonoBehaviour {
 
     // Public references
     public TreeController treeController;
 
     // Local References
-    private AudioSource _source;
 
     void Start() {
-        _source = GetComponent<AudioSource>();
+        
     }
 
     private void Update() {
@@ -33,9 +31,6 @@ public class SapController : MonoBehaviour {
                 // Call Sap-Specific OnCollected Effect
                 sap.OnSapCollected();
 
-                // Play Pickup Sound
-                float _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
-                _source.PlayOneShot(sap.pickupSound, _volume);
             }
         }
     }
