@@ -122,6 +122,12 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
+    //------Tutorial UI------
+    public GameObject Tutorial;
+    public Text AcornTutorial;
+    public Text MistletoeTutorial;
+    public Text BranchTutorial;
+    //-----------------------
     private bool isSinglePlayer;
     private bool start = false;
     private void Start() {
