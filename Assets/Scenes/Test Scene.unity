@@ -2643,7 +2643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 273.31604
+  m_PathPosition: 283.36584
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5909,8 +5909,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.018842384, y: -0.85382044, z: -0.030732526, w: 0.5193179}
-  m_LocalPosition: {x: 86.78209, y: 4.104979, z: 75.07733}
+  m_LocalRotation: {x: -0.017521832, y: -0.61150527, z: -0.0134595195, w: 0.7909318}
+  m_LocalPosition: {x: 105.871475, y: 4.099361, z: 51.21768}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -7011,6 +7011,10 @@ PrefabInstance:
       propertyPath: gameOverMenuObject
       value: 
       objectReference: {fileID: 1419635706}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: audioSource
+      value: 
+      objectReference: {fileID: 534669907}
     - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: treeController
@@ -10645,7 +10649,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.018842384, y: -0.85382044, z: -0.030732526, w: 0.5193179}
+  m_LocalRotation: {x: -0.017521832, y: -0.61150527, z: -0.0134595195, w: 0.7909318}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

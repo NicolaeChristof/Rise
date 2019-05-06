@@ -117,8 +117,6 @@ public class BeeHiveBehavior : MonoBehaviour {
                 GameObject Health = GameObject.Find("Health Bar");
                 Health.GetComponent<HealthUI>().UpdateHealth();
 
-                Health.GetComponent<HealthUI>().DropAcorn();
-
             }
 
         }
