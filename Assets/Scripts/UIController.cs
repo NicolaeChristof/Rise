@@ -68,12 +68,8 @@ public class UIController : RiseBehavior {
     private DepthOfField depthOfField;
     private float defaultDOF = 2.94f;
 
-    // Unsure if still using this
-    private bool justPaused = false;
-
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
-    private bool _pressedPause = false;
 
     //------Branch UI--------
     public GameObject uiBranches;
