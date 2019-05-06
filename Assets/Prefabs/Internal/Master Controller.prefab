@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 2298827586175594228}
   - component: {fileID: 2298827586175594232}
   - component: {fileID: 2298827586175594231}
-  - component: {fileID: 2298827586175594230}
   m_Layer: 0
   m_Name: Master Controller
   m_TagString: Untagged
@@ -50,17 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squirrelCamera: {fileID: 0}
   treeCamera: {fileID: 0}
-  postProcessProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
-  buttonArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  selectorArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  pauseMenu: {fileID: 0}
-  pauseDOF: 0
   enforceModes: 0
 --- !u!114 &2298827586175594232
 MonoBehaviour:
@@ -108,24 +96,6 @@ MonoBehaviour:
   textureCutoff: 0.5
   offset: 0.4
   updateTextures: 0
---- !u!114 &2298827586175594230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2298827586175594235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c0d7c8b98fa55f428ed1cffe7ba751d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayLight: {fileID: 0}
-  nightLight: {fileID: 0}
-  timeOfDay: 30
-  dayNightSpeed: 0.1
-  rotationSpeed: 0
-  cycle: 0
 --- !u!1 &2298827587787684350
 GameObject:
   m_ObjectHideFlags: 0
