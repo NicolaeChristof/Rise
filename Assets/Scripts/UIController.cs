@@ -119,13 +119,16 @@ public class UIController : RiseBehavior {
     //-----------------------
 
     //----Sound Settings----
-    public AudioSource audioSource;
+    private AudioSource audioSource;
 
     public AudioClip[] audioClips;
+
+    private static int _audioCursor = 0;
     //----------------------
 
     private bool isSinglePlayer;
     private bool start = false;
+
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
@@ -181,7 +184,11 @@ public class UIController : RiseBehavior {
             misletoeText = misletoeUI.GetComponent<Text>();
             misletoeText.text = "Mistletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MistletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
         }
-        
+
+        audioSource = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<AudioSource>();
+        audioSource.clip = audioClips[_audioCursor];
+        audioSource.Play(0);
+
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
@@ -192,6 +199,7 @@ public class UIController : RiseBehavior {
         }
 
         GameModel.squirrelHealth = 10;
+
         //-----Options UI----
         _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         _qualityCursor = QualitySettings.GetQualityLevel();
@@ -204,6 +212,7 @@ public class UIController : RiseBehavior {
             false);
 
         ChangeController(_controllerCursor);
+        //-------------------
     }
 
     public override void UpdateAlways() {
@@ -318,8 +327,7 @@ public class UIController : RiseBehavior {
     public void PauseEvent(bool isTrue) {
         // Pause the game
         if (!GameModel.paused) {
-
-            audioSource.clip = audioClips[0];
+            audioSource.clip = audioClips[1];
             audioSource.Play(0);
 
             GameModel.paused = true;
@@ -339,13 +347,16 @@ public class UIController : RiseBehavior {
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
 
+            audioSource.clip = audioClips[_audioCursor];
+            audioSource.Play(0);
+
             OpenMenu(1, false);
 
         }
     }
 
     public void MenuEvent(bool isTrue) {
-        audioSource.clip = audioClips[1];
+        audioSource.clip = audioClips[0];
         audioSource.Play(0);
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
@@ -414,6 +425,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Spring Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 2;
         SceneManager.LoadScene("Spring Template");
     }
 
@@ -421,6 +433,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Summer Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 3;
         SceneManager.LoadScene("Summer Template");
     }
 
@@ -428,6 +441,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Fall Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 4;
         SceneManager.LoadScene("Fall Template");
     }
 
@@ -435,6 +449,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Winter Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 5;
         SceneManager.LoadScene("Winter Template");
     }
 
