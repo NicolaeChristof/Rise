@@ -118,11 +118,10 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
-    //----Sound Settings----
-    private AudioSource audioSource;
-
+    //----Sound Settings-----
     public AudioClip[] audioClips;
 
+    private AudioSource _audioSource;
     private static int _audioCursor = 0;
     //----------------------
 
@@ -185,9 +184,9 @@ public class UIController : RiseBehavior {
             misletoeText.text = "Mistletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MistletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
         }
 
-        audioSource = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<AudioSource>();
-        audioSource.clip = audioClips[_audioCursor];
-        audioSource.Play(0);
+        _audioSource = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<AudioSource>();
+        _audioSource.clip = audioClips[_audioCursor];
+        _audioSource.Play(0);
 
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
@@ -327,8 +326,8 @@ public class UIController : RiseBehavior {
     public void PauseEvent(bool isTrue) {
         // Pause the game
         if (!GameModel.paused) {
-            audioSource.clip = audioClips[1];
-            audioSource.Play(0);
+            _audioSource.clip = audioClips[1];
+            _audioSource.Play(0);
 
             GameModel.paused = true;
 
@@ -347,8 +346,8 @@ public class UIController : RiseBehavior {
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
 
-            audioSource.clip = audioClips[_audioCursor];
-            audioSource.Play(0);
+            _audioSource.clip = audioClips[_audioCursor];
+            _audioSource.Play(0);
 
             OpenMenu(1, false);
 
@@ -356,8 +355,8 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
-        audioSource.clip = audioClips[0];
-        audioSource.Play(0);
+        _audioSource.clip = audioClips[0];
+        _audioSource.Play(0);
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
 
