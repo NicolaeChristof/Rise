@@ -123,6 +123,7 @@ public class UIController : RiseBehavior {
 
     private AudioSource _audioSource;
     private static int _audioCursor = 0;
+    private AudioClip _currentAudioClip;
     //----------------------
 
     private bool isSinglePlayer;
@@ -185,6 +186,7 @@ public class UIController : RiseBehavior {
         }
 
         _audioSource = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<AudioSource>();
+        _currentAudioClip = _audioSource.clip;
         _audioSource.clip = audioClips[_audioCursor];
         _audioSource.Play(0);
 
@@ -386,6 +388,8 @@ public class UIController : RiseBehavior {
             settingsController.SetCameras();
         }
 
+        _audioSource.clip = _currentAudioClip;
+        _audioSource.Play(0);
         List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
         SetActiveInactive(active, inactive);
@@ -425,6 +429,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Spring Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 2;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Spring Template");
     }
 
@@ -433,6 +438,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Summer Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 3;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Summer Template");
     }
 
@@ -441,6 +447,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Fall Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 4;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Fall Template");
     }
 
@@ -449,6 +456,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Winter Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 5;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Winter Template");
     }
 
