@@ -155,15 +155,6 @@ public class HealthUI : MonoBehaviour
         }
     }
 
-    public void DropAcorn() {
-        Image currentAcorn = GameObject.Instantiate(moveableAcorn, Hearts[Mathf.FloorToInt(GameModel.squirrelHealth)].transform.position, Quaternion.identity, transform);
-
-        Vector3 finalDestination = currentAcorn.transform.position;
-        finalDestination.y -= 150f;
-
-        currentAcorn.transform.DOMove(finalDestination, GameModel.tweenTime, false);
-    }
-
     // This function is called once the movement and rotation tweens are done
     // in MoveAcorn
     private void HealthFullyUpdated(Image currentAcorn) {
