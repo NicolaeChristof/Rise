@@ -2187,7 +2187,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 65.95839
+  m_PathPosition: 66.45312
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -2610,7 +2610,7 @@ MonoBehaviour:
   cantGrowSound: {fileID: 8300000, guid: 2c6265f966eef2d4ea6b4bef801326a0, type: 3}
   minDistance: 0.5
   sortOrder: 0
-  branch: {fileID: 4352697463616401196, guid: 59a92ea29efd54ad9810fb5b811ac9f0, type: 3}
+  branch: {fileID: 4352697463616401196, guid: 7fcd8ff92c4d6d54f9d72d04743bdef8, type: 3}
   sapType: 1
 --- !u!1001 &317714687
 PrefabInstance:
@@ -5139,8 +5139,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.014770894, y: -0.5043814, z: -0.008566427, w: 0.8633122}
-  m_LocalPosition: {x: 103.73696, y: 4.4672146, z: 39.255665}
+  m_LocalRotation: {x: -0.019092968, y: -0.6329612, z: -0.015518732, w: 0.7737925}
+  m_LocalPosition: {x: 106.01072, y: 3.8955638, z: 53.70039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6161,26 +6161,11 @@ PrefabInstance:
       propertyPath: timerUI
       value: 
       objectReference: {fileID: 1040380287}
-    - target: {fileID: 929931778804779067, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Graphic
-      objectReference: {fileID: 0}
     - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: treeController
       value: 
       objectReference: {fileID: 577484134}
-    - target: {fileID: 5079048047927201056, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Graphic
-      objectReference: {fileID: 0}
-    - target: {fileID: 5696719477880092327, guid: 02b191eae91d53d43ae5ecce0110924a,
-        type: 3}
-      propertyPath: m_TagString
-      value: Graphic
-      objectReference: {fileID: 0}
     - target: {fileID: 5737707754222980247, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_IsActive
@@ -6302,6 +6287,21 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 12800000, guid: 0dba26caad0583849ab1f02bd5fe1071,
         type: 3}
+    - target: {fileID: 929931778804779067, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Graphic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5079048047927201056, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Graphic
+      objectReference: {fileID: 0}
+    - target: {fileID: 5696719477880092327, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_TagString
+      value: Graphic
+      objectReference: {fileID: 0}
     - target: {fileID: 2935658018826482390, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: m_IsActive
@@ -9364,7 +9364,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.014770894, y: -0.5043814, z: -0.008566427, w: 0.8633122}
+  m_LocalRotation: {x: -0.019092968, y: -0.6329612, z: -0.015518732, w: 0.7737925}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14970,16 +14970,6 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1734308155}
-    - target: {fileID: 2298827586175594230, guid: 954646146aff04c9c80c9dc838056fcc,
-        type: 3}
-      propertyPath: dayLight
-      value: 
-      objectReference: {fileID: 170076734}
-    - target: {fileID: 2298827586175594230, guid: 954646146aff04c9c80c9dc838056fcc,
-        type: 3}
-      propertyPath: nightLight
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 2298827586175594233, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -15043,6 +15033,16 @@ PrefabInstance:
     - target: {fileID: 2298827586616047074, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: tree
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2298827586175594230, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: dayLight
+      value: 
+      objectReference: {fileID: 170076734}
+    - target: {fileID: 2298827586175594230, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: nightLight
       value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
