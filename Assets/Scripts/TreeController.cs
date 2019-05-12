@@ -129,7 +129,7 @@ public class TreeController : RiseBehavior {
         // Handle Teleport
         if (InputHelper.GetAnyDown(TreeInput.TELEPORT)) {
 
-            Debug.Log("TELEPORT");
+            // Debug.Log("TELEPORT");
 
             transform.position = squirrel.transform.position;
 
