@@ -23,7 +23,7 @@ public class TreePlayerAnimator : MonoBehaviour {
     // Update is called once per frame
     void Update() {
 
-        transform.Rotate(0.0f, 0.0f, 5.0f);
+        _tree.Rotate(0.0f, 0.0f, 5.0f);
         
     }
 }
