@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using RiseExtensions;
 using System;
+using System.Collections;
 
 public class TreeController : RiseBehavior {
 
@@ -24,7 +25,10 @@ public class TreeController : RiseBehavior {
 
     // Local References
     private GameObject _reticleInstance;
-
+    private GameObject canvas;
+    private UIController ui;
+    private bool triggered = false;
+    private IEnumerator coroutine;
     // Local Fields
     private int _selectedBranch;
     private List<BranchProvider> branches;
@@ -54,7 +58,8 @@ public class TreeController : RiseBehavior {
 
     void Start() {
         _reticleInstance = Instantiate(reticle, transform.position, Quaternion.identity);
-
+        canvas = GameObject.Find("Canvas");
+        ui = canvas.GetComponent<UIController>();
         UpdateReticle();
         UpdateComponents();
         Select(0);
@@ -96,6 +101,14 @@ public class TreeController : RiseBehavior {
                 if (verticallyClose || squirrelBelow || squirrelAbove) {
                     transform.Translate(Vector3.up * idealMove, Space.World);
                     moved = true;
+                }
+                else if (GameModel.tutorialEnabled && !triggered)
+                {
+                    triggered = true;
+                    coroutine = Delay(3.0f);
+                    StartCoroutine(coroutine);
+                    ui.TeleportText();
+                    
                 }
             }
         }
@@ -269,5 +282,14 @@ public class TreeController : RiseBehavior {
 
     private void UpdateUI() {
         uiUpdateEvent?.Invoke(GetSelectedBranch());
+    }
+
+    private IEnumerator Delay(float wait)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(wait);
+            triggered = false;
+        }
     }
 }

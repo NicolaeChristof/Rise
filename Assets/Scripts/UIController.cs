@@ -124,10 +124,12 @@ public class UIController : RiseBehavior {
 
     //------Tutorial UI------
     public GameObject Tutorial;
-    public Text AcornTutorial;
-    public Text MistletoeTutorial;
-    public Text BranchTutorial;
+    public GameObject AcornTutorial;
+    public GameObject MistletoeTutorial;
+    public GameObject BranchTutorial;
+    private IEnumerator coroutine;
     //-----------------------
+
     private bool isSinglePlayer;
     private bool start = false;
     private void Start() {
@@ -376,14 +378,37 @@ public class UIController : RiseBehavior {
             settingsController.SetCameras();
         }
 
-        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-        SetActiveInactive(active, inactive);
+        if(GameModel.tutorialEnabled)
+        {
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI, AcornTutorial };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+            coroutine = SetInactive(3.0f, AcornTutorial);
+            StartCoroutine(coroutine);
+            coroutine = DisplayMistletoe (3.0f);
+            StartCoroutine(coroutine);
+            
+        }
+        else
+        {
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+        }
+        
+        
 
         OpenMenu(1, false);
         GameModel.enableTimer = true;
     }
 
+    private IEnumerator DisplayMistletoe(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        MistletoeTutorial.SetActive(true);
+        coroutine = SetInactive(3.0f, MistletoeTutorial);
+        StartCoroutine(coroutine);
+    }
     public void GameModeEvent(bool isTrue)
     {
         if (GameModel.singlePlayer)
@@ -751,5 +776,20 @@ public class UIController : RiseBehavior {
             UpdateMistletoe();
         }
         
+    }
+
+    public void TeleportText()
+    {
+        BranchTutorial.SetActive(true);
+        coroutine = SetInactive(3.0f, BranchTutorial);
+        StartCoroutine(coroutine);
+    }
+
+    
+
+    private IEnumerator SetInactive(float delay, GameObject temp)
+    {
+            yield return new WaitForSeconds(delay);
+            temp.SetActive(false);
     }
 }

@@ -2120,8 +2120,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.4, y: 15.8}
-  m_SizeDelta: {x: 511.11, y: 257.05}
+  m_AnchoredPosition: {x: -2.4, y: 108}
+  m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7592426019658991234
 CanvasRenderer:
@@ -2130,7 +2130,7 @@ CanvasRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1646692560058024116}
-  m_CullTransparentMesh: 0
+  m_CullTransparentMesh: 1
 --- !u!114 &2034895464365638197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2153,18 +2153,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7566645627c33334288ad48445d801f1, type: 3}
-    m_FontSize: 24
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 48
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Collect Acorns to Gain Health and Replenish Health.
+  m_Text: Collect Acorns to Gain Branches and Replenish Health.
 --- !u!1 &2064148243600504659
 GameObject:
   m_ObjectHideFlags: 0
@@ -2498,8 +2498,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.4000244, y: 15.799957}
-  m_SizeDelta: {x: 511.11, y: 257.05}
+  m_AnchoredPosition: {x: -2.4000244, y: 144}
+  m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1401337604039686484
 CanvasRenderer:
@@ -2531,18 +2531,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7566645627c33334288ad48445d801f1, type: 3}
-    m_FontSize: 24
+    m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 48
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Press Y to teleport to the player.
+  m_Text: Press Y to teleport to the Squirrel.
 --- !u!1 &2890352214364198584
 GameObject:
   m_ObjectHideFlags: 0
@@ -2731,8 +2731,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.4000244, y: 15.799957}
-  m_SizeDelta: {x: 511.11, y: 257.05}
+  m_AnchoredPosition: {x: -2.4000244, y: 106}
+  m_SizeDelta: {x: 1000, y: 500}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3188968147522843306
 CanvasRenderer:
@@ -2764,18 +2764,18 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 12800000, guid: 7566645627c33334288ad48445d801f1, type: 3}
-    m_FontSize: 24
+    m_FontSize: 44
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 0
-    m_MaxSize: 40
-    m_Alignment: 3
+    m_MaxSize: 44
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Protect the tree by collecting the mistletoe
+  m_Text: Protect the tree by collecting the Mistletoe.
 --- !u!1 &3480931666021256960
 GameObject:
   m_ObjectHideFlags: 0
@@ -4621,9 +4621,9 @@ MonoBehaviour:
   qualityText: {fileID: 88283026818335800}
   timerUI: {fileID: 4276388968899245417}
   Tutorial: {fileID: 749640945392600343}
-  AcornTutorial: {fileID: 2034895464365638197}
-  MistletoeTutorial: {fileID: 1309178848111671220}
-  BranchTutorial: {fileID: 6162700195718774076}
+  AcornTutorial: {fileID: 1646692560058024116}
+  MistletoeTutorial: {fileID: 3318888860935459892}
+  BranchTutorial: {fileID: 2590486944014776992}
 --- !u!1 &6462225557133089120
 GameObject:
   m_ObjectHideFlags: 0
@@ -5714,16 +5714,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2660507254430891218}
     m_Modifications:
-    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
-        type: 3}
-      propertyPath: m_Name
-      value: UIBranchElement
-      objectReference: {fileID: 0}
-    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5842,6 +5832,16 @@ PrefabInstance:
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
+        type: 3}
+      propertyPath: m_Name
+      value: UIBranchElement
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
+        type: 3}
+      propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5390275804387599201, guid: 051fa15c2d9c141e182dd1bd335b53a0,
