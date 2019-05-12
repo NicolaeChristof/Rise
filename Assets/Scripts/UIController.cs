@@ -220,13 +220,19 @@ public class UIController : RiseBehavior {
     public override void UpdateAlways() {
         // Setting _currentAxis and _pressedSelect depending on whether the player is currently
         // a tree or a squirrel
-        if (GameModel.isSquirrel) {
+        if (InputHelper.GetAny(SquirrelInput.MOVE_VERTICAL)) {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
+        } else if(InputHelper.GetAny(SquirrelInput.JUMP)){
             _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
-        } else {
-            _currentAxis = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+        } else if(InputHelper.GetAny(TreeInput.BRANCH_PLACE))
+        {
             _pressedSelect = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
         }
+        else
+        {
+            _currentAxis = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
+        }
+        
 
         if (GameModel.paused) {
             // Here we're testing which option in the current menu the
