@@ -20,6 +20,7 @@ public class UIController : RiseBehavior {
     public GameObject levelSelectMenuObject;
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
+    public GameObject characterSelectMenuObject;
     private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
 
@@ -135,7 +136,7 @@ public class UIController : RiseBehavior {
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject };
 
         //-----Menu Functionality List-----
 
@@ -143,7 +144,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions = new List<List<_selectAction>>();
 
         // Main Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, ExitGameEvent });
 
         // Pause Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
@@ -159,6 +160,9 @@ public class UIController : RiseBehavior {
 
         // Game Over Menu
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
+
+        //Character SelectMenu
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayerOneEvent, PlayerTwoEvent, ExitCharacterEvent });
 
         //-------------------------------
 
@@ -614,6 +618,37 @@ public class UIController : RiseBehavior {
         OpenMenu(5, true);
     }
 
+    public void CharacterSelectEvent(bool isTrue)
+    {
+        Debug.Log("Character Select");
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+        OpenMenu(6, true);
+    }
+
+    public void PlayerOneEvent(bool isTrue)
+    {
+        Debug.Log("Player One");
+        InputHelper.TestSwap();
+    }
+
+    public void PlayerTwoEvent(bool isTrue)
+    {
+        Debug.Log("Player Two");
+    }
+
+    public void ExitCharacterEvent(bool isTrue)
+    {
+        Debug.Log("Exit Character Select");
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+
+    }
     //----------MENU FUNCTIONS----------
 
     //----------PRIVATE HELPER FUNCTIONS----------
