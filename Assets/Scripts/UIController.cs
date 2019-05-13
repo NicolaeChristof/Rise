@@ -393,9 +393,9 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI, AcornTutorial };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
-            coroutine = SetInactive(3.0f, AcornTutorial);
+            coroutine = SetInactive(4.0f, AcornTutorial);
             StartCoroutine(coroutine);
-            coroutine = DisplayMistletoe (3.0f);
+            coroutine = DisplayMistletoe (4.0f);
             StartCoroutine(coroutine);
             
         }
@@ -416,7 +416,7 @@ public class UIController : RiseBehavior {
     {
         yield return new WaitForSeconds(delay);
         MistletoeTutorial.SetActive(true);
-        coroutine = SetInactive(3.0f, MistletoeTutorial);
+        coroutine = SetInactive(4.0f, MistletoeTutorial);
         StartCoroutine(coroutine);
     }
     public void GameModeEvent(bool isTrue)
