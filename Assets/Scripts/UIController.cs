@@ -162,7 +162,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
 
         //Character SelectMenu
-        _listsOfSelectActions.Add(new List<_selectAction> { PlayerOneEvent, PlayerTwoEvent, ExitCharacterEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayerOneEvent, ExitCharacterEvent });
 
         //-------------------------------
 
@@ -637,11 +637,6 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Player One");
         InputHelper.TestSwap();
-    }
-
-    public void PlayerTwoEvent(bool isTrue)
-    {
-        Debug.Log("Player Two");
     }
 
     public void ExitCharacterEvent(bool isTrue)
