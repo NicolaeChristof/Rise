@@ -582,6 +582,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Next Level");
         GameModel.paused = false;
         GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         GameModel.endGame = false;
         Scene currentScene = SceneManager.GetActiveScene();
         GameModel.squirrelHealth = 10;
