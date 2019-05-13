@@ -57,7 +57,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 1fcf86673fc90564e9e2b3f6377ceaeb, type: 2}
+  - {fileID: 2100000, guid: 36fede334ec46fb4a930dc05143d7f02, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -88,7 +88,7 @@ GameObject:
   - component: {fileID: 7942988497882146801}
   - component: {fileID: 7942988497882146800}
   m_Layer: 0
-  m_Name: Falling Object Spawner
+  m_Name: Falling Object Spawner Winter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,5 +121,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d37df378bd97fd4fbc0b471e5dc3000, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  nut: {fileID: 3551056811072294866, guid: b7064ab4397f90f47a3b2ed273b1fa26, type: 3}
+  nut: {fileID: 3551056811072294866, guid: 25f1538bbce34e44cba9d9bbba41213f, type: 3}
   frequency: 3
