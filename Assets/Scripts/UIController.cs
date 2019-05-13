@@ -131,6 +131,7 @@ public class UIController : RiseBehavior {
     private IEnumerator coroutine;
     //-----------------------
 
+    public Text gameoverText; 
     private bool isSinglePlayer;
     private bool start = false;
     private void Start() {
@@ -617,6 +618,14 @@ public class UIController : RiseBehavior {
     public void GameOverEvent(bool isTrue)
     {
         Debug.Log("Game Over");
+        if(isTrue)
+        {
+            gameoverText.text = "Game Over, you ran out of health";
+        }
+        else
+        {
+            gameoverText.text = "Game Over, you ran out of time";
+        }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { };
         SetActiveInactive(active, inactive);

@@ -17,7 +17,7 @@ public class SettingsController : RiseBehavior {
     public Text[] buttonArray = new Text[3];
     public Image[] selectorArray = new Image[3];
     public GameObject pauseMenu;
-
+    public GameObject canvas;
     // Public Fields
     public float pauseDOF;
     public bool enforceModes;
@@ -98,7 +98,8 @@ public class SettingsController : RiseBehavior {
                 GameModel.displayTime = "0:0";
 
                 GameModel.paused = true;
-
+                UIController temp = canvas.GetComponent<UIController>();
+                temp.GameOverEvent(false);
             }
 
             // Debug.Log(GameModel.displayTime);
