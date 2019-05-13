@@ -87,8 +87,16 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.timer -= Time.deltaTime;
 
-                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
-                //Debug.Log(GameModel.displayTime);
+                
+                if(Mathf.Floor(GameModel.timer % 60) < 10)
+                {
+                    GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":0" +  Mathf.Floor((GameModel.timer % 60)).ToString("F0"); 
+                }
+                else
+                {
+                    GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
+                }
+                Debug.Log(Mathf.Floor((GameModel.timer % 60)).ToString("F0"));
                 
 
             } else {
