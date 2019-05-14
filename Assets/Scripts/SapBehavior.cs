@@ -5,7 +5,6 @@ using RiseExtensions;
 public class SapBehavior : RiseBehavior {
 
     // Public References
-
     // Public Fields
     public AudioClip pickupSound;
     public SapType sapType;
@@ -34,7 +33,6 @@ public class SapBehavior : RiseBehavior {
 
         uiBranchManager = FindObjectOfType<UIBranchManager>();
         healthUI = FindObjectOfType<HealthUI>();
-
     }
 
     public override void UpdateAlways() {

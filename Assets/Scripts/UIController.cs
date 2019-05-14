@@ -20,6 +20,7 @@ public class UIController : RiseBehavior {
     public GameObject levelSelectMenuObject;
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
+    public GameObject characterSelectMenuObject;
     private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
 
@@ -100,7 +101,8 @@ public class UIController : RiseBehavior {
     public Text gameModeText;
     public Text controllerText;
     public Text qualityText;
-
+    public Text squirrelPlayer;
+    public Text treePlayer;
     // _qualityStrings is a string that holds the possible labels
     // for each graphic level. _qualityCursor holds the index of the
     // current label
@@ -118,6 +120,20 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
+
+    //------Tutorial UI------
+    public GameObject Tutorial;
+    public GameObject AcornTutorial;
+    public GameObject MistletoeTutorial;
+    public GameObject BranchTutorial;
+    private bool displayedAcorn = false;
+    private bool displayedMistletoe = false;
+    private bool displayedBranch = false;
+    private IEnumerator coroutine;
+    //-----------------------
+
+    public Text gameoverText; 
+
     //----Sound Settings-----
     public AudioClip[] audioClips;
 
@@ -126,13 +142,14 @@ public class UIController : RiseBehavior {
     private AudioClip _currentAudioClip;
     //----------------------
 
+
     private bool isSinglePlayer;
     private bool start = false;
 
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject };
 
         //-----Menu Functionality List-----
 
@@ -140,7 +157,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions = new List<List<_selectAction>>();
 
         // Main Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, OptionsEvent, ExitGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, ExitGameEvent });
 
         // Pause Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
@@ -156,6 +173,9 @@ public class UIController : RiseBehavior {
 
         // Game Over Menu
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
+
+        //Character SelectMenu
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayerOneEvent, ExitCharacterEvent });
 
         //-------------------------------
 
@@ -219,13 +239,17 @@ public class UIController : RiseBehavior {
     public override void UpdateAlways() {
         // Setting _currentAxis and _pressedSelect depending on whether the player is currently
         // a tree or a squirrel
-        if (GameModel.isSquirrel) {
+        if (GameModel.isSquirrel)
+        {
             _currentAxis = InputHelper.GetAxis(SquirrelInput.MOVE_VERTICAL);
             _pressedSelect = InputHelper.GetButtonDown(SquirrelInput.JUMP);
-        } else {
+        }
+        else
+        {
             _currentAxis = InputHelper.GetAxis(TreeInput.MOVE_VERTICAL);
             _pressedSelect = InputHelper.GetButtonDown(TreeInput.BRANCH_PLACE);
         }
+
 
         if (GameModel.paused) {
             // Here we're testing which option in the current menu the
@@ -286,8 +310,11 @@ public class UIController : RiseBehavior {
             GameObject Health = GameObject.Find("Health Bar");
             Health.GetComponent<HealthUI>().UpdateHealth();
         }
-
-        timerUIText.text = "Timer: " + GameModel.displayTime;
+        if(GameModel.timer > 0)
+        {
+            timerUIText.text = "Timer: " + GameModel.displayTime;
+        }
+        
     }
 
     // This ensures that the depth of field returns to its initial
@@ -335,6 +362,25 @@ public class UIController : RiseBehavior {
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { };
+            if(AcornTutorial.activeSelf)
+            {
+                displayedAcorn = true;
+                AcornTutorial.SetActive(false);
+            }
+            
+            if(MistletoeTutorial.activeSelf)
+            {
+                displayedMistletoe = true;
+                MistletoeTutorial.SetActive(false);
+            }
+
+            if(BranchTutorial.activeSelf)
+            {
+                displayedBranch = true;
+                BranchTutorial.SetActive(false);
+            }
+
+            
             SetActiveInactive(active, inactive);
 
             OpenMenu(1, true);
@@ -345,8 +391,29 @@ public class UIController : RiseBehavior {
             GameModel.paused = false;
 
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
             SetActiveInactive(active, inactive);
+
+            if (displayedAcorn)
+            {
+                displayedAcorn = false;
+                StartTutorial();
+            }
+            else if (displayedMistletoe)
+            {
+                displayedMistletoe = false;
+                MistletoeTutorial.SetActive(true);
+                coroutine = SetInactive(4.0f, MistletoeTutorial);
+                StartCoroutine(coroutine);
+            }
+
+            if (displayedBranch)
+            {
+                displayedBranch = false;
+                BranchTutorial.SetActive(true);
+                coroutine = SetInactive(3.0f, BranchTutorial);
+                StartCoroutine(coroutine);
+            }
 
             _audioSource.clip = audioClips[_audioCursor];
             _audioSource.Play(0);
@@ -390,14 +457,49 @@ public class UIController : RiseBehavior {
 
         _audioSource.clip = _currentAudioClip;
         _audioSource.Play(0);
-        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-        SetActiveInactive(active, inactive);
 
+        if (GameModel.tutorialEnabled)
+        {
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+            StartTutorial();
+            
+        }
+        else
+        {
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            SetActiveInactive(active, inactive);
+        }
+        
         OpenMenu(1, false);
         GameModel.enableTimer = true;
     }
 
+    private void StartTutorial()
+    {
+        AcornTutorial.SetActive(true);
+        coroutine = SetInactive(4.0f, AcornTutorial);
+        StartCoroutine(coroutine);
+        coroutine = DisplayMistletoe(4.0f);
+        StartCoroutine(coroutine);
+    }
+    private IEnumerator DisplayMistletoe(float delay)
+    {
+        while(!GameModel.paused)
+        {
+            yield return new WaitForSeconds(delay);
+            if(!GameModel.paused)
+            {
+                MistletoeTutorial.SetActive(true);
+                coroutine = SetInactive(4.0f, MistletoeTutorial);
+                StartCoroutine(coroutine);
+            }
+            
+        }
+        
+    }
     public void GameModeEvent(bool isTrue)
     {
         if (GameModel.singlePlayer)
@@ -568,6 +670,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Next Level");
         GameModel.paused = false;
         GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         GameModel.endGame = false;
         Scene currentScene = SceneManager.GetActiveScene();
         GameModel.squirrelHealth = 10;
@@ -604,13 +707,71 @@ public class UIController : RiseBehavior {
     public void GameOverEvent(bool isTrue)
     {
         Debug.Log("Game Over");
+        if(isTrue)
+        {
+            gameoverText.text = "Game Over, you ran out of health";
+        }
+        else
+        {
+            gameoverText.text = "Game Over, you ran out of time";
+        }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { };
         SetActiveInactive(active, inactive);
         GameModel.timer = 300.0f;
+        GameModel.displayTime = "0:0";
         OpenMenu(5, true);
     }
 
+    public void CharacterSelectEvent(bool isTrue)
+    {
+        Debug.Log("Character Select");
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+        OpenMenu(6, true);
+        if (!GameModel.isFirstPlayer)
+        {
+            squirrelPlayer.text = "Squirrel : Player Two";
+            treePlayer.text = "Tree : Player One";
+        }
+        else
+        {
+            squirrelPlayer.text = "Squirrel : Player Two";
+            treePlayer.text = "Tree : Player One";
+        }
+    }
+
+    public void PlayerOneEvent(bool isTrue)
+    {
+        Debug.Log("Player One");
+        if (GameModel.isFirstPlayer)
+        {
+            squirrelPlayer.text = "Squirrel : Player Two";
+            treePlayer.text = "Tree : Player One";
+            GameModel.isFirstPlayer = false;
+        }
+        else
+        {
+            squirrelPlayer.text = "Squirrel : Player One";
+            treePlayer.text = "Tree : Player Two";
+            GameModel.isFirstPlayer = true;
+        }
+        InputHelper.TestSwap();
+
+    }
+
+    public void ExitCharacterEvent(bool isTrue)
+    {
+        Debug.Log("Exit Character Select");
+
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+
+    }
     //----------MENU FUNCTIONS----------
 
     //----------PRIVATE HELPER FUNCTIONS----------
@@ -773,5 +934,24 @@ public class UIController : RiseBehavior {
             UpdateMistletoe();
         }
         
+    }
+
+    public void TeleportText()
+    {
+        BranchTutorial.SetActive(true);
+        coroutine = SetInactive(3.0f, BranchTutorial);
+        StartCoroutine(coroutine);
+    }
+
+    
+
+    private IEnumerator SetInactive(float delay, GameObject temp)
+    {
+        while(true)
+        {
+                yield return new WaitForSeconds(delay);
+                temp.SetActive(false);
+        }
+            
     }
 }

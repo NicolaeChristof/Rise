@@ -12,6 +12,14 @@ public class SettingsController : RiseBehavior {
     public Camera squirrelCamera;
     public Camera treeCamera;
 
+
+    public PostProcessProfile postProcessProfile;
+
+    public Text[] buttonArray = new Text[3];
+    public Image[] selectorArray = new Image[3];
+    public GameObject pauseMenu;
+    public GameObject canvas;
+
     // Public Fields
     public bool enforceModes;
 
@@ -24,7 +32,7 @@ public class SettingsController : RiseBehavior {
 
     // Start is called before the first frame update
     void Start() {
-
+        canvas = GameObject.Find("Canvas");
         InputHelper.Initialize();
 
         if (enforceModes) {
@@ -74,8 +82,16 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.timer -= Time.deltaTime;
 
-                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
-                //Debug.Log(GameModel.displayTime);
+                
+                if(Mathf.Floor(GameModel.timer % 60) < 10)
+                {
+                    GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":0" +  Mathf.Floor((GameModel.timer % 60)).ToString("F0"); 
+                }
+                else
+                {
+                    GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
+                }
+                
                 
 
             } else {
@@ -85,7 +101,8 @@ public class SettingsController : RiseBehavior {
                 GameModel.displayTime = "0:0";
 
                 GameModel.paused = true;
-
+                UIController temp = canvas.GetComponent<UIController>();
+                temp.GameOverEvent(false);
             }
 
             // Debug.Log(GameModel.displayTime);

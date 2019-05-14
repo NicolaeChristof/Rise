@@ -2643,7 +2643,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 324.7362
+  m_PathPosition: 325.32178
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5909,8 +5909,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.21530637, y: -0.6032182, z: 0.1722635, w: 0.74839586}
-  m_LocalPosition: {x: 94.7981, y: 26.740938, z: 55.502773}
+  m_LocalRotation: {x: 0.16441846, y: -0.76051956, z: 0.20984994, w: 0.5920639}
+  m_LocalPosition: {x: 95.125305, y: 26.248837, z: 70.772575}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -9639,6 +9639,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1158400067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1164572582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6462225555944426793, guid: 02b191eae91d53d43ae5ecce0110924a,
+    type: 3}
+  m_PrefabInstance: {fileID: 792013024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1167826260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10669,7 +10675,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.21530637, y: -0.6032182, z: 0.1722635, w: 0.74839586}
+  m_LocalRotation: {x: 0.16441846, y: -0.76051956, z: 0.20984994, w: 0.5920639}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -17366,6 +17372,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: dayLight
+      value: 
+      objectReference: {fileID: 170076734}
+    - target: {fileID: 0}
+      propertyPath: nightLight
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 2298827586175594235, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: m_Name
@@ -17416,14 +17430,11 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1734308155}
-    - target: {fileID: 0}
-      propertyPath: dayLight
+    - target: {fileID: 2298827586175594228, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: canvas
       value: 
-      objectReference: {fileID: 170076734}
-    - target: {fileID: 0}
-      propertyPath: nightLight
-      value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1164572582}
     - target: {fileID: 2298827586175594233, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: m_LocalPosition.x
