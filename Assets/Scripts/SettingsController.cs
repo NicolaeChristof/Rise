@@ -32,7 +32,7 @@ public class SettingsController : RiseBehavior {
 
     // Start is called before the first frame update
     void Start() {
-
+        canvas = GameObject.Find("Canvas");
         InputHelper.Initialize();
 
         if (enforceModes) {

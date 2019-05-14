@@ -308,8 +308,11 @@ public class UIController : RiseBehavior {
             GameObject Health = GameObject.Find("Health Bar");
             Health.GetComponent<HealthUI>().UpdateHealth();
         }
-
-        timerUIText.text = "Timer: " + GameModel.displayTime;
+        if(GameModel.timer > 0)
+        {
+            timerUIText.text = "Timer: " + GameModel.displayTime;
+        }
+        
     }
 
     // This ensures that the depth of field returns to its initial
@@ -356,7 +359,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { };
+            List<GameObject> inactive = new List<GameObject> { Tutorial };
             SetActiveInactive(active, inactive);
 
             OpenMenu(1, true);
@@ -367,7 +370,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = false;
 
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
             SetActiveInactive(active, inactive);
 
             _audioSource.clip = audioClips[_audioCursor];
@@ -661,6 +664,7 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { };
         SetActiveInactive(active, inactive);
         GameModel.timer = 300.0f;
+        GameModel.displayTime = "0:0";
         OpenMenu(5, true);
     }
 
