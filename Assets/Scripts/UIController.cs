@@ -126,9 +126,11 @@ public class UIController : RiseBehavior {
     public GameObject AcornTutorial;
     public GameObject MistletoeTutorial;
     public GameObject BranchTutorial;
+    public GameObject TeleportTutorial;
     private bool displayedAcorn = false;
     private bool displayedMistletoe = false;
     private bool displayedBranch = false;
+    private bool displayedTeleport = false;
     private IEnumerator coroutine;
     //-----------------------
 
@@ -387,6 +389,12 @@ public class UIController : RiseBehavior {
                 BranchTutorial.SetActive(false);
             }
 
+            if(TeleportTutorial.activeSelf)
+            {
+                displayedTeleport = true;
+                TeleportTutorial.SetActive(false);
+            }
+
             
             SetActiveInactive(active, inactive);
 
@@ -410,7 +418,14 @@ public class UIController : RiseBehavior {
             {
                 displayedMistletoe = false;
                 MistletoeTutorial.SetActive(true);
-                coroutine = SetInactive(4.0f, MistletoeTutorial);
+                coroutine = DisplayMistletoe(0.0f);
+                StartCoroutine(coroutine);
+            }
+            else if (displayedTeleport)
+            {
+                displayedBranch = false;
+                TeleportTutorial.SetActive(true);
+                coroutine = SetInactive(4.0f, TeleportTutorial);
                 StartCoroutine(coroutine);
             }
 
@@ -494,19 +509,28 @@ public class UIController : RiseBehavior {
     }
     private IEnumerator DisplayMistletoe(float delay)
     {
-        while(!GameModel.paused)
-        {
             yield return new WaitForSeconds(delay);
             if(!GameModel.paused)
             {
                 MistletoeTutorial.SetActive(true);
                 coroutine = SetInactive(4.0f, MistletoeTutorial);
                 StartCoroutine(coroutine);
+                coroutine = DisplayTeleport(4.0f);
+                StartCoroutine(coroutine);
             }
-            
-        }
-        
     }
+
+    private IEnumerator DisplayTeleport(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (!GameModel.paused)
+        {
+            TeleportTutorial.SetActive(true);
+            coroutine = SetInactive(4.0f, TeleportTutorial);
+            StartCoroutine(coroutine);
+        }
+    }
+
     public void GameModeEvent(bool isTrue)
     {
         if (GameModel.singlePlayer)

@@ -289,6 +289,7 @@ public class TreeController : RiseBehavior {
         while (true)
         {
             yield return new WaitForSeconds(wait);
+            triggered = false;
         }
     }
 }
