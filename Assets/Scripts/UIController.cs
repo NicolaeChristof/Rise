@@ -118,8 +118,17 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
+    //----Sound Settings-----
+    public AudioClip[] audioClips;
+
+    private AudioSource _audioSource;
+    private static int _audioCursor = 0;
+    private AudioClip _currentAudioClip;
+    //----------------------
+
     private bool isSinglePlayer;
     private bool start = false;
+
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
@@ -175,7 +184,12 @@ public class UIController : RiseBehavior {
             misletoeText = misletoeUI.GetComponent<Text>();
             misletoeText.text = "Mistletoe: " + checkpoints[0].GetComponent<CheckpointBehavior>().MistletoeCount() + "/" + checkpoints[0].GetComponent<CheckpointBehavior>().mistletoeNeeded;
         }
-        
+
+        _audioSource = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<AudioSource>();
+        _currentAudioClip = _audioSource.clip;
+        _audioSource.clip = audioClips[_audioCursor];
+        _audioSource.Play(0);
+
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
@@ -186,6 +200,7 @@ public class UIController : RiseBehavior {
         }
 
         GameModel.squirrelHealth = 10;
+
         //-----Options UI----
         _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         _qualityCursor = QualitySettings.GetQualityLevel();
@@ -198,7 +213,7 @@ public class UIController : RiseBehavior {
             false);
 
         ChangeController(_controllerCursor);
-        
+        //-------------------
     }
 
     public override void UpdateAlways() {
@@ -313,6 +328,8 @@ public class UIController : RiseBehavior {
     public void PauseEvent(bool isTrue) {
         // Pause the game
         if (!GameModel.paused) {
+            _audioSource.clip = audioClips[1];
+            _audioSource.Play(0);
 
             GameModel.paused = true;
 
@@ -331,12 +348,17 @@ public class UIController : RiseBehavior {
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
 
+            _audioSource.clip = audioClips[_audioCursor];
+            _audioSource.Play(0);
+
             OpenMenu(1, false);
 
         }
     }
 
     public void MenuEvent(bool isTrue) {
+        _audioSource.clip = audioClips[0];
+        _audioSource.Play(0);
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
 
@@ -366,6 +388,8 @@ public class UIController : RiseBehavior {
             settingsController.SetCameras();
         }
 
+        _audioSource.clip = _currentAudioClip;
+        _audioSource.Play(0);
         List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
         SetActiveInactive(active, inactive);
@@ -404,6 +428,8 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Spring Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 2;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Spring Template");
     }
 
@@ -411,6 +437,8 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Summer Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 3;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Summer Template");
     }
 
@@ -418,6 +446,8 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Fall Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 4;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Fall Template");
     }
 
@@ -425,6 +455,8 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Winter Activated");
         GameModel.startAtMenu = false;
+        _audioCursor = 5;
+        _currentAudioClip = audioClips[_audioCursor];
         SceneManager.LoadScene("Winter Template");
     }
 

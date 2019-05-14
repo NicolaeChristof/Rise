@@ -4350,7 +4350,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4db56be3523be8849897aca1591b50c2, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 82c112a3dc05f084f86b513556c04ae5, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.12
   m_Pitch: 1
@@ -6203,6 +6203,82 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TreeFallLarge
+      value: Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: settingsController
+      value: 
+      objectReference: {fileID: 114770512}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: _trackCam
+      value: 
+      objectReference: {fileID: 593501732}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: heightUI
+      value: 
+      objectReference: {fileID: 1273465460}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: pauseDOF
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: settingsController
+      value: 
+      objectReference: {fileID: 114770512}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: _trackCam
+      value: 
+      objectReference: {fileID: 593501732}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: heightUI
+      value: 
+      objectReference: {fileID: 1273465460}
+    - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
+      propertyPath: pauseDOF
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: fallDistance
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: fallDistance
+      value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 5737707754222980247, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6462225555930554043, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7150636402826049791, guid: eb48d2fd3f4ef1b4aa9d5a763cb4168a,
         type: 3}
