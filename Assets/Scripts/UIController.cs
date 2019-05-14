@@ -401,8 +401,7 @@ public class UIController : RiseBehavior {
                 displayedAcorn = false;
                 StartTutorial();
             }
-
-            if (displayedMistletoe)
+            else if (displayedMistletoe)
             {
                 displayedMistletoe = false;
                 MistletoeTutorial.SetActive(true);
@@ -490,10 +489,18 @@ public class UIController : RiseBehavior {
     }
     private IEnumerator DisplayMistletoe(float delay)
     {
-        yield return new WaitForSeconds(delay);
-        MistletoeTutorial.SetActive(true);
-        coroutine = SetInactive(4.0f, MistletoeTutorial);
-        StartCoroutine(coroutine);
+        while(!GameModel.paused)
+        {
+            yield return new WaitForSeconds(delay);
+            if(!GameModel.paused)
+            {
+                MistletoeTutorial.SetActive(true);
+                coroutine = SetInactive(4.0f, MistletoeTutorial);
+                StartCoroutine(coroutine);
+            }
+            
+        }
+        
     }
     public void GameModeEvent(bool isTrue)
     {
