@@ -102,7 +102,7 @@ public class TreeController : RiseBehavior {
                     transform.Translate(Vector3.up * idealMove, Space.World);
                     moved = true;
                 }
-                else if (GameModel.tutorialEnabled && !triggered)
+                else if (!triggered)
                 {
                     triggered = true;
                     coroutine = Delay(3.0f);
