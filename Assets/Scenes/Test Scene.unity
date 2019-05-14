@@ -9639,6 +9639,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1158400067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1164572582 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6462225555944426793, guid: 02b191eae91d53d43ae5ecce0110924a,
+    type: 3}
+  m_PrefabInstance: {fileID: 792013024}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1167826260
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17424,6 +17430,11 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 1734308155}
+    - target: {fileID: 2298827586175594228, guid: 954646146aff04c9c80c9dc838056fcc,
+        type: 3}
+      propertyPath: canvas
+      value: 
+      objectReference: {fileID: 1164572582}
     - target: {fileID: 2298827586175594233, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: m_LocalPosition.x
