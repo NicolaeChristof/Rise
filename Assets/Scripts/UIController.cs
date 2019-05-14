@@ -225,6 +225,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
             MenuEvent(true);
         } else {
+            StartTutorial();
             OpenMenu(1, false);
         }
 
@@ -706,7 +707,7 @@ public class UIController : RiseBehavior {
         GameModel.endGame = false;
         Scene currentScene = SceneManager.GetActiveScene();
         GameModel.squirrelHealth = 10;
-
+        GameModel.tutorialEnabled = false;
         if (currentScene.name == ("Test Scene")){
             SpringEvent(true);
         }
