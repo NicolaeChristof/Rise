@@ -367,11 +367,19 @@ public class UIController : RiseBehavior {
             if(AcornTutorial.activeSelf)
             {
                 displayedAcorn = true;
+                AcornTutorial.SetActive(false);
             }
             
             if(MistletoeTutorial.activeSelf)
             {
                 displayedMistletoe = true;
+                MistletoeTutorial.SetActive(false);
+            }
+
+            if(BranchTutorial.activeSelf)
+            {
+                displayedBranch = true;
+                BranchTutorial.SetActive(false);
             }
 
             
@@ -387,6 +395,28 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
             SetActiveInactive(active, inactive);
+
+            if (displayedAcorn)
+            {
+                displayedAcorn = false;
+                StartTutorial();
+            }
+
+            if (displayedMistletoe)
+            {
+                displayedMistletoe = false;
+                MistletoeTutorial.SetActive(true);
+                coroutine = SetInactive(4.0f, MistletoeTutorial);
+                StartCoroutine(coroutine);
+            }
+
+            if (displayedBranch)
+            {
+                displayedBranch = false;
+                BranchTutorial.SetActive(true);
+                coroutine = SetInactive(3.0f, BranchTutorial);
+                StartCoroutine(coroutine);
+            }
 
             _audioSource.clip = audioClips[_audioCursor];
             _audioSource.Play(0);
