@@ -708,7 +708,7 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
-
+        GameModel.startAtMenu = true;
         OpenMenu(0, true);
     }
 
@@ -724,10 +724,11 @@ public class UIController : RiseBehavior {
             gameoverText.text = "Ran out of time!";
         }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> {  };
         SetActiveInactive(active, inactive);
         GameModel.timer = 300.0f;
         GameModel.displayTime = "0:0";
+        GameModel.tutorialEnabled = false;
         OpenMenu(5, true);
     }
 
