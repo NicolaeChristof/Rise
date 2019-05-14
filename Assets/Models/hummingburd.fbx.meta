@@ -1,53 +1,71 @@
 fileFormatVersion: 2
-guid: 834727265af2d784daa7b1c4a332eb66
+guid: 72fc949e4c40d2d4c9540e6ccc98b906
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
     100000: Armature
     100002: Bone
-    100004: Bone_002
-    100006: Bone_003
-    100008: Bone_004
-    100010: Bone_005
-    100012: Bone_006
-    100014: Bone_007
-    100016: Bone_008
-    100018: Bone_009
-    100020: Cube
-    100022: //RootNode
-    100024: Plane
-    100026: Plane_001
-    100028: Sphere
+    100004: Bone.002
+    100006: Bone.002_end
+    100008: Bone.003
+    100010: Bone.004
+    100012: Bone.005
+    100014: Bone.005_end
+    100016: Bone.006
+    100018: Bone.007
+    100020: Bone.008
+    100022: Bone.008_end
+    100024: Bone.009
+    100026: Bone.009_end
+    100028: Camera
+    100030: Cube
+    100032: //RootNode
+    100034: Lamp
+    100036: Plane
+    100038: Plane.001
+    100040: Sphere
+    100042: Sun
     400000: Armature
     400002: Bone
-    400004: Bone_002
-    400006: Bone_003
-    400008: Bone_004
-    400010: Bone_005
-    400012: Bone_006
-    400014: Bone_007
-    400016: Bone_008
-    400018: Bone_009
-    400020: Cube
-    400022: //RootNode
-    400024: Plane
-    400026: Plane_001
-    400028: Sphere
-    2100000: Material_004
-    2100002: Material_002
-    2100004: Material_003
-    2100006: Material_001
-    4300000: Plane
-    4300002: Cube
-    4300004: Plane_001
-    4300006: Sphere
-    7400000: Default Take
-    7400002: ArmatureAction
+    400004: Bone.002
+    400006: Bone.002_end
+    400008: Bone.003
+    400010: Bone.004
+    400012: Bone.005
+    400014: Bone.005_end
+    400016: Bone.006
+    400018: Bone.007
+    400020: Bone.008
+    400022: Bone.008_end
+    400024: Bone.009
+    400026: Bone.009_end
+    400028: Camera
+    400030: Cube
+    400032: //RootNode
+    400034: Lamp
+    400036: Plane
+    400038: Plane.001
+    400040: Sphere
+    400042: Sun
+    2000000: Camera
+    2100000: Material.001
+    2100002: Material.004
+    2100004: Material.002
+    2100006: Material.003
+    2300000: Plane
+    2300002: Sphere
+    3300000: Plane
+    3300002: Sphere
+    4300000: Sphere
+    4300002: Plane
+    4300004: Cube
+    4300006: Plane.001
+    7400000: Armature|ArmatureAction
     9500000: //RootNode
+    10800000: Lamp
+    10800002: Sun
     13700000: Cube
-    13700002: Plane
-    13700004: Plane_001
-    13700006: Sphere
+    13700002: Plane.001
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -100,7 +118,7 @@ ModelImporter:
     secondaryUVHardAngle: 88
     secondaryUVPackMargin: 4
     useFileScale: 1
-    previousCalculatedGlobalScale: 1
+    previousCalculatedGlobalScale: 0.01
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
