@@ -12,13 +12,12 @@ GameObject:
   - component: {fileID: 2298827586175594228}
   - component: {fileID: 2298827586175594232}
   - component: {fileID: 2298827586175594231}
-  - component: {fileID: 2298827586175594230}
   m_Layer: 0
   m_Name: Master Controller
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &2298827586175594233
 Transform:
@@ -50,17 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   squirrelCamera: {fileID: 0}
   treeCamera: {fileID: 0}
-  postProcessProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
-  buttonArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  selectorArray:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  pauseMenu: {fileID: 0}
-  pauseDOF: 0
+  enforceModes: 0
 --- !u!114 &2298827586175594232
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,24 +96,6 @@ MonoBehaviour:
   textureCutoff: 0.5
   offset: 0.4
   updateTextures: 0
---- !u!114 &2298827586175594230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2298827586175594235}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0c0d7c8b98fa55f428ed1cffe7ba751d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dayLight: {fileID: 0}
-  nightLight: {fileID: 0}
-  timeOfDay: 30
-  dayNightSpeed: 0.1
-  rotationSpeed: 0
-  cycle: 0
 --- !u!1 &2298827587787684350
 GameObject:
   m_ObjectHideFlags: 0
@@ -215,6 +186,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: WaterProDaytime
       objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_LocalPosition.x
       value: 60.78
@@ -271,14 +246,14 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 12.2
       objectReference: {fileID: 0}
-    - target: {fileID: 11400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
-      propertyPath: waterMode
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 3300000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 11400000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
+      propertyPath: waterMode
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 780611a67e8e941a2b3aa96e5915a793, type: 3}
 --- !u!4 &2298827586871164544 stripped

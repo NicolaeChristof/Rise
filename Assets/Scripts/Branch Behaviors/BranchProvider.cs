@@ -18,6 +18,9 @@ public abstract class BranchProvider : RiseBehavior, IComparable<BranchProvider>
     public float minDistance = 0.5F;
     public int sortOrder;
 
+    // Private Fields
+    private UIBranchManager uiBranchManager;
+
     // Internal Fields
     protected float _currentSap;
 
@@ -33,6 +36,7 @@ public abstract class BranchProvider : RiseBehavior, IComparable<BranchProvider>
 
     public virtual void Start() {
         _currentSap = startingSap;
+        uiBranchManager = FindObjectOfType<UIBranchManager>();
     }
 
     public virtual void Update() { }
@@ -76,6 +80,7 @@ public abstract class BranchProvider : RiseBehavior, IComparable<BranchProvider>
         if (CanPlaceBranch(position, rotation)) {
             GameObject newBranch = Instantiate(GetBranch(), position, rotation);
             OnBranchPlaced(newBranch);
+            uiBranchManager.DropLeaf();
             return newBranch;
         }
         return null;

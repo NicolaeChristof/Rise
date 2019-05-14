@@ -104,7 +104,6 @@ public class HealthUI : MonoBehaviour
                 Hearts[2].GetComponent<Image>().sprite = empty;
                 Hearts[3].GetComponent<Image>().sprite = empty;
                 Hearts[4].GetComponent<Image>().sprite = empty;
-                heartLocation = Hearts[Hearts.Count - 3 - Mathf.FloorToInt(cursor / 2)].transform.position;
                 break;
             case 3:
                 Hearts[0].GetComponent<Image>().sprite = full;
@@ -136,7 +135,6 @@ public class HealthUI : MonoBehaviour
                 break;
             default:
                 break;
-
         }
         
     }

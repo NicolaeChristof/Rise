@@ -116,7 +116,6 @@ public class BeeHiveBehavior : MonoBehaviour {
                 GameModel.squirrelHealth--;
                 GameObject Health = GameObject.Find("Health Bar");
                 Health.GetComponent<HealthUI>().UpdateHealth();
-                
 
             }
 

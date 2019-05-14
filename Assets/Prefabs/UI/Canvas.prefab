@@ -5206,6 +5206,13 @@ MonoBehaviour:
   MistletoeTutorial: {fileID: 3318888860935459892}
   BranchTutorial: {fileID: 2590486944014776992}
   gameoverText: {fileID: 9176153317035920889}
+  audioClips:
+  - {fileID: 8300000, guid: 31ff6aec35b40944ebb41fca8deea158, type: 3}
+  - {fileID: 8300000, guid: 1fe1ad4a598267d4cb645c079b1b0425, type: 3}
+  - {fileID: 8300000, guid: ec650248f8c481945b9b54d3ed7d36fa, type: 3}
+  - {fileID: 8300000, guid: c866e63855ccbd949bcb220bbc3bdfc2, type: 3}
+  - {fileID: 8300000, guid: 82c112a3dc05f084f86b513556c04ae5, type: 3}
+  - {fileID: 8300000, guid: a7236d37cef81da479665919322fe962, type: 3}
 --- !u!1 &6462225557133089120
 GameObject:
   m_ObjectHideFlags: 0
@@ -6539,7 +6546,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalPosition.x
