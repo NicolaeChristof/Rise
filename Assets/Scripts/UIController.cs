@@ -410,8 +410,10 @@ public class UIController : RiseBehavior {
             settingsController.SetCameras();
         }
 
+        _audioSource.clip = _currentAudioClip;
+        _audioSource.Play(0);
 
-        if(GameModel.tutorialEnabled)
+        if (GameModel.tutorialEnabled)
         {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI, AcornTutorial };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
@@ -429,15 +431,6 @@ public class UIController : RiseBehavior {
             SetActiveInactive(active, inactive);
         }
         
-        
-
-        _audioSource.clip = _currentAudioClip;
-        _audioSource.Play(0);
-        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-        SetActiveInactive(active, inactive);
-
-
         OpenMenu(1, false);
         GameModel.enableTimer = true;
     }
