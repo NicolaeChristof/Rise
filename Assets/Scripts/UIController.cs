@@ -140,6 +140,10 @@ public class UIController : RiseBehavior {
     private AudioSource _audioSource;
     private static int _audioCursor = 0;
     private AudioClip _currentAudioClip;
+
+    // This is a temporary variable to ensure that
+    // the sound plays properly when you hit the restart button
+    private static bool _setAudioClipAtStart = true;
     //----------------------
 
 
@@ -207,7 +211,10 @@ public class UIController : RiseBehavior {
 
         _audioSource = GameObject.FindGameObjectWithTag("Squirrel Camera").GetComponent<AudioSource>();
         _currentAudioClip = _audioSource.clip;
-        _audioSource.clip = audioClips[_audioCursor];
+
+        if (_setAudioClipAtStart) {
+            _audioSource.clip = audioClips[_audioCursor];
+        }
         _audioSource.Play(0);
 
         // This ensures that you don't have to go through the main menu
@@ -589,6 +596,7 @@ public class UIController : RiseBehavior {
     }
 
     public void RestartEvent(bool isTrue) {
+        _setAudioClipAtStart = false;
         GameModel.squirrelHealth = 10;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         GameModel.startAtMenu = false;
