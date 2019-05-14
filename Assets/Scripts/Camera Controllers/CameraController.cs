@@ -84,7 +84,7 @@ public class CameraController : RiseBehavior {
         transform.RotateAround(target, Vector3.up, _moveDirection.x * cameraSpeed_h);
 
         _postProcessProfile.TryGetSettings(out depthOfField);
-        depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z);
+        depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z) - 4f;
 
     }
 

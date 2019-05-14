@@ -190,6 +190,10 @@ public class UIController : RiseBehavior {
         _audioSource.clip = audioClips[_audioCursor];
         _audioSource.Play(0);
 
+        foreach(GameObject menuObject in menuObjects) {
+            menuObject.SetActive(false);
+        }
+
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
         if (GameModel.startAtMenu) {
