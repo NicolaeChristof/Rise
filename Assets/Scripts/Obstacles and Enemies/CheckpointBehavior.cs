@@ -41,7 +41,7 @@ public class CheckpointBehavior : MonoBehaviour {
 
         _originalScale = _web.transform.localScale;
 
-        _newScale = new Vector3(_originalScale.x + 0.1f, _originalScale.y, _originalScale.z + 0.1f);
+        _newScale = new Vector3(_originalScale.x + 0.3f, _originalScale.y, _originalScale.z + 0.3f);
 
         _activated = false;
 
