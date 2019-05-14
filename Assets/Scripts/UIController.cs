@@ -101,7 +101,8 @@ public class UIController : RiseBehavior {
     public Text gameModeText;
     public Text controllerText;
     public Text qualityText;
-
+    public Text squirrelPlayer;
+    public Text treePlayer;
     // _qualityStrings is a string that holds the possible labels
     // for each graphic level. _qualityCursor holds the index of the
     // current label
@@ -125,6 +126,9 @@ public class UIController : RiseBehavior {
     public GameObject AcornTutorial;
     public GameObject MistletoeTutorial;
     public GameObject BranchTutorial;
+    private bool displayedAcorn = false;
+    private bool displayedMistletoe = false;
+    private bool displayedBranch = false;
     private IEnumerator coroutine;
     //-----------------------
 
@@ -359,7 +363,18 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { Tutorial };
+            List<GameObject> inactive = new List<GameObject> { };
+            if(AcornTutorial.activeSelf)
+            {
+                displayedAcorn = true;
+            }
+            
+            if(MistletoeTutorial.activeSelf)
+            {
+                displayedMistletoe = true;
+            }
+
+            
             SetActiveInactive(active, inactive);
 
             OpenMenu(1, true);
@@ -418,13 +433,10 @@ public class UIController : RiseBehavior {
 
         if (GameModel.tutorialEnabled)
         {
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI, AcornTutorial };
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
-            coroutine = SetInactive(4.0f, AcornTutorial);
-            StartCoroutine(coroutine);
-            coroutine = DisplayMistletoe (4.0f);
-            StartCoroutine(coroutine);
+            StartTutorial();
             
         }
         else
@@ -438,6 +450,14 @@ public class UIController : RiseBehavior {
         GameModel.enableTimer = true;
     }
 
+    private void StartTutorial()
+    {
+        AcornTutorial.SetActive(true);
+        coroutine = SetInactive(4.0f, AcornTutorial);
+        StartCoroutine(coroutine);
+        coroutine = DisplayMistletoe(4.0f);
+        StartCoroutine(coroutine);
+    }
     private IEnumerator DisplayMistletoe(float delay)
     {
         yield return new WaitForSeconds(delay);
@@ -675,12 +695,35 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
         OpenMenu(6, true);
+        if (!GameModel.isFirstPlayer)
+        {
+            squirrelPlayer.text = "Squirrel : Player Two";
+            treePlayer.text = "Tree : Player One";
+        }
+        else
+        {
+            squirrelPlayer.text = "Squirrel : Player Two";
+            treePlayer.text = "Tree : Player One";
+        }
     }
 
     public void PlayerOneEvent(bool isTrue)
     {
         Debug.Log("Player One");
+        if (GameModel.isFirstPlayer)
+        {
+            squirrelPlayer.text = "Squirrel : Player Two";
+            treePlayer.text = "Tree : Player One";
+            GameModel.isFirstPlayer = false;
+        }
+        else
+        {
+            squirrelPlayer.text = "Squirrel : Player One";
+            treePlayer.text = "Tree : Player Two";
+            GameModel.isFirstPlayer = true;
+        }
         InputHelper.TestSwap();
+
     }
 
     public void ExitCharacterEvent(bool isTrue)
@@ -869,7 +912,11 @@ public class UIController : RiseBehavior {
 
     private IEnumerator SetInactive(float delay, GameObject temp)
     {
-            yield return new WaitForSeconds(delay);
-            temp.SetActive(false);
+        while(true)
+        {
+                yield return new WaitForSeconds(delay);
+                temp.SetActive(false);
+        }
+            
     }
 }
