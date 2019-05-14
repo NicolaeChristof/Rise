@@ -721,7 +721,7 @@ public class UIController : RiseBehavior {
         }
         else
         {
-            gameoverText.text = "Game Over, you ran out of time";
+            gameoverText.text = "Ran out of time!";
         }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { };
