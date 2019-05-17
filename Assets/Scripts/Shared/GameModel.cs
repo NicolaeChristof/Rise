@@ -5,7 +5,7 @@ using UnityEngine;
 public static class GameModel {
 
     // General Settings
-    public static bool inputGamePad = false;
+    public static bool inputGamePad = true;
 
     public static bool singlePlayer = false;
 
@@ -14,6 +14,8 @@ public static class GameModel {
     public static bool paused = false;
 
     public static bool endGame = false;
+
+    public static bool isFirstPlayer = true;
 
     public static bool isSquirrel = true;
 
@@ -26,6 +28,8 @@ public static class GameModel {
     public static bool enableTimer = true;
 
     public static bool menuCameraEnabled = true;
+
+    public static bool tutorialEnabled = true;
 
     public static float timer = 300.0f;
 
