@@ -35,7 +35,7 @@ public class CameraController : RiseBehavior {
         transform.LookAt(target);
 
         _postProcessProfile = GetComponent<PostProcessVolume>().profile;
-        _postProcessProfile.TryGetSettings(out depthOfField);
+        //_postProcessProfile.TryGetSettings(out depthOfField);
 
     }
 

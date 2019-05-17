@@ -4334,7 +4334,6 @@ MonoBehaviour:
   postProcessProfile: {fileID: 11400000, guid: 0ad8259dce454c440914ae4de500a97a, type: 2}
   _trackCam: {fileID: 0}
   treeController: {fileID: 0}
-  pauseDOF: 0.1
   uiBranches: {fileID: 2135184480070798262}
   heightUI: {fileID: 0}
   heightUIText: {fileID: 6462225557133089122}
@@ -4464,7 +4463,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 28.824999, y: 0.000030517578}
+  m_AnchoredPosition: {x: 39, y: 0}
   m_SizeDelta: {x: -5.6100016, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6462225557345203650
@@ -4494,7 +4493,7 @@ RectTransform:
   m_GameObject: {fileID: 6462225557345203650}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.13, y: 0.13, z: 1}
+  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
   m_Children: []
   m_Father: {fileID: 6462225555729219407}
   m_RootOrder: 0
@@ -4525,7 +4524,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2735849, g: 0.17499098, b: 0, a: 0.78431374}
+  m_Color: {r: 0.2735849, g: 0.17499098, b: 0, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
@@ -5441,11 +5440,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2660507254430891218}
     m_Modifications:
-    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
-        type: 3}
-      propertyPath: m_Name
-      value: UIBranchElement
-      objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5504,12 +5498,12 @@ PrefabInstance:
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 475
+      value: 450
       objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 185
+      value: 175
       objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
@@ -5554,17 +5548,22 @@ PrefabInstance:
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: -1
+      value: -1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 1.2
       objectReference: {fileID: 0}
     - target: {fileID: 7503067964349272777, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8348248089690041542, guid: 051fa15c2d9c141e182dd1bd335b53a0,
+        type: 3}
+      propertyPath: m_Name
+      value: UIBranchElement
       objectReference: {fileID: 0}
     - target: {fileID: 5390275804387599201, guid: 051fa15c2d9c141e182dd1bd335b53a0,
         type: 3}
