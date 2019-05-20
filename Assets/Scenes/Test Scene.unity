@@ -5044,10 +5044,11 @@ GameObject:
   - component: {fileID: 534669909}
   - component: {fileID: 534669904}
   - component: {fileID: 534669907}
+  - component: {fileID: 534669911}
   - component: {fileID: 534669908}
   - component: {fileID: 534669910}
+  - component: {fileID: 534669912}
   - component: {fileID: 534669903}
-  - component: {fileID: 534669911}
   m_Layer: 8
   m_Name: Squirrel Camera
   m_TagString: Squirrel Camera
@@ -5345,6 +5346,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &534669912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 534669902}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: f4f1fe60b3fc0fd45a8827b355c67717, type: 2}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1001 &550571253
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10095,9 +10113,10 @@ GameObject:
   - component: {fileID: 1237406274}
   - component: {fileID: 1237406269}
   - component: {fileID: 1237406273}
+  - component: {fileID: 1237406276}
   - component: {fileID: 1237406270}
   - component: {fileID: 1237406271}
-  - component: {fileID: 1237406276}
+  - component: {fileID: 1237406277}
   - component: {fileID: 1237406272}
   m_Layer: 9
   m_Name: Tree Camera
@@ -10300,6 +10319,23 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1237406277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1237406268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bae48398d2e009f40b9e447fef9295f5, type: 2}
+  isGlobal: 0
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!4 &1237506560 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7942988497882146801, guid: d7ebf3555f85d8f4fa27523293929c5b,
