@@ -35,7 +35,6 @@ public class CameraController : RiseBehavior {
         transform.LookAt(target);
 
         _postProcessProfile = GetComponent<PostProcessVolume>().profile;
-        //_postProcessProfile.TryGetSettings(out depthOfField);
 
     }
 
@@ -83,8 +82,10 @@ public class CameraController : RiseBehavior {
         // rotate the camera around the center of the target
         transform.RotateAround(target, Vector3.up, _moveDirection.x * cameraSpeed_h);
 
-        _postProcessProfile.TryGetSettings(out depthOfField);
-        depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z) - 4f;
+        if (GameModel.changePostProcessing) {
+            _postProcessProfile.TryGetSettings(out depthOfField);
+            depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z) - 4f;
+        }
 
     }
 

@@ -44,4 +44,6 @@ public static class GameModel {
 
     public static float volHighRange = 1.0f;
 
+    public static bool changePostProcessing = false;
+
 }
