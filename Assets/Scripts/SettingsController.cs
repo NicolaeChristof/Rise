@@ -20,9 +20,6 @@ public class SettingsController : RiseBehavior {
     // Private Fields
     private GameObject canvas;
 
-    private DepthOfField depthOfField;
-    private float defaultDOF;
-
     // Start is called before the first frame update
     void Start() {
         canvas = GameObject.Find("Canvas");

@@ -21,6 +21,7 @@ public class CameraController : RiseBehavior {
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
 
+    private PostProcessVolume[] _postProcessVolumeArray;
     private PostProcessProfile _postProcessProfile;
     private DepthOfField depthOfField;
 
@@ -34,8 +35,13 @@ public class CameraController : RiseBehavior {
         // face the camera towards the center of the target
         transform.LookAt(target);
 
-        _postProcessProfile = GetComponent<PostProcessVolume>().profile;
+        _postProcessVolumeArray = GetComponents<PostProcessVolume>();
 
+        foreach(PostProcessVolume currentProfile in _postProcessVolumeArray) {
+            if (currentProfile.sharedProfile.name.Contains("Depth")) {
+                _postProcessProfile = currentProfile.profile;
+            }
+        }
     }
 
     // Update is called once per frame
@@ -84,7 +90,7 @@ public class CameraController : RiseBehavior {
 
         if (GameModel.changePostProcessing) {
             _postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z) - 4f;
+            depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z);
         }
 
     }

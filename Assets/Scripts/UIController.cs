@@ -32,7 +32,7 @@ public class UIController : RiseBehavior {
     private List<GameObject> _optionList;
 
     // The post-processing profile that's currently being used
-    public PostProcessProfile postProcessProfile;
+    // public PostProcessProfile postProcessProfile;
 
     // The tracking camera on the main menu
     public Camera _trackCam;
