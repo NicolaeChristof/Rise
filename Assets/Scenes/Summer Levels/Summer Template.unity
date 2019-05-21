@@ -2568,7 +2568,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 293.2555
+  m_PathPosition: 293.59583
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5035,8 +5035,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.24175672, y: -0.44394207, z: 0.1246988, w: 0.85376775}
-  m_LocalPosition: {x: 89.93802, y: 26.679735, z: 43.27329}
+  m_LocalRotation: {x: 0.22549662, y: -0.55753624, z: 0.15937293, w: 0.78288245}
+  m_LocalPosition: {x: 93.726265, y: 26.779922, z: 51.71862}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10044,7 +10044,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.24175672, y: -0.44394207, z: 0.1246988, w: 0.85376775}
+  m_LocalRotation: {x: 0.22549662, y: -0.55753624, z: 0.15937293, w: 0.78288245}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16314,6 +16314,16 @@ PrefabInstance:
       propertyPath: treeSlider
       value: 
       objectReference: {fileID: 31388210}
+    - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+        type: 3}
+      propertyPath: playerModel
+      value: 
+      objectReference: {fileID: 475141406832027345}
+    - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+        type: 3}
+      propertyPath: playerModelStanding
+      value: 
+      objectReference: {fileID: 475141406832027346}
     - target: {fileID: 475141408096447679, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: treeController
@@ -16321,6 +16331,18 @@ PrefabInstance:
       objectReference: {fileID: 577484134}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd6885b7ff2e94e4cb846c0e367c226d, type: 3}
+--- !u!1 &475141406832027345 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4404947057361795735, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+    type: 3}
+  m_PrefabInstance: {fileID: 475141406832027344}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &475141406832027346 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7273656007222594860, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+    type: 3}
+  m_PrefabInstance: {fileID: 475141406832027344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2298827586874393278
 PrefabInstance:
   m_ObjectHideFlags: 0
