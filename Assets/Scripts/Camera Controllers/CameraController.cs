@@ -25,6 +25,8 @@ public class CameraController : RiseBehavior {
     private PostProcessProfile _postProcessProfile;
     private DepthOfField depthOfField;
 
+    private float dofRatio = .5f;
+
     // Start is called before the first frame update
     void Start() {
 
@@ -90,7 +92,7 @@ public class CameraController : RiseBehavior {
 
         if (GameModel.changePostProcessing) {
             _postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z);
+            depthOfField.focusDistance.value = Mathf.Abs(transform.InverseTransformDirection(transform.position - target).z) * dofRatio;
         }
 
     }
