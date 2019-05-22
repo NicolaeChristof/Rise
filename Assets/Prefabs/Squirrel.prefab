@@ -54,8 +54,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerTarget: {fileID: 0}
-  playerModel: {fileID: 0}
-  playerModelStanding: {fileID: 0}
+  playerModel: {fileID: 1935234892420204763}
+  playerModelStanding: {fileID: 7273656007222594860}
   squirrelCamera: {fileID: 0}
   treeCamera: {fileID: 0}
   jumpSound: {fileID: 8300000, guid: d0b2c6e21acb9644985bf9428856a9a3, type: 3}
@@ -65,12 +65,12 @@ MonoBehaviour:
   idleSound: {fileID: 8300000, guid: 38f7329b90562fd4abb86032aa8dc511, type: 3}
   impactSound: {fileID: 8300000, guid: f419ccd3844c572438059dc842502efb, type: 3}
   treeSlider: {fileID: 0}
-  standingAnimator: {fileID: 0}
+  standingAnimator: {fileID: 7273656007215218344}
   speed: 6
   jumpSpeed: 10
   gravity: 20
   maxPlayerDistance: 15
-  maxJumps: 1
+  maxJumps: 2
   accelerationSpeed: 0.25
   deaccelerationSpeed: 0.3
   useAcceleration: 1

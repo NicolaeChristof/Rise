@@ -86,6 +86,8 @@ public class PlayerController : RiseBehavior {
 
     private bool _playerStunned = false;
 
+    private bool _onGround = true;
+
     private float _walkSpeed = 0.0f;
 
     private float _maxWalkSpeed = 1.0f;
@@ -279,8 +281,8 @@ public class PlayerController : RiseBehavior {
             if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps && !GameModel.endGame) {
 
                 standingAnimator.SetBool("isJumping", true);
-                
-                if(_numJumps == 1)
+
+                if (_numJumps == 1)
                 {
                     standingAnimator.SetBool("isDoubleJumping", true);
                 }
@@ -292,19 +294,21 @@ public class PlayerController : RiseBehavior {
 
                 _moveDirection.y = jumpSpeed;
 
+               
                 transform.DOScale(_newScale, 2.0f)
                     .SetEase(Ease.OutElastic);
 
                 transform.DOScale(_originalScale, 2.0f)
                     .SetEase(Ease.OutElastic);
 
+                
             }
             else if (_controller.isGrounded) {
 
                 _numJumps = 0;
                 standingAnimator.SetBool("isJumping", false);
                 standingAnimator.SetBool("isDoubleJumping", false);
-
+                _onGround = true;
             }
 
         } else {
@@ -320,7 +324,11 @@ public class PlayerController : RiseBehavior {
 
         // Apply gravity
         if (!_controller.isGrounded) {
-
+            if(_onGround)
+            {
+                _onGround = false;
+                _numJumps = 1;
+            }
             _moveDirection.y -= gravity * Time.deltaTime;
 
         }
