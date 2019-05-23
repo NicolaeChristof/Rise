@@ -2765,7 +2765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 27.84333
+  m_PathPosition: 28.043297
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5604,14 +5604,15 @@ GameObject:
   - component: {fileID: 593501732}
   - component: {fileID: 593501735}
   - component: {fileID: 593501734}
+  - component: {fileID: 593501736}
   - component: {fileID: 593501731}
-  m_Layer: 8
+  m_Layer: 10
   m_Name: Track Camera
   m_TagString: Track Camera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &593501730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5709,8 +5710,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.010452926, y: 0.9552377, z: 0.034731403, w: 0.29360777}
-  m_LocalPosition: {x: 47.678883, y: 4.1626587, z: 84.33117}
+  m_LocalRotation: {x: -0.015430027, y: 0.9153744, z: 0.035773803, w: 0.40071416}
+  m_LocalPosition: {x: 43.846714, y: 4.099341, z: 79.721855}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -5748,7 +5749,7 @@ MonoBehaviour:
   volumeTrigger: {fileID: 593501733}
   volumeLayer:
     serializedVersion: 2
-    m_Bits: 256
+    m_Bits: 1024
   stopNaNPropagation: 1
   finalBlitToCameraTarget: 1
   antialiasingMode: 0
@@ -5793,6 +5794,23 @@ MonoBehaviour:
   m_BeforeTransparentBundles: []
   m_BeforeStackBundles: []
   m_AfterStackBundles: []
+--- !u!114 &593501736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 593501729}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: 90a3d975b2610f1438e7fac4933666c3, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1001 &605731007
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10156,7 +10174,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.010452926, y: 0.9552377, z: 0.034731403, w: 0.29360777}
+  m_LocalRotation: {x: -0.015430027, y: 0.9153744, z: 0.035773803, w: 0.40071416}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
