@@ -64,12 +64,6 @@ public class UIController : RiseBehavior {
     // doesn't rapidly select options
     private bool _justSelected = false;
 
-    // Depth of field settings for when a menu is pulled up
-    /*
-    public float pauseDOF;
-    private DepthOfField depthOfField;
-    private float defaultDOF = 2.94f;*/
-
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
 
@@ -330,13 +324,6 @@ public class UIController : RiseBehavior {
             timerUIText.text = "Timer: " + GameModel.displayTime;
         }
         
-    }
-
-    // This ensures that the depth of field returns to its initial
-    // settings once the game is restarted
-    public void OnApplicationQuit() {
-        //postProcessProfile.TryGetSettings(out depthOfField);
-        //depthOfField.focusDistance.value = defaultDOF;
     }
 
     // The function that gets called once you select an option
@@ -852,12 +839,6 @@ public class UIController : RiseBehavior {
             _buttonToSelect = 0;
             Select(_buttonToSelect);
 
-            // Since the game is paused, we're going to make the depth of field
-            // deeper
-
-            /*
-            postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = pauseDOF;*/
 
         // This is true if you want to return to activel playing the game
         } else {
@@ -866,8 +847,7 @@ public class UIController : RiseBehavior {
             // being played
             GameModel.inMenu = false;
             GameModel.paused = false;
-            // Since the game's no longer paused, we'll
-            // make the depth of field shallow
+
             if (GameModel.singlePlayer)
             {
                 GameModel.singlePlayer = true;
@@ -891,9 +871,6 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
-            /*
-            postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = defaultDOF;*/
         }
     }
 
