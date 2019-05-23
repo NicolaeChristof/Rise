@@ -136,6 +136,7 @@ public class UIController : RiseBehavior {
 
     private static int _audioCursor = 0;
     private AudioClip _currentAudioClip;
+    private AudioSource _audioSource;
 
     // This is a temporary variable to ensure that
     // the sound plays properly when you hit the restart button
@@ -356,8 +357,8 @@ public class UIController : RiseBehavior {
     public void PauseEvent(bool isTrue) {
         // Pause the game
         if (!GameModel.paused) {
-            audioSource.clip = audioClips[1];
-            audioSource.Play(0);
+            _audioSource.clip = audioClips[1];
+            _audioSource.Play(0);
 
             GameModel.paused = true;
 
@@ -438,8 +439,8 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
-        audioSource.clip = audioClips[0];
-        audioSource.Play(0);
+        _audioSource.clip = audioClips[0];
+        _audioSource.Play(0);
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
 
