@@ -1,71 +1,111 @@
 fileFormatVersion: 2
-guid: 72fc949e4c40d2d4c9540e6ccc98b906
+guid: 1b944daeb38b86643bea97d9c1b0487c
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
-    100000: Armature
-    100002: Bone
-    100004: Bone.002
-    100006: Bone.002_end
-    100008: Bone.003
-    100010: Bone.004
-    100012: Bone.005
-    100014: Bone.005_end
-    100016: Bone.006
-    100018: Bone.007
-    100020: Bone.008
-    100022: Bone.008_end
-    100024: Bone.009
-    100026: Bone.009_end
-    100028: Camera
-    100030: Cube
-    100032: //RootNode
-    100034: Lamp
-    100036: Plane
-    100038: Plane.001
-    100040: Sphere
-    100042: Sun
-    400000: Armature
-    400002: Bone
-    400004: Bone.002
-    400006: Bone.002_end
-    400008: Bone.003
-    400010: Bone.004
-    400012: Bone.005
-    400014: Bone.005_end
-    400016: Bone.006
-    400018: Bone.007
-    400020: Bone.008
-    400022: Bone.008_end
-    400024: Bone.009
-    400026: Bone.009_end
-    400028: Camera
-    400030: Cube
-    400032: //RootNode
-    400034: Lamp
-    400036: Plane
-    400038: Plane.001
-    400040: Sphere
-    400042: Sun
-    2000000: Camera
-    2100000: Material.001
-    2100002: Material.004
-    2100004: Material.002
-    2100006: Material.003
-    2300000: Plane
-    2300002: Sphere
-    3300000: Plane
-    3300002: Sphere
-    4300000: Sphere
-    4300002: Plane
-    4300004: Cube
-    4300006: Plane.001
-    7400000: Armature|ArmatureAction
+    100000: body
+    100002: elbow_Left
+    100004: elbow_Right
+    100006: eye_white
+    100008: eyes
+    100010: Foor_Left
+    100012: Foor_Right
+    100014: foot_left
+    100016: foot_right
+    100018: hand
+    100020: Hand_Right
+    100022: head
+    100024: head 1
+    100026: Hips
+    100028: Knee_Left
+    100030: Knee_Right
+    100032: LegTop_Left
+    100034: LegTop_Right
+    100036: Middle_Right
+    100038: middle_tip
+    100040: mouth
+    100042: neck
+    100044: nose
+    100046: Pinky_Right
+    100048: pinky_tip
+    100050: Pointer_Right
+    100052: pointer_tip
+    100054: shoulders
+    100056: shouler_Left
+    100058: shouler_Right
+    100060: //RootNode
+    100062: tail
+    100064: tail_0
+    100066: tail_1
+    100068: Thumb_Right
+    100070: thumb_tip
+    100072: Toes_Left
+    100074: Toes_Right
+    100076: ToeTip_Left
+    100078: ToeTip_Right
+    100080: torso
+    400000: body
+    400002: elbow_Left
+    400004: elbow_Right
+    400006: eye_white
+    400008: eyes
+    400010: Foor_Left
+    400012: Foor_Right
+    400014: foot_left
+    400016: foot_right
+    400018: hand
+    400020: Hand_Right
+    400022: head
+    400024: head 1
+    400026: Hips
+    400028: Knee_Left
+    400030: Knee_Right
+    400032: LegTop_Left
+    400034: LegTop_Right
+    400036: Middle_Right
+    400038: middle_tip
+    400040: mouth
+    400042: neck
+    400044: nose
+    400046: Pinky_Right
+    400048: pinky_tip
+    400050: Pointer_Right
+    400052: pointer_tip
+    400054: shoulders
+    400056: shouler_Left
+    400058: shouler_Right
+    400060: //RootNode
+    400062: tail
+    400064: tail_0
+    400066: tail_1
+    400068: Thumb_Right
+    400070: thumb_tip
+    400072: Toes_Left
+    400074: Toes_Right
+    400076: ToeTip_Left
+    400078: ToeTip_Right
+    400080: torso
+    2100000: ALL_TEXTURES
+    4300000: head
+    4300002: eyes
+    4300004: eye_white
+    4300006: mouth
+    4300008: body
+    4300010: hand
+    4300012: tail
+    4300014: foot_left
+    4300016: foot_right
+    7400000: DoubleJump
     9500000: //RootNode
-    10800000: Lamp
-    10800002: Sun
-    13700000: Cube
-    13700002: Plane.001
+    13700000: body
+    13700002: eye_white
+    13700004: eyes
+    13700006: foot_left
+    13700008: foot_right
+    13700010: hand
+    13700012: head
+    13700014: mouth
+    13700016: tail
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -95,17 +135,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Armature|ArmatureAction
-      takeName: Armature|ArmatureAction
+      name: DoubleJump
+      takeName: Take 001
       firstFrame: 0
-      lastFrame: 6
+      lastFrame: 20
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0
