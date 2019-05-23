@@ -134,7 +134,6 @@ public class UIController : RiseBehavior {
     //----Sound Settings-----
     public AudioClip[] audioClips;
 
-    private AudioSource _audioSource;
     private static int _audioCursor = 0;
     private AudioClip _currentAudioClip;
 
@@ -357,8 +356,8 @@ public class UIController : RiseBehavior {
     public void PauseEvent(bool isTrue) {
         // Pause the game
         if (!GameModel.paused) {
-            _audioSource.clip = audioClips[1];
-            _audioSource.Play(0);
+            audioSource.clip = audioClips[1];
+            audioSource.Play(0);
 
             GameModel.paused = true;
 
@@ -439,8 +438,8 @@ public class UIController : RiseBehavior {
     }
 
     public void MenuEvent(bool isTrue) {
-        _audioSource.clip = audioClips[0];
-        _audioSource.Play(0);
+        audioSource.clip = audioClips[0];
+        audioSource.Play(0);
         GameModel.isSquirrel = true;
         OpenMenu(0, true);
 
