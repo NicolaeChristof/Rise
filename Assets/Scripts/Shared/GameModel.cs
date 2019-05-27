@@ -9,7 +9,7 @@ public static class GameModel {
 
     public static bool singlePlayer = false;
 
-    public static bool splitScreen = true;
+    public static bool splitScreen = false;
 
     public static bool paused = false;
 
@@ -43,5 +43,7 @@ public static class GameModel {
     public static float volLowRange = 0.8f;
 
     public static float volHighRange = 1.0f;
+
+    public static bool changePostProcessing = true;
 
 }
