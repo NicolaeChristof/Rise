@@ -12,23 +12,13 @@ public class SettingsController : RiseBehavior {
     public Camera squirrelCamera;
     public Camera treeCamera;
 
-
-    public PostProcessProfile postProcessProfile;
-
-    public Text[] buttonArray = new Text[3];
-    public Image[] selectorArray = new Image[3];
-    public GameObject pauseMenu;
-    public GameObject canvas;
-
     // Public Fields
     public bool enforceModes;
 
     // Private References
 
     // Private Fields
-
-    private DepthOfField depthOfField;
-    private float defaultDOF;
+    private GameObject canvas;
 
     // Start is called before the first frame update
     void Start() {
