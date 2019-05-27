@@ -9,12 +9,14 @@ public class FallingObjectBehavior : MonoBehaviour {
     public AudioClip fallingSound;
 
     public AudioClip thunkSound;
-
+    public Rigidbody rb;
     // Private References
     private AudioSource _source;
 
     // Private Fields
     private Vector3 _newScale;
+    private Vector3 v;
+
 
     // Start is called before the first frame update
     void Start() {
@@ -27,6 +29,22 @@ public class FallingObjectBehavior : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        if(GameModel.paused)
+        {
+            if (rb.velocity != new Vector3(0,0,0))
+            {
+                v = rb.velocity;
+            }
+            rb.velocity = new Vector3(0, 0, 0);
+        }
+        else
+        {
+            if(rb.velocity == new Vector3(0, 0, 0))
+            {
+                rb.velocity = v;
+            }
+        }
+           
 
         if (transform.position.y < 3) {
 
@@ -66,8 +84,8 @@ public class FallingObjectBehavior : MonoBehaviour {
             collision.gameObject.GetComponent<PlayerController>().stunPlayer(0.5f);
 
             GameModel.squirrelHealth--;
-
-            Debug.Log(GameModel.squirrelHealth);
+            GameObject Health = GameObject.Find("Health Bar");
+            Health.GetComponent<HealthUI>().UpdateHealth();
 
         }
 

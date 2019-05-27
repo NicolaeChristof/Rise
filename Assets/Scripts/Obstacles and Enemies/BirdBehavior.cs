@@ -104,8 +104,8 @@ public class BirdBehavior : RiseBehavior {
             _playerController.addExternalForce(_pushDirection);
 
             GameModel.squirrelHealth--;
-
-            Debug.Log(GameModel.squirrelHealth);
+            GameObject Health = GameObject.Find("Health Bar");
+            Health.GetComponent<HealthUI>().UpdateHealth();
 
             invertDirection();
 
