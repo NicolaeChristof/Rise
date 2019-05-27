@@ -31,6 +31,8 @@ public class PlayerController : RiseBehavior {
 
     public Slider treeSlider;
 
+    public Animator standingAnimator;
+
     // Public Fields
     [Range(0.0f, 10.0f)]
     public float speed, jumpSpeed;
@@ -83,6 +85,8 @@ public class PlayerController : RiseBehavior {
     private Vector3 _newScale;
 
     private bool _playerStunned = false;
+
+    private bool _onGround = true;
 
     private float _walkSpeed = 0.0f;
 
@@ -273,9 +277,15 @@ public class PlayerController : RiseBehavior {
             _moveDirection.x *= speed;
 
             _moveDirection.z *= speed;
-
+            
             if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps && !GameModel.endGame) {
 
+                standingAnimator.SetBool("isJumping", true);
+
+                if (_numJumps == 1)
+                {
+                    standingAnimator.SetBool("isDoubleJumping", true);
+                }
                 _numJumps++;
 
                 _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
@@ -284,18 +294,21 @@ public class PlayerController : RiseBehavior {
 
                 _moveDirection.y = jumpSpeed;
 
+               
                 transform.DOScale(_newScale, 2.0f)
                     .SetEase(Ease.OutElastic);
 
                 transform.DOScale(_originalScale, 2.0f)
                     .SetEase(Ease.OutElastic);
 
+                
             }
-
-            if (_controller.isGrounded) {
+            else if (_controller.isGrounded) {
 
                 _numJumps = 0;
-
+                standingAnimator.SetBool("isJumping", false);
+                standingAnimator.SetBool("isDoubleJumping", false);
+                _onGround = true;
             }
 
         } else {
@@ -311,7 +324,11 @@ public class PlayerController : RiseBehavior {
 
         // Apply gravity
         if (!_controller.isGrounded) {
-
+            if(_onGround)
+            {
+                _onGround = false;
+                _numJumps = 1;
+            }
             _moveDirection.y -= gravity * Time.deltaTime;
 
         }
