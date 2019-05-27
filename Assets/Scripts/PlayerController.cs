@@ -11,13 +11,27 @@ public class PlayerController : RiseBehavior {
 
     public GameObject playerModel;
 
+    public GameObject playerModelStanding;
+
     public Camera squirrelCamera;
 
     public Camera treeCamera;
 
     public AudioClip jumpSound;
 
+    public AudioClip doubleJumpSound;
+
+    public AudioClip groundWalk;
+
+    public AudioClip branchWalk;
+
+    public AudioClip idleSound;
+
+    public AudioClip impactSound;
+
     public Slider treeSlider;
+
+    public Animator standingAnimator;
 
     // Public Fields
     [Range(0.0f, 10.0f)]
@@ -42,15 +56,12 @@ public class PlayerController : RiseBehavior {
 
     public bool useDeacceleration;
 
-    // The height of a real-life squirrel
-    //public float realSquirrelHeight;
-
-    //public Text heightText;
-
     // Private References
     private CharacterController _controller;
 
     private AudioSource _source;
+
+    private CapsuleCollider[] _hitBoxes;
 
     // Private Fields
     private Vector3 _moveDirection = Vector3.zero;
@@ -67,16 +78,6 @@ public class PlayerController : RiseBehavior {
 
     private bool _walkSoundPlaying = false;
 
-    //private float _realToVirtualRatio;
-
-    //public float _heightOffset = -20f;
-
-    //private float _currentHeight;
-
-    //private float _currentHeightActual;
-
-    //private float _treeHeight;
-
     private float _numJumps = 0;
 
     private Vector3 _originalScale;
@@ -84,6 +85,8 @@ public class PlayerController : RiseBehavior {
     private Vector3 _newScale;
 
     private bool _playerStunned = false;
+
+    private bool _onGround = true;
 
     private float _walkSpeed = 0.0f;
 
@@ -98,14 +101,14 @@ public class PlayerController : RiseBehavior {
 
         _source = GetComponent<AudioSource>();
 
-        /*
-        _realToVirtualRatio = realSquirrelHeight / _controller.height;
-
-        _treeHeight = playerTarget.transform.localScale.y + playerTarget.transform.position.y - _heightOffset;*/
+        _hitBoxes = GetComponents<CapsuleCollider>();
 
         _originalScale = transform.localScale;
 
         _newScale = new Vector3(_originalScale.x, _originalScale.y + 0.1f, _originalScale.z);
+
+        // Face player model forwards
+        playerModelStanding.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
 
     }
 
@@ -206,7 +209,17 @@ public class PlayerController : RiseBehavior {
 
                 _walkSoundPlaying = true;
 
-                // _source.Play();
+                if (transform.position.y < 3.0f) {
+
+                    _source.clip = groundWalk;
+
+                } else {
+
+                    _source.clip = branchWalk;
+
+                }
+
+                _source.Play();
 
             }
 
@@ -221,18 +234,39 @@ public class PlayerController : RiseBehavior {
             // Orient player model
             if (_moveDirection.x < 0) {
 
+                playerModelStanding.SetActive(false);
+
+                playerModel.SetActive(true);
+
+                _hitBoxes[0].enabled = true;
+
+                _hitBoxes[1].enabled = false;
+
                 // Face player model to the left
                 playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y - 90.0f, 0.0f);
 
             } else if (_moveDirection.x > 0) {
+
+                playerModelStanding.SetActive(false);
+
+                playerModel.SetActive(true);
+
+                _hitBoxes[0].enabled = true;
+
+                _hitBoxes[1].enabled = false;
 
                 // Face player model to the right
                 playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 90.0f, 0.0f);
 
             } else {
 
-                // Face player model outwards towards camera
-                playerModel.transform.localEulerAngles = new Vector3(0.0f, transform.rotation.y + 180.0f, 0.0f);
+                playerModel.SetActive(false);
+
+                playerModelStanding.SetActive(true);
+
+                _hitBoxes[0].enabled = false;
+
+                _hitBoxes[1].enabled = true;
 
                 _source.Stop();
 
@@ -243,9 +277,15 @@ public class PlayerController : RiseBehavior {
             _moveDirection.x *= speed;
 
             _moveDirection.z *= speed;
-
+            
             if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps && !GameModel.endGame) {
 
+                standingAnimator.SetBool("isJumping", true);
+
+                if (_numJumps == 1)
+                {
+                    standingAnimator.SetBool("isDoubleJumping", true);
+                }
                 _numJumps++;
 
                 _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
@@ -254,18 +294,21 @@ public class PlayerController : RiseBehavior {
 
                 _moveDirection.y = jumpSpeed;
 
+               
                 transform.DOScale(_newScale, 2.0f)
                     .SetEase(Ease.OutElastic);
 
                 transform.DOScale(_originalScale, 2.0f)
                     .SetEase(Ease.OutElastic);
 
+                
             }
-
-            if (_controller.isGrounded) {
+            else if (_controller.isGrounded) {
 
                 _numJumps = 0;
-
+                standingAnimator.SetBool("isJumping", false);
+                standingAnimator.SetBool("isDoubleJumping", false);
+                _onGround = true;
             }
 
         } else {
@@ -281,7 +324,11 @@ public class PlayerController : RiseBehavior {
 
         // Apply gravity
         if (!_controller.isGrounded) {
-
+            if(_onGround)
+            {
+                _onGround = false;
+                _numJumps = 1;
+            }
             _moveDirection.y -= gravity * Time.deltaTime;
 
         }
@@ -351,6 +398,10 @@ public class PlayerController : RiseBehavior {
         _playerStunned = true;
 
         _numJumps = maxJumps;
+
+        _volume = Random.Range(GameModel.volLowRange, GameModel.volHighRange);
+
+        _source.PlayOneShot(impactSound, _volume);
 
         yield return new WaitForSeconds(stunTime);
 

@@ -12,32 +12,17 @@ public class SettingsController : RiseBehavior {
     public Camera squirrelCamera;
     public Camera treeCamera;
 
-    public PostProcessProfile postProcessProfile;
-
-    public Text[] buttonArray = new Text[3];
-    public Image[] selectorArray = new Image[3];
-    public GameObject pauseMenu;
-
     // Public Fields
-    public float pauseDOF;
     public bool enforceModes;
 
     // Private References
 
     // Private Fields
-    private int _buttonSelected = 0;
-    private bool _justSelected;
-
-    private delegate void _selectAction();
-    private _selectAction[] _selectActions;
-    private _selectAction _currentSelectAction;
-
-    private DepthOfField depthOfField;
-    private float defaultDOF;
+    private GameObject canvas;
 
     // Start is called before the first frame update
     void Start() {
-
+        canvas = GameObject.Find("Canvas");
         InputHelper.Initialize();
 
         if (enforceModes) {
@@ -87,18 +72,27 @@ public class SettingsController : RiseBehavior {
 
                 GameModel.timer -= Time.deltaTime;
 
-                GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
-                //Debug.Log(GameModel.displayTime);
+                
+                if(Mathf.Floor(GameModel.timer % 60) < 10)
+                {
+                    GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":0" +  Mathf.Floor((GameModel.timer % 60)).ToString("F0"); 
+                }
+                else
+                {
+                    GameModel.displayTime = Mathf.Floor((GameModel.timer / 60)).ToString("F0") + ":" + Mathf.Floor((GameModel.timer % 60)).ToString("F0");
+                }
+                
                 
 
             } else {
 
-                Debug.Log("GAME OVER! You Ran Out Of Time!!");
+                Debug.Log("You Ran Out Of Time!!");
 
                 GameModel.displayTime = "0:0";
 
                 GameModel.paused = true;
-
+                UIController temp = canvas.GetComponent<UIController>();
+                temp.GameOverEvent(false);
             }
 
             // Debug.Log(GameModel.displayTime);

@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class BranchBehaviorBouncy : BranchBehavior {
 
-    private Vector3 _bounceHeight = new Vector3(0.0f, 10.0f, 0.0f);
+    // Public References
+
+    // Public Fields
+    [Range(0.0f, 20.0f)]
+    public float bounceHeight;
+
+    // Private References
+
+    // Private Fields
 
     public override void OnTriggerEnter (Collider collider) {
 
@@ -12,7 +20,7 @@ public class BranchBehaviorBouncy : BranchBehavior {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            collider.gameObject.GetComponent<PlayerController>().addExternalForce(_bounceHeight);
+            collider.gameObject.GetComponent<PlayerController>().addExternalForce(new Vector3(0.0f, bounceHeight, 0.0f));
 
         }
     }

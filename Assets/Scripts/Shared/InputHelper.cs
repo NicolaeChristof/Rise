@@ -119,6 +119,27 @@ namespace RiseExtensions {
             }
         }
 
+        public static void TestSwap()
+        {
+            if(PlayerOne.mode == InputMode.SQUIRREL)
+            {
+
+
+                // TODO: Set mode on setup screen, not statically
+                PlayerOne.mode = InputMode.TREE;
+                PlayerTwo.mode = InputMode.SQUIRREL;
+                Debug.Log("Swapped");
+            }
+            else
+            {
+
+                // TODO: Set mode on setup screen, not statically
+                PlayerOne.mode = InputMode.SQUIRREL;
+                PlayerTwo.mode = InputMode.TREE;
+            }
+           
+        }
+
         public static void LateCheck() {
             foreach (SquirrelInput input in (SquirrelInput[])Enum.GetValues(typeof(SquirrelInput))) {
                 PREVIOUS_SQUIRREL_INPUT[input] = GetAxisRaw(input);
@@ -201,6 +222,7 @@ namespace RiseExtensions {
         public static bool GetAny(TreeInput input) {
             return CheckEpsilon(GetAxis(input)) || GetButton(input);
         }
+
 
         /// <summary>
         /// Returns the raw axis actuation value for the passed Squirrel input. Use like Input.GetAxisRaw.

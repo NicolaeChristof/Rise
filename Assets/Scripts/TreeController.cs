@@ -3,6 +3,7 @@ using UnityEngine;
 using DG.Tweening;
 using RiseExtensions;
 using System;
+using System.Collections;
 
 public class TreeController : RiseBehavior {
 
@@ -24,7 +25,10 @@ public class TreeController : RiseBehavior {
 
     // Local References
     private GameObject _reticleInstance;
-
+    private GameObject canvas;
+    private UIController ui;
+    private bool triggered = false;
+    private IEnumerator coroutine;
     // Local Fields
     private int _selectedBranch;
     private List<BranchProvider> branches;
@@ -54,7 +58,8 @@ public class TreeController : RiseBehavior {
 
     void Start() {
         _reticleInstance = Instantiate(reticle, transform.position, Quaternion.identity);
-
+        canvas = GameObject.Find("Canvas");
+        ui = canvas.GetComponent<UIController>();
         UpdateReticle();
         UpdateComponents();
         Select(0);
@@ -97,6 +102,14 @@ public class TreeController : RiseBehavior {
                     transform.Translate(Vector3.up * idealMove, Space.World);
                     moved = true;
                 }
+                else if (!triggered)
+                {
+                    triggered = true;
+                    coroutine = Delay(3.0f);
+                    StartCoroutine(coroutine);
+                    ui.TeleportText();
+                    
+                }
             }
         }
 
@@ -129,7 +142,7 @@ public class TreeController : RiseBehavior {
         // Handle Teleport
         if (InputHelper.GetAnyDown(TreeInput.TELEPORT)) {
 
-            Debug.Log("TELEPORT");
+            // Debug.Log("TELEPORT");
 
             transform.position = squirrel.transform.position;
 
@@ -152,6 +165,12 @@ public class TreeController : RiseBehavior {
         foreach (BranchProvider provider in branches) {
             provider.UpdateSap(type, quantity);
             sapUpdated?.Invoke(quantity, (int)type);
+        }
+        if(GameModel.squirrelHealth < 10)
+        {
+            GameModel.squirrelHealth++;
+            GameObject Health = GameObject.Find("Health Bar");
+            Health.GetComponent<HealthUI>().UpdateHealth();
         }
         UpdateUI();
     }
@@ -263,5 +282,14 @@ public class TreeController : RiseBehavior {
 
     private void UpdateUI() {
         uiUpdateEvent?.Invoke(GetSelectedBranch());
+    }
+
+    private IEnumerator Delay(float wait)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(wait);
+            triggered = false;
+        }
     }
 }
