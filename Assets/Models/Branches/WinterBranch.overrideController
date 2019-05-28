@@ -6,6 +6,8 @@ AnimatorOverrideController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Branch
-  m_Controller: {fileID: 0}
-  m_Clips: []
+  m_Name: WinterBranch
+  m_Controller: {fileID: 9100000, guid: d41c6604c4c60954baa6634eb5646741, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ca59a88e4967dd54ebcecee489e5f172, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: b099159c0a25d42428103b9b5c55909c, type: 3}
