@@ -32,7 +32,7 @@ public class UIController : RiseBehavior {
     private List<GameObject> _optionList;
 
     // The post-processing profile that's currently being used
-    public PostProcessProfile postProcessProfile;
+    // public PostProcessProfile postProcessProfile;
 
     // The tracking camera on the main menu
     public Camera _trackCam;
@@ -63,11 +63,6 @@ public class UIController : RiseBehavior {
     // A boolean that ensures that holding the joystick up/down
     // doesn't rapidly select options
     private bool _justSelected = false;
-
-    // Depth of field settings for when a menu is pulled up
-    public float pauseDOF;
-    private DepthOfField depthOfField;
-    private float defaultDOF = 2.94f;
 
     private float _currentAxis = 0f;
     private bool _pressedSelect = false;
@@ -139,9 +134,9 @@ public class UIController : RiseBehavior {
     //----Sound Settings-----
     public AudioClip[] audioClips;
 
-    private AudioSource _audioSource;
     private static int _audioCursor = 0;
     private AudioClip _currentAudioClip;
+    private AudioSource _audioSource;
 
     // This is a temporary variable to ensure that
     // the sound plays properly when you hit the restart button
@@ -218,6 +213,10 @@ public class UIController : RiseBehavior {
             _audioSource.clip = audioClips[_audioCursor];
         }
         _audioSource.Play(0);
+
+        foreach(GameObject menuObject in menuObjects) {
+            menuObject.SetActive(false);
+        }
 
         // This ensures that you don't have to go through the main menu
         // when you click restart from the pause menu
@@ -325,13 +324,6 @@ public class UIController : RiseBehavior {
             timerUIText.text = "Timer: " + GameModel.displayTime;
         }
         
-    }
-
-    // This ensures that the depth of field returns to its initial
-    // settings once the game is restarted
-    public void OnApplicationQuit() {
-        postProcessProfile.TryGetSettings(out depthOfField);
-        depthOfField.focusDistance.value = defaultDOF;
     }
 
     // The function that gets called once you select an option
@@ -847,10 +839,6 @@ public class UIController : RiseBehavior {
             _buttonToSelect = 0;
             Select(_buttonToSelect);
 
-            // Since the game is paused, we're going to make the depth of field
-            // deeper
-            postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = pauseDOF;
 
         // This is true if you want to return to activel playing the game
         } else {
@@ -859,8 +847,7 @@ public class UIController : RiseBehavior {
             // being played
             GameModel.inMenu = false;
             GameModel.paused = false;
-            // Since the game's no longer paused, we'll
-            // make the depth of field shallow
+
             if (GameModel.singlePlayer)
             {
                 GameModel.singlePlayer = true;
@@ -884,8 +871,6 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
-            postProcessProfile.TryGetSettings(out depthOfField);
-            depthOfField.focusDistance.value = defaultDOF;
         }
     }
 
