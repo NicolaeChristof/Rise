@@ -1,0 +1,13 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: BounceBranch
+  m_Controller: {fileID: 9100000, guid: d41c6604c4c60954baa6634eb5646741, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: ca59a88e4967dd54ebcecee489e5f172, type: 3}
+    m_OverrideClip: {fileID: 7400000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
