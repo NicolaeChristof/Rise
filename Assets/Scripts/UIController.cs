@@ -21,6 +21,8 @@ public class UIController : RiseBehavior {
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
     public GameObject characterSelectMenuObject;
+    public GameObject creditsMenuObject;
+
     private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
 
@@ -150,7 +152,7 @@ public class UIController : RiseBehavior {
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject };
 
         //-----Menu Functionality List-----
 
@@ -158,7 +160,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions = new List<List<_selectAction>>();
 
         // Main Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, ExitGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, CreditsMenuEvent, ExitGameEvent });
 
         // Pause Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
@@ -175,8 +177,11 @@ public class UIController : RiseBehavior {
         // Game Over Menu
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
 
-        //Character SelectMenu
+        // Character Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PlayerOneEvent, ExitCharacterEvent });
+
+        // Credits Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { ExitCreditsMenuEvent });
 
         //-------------------------------
 
@@ -798,6 +803,23 @@ public class UIController : RiseBehavior {
         OpenMenu(0, true);
 
     }
+
+    public void CreditsMenuEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(7, true);
+    }
+
+    public void ExitCreditsMenuEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+    }
+
     //----------MENU FUNCTIONS----------
 
     //----------PRIVATE HELPER FUNCTIONS----------

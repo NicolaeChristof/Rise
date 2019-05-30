@@ -3135,7 +3135,7 @@ GameObject:
   - component: {fileID: 2863165709533659533}
   m_Layer: 5
   m_Name: Text
-  m_TagString: Untagged
+  m_TagString: Graphic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5640,6 +5640,7 @@ MonoBehaviour:
   endGameMenuObject: {fileID: 1331010429358596035}
   gameOverMenuObject: {fileID: 3543302297264031453}
   characterSelectMenuObject: {fileID: 1627964115639353451}
+  creditsMenuObject: {fileID: 8174898739979259475}
   _trackCam: {fileID: 0}
   treeController: {fileID: 0}
   uiBranches: {fileID: 2135184480070798262}
@@ -6835,7 +6836,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2299499664123788672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6872,7 +6873,7 @@ GameObject:
   - component: {fileID: 8321443300927476807}
   m_Layer: 5
   m_Name: Image
-  m_TagString: Untagged
+  m_TagString: Graphic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
