@@ -3156,7 +3156,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -430.6}
+  m_AnchoredPosition: {x: 0, y: -750}
   m_SizeDelta: {x: 797.4, y: 1133.2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7794475614879862133
@@ -5654,6 +5654,9 @@ MonoBehaviour:
   qualityText: {fileID: 88283026818335800}
   squirrelPlayer: {fileID: 545802621164511757}
   treePlayer: {fileID: 5440695980862834165}
+  creditsText: {fileID: 3097775112689735099}
+  creditsEnd: {x: 0, y: 450, z: 0}
+  creditsTime: 100
   timerUI: {fileID: 4276388968899245417}
   Tutorial: {fileID: 749640945392600343}
   AcornTutorial: {fileID: 1646692560058024116}

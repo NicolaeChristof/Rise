@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
+using DG.Tweening;
 using RiseExtensions;
 
 public class UIController : RiseBehavior {
@@ -110,6 +111,13 @@ public class UIController : RiseBehavior {
     // of the quality options
     private int _controllerCursor;
     private string[] _controllerStrings;
+    //---------------------
+
+    //-----Credits UI------
+    public GameObject creditsText;
+
+    public Vector3 creditsEnd;
+    public float creditsTime;
     //---------------------
 
     //------Timer UI---------
@@ -816,6 +824,8 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
+
+        creditsText.transform.DOMove(creditsEnd, creditsTime, false);
 
         OpenMenu(0, true);
     }
