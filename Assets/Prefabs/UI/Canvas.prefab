@@ -3134,7 +3134,7 @@ GameObject:
   - component: {fileID: 7794475614879862133}
   - component: {fileID: 2863165709533659533}
   m_Layer: 5
-  m_Name: Text
+  m_Name: Credit Text
   m_TagString: Graphic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3156,8 +3156,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -750}
-  m_SizeDelta: {x: 797.4, y: 1133.2}
+  m_AnchoredPosition: {x: 0, y: -293.01}
+  m_SizeDelta: {x: 797.4, y: 974.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7794475614879862133
 CanvasRenderer:
@@ -5655,8 +5655,8 @@ MonoBehaviour:
   squirrelPlayer: {fileID: 545802621164511757}
   treePlayer: {fileID: 5440695980862834165}
   creditsText: {fileID: 3097775112689735099}
-  creditsEnd: {x: 0, y: 450, z: 0}
-  creditsTime: 100
+  creditsEnd: {x: 0, y: 650, z: 0}
+  creditsTime: 25
   timerUI: {fileID: 4276388968899245417}
   Tutorial: {fileID: 749640945392600343}
   AcornTutorial: {fileID: 1646692560058024116}
@@ -6839,7 +6839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2299499664123788672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6875,7 +6875,7 @@ GameObject:
   - component: {fileID: 915205355724781979}
   - component: {fileID: 8321443300927476807}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Mask
   m_TagString: Graphic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

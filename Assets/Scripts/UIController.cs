@@ -825,7 +825,7 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
 
-        creditsText.transform.DOMove(creditsEnd, creditsTime, false);
+        creditsText.transform.DOLocalMove(creditsEnd, creditsTime, false);
 
         OpenMenu(0, true);
     }
