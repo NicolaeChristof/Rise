@@ -127,6 +127,9 @@ public class UIController : RiseBehavior {
     private Text timerUIText;
     //-----------------------
 
+    //------Divider UI-------
+    public GameObject divider;
+    //-----------------------
 
     //------Tutorial UI------
     public GameObject Tutorial;
@@ -380,8 +383,9 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { };
-            if(AcornTutorial.activeSelf)
+            List<GameObject> inactive = new List<GameObject> { divider };
+
+            if (AcornTutorial.activeSelf)
             {
                 displayedAcorn = true;
                 AcornTutorial.SetActive(false);
@@ -417,6 +421,9 @@ public class UIController : RiseBehavior {
 
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
+            if (!GameModel.singlePlayer) {
+                active.Add(divider);
+            }
             SetActiveInactive(active, inactive);
 
             if (displayedAcorn)
@@ -462,7 +469,7 @@ public class UIController : RiseBehavior {
         OpenMenu(0, true);
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
     }
 
@@ -471,6 +478,7 @@ public class UIController : RiseBehavior {
         {
             GameModel.singlePlayer = true;
             GameModel.splitScreen = false;
+            divider.SetActive(false);
         }
         else
         {
@@ -479,6 +487,7 @@ public class UIController : RiseBehavior {
             {
                 GameModel.splitScreen = true;
             }
+            divider.SetActive(true);
         }
         
 
@@ -494,6 +503,7 @@ public class UIController : RiseBehavior {
         {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
+
             SetActiveInactive(active, inactive);
             StartTutorial();
             
@@ -559,7 +569,7 @@ public class UIController : RiseBehavior {
     public void LevelSelectEvent(bool isTrue)
     {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(3, true);
@@ -607,7 +617,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Exit Level Select Activated");
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -616,7 +626,7 @@ public class UIController : RiseBehavior {
 
     public void OptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         OpenMenu(2, true);
         if (GameModel.singlePlayer)
@@ -673,7 +683,10 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = true;
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        if (!GameModel.singlePlayer) {
+            active.Add(divider);
+        }
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -684,7 +697,7 @@ public class UIController : RiseBehavior {
 
     public void ExitFromOptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         ChangeController(_controllerCursor);
@@ -700,7 +713,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches , healthUI };
-            List<GameObject> inactive = new List<GameObject> { };
+            List<GameObject> inactive = new List<GameObject> { divider };
             SetActiveInactive(active, inactive);
 
             OpenMenu(4, true);
@@ -740,7 +753,7 @@ public class UIController : RiseBehavior {
         GameModel.endGame = false;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         GameModel.startAtMenu = true;
         OpenMenu(0, true);
@@ -758,7 +771,7 @@ public class UIController : RiseBehavior {
             gameoverText.text = "Ran out of time!";
         }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> {  };
+        List<GameObject> inactive = new List<GameObject> { divider };
         SetActiveInactive(active, inactive);
         GameModel.timer = 300.0f;
         GameModel.displayTime = "0:0";
@@ -770,7 +783,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Character Select");
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         OpenMenu(6, true);
         if (!GameModel.isFirstPlayer)
@@ -809,7 +822,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Exit Character Select");
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -818,7 +831,7 @@ public class UIController : RiseBehavior {
 
     public void CreditsMenuEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(7, true);
@@ -829,7 +842,7 @@ public class UIController : RiseBehavior {
 
     public void ExitCreditsMenuEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
