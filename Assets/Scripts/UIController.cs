@@ -118,14 +118,6 @@ public class UIController : RiseBehavior {
 
     //------Tutorial UI------
     public GameObject Tutorial;
-    public GameObject AcornTutorial;
-    public GameObject MistletoeTutorial;
-    public GameObject BranchTutorial;
-    public GameObject TeleportTutorial;
-    private bool displayedAcorn = false;
-    private bool displayedMistletoe = false;
-    private bool displayedBranch = false;
-    private bool displayedTeleport = false;
     private IEnumerator coroutine;
     //-----------------------
 
@@ -224,7 +216,6 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
             MenuEvent(true);
         } else {
-            StartTutorial();
             OpenMenu(1, false);
         }
 
@@ -402,33 +393,6 @@ public class UIController : RiseBehavior {
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
             SetActiveInactive(active, inactive);
 
-            if (displayedAcorn)
-            {
-                displayedAcorn = false;
-                StartTutorial();
-            }
-            else if (displayedMistletoe)
-            {
-                displayedMistletoe = false;
-                MistletoeTutorial.SetActive(true);
-                coroutine = DisplayMistletoe(0.0f);
-                StartCoroutine(coroutine);
-            }
-            else if (displayedTeleport)
-            {
-                displayedBranch = false;
-                TeleportTutorial.SetActive(true);
-                coroutine = SetInactive(4.0f, TeleportTutorial);
-                StartCoroutine(coroutine);
-            }
-
-            if (displayedBranch)
-            {
-                displayedBranch = false;
-                BranchTutorial.SetActive(true);
-                coroutine = SetInactive(3.0f, BranchTutorial);
-                StartCoroutine(coroutine);
-            }
 
             _audioSource.clip = audioClips[_audioCursor];
             _audioSource.Play(0);
@@ -478,7 +442,6 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
             SetActiveInactive(active, inactive);
-            StartTutorial();
             
         }
         else
@@ -492,37 +455,9 @@ public class UIController : RiseBehavior {
         GameModel.enableTimer = true;
     }
 
-    private void StartTutorial()
-    {
-        AcornTutorial.SetActive(true);
-        coroutine = SetInactive(4.0f, AcornTutorial);
-        StartCoroutine(coroutine);
-        coroutine = DisplayMistletoe(4.0f);
-        StartCoroutine(coroutine);
-    }
-    private IEnumerator DisplayMistletoe(float delay)
-    {
-            yield return new WaitForSeconds(delay);
-            if(!GameModel.paused)
-            {
-                MistletoeTutorial.SetActive(true);
-                coroutine = SetInactive(4.0f, MistletoeTutorial);
-                StartCoroutine(coroutine);
-                coroutine = DisplayTeleport(4.0f);
-                StartCoroutine(coroutine);
-            }
-    }
 
-    private IEnumerator DisplayTeleport(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (!GameModel.paused)
-        {
-            TeleportTutorial.SetActive(true);
-            coroutine = SetInactive(4.0f, TeleportTutorial);
-            StartCoroutine(coroutine);
-        }
-    }
+
+
 
     public void GameModeEvent(bool isTrue)
     {
@@ -955,22 +890,9 @@ public class UIController : RiseBehavior {
         
     }
 
-    public void TeleportText()
-    {
-        BranchTutorial.SetActive(true);
-        coroutine = SetInactive(3.0f, BranchTutorial);
-        StartCoroutine(coroutine);
-    }
+
 
     
 
-    private IEnumerator SetInactive(float delay, GameObject temp)
-    {
-        while(true)
-        {
-                yield return new WaitForSeconds(delay);
-                temp.SetActive(false);
-        }
-            
-    }
+
 }
