@@ -100,16 +100,8 @@ public class TreeController : RiseBehavior {
                 bool squirrelAbove = (transform.position.y < squirrel.transform.position.y) && (idealMove + transform.position.y > transform.position.y);
                 if (verticallyClose || squirrelBelow || squirrelAbove) {
                     transform.Translate(Vector3.up * idealMove, Space.World);
-                    moved = true;
                 }
-                else if (!triggered)
-                {
-                    triggered = true;
-                    coroutine = Delay(3.0f);
-                    StartCoroutine(coroutine);
-                    ui.TeleportText();
-                    
-                }
+
             }
         }
 

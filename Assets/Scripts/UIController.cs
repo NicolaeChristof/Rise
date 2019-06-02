@@ -355,29 +355,7 @@ public class UIController : RiseBehavior {
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { };
-            if(AcornTutorial.activeSelf)
-            {
-                displayedAcorn = true;
-                AcornTutorial.SetActive(false);
-            }
             
-            if(MistletoeTutorial.activeSelf)
-            {
-                displayedMistletoe = true;
-                MistletoeTutorial.SetActive(false);
-            }
-
-            if(BranchTutorial.activeSelf)
-            {
-                displayedBranch = true;
-                BranchTutorial.SetActive(false);
-            }
-
-            if(TeleportTutorial.activeSelf)
-            {
-                displayedTeleport = true;
-                TeleportTutorial.SetActive(false);
-            }
 
             
             SetActiveInactive(active, inactive);
@@ -389,8 +367,8 @@ public class UIController : RiseBehavior {
 
             GameModel.paused = false;
 
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject , heightUIText.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { };
             SetActiveInactive(active, inactive);
 
 
