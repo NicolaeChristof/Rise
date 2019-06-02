@@ -2605,7 +2605,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 293.766
+  m_PathPosition: 310.96277
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3436,12 +3436,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8054649134457348853, guid: c727303b33dbc4705b2b16e6966b2bca,
     type: 3}
   m_PrefabInstance: {fileID: 550571253}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &390776716 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1935234892420204763, guid: dd6885b7ff2e94e4cb846c0e367c226d,
-    type: 3}
-  m_PrefabInstance: {fileID: 475141406832027344}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &399516755 stripped
 Transform:
@@ -5111,8 +5105,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: 0.2129875, y: -0.612616, z: 0.17485349, w: 0.7407863}
-  m_LocalPosition: {x: 94.98121, y: 26.727564, z: 56.313683}
+  m_LocalRotation: {x: -0.014163046, y: 0.09482159, z: 0.0013936016, w: 0.99539256}
+  m_LocalPosition: {x: 53.615803, y: 4.7525096, z: 16.289957}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -10190,7 +10184,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: 0.2129875, y: -0.612616, z: 0.17485349, w: 0.7407863}
+  m_LocalRotation: {x: -0.014163046, y: 0.09482159, z: 0.0013936016, w: 0.99539256}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -13685,6 +13679,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 513125122}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1878498445 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5226713685422736942, guid: dd6885b7ff2e94e4cb846c0e367c226d,
+    type: 3}
+  m_PrefabInstance: {fileID: 475141406832027344}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1878795499 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1460090839, guid: 02b191eae91d53d43ae5ecce0110924a,
@@ -16498,7 +16498,7 @@ PrefabInstance:
         type: 3}
       propertyPath: playerModel
       value: 
-      objectReference: {fileID: 390776716}
+      objectReference: {fileID: 1878498445}
     - target: {fileID: 475141408096447678, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: playerModelStanding

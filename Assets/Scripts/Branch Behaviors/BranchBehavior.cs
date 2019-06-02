@@ -15,6 +15,8 @@ public class BranchBehavior : MonoBehaviour {
     // Public Fields
     public string readableName = "Normal Branch";
 
+    public Animator branchAnimator;
+
     // Private References
     private AudioSource _source;
 
@@ -24,6 +26,8 @@ public class BranchBehavior : MonoBehaviour {
     private Vector3 _originalRotation;
 
     private Vector3 _newRotation;
+
+    private IEnumerator coroutine;
 
     void Start() {
 
@@ -53,14 +57,16 @@ public class BranchBehavior : MonoBehaviour {
             _branchModel.transform.DORotate(_newRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
 
+            branchAnimator.SetBool("Bounce", true);
+            coroutine = SetInactive(.4f);
+            StartCoroutine(coroutine);
+
         }
 
     }
 
     public virtual void OnTriggerStay (Collider collider) {
-
-
-
+        
     }
 
     public virtual void OnTriggerExit (Collider collider) {
@@ -69,8 +75,11 @@ public class BranchBehavior : MonoBehaviour {
 
             _branchModel.transform.DORotate(_originalRotation, 2.0f, RotateMode.Fast)
                 .SetEase(Ease.OutElastic);
-
+            branchAnimator.SetBool("Bounce", true);
+            coroutine = SetInactive(.4f);
+            StartCoroutine(coroutine);
         }
+
 
     }
 
@@ -84,5 +93,15 @@ public class BranchBehavior : MonoBehaviour {
     // TODO: Internalize? I18n?
     public virtual string GetReadableName () {
         return readableName;
+    }
+
+    private IEnumerator SetInactive(float delay)
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(delay);
+            branchAnimator.SetBool("Bounce", false);
+        }
+
     }
 }

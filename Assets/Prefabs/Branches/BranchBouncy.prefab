@@ -51,6 +51,7 @@ MonoBehaviour:
   breakSound: {fileID: 8300000, guid: 1eda24d18b3b5774a8148bcdf238f407, type: 3}
   rustleSound: {fileID: 8300000, guid: 2c6265f966eef2d4ea6b4bef801326a0, type: 3}
   readableName: Bouncy Branch
+  branchAnimator: {fileID: 2863904339053789217}
   bounceHeight: 15
 --- !u!65 &6767032193523892632
 BoxCollider:
@@ -241,6 +242,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 990dce6fb5ca55647bf4680c6a411b55,
+        type: 2}
     - target: {fileID: 2300000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -270,6 +276,12 @@ PrefabInstance:
 --- !u!4 &2863904339063648193 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 84e1afb7944b1934abf6f7c2d3223968,
+    type: 3}
+  m_PrefabInstance: {fileID: 2863904339063256385}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2863904339053789217 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 9500000, guid: 84e1afb7944b1934abf6f7c2d3223968,
     type: 3}
   m_PrefabInstance: {fileID: 2863904339063256385}
   m_PrefabAsset: {fileID: 0}
