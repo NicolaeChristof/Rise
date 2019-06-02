@@ -115,9 +115,11 @@ public class UIController : RiseBehavior {
 
     //-----Credits UI------
     public GameObject creditsText;
-
     public Vector3 creditsEnd;
     public float creditsTime;
+
+    private Vector3 creditsInitialPosition;
+    private Tween currentCreditsTween;
     //---------------------
 
     //------Timer UI---------
@@ -256,6 +258,8 @@ public class UIController : RiseBehavior {
 
         ChangeController(_controllerCursor);
         //-------------------
+
+        creditsInitialPosition = creditsText.transform.position;
     }
 
     public override void UpdateAlways() {
@@ -818,6 +822,9 @@ public class UIController : RiseBehavior {
         SetActiveInactive(active, inactive);
 
         OpenMenu(7, true);
+
+        creditsText.transform.position = creditsInitialPosition;
+        currentCreditsTween = creditsText.transform.DOLocalMove(creditsEnd, creditsTime, false).SetEase(Ease.OutSine).OnComplete(() => currentCreditsTween.Restart());
     }
 
     public void ExitCreditsMenuEvent(bool isTrue) {
@@ -825,9 +832,11 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         SetActiveInactive(active, inactive);
 
-        creditsText.transform.DOLocalMove(creditsEnd, creditsTime, false);
-
         OpenMenu(0, true);
+
+        if (currentCreditsTween != null) {
+            currentCreditsTween.Kill();
+        }
     }
 
     //----------MENU FUNCTIONS----------
