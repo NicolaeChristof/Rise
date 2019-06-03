@@ -781,7 +781,7 @@ public class UIController : RiseBehavior {
         {
             
             yield return new WaitForSeconds(5);
-            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI, divider};
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI, divider, timerUI };
             List<GameObject> inactive = new List<GameObject> { Tutorial };
             SetActiveInactive(active, inactive);
             GameModel.paused = false;
