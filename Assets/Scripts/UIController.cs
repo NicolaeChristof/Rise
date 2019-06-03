@@ -494,6 +494,8 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = false;
         _audioCursor = 2;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Spring Template");
     }
 
@@ -503,6 +505,8 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = false;
         _audioCursor = 3;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Summer Template");
     }
 
@@ -512,6 +516,8 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = false;
         _audioCursor = 4;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Fall Template");
     }
 
@@ -521,6 +527,8 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = false;
         _audioCursor = 5;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Winter Template");
     }
 
