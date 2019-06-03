@@ -96,21 +96,15 @@ public class UIController : RiseBehavior {
 
     // The Text labels that correspond to the control method
     // and graphics level we're using, respectively
-    public Text gameModeText;
-    public Text controllerText;
     public Text qualityText;
     public Text squirrelPlayer;
     public Text treePlayer;
+
     // _qualityStrings is a string that holds the possible labels
     // for each graphic level. _qualityCursor holds the index of the
     // current label
     private int _qualityCursor;
     private string[] _qualityStrings;
-
-    // The functionality for the controller swap is similar to that
-    // of the quality options
-    private int _controllerCursor;
-    private string[] _controllerStrings;
     //---------------------
 
     //-----Credits UI------
@@ -172,7 +166,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
 
         // Options Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { GameModeEvent, ControllerEvent, QualityEvent, ExitFromOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromOptionsEvent });
 
         // Level Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
@@ -245,14 +239,16 @@ public class UIController : RiseBehavior {
         _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         _qualityCursor = QualitySettings.GetQualityLevel();
 
-        _controllerStrings = new string[] { "Keyboard", "Controller", "Keyboard (No Controller Detected)" };
+        //_controllerStrings = new string[] { "Keyboard", "Controller", "Keyboard (No Controller Detected)" };
 
         UpdateQuality();
 
+        /*
         PrepareController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
             false);
+            */
 
-        ChangeController(_controllerCursor);
+        //ChangeController(_controllerCursor);
         //-------------------
 
         creditsInitialPosition = creditsText.transform.position;
@@ -461,7 +457,7 @@ public class UIController : RiseBehavior {
 
 
 
-
+    /*
     public void GameModeEvent(bool isTrue)
     {
         if (GameModel.singlePlayer)
@@ -475,6 +471,7 @@ public class UIController : RiseBehavior {
             GameModel.singlePlayer = true;
         }
     }
+    */
 
     //level select event
     public void LevelSelectEvent(bool isTrue)
@@ -540,14 +537,14 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
         OpenMenu(2, true);
-        if (GameModel.singlePlayer)
+        /*if (GameModel.singlePlayer)
         {
             gameModeText.text = "One Player";
         }
         else
         {
             gameModeText.text = "Two Players";
-        }
+        }*/
     }
 
     public void RestartEvent(bool isTrue) {
@@ -570,6 +567,7 @@ public class UIController : RiseBehavior {
         GameModel.endGame = false;
     }
 
+    /*
     public void ControllerEvent(bool isTrue) {
         if (GameModel.inputGamePad) {
             PrepareController(false, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
@@ -579,6 +577,7 @@ public class UIController : RiseBehavior {
                 false);
         }
     }
+    */
 
     public void QualityEvent(bool isTrue) {
         _qualityCursor = (_qualityCursor + 1) % _qualityStrings.Length;
@@ -611,7 +610,7 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
-        ChangeController(_controllerCursor);
+        //ChangeController(_controllerCursor);
 
         OpenMenu(0, true);
     }
@@ -891,6 +890,8 @@ public class UIController : RiseBehavior {
     // A function that sets the controller cursor accordingly.
     // It doesn't actually change the control method (it just tells
     // ExitFromOptionsEvent what control methods we're going to switch to)
+
+    /*
     private void PrepareController(bool useController, bool controllerConnected) {
         if (useController) {
             if (controllerConnected) {
@@ -904,6 +905,7 @@ public class UIController : RiseBehavior {
 
         controllerText.text = _controllerStrings[_controllerCursor];
     }
+    */
 
     // This function takes the controller cursor and uses it
     // to actually set your input method. It's mainly called
