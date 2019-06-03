@@ -186,13 +186,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Branch_Bouncy_Animation
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 22100000, guid: 990dce6fb5ca55647bf4680c6a411b55,
+        type: 2}
     - target: {fileID: 400000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
       propertyPath: m_LocalPosition.x
       value: -9.84
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.04
+      value: -1.5
       objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
       propertyPath: m_LocalPosition.z
@@ -242,11 +247,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.45
       objectReference: {fileID: 0}
-    - target: {fileID: 9500000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 22100000, guid: 990dce6fb5ca55647bf4680c6a411b55,
-        type: 2}
     - target: {fileID: 2300000, guid: 84e1afb7944b1934abf6f7c2d3223968, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

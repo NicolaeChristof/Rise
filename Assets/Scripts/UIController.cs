@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.Rendering.PostProcessing;
+using DG.Tweening;
 using RiseExtensions;
 
 public class UIController : RiseBehavior {
@@ -21,6 +22,8 @@ public class UIController : RiseBehavior {
     public GameObject endGameMenuObject;
     public GameObject gameOverMenuObject;
     public GameObject characterSelectMenuObject;
+    public GameObject creditsMenuObject;
+
     private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
 
@@ -110,11 +113,23 @@ public class UIController : RiseBehavior {
     private string[] _controllerStrings;
     //---------------------
 
+    //-----Credits UI------
+    public GameObject creditsText;
+    public Vector3 creditsEnd;
+    public float creditsTime;
+
+    private Vector3 creditsInitialPosition;
+    private Tween currentCreditsTween;
+    //---------------------
+
     //------Timer UI---------
     public GameObject timerUI;
     private Text timerUIText;
     //-----------------------
 
+    //------Divider UI-------
+    public GameObject divider;
+    //-----------------------
 
     //------Tutorial UI------
     public GameObject Tutorial;
@@ -142,7 +157,8 @@ public class UIController : RiseBehavior {
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, Tutorial };
+
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject };
 
         //-----Menu Functionality List-----
 
@@ -150,7 +166,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions = new List<List<_selectAction>>();
 
         // Main Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, ExitGameEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, CreditsMenuEvent, ExitGameEvent });
 
         // Pause Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
@@ -167,8 +183,11 @@ public class UIController : RiseBehavior {
         // Game Over Menu
         _listsOfSelectActions.Add(new List<_selectAction> { RestartEvent, ExitEndGameEvent });
 
-        //Character SelectMenu
+        // Character Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { PlayerOneEvent, ExitCharacterEvent });
+
+        // Credits Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { ExitCreditsMenuEvent });
 
         //-------------------------------
 
@@ -235,6 +254,8 @@ public class UIController : RiseBehavior {
 
         ChangeController(_controllerCursor);
         //-------------------
+
+        creditsInitialPosition = creditsText.transform.position;
     }
 
     public override void UpdateAlways() {
@@ -355,7 +376,15 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { };
+
+            List<GameObject> inactive = new List<GameObject> { divider };
+
+            if (AcornTutorial.activeSelf)
+            {
+                displayedAcorn = true;
+                AcornTutorial.SetActive(false);
+            }
+
             
 
             
@@ -370,6 +399,9 @@ public class UIController : RiseBehavior {
 
             List<GameObject> active = new List<GameObject> { heightUISlider.gameObject , heightUIText.gameObject, uiBranches, healthUI };
             List<GameObject> inactive = new List<GameObject> { };
+            if (!GameModel.singlePlayer) {
+                active.Add(divider);
+            }
             SetActiveInactive(active, inactive);
 
 
@@ -388,7 +420,7 @@ public class UIController : RiseBehavior {
         OpenMenu(0, true);
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
     }
 
@@ -397,6 +429,7 @@ public class UIController : RiseBehavior {
         {
             GameModel.singlePlayer = true;
             GameModel.splitScreen = false;
+            divider.SetActive(false);
         }
         else
         {
@@ -405,6 +438,7 @@ public class UIController : RiseBehavior {
             {
                 GameModel.splitScreen = true;
             }
+            divider.SetActive(true);
         }
         
 
@@ -420,6 +454,7 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> {  };
         SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
         LoadingScreenEvent(true);
         GameModel.enableTimer = true;
@@ -447,7 +482,7 @@ public class UIController : RiseBehavior {
     public void LevelSelectEvent(bool isTrue)
     {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(3, true);
@@ -495,7 +530,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Exit Level Select Activated");
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -504,7 +539,7 @@ public class UIController : RiseBehavior {
 
     public void OptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         OpenMenu(2, true);
         if (GameModel.singlePlayer)
@@ -561,7 +596,10 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = true;
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        if (!GameModel.singlePlayer) {
+            active.Add(divider);
+        }
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -572,7 +610,7 @@ public class UIController : RiseBehavior {
 
     public void ExitFromOptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         ChangeController(_controllerCursor);
@@ -588,7 +626,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches , healthUI };
-            List<GameObject> inactive = new List<GameObject> { };
+            List<GameObject> inactive = new List<GameObject> { divider };
             SetActiveInactive(active, inactive);
 
             OpenMenu(4, true);
@@ -628,7 +666,7 @@ public class UIController : RiseBehavior {
         GameModel.endGame = false;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         GameModel.startAtMenu = true;
         OpenMenu(0, true);
@@ -646,7 +684,7 @@ public class UIController : RiseBehavior {
             gameoverText.text = "Game Over, you ran out of time!";
         }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> {  };
+        List<GameObject> inactive = new List<GameObject> { divider };
         SetActiveInactive(active, inactive);
         GameModel.timer = 300.0f;
         GameModel.displayTime = "0:0";
@@ -658,7 +696,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Character Select");
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         OpenMenu(6, true);
         if (!GameModel.isFirstPlayer)
@@ -697,12 +735,36 @@ public class UIController : RiseBehavior {
         Debug.Log("Exit Character Select");
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
 
     }
+
+    public void CreditsMenuEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(7, true);
+
+        creditsText.transform.position = creditsInitialPosition;
+        currentCreditsTween = creditsText.transform.DOLocalMove(creditsEnd, creditsTime, false).SetEase(Ease.Linear).OnComplete(() => currentCreditsTween.Restart());
+    }
+
+    public void ExitCreditsMenuEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        SetActiveInactive(active, inactive);
+
+        OpenMenu(0, true);
+
+        if (currentCreditsTween != null) {
+            currentCreditsTween.Kill();
+        }
+    }
+
 
     public void LoadingScreenEvent(bool isTrue)
     {
@@ -729,6 +791,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = false;
         }
     }
+
     //----------MENU FUNCTIONS----------
 
     //----------PRIVATE HELPER FUNCTIONS----------
