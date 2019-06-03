@@ -142,7 +142,7 @@ public class UIController : RiseBehavior {
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, Tutorial };
 
         //-----Menu Functionality List-----
 
@@ -217,6 +217,7 @@ public class UIController : RiseBehavior {
             MenuEvent(true);
         } else {
             OpenMenu(1, false);
+            LoadingScreenEvent(true);
         }
 
         GameModel.squirrelHealth = 10;
@@ -415,21 +416,12 @@ public class UIController : RiseBehavior {
         _audioSource.clip = _currentAudioClip;
         _audioSource.Play(0);
 
-        if (GameModel.tutorialEnabled)
-        {
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-            SetActiveInactive(active, inactive);
-            
-        }
-        else
-        {
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-            SetActiveInactive(active, inactive);
-        }
-        
+
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> {  };
+        SetActiveInactive(active, inactive);
         OpenMenu(1, false);
+        LoadingScreenEvent(true);
         GameModel.enableTimer = true;
     }
 
@@ -710,6 +702,33 @@ public class UIController : RiseBehavior {
 
         OpenMenu(0, true);
 
+    }
+
+    public void LoadingScreenEvent(bool isTrue)
+    {
+        Debug.Log("Loading Screen");
+
+        List<GameObject> active = new List<GameObject> { Tutorial };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        SetActiveInactive(active, inactive);
+        GameModel.paused = true;
+        StartCoroutine(LoadingDelay(true));
+        
+        
+    }
+
+    private IEnumerator LoadingDelay(bool isNextLevel)
+    {
+        while (true)
+        {
+            
+            yield return new WaitForSeconds(5);
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { Tutorial };
+            SetActiveInactive(active, inactive);
+            GameModel.paused = false;
+
+        }
     }
     //----------MENU FUNCTIONS----------
 
