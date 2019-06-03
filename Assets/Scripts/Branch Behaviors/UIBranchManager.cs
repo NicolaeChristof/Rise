@@ -50,7 +50,7 @@ public class UIBranchManager : RiseBehavior {
 
     public override void UpdateAlways() {
         if(currentProvider == null && treeController.GetSelectedBranch() != null) {
-            Debug.Log("thing");
+            // Debug.Log("thing");
         }
         pauseComponent(branch);
         leaves.ForEach(pauseComponent);

@@ -128,7 +128,7 @@ namespace RiseExtensions {
                 // TODO: Set mode on setup screen, not statically
                 PlayerOne.mode = InputMode.TREE;
                 PlayerTwo.mode = InputMode.SQUIRREL;
-                Debug.Log("Swapped");
+                // Debug.Log("Swapped");
             }
             else
             {
@@ -427,12 +427,12 @@ namespace RiseExtensions {
 		private static void PrintDebug() {
 			foreach (SquirrelInput input in (SquirrelInput[])Enum.GetValues(typeof(SquirrelInput))) {
 				if (GetButton(input) || Math.Abs(GetAxis(input)) > 0.1F) {
-					Debug.Log("SQUIRREL: " + input);
+					// Debug.Log("SQUIRREL: " + input);
 				}
 			}
 			foreach (TreeInput input in (TreeInput[])Enum.GetValues(typeof(SquirrelInput))) {
 				if (GetButton(input) || Math.Abs(GetAxis(input)) > 0.1F) {
-					Debug.Log("TREE: " + input);
+					// Debug.Log("TREE: " + input);
 				}
 			}
 		}
@@ -499,7 +499,7 @@ namespace RiseExtensions {
 			/* Internal Methods */
 			private static string CheckAndGetBinding<T>(Dictionary<T, string[]> dictionary, T key, uint index) {
 				if (!dictionary.ContainsKey(key)) {
-					Debug.LogError(string.Format("No binding provided for {0} control: {1}", key.GetType(), key));
+					// Debug.LogError(string.Format("No binding provided for {0} control: {1}", key.GetType(), key));
 					return "!!!NULL!!!";
 				}
 				return dictionary[key][index];
@@ -516,10 +516,10 @@ namespace RiseExtensions {
 
 			private static void CheckAndPutBinding<T>(Dictionary<T, string[]> dictionary, T key, string[] binding) {
 				if (binding == null) {
-					Debug.LogError("Null binding passed to control profile!");
+					// Debug.LogError("Null binding passed to control profile!");
 				}
 				else if (binding.Length < 2) {
-					Debug.LogError("Invalid binding passed to control profile!");
+					// Debug.LogError("Invalid binding passed to control profile!");
 				}
 				else {
 					dictionary.Remove(key);
