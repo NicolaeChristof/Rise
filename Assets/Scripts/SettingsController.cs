@@ -86,7 +86,7 @@ public class SettingsController : RiseBehavior {
 
             } else {
 
-                Debug.Log("You Ran Out Of Time!!");
+                // Debug.Log("You Ran Out Of Time!!");
 
                 GameModel.displayTime = "0:0";
 

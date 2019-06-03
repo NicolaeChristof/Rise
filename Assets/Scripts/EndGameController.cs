@@ -29,7 +29,7 @@ public class EndGameController : MonoBehaviour {
 
         if (collider.gameObject.tag.Equals("Player")) {
 
-            Debug.Log("YOU WIN!");
+            // Debug.Log("YOU WIN!");
 
             GameModel.enableTimer = false;
 

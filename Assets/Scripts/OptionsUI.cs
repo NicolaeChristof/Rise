@@ -47,7 +47,7 @@ public class OptionsUI : RiseBehavior {
         }
 
         incrementCurrentOption = listOfIncrementFunctions[0];
-        Debug.Log(cursors.Count);
+        // Debug.Log(cursors.Count);
     }
 
     public override void UpdateAlways() {
@@ -84,7 +84,7 @@ public class OptionsUI : RiseBehavior {
                 currentDisplayText = "Keyboard (No Controller)";
             }
         }
-        Debug.Log(currentDisplayText);
+        // Debug.Log(currentDisplayText);
         return (currentDisplayText);
     }
 
@@ -92,7 +92,7 @@ public class OptionsUI : RiseBehavior {
         cursors[currentOptionSelected] = (cursors[currentOptionSelected] + value) % scrollables[currentOptionSelected].Count;
         QualitySettings.SetQualityLevel(cursors[currentOptionSelected]);
         currentDisplayText = scrollables[currentOptionSelected][cursors[currentOptionSelected]];
-        Debug.Log(currentDisplayText);
+        // Debug.Log(currentDisplayText);
         return (currentDisplayText);
     }
 
