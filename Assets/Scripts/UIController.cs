@@ -334,7 +334,7 @@ public class UIController : RiseBehavior {
         }
         if(GameModel.timer > 0)
         {
-            timerUIText.text = "Timer: " + GameModel.displayTime;
+            timerUIText.text = "Timer:\n" + GameModel.displayTime;
         }
         
     }
@@ -377,7 +377,7 @@ public class UIController : RiseBehavior {
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
 
-            List<GameObject> inactive = new List<GameObject> { divider };
+            List<GameObject> inactive = new List<GameObject> { divider, timerUI };
 
 
 
