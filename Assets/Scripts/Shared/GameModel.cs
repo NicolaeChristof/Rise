@@ -31,7 +31,7 @@ public static class GameModel {
 
     public static bool tutorialEnabled = true;
 
-    public static float timer = 300.0f;
+    public static float timer = 5.0f;
 
     public static string displayTime = "mm:ss";
 

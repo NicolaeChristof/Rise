@@ -133,14 +133,6 @@ public class UIController : RiseBehavior {
 
     //------Tutorial UI------
     public GameObject Tutorial;
-    public GameObject AcornTutorial;
-    public GameObject MistletoeTutorial;
-    public GameObject BranchTutorial;
-    public GameObject TeleportTutorial;
-    private bool displayedAcorn = false;
-    private bool displayedMistletoe = false;
-    private bool displayedBranch = false;
-    private bool displayedTeleport = false;
     private IEnumerator coroutine;
     //-----------------------
 
@@ -165,6 +157,7 @@ public class UIController : RiseBehavior {
     private void Start() {
 
         // Setting menuObjects to store all the menus in the game
+
         menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject };
 
         //-----Menu Functionality List-----
@@ -242,8 +235,8 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
             MenuEvent(true);
         } else {
-            StartTutorial();
             OpenMenu(1, false);
+            LoadingScreenEvent(true);
         }
 
         GameModel.squirrelHealth = 10;
@@ -383,31 +376,12 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
+
             List<GameObject> inactive = new List<GameObject> { divider };
 
-            if (AcornTutorial.activeSelf)
-            {
-                displayedAcorn = true;
-                AcornTutorial.SetActive(false);
-            }
+
+
             
-            if(MistletoeTutorial.activeSelf)
-            {
-                displayedMistletoe = true;
-                MistletoeTutorial.SetActive(false);
-            }
-
-            if(BranchTutorial.activeSelf)
-            {
-                displayedBranch = true;
-                BranchTutorial.SetActive(false);
-            }
-
-            if(TeleportTutorial.activeSelf)
-            {
-                displayedTeleport = true;
-                TeleportTutorial.SetActive(false);
-            }
 
             
             SetActiveInactive(active, inactive);
@@ -419,40 +393,13 @@ public class UIController : RiseBehavior {
 
             GameModel.paused = false;
 
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject};
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject , heightUIText.gameObject, uiBranches, healthUI };
+            List<GameObject> inactive = new List<GameObject> { };
             if (!GameModel.singlePlayer) {
                 active.Add(divider);
             }
             SetActiveInactive(active, inactive);
 
-            if (displayedAcorn)
-            {
-                displayedAcorn = false;
-                StartTutorial();
-            }
-            else if (displayedMistletoe)
-            {
-                displayedMistletoe = false;
-                MistletoeTutorial.SetActive(true);
-                coroutine = DisplayMistletoe(0.0f);
-                StartCoroutine(coroutine);
-            }
-            else if (displayedTeleport)
-            {
-                displayedBranch = false;
-                TeleportTutorial.SetActive(true);
-                coroutine = SetInactive(4.0f, TeleportTutorial);
-                StartCoroutine(coroutine);
-            }
-
-            if (displayedBranch)
-            {
-                displayedBranch = false;
-                BranchTutorial.SetActive(true);
-                coroutine = SetInactive(3.0f, BranchTutorial);
-                StartCoroutine(coroutine);
-            }
 
             _audioSource.clip = audioClips[_audioCursor];
             _audioSource.Play(0);
@@ -499,57 +446,19 @@ public class UIController : RiseBehavior {
         _audioSource.clip = _currentAudioClip;
         _audioSource.Play(0);
 
-        if (GameModel.tutorialEnabled)
-        {
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
 
-            SetActiveInactive(active, inactive);
-            StartTutorial();
-            
-        }
-        else
-        {
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, uiBranches, healthUI };
-            List<GameObject> inactive = new List<GameObject> { heightUIText.gameObject };
-            SetActiveInactive(active, inactive);
-        }
-        
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> {  };
+        SetActiveInactive(active, inactive);
+
         OpenMenu(1, false);
+        LoadingScreenEvent(true);
         GameModel.enableTimer = true;
     }
 
-    private void StartTutorial()
-    {
-        AcornTutorial.SetActive(true);
-        coroutine = SetInactive(4.0f, AcornTutorial);
-        StartCoroutine(coroutine);
-        coroutine = DisplayMistletoe(4.0f);
-        StartCoroutine(coroutine);
-    }
-    private IEnumerator DisplayMistletoe(float delay)
-    {
-            yield return new WaitForSeconds(delay);
-            if(!GameModel.paused)
-            {
-                MistletoeTutorial.SetActive(true);
-                coroutine = SetInactive(4.0f, MistletoeTutorial);
-                StartCoroutine(coroutine);
-                coroutine = DisplayTeleport(4.0f);
-                StartCoroutine(coroutine);
-            }
-    }
 
-    private IEnumerator DisplayTeleport(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (!GameModel.paused)
-        {
-            TeleportTutorial.SetActive(true);
-            coroutine = SetInactive(4.0f, TeleportTutorial);
-            StartCoroutine(coroutine);
-        }
-    }
+
+
 
     public void GameModeEvent(bool isTrue)
     {
@@ -768,7 +677,7 @@ public class UIController : RiseBehavior {
         }
         else
         {
-            gameoverText.text = "Ran out of time!";
+            gameoverText.text = "Game Over, you ran out of time!";
         }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
         List<GameObject> inactive = new List<GameObject> { divider };
@@ -849,6 +758,33 @@ public class UIController : RiseBehavior {
 
         if (currentCreditsTween != null) {
             currentCreditsTween.Kill();
+        }
+    }
+
+
+    public void LoadingScreenEvent(bool isTrue)
+    {
+        Debug.Log("Loading Screen");
+
+        List<GameObject> active = new List<GameObject> { Tutorial };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        SetActiveInactive(active, inactive);
+        GameModel.paused = true;
+        StartCoroutine(LoadingDelay(true));
+        
+        
+    }
+
+    private IEnumerator LoadingDelay(bool isNextLevel)
+    {
+        if (true)
+        {
+            
+            yield return new WaitForSeconds(5);
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI, divider};
+            List<GameObject> inactive = new List<GameObject> { Tutorial };
+            SetActiveInactive(active, inactive);
+            GameModel.paused = false;
         }
     }
 
@@ -1009,22 +945,9 @@ public class UIController : RiseBehavior {
         
     }
 
-    public void TeleportText()
-    {
-        BranchTutorial.SetActive(true);
-        coroutine = SetInactive(3.0f, BranchTutorial);
-        StartCoroutine(coroutine);
-    }
+
 
     
 
-    private IEnumerator SetInactive(float delay, GameObject temp)
-    {
-        while(true)
-        {
-                yield return new WaitForSeconds(delay);
-                temp.SetActive(false);
-        }
-            
-    }
+
 }
