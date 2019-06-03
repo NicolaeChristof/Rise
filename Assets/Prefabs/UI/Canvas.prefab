@@ -4415,7 +4415,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4384218391226602843
 RectTransform:
   m_ObjectHideFlags: 0
@@ -5784,7 +5784,7 @@ MonoBehaviour:
   endGameMenuObject: {fileID: 1331010429358596035}
   gameOverMenuObject: {fileID: 3543302297264031453}
   characterSelectMenuObject: {fileID: 1627964115639353451}
-  creditsMenuObject: {fileID: 0}
+  creditsMenuObject: {fileID: 8174898739979259475}
   _trackCam: {fileID: 0}
   treeController: {fileID: 0}
   uiBranches: {fileID: 2135184480070798262}
@@ -5798,11 +5798,11 @@ MonoBehaviour:
   qualityText: {fileID: 88283026818335800}
   squirrelPlayer: {fileID: 545802621164511757}
   treePlayer: {fileID: 5440695980862834165}
-  creditsText: {fileID: 0}
+  creditsText: {fileID: 3097775112689735099}
   creditsEnd: {x: 0, y: 0, z: 0}
   creditsTime: 0
   timerUI: {fileID: 4276388968899245417}
-  divider: {fileID: 0}
+  divider: {fileID: 5516758475904943992}
   Tutorial: {fileID: 4763206022284162030}
   gameoverText: {fileID: 9176153317035920889}
   audioClips:
