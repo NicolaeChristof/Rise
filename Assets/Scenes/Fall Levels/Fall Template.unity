@@ -7048,6 +7048,11 @@ PrefabInstance:
       propertyPath: treeController
       value: 
       objectReference: {fileID: 577484134}
+    - target: {fileID: 4154574534217816633, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: heightUI
+      value: 
+      objectReference: {fileID: 1273465460}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1001 &811031902
@@ -16249,7 +16254,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4763276210772408033}
-  m_LocalRotation: {x: 0.17691001, y: 0.28110415, z: -0.053304933, w: 0.94172287}
+  m_LocalRotation: {x: 0.18287995, y: 0.260399, z: -0.05078481, w: 0.94666165}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -16585,7 +16590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 4763276211343498305}
-  m_PathPosition: 786.3015
+  m_PathPosition: 786.3816
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -16885,8 +16890,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4763276212153710643}
-  m_LocalRotation: {x: 0.17691001, y: 0.28110415, z: -0.053304933, w: 0.94172287}
-  m_LocalPosition: {x: 43.380573, y: 19.684414, z: 33.314075}
+  m_LocalRotation: {x: 0.18287995, y: 0.260399, z: -0.05078481, w: 0.94666165}
+  m_LocalPosition: {x: 44.590733, y: 20.153826, z: 32.39635}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4763276212189469542}

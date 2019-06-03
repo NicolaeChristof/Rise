@@ -2765,7 +2765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 332.46875
+  m_PathPosition: 332.5338
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -5710,8 +5710,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.03246964, y: -0.15501416, z: -0.00497401, w: 0.987366}
-  m_LocalPosition: {x: 73.707184, y: 3.6738176, z: 27.689945}
+  m_LocalRotation: {x: -0.033710063, y: -0.17837352, z: -0.0059898333, w: 0.983367}
+  m_LocalPosition: {x: 75.47343, y: 3.545061, z: 27.91616}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6997,6 +6997,11 @@ PrefabInstance:
       propertyPath: settingsController
       value: 
       objectReference: {fileID: 114770512}
+    - target: {fileID: 4154574534217816633, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: heightUI
+      value: 
+      objectReference: {fileID: 1273465460}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1 &792013025 stripped
@@ -10187,7 +10192,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.03246964, y: -0.15501416, z: -0.00497401, w: 0.987366}
+  m_LocalRotation: {x: -0.033710063, y: -0.17837352, z: -0.0059898333, w: 0.983367}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
