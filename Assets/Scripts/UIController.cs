@@ -166,7 +166,7 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
 
         // Options Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromPauseOptionsEvent });
 
         // Level Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
@@ -367,7 +367,7 @@ public class UIController : RiseBehavior {
     //----------MENU FUNCTIONS----------
     public void PauseEvent(bool isTrue) {
         // Pause the game
-        if (!GameModel.paused) {
+        if (!GameModel.paused || !isTrue) {
             _audioSource.clip = audioClips[1];
             _audioSource.Play(0);
 
@@ -376,11 +376,6 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
 
             List<GameObject> inactive = new List<GameObject> { divider, timerUI };
-
-
-
-            
-
             
             SetActiveInactive(active, inactive);
 
@@ -397,7 +392,6 @@ public class UIController : RiseBehavior {
                 active.Add(divider);
             }
             SetActiveInactive(active, inactive);
-
 
             _audioSource.clip = audioClips[_audioCursor];
             _audioSource.Play(0);
@@ -613,6 +607,10 @@ public class UIController : RiseBehavior {
         //ChangeController(_controllerCursor);
 
         OpenMenu(0, true);
+    }
+
+    public void ExitFromPauseOptionsEvent(bool isTrue) {
+        PauseEvent(false);
     }
 
     public void EndGameEvent(bool isTrue) {
