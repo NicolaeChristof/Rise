@@ -379,11 +379,7 @@ public class UIController : RiseBehavior {
 
             List<GameObject> inactive = new List<GameObject> { divider };
 
-            if (AcornTutorial.activeSelf)
-            {
-                displayedAcorn = true;
-                AcornTutorial.SetActive(false);
-            }
+
 
             
 
