@@ -192,7 +192,7 @@ public class UIController : RiseBehavior {
         //-------------------------------
 
         // Get UI timer text
-        timerUIText = timerUI.GetComponent<Text>();
+        timerUIText = timerUI.GetComponentInChildren<Text>();
         
         // Similar to setting _listsOfSelectActions,
         // this involves configuring which game objects correspond to each thing
@@ -393,7 +393,7 @@ public class UIController : RiseBehavior {
 
             GameModel.paused = false;
 
-            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject , heightUIText.gameObject, uiBranches, healthUI };
+            List<GameObject> active = new List<GameObject> { heightUISlider.gameObject , heightUIText.gameObject, uiBranches, healthUI, timerUI };
             List<GameObject> inactive = new List<GameObject> { };
             if (!GameModel.singlePlayer) {
                 active.Add(divider);
@@ -416,7 +416,7 @@ public class UIController : RiseBehavior {
         OpenMenu(0, true);
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
     }
 
@@ -447,7 +447,7 @@ public class UIController : RiseBehavior {
         _audioSource.Play(0);
 
 
-        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> active = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, timerUI };
         List<GameObject> inactive = new List<GameObject> {  };
         SetActiveInactive(active, inactive);
 
@@ -478,7 +478,7 @@ public class UIController : RiseBehavior {
     public void LevelSelectEvent(bool isTrue)
     {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
         OpenMenu(3, true);
@@ -535,7 +535,7 @@ public class UIController : RiseBehavior {
 
     public void OptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
         OpenMenu(2, true);
         if (GameModel.singlePlayer)
@@ -592,7 +592,7 @@ public class UIController : RiseBehavior {
         GameModel.startAtMenu = true;
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         if (!GameModel.singlePlayer) {
             active.Add(divider);
         }
@@ -606,7 +606,7 @@ public class UIController : RiseBehavior {
 
     public void ExitFromOptionsEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
         ChangeController(_controllerCursor);
@@ -622,7 +622,7 @@ public class UIController : RiseBehavior {
             GameModel.paused = true;
 
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches , healthUI };
-            List<GameObject> inactive = new List<GameObject> { divider };
+            List<GameObject> inactive = new List<GameObject> { divider, timerUI };
             SetActiveInactive(active, inactive);
 
             OpenMenu(4, true);
@@ -662,7 +662,7 @@ public class UIController : RiseBehavior {
         GameModel.endGame = false;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
         GameModel.startAtMenu = true;
         OpenMenu(0, true);
@@ -680,7 +680,7 @@ public class UIController : RiseBehavior {
             gameoverText.text = "Game Over, you ran out of time!";
         }
         List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
-        List<GameObject> inactive = new List<GameObject> { divider };
+        List<GameObject> inactive = new List<GameObject> { divider, timerUI };
         SetActiveInactive(active, inactive);
         GameModel.timer = 300.0f;
         GameModel.displayTime = "0:0";
@@ -692,7 +692,7 @@ public class UIController : RiseBehavior {
     {
         Debug.Log("Character Select");
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
         OpenMenu(6, true);
         if (!GameModel.isFirstPlayer)
@@ -731,7 +731,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Exit Character Select");
 
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -740,7 +740,7 @@ public class UIController : RiseBehavior {
 
     public void CreditsMenuEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
         OpenMenu(7, true);
@@ -751,7 +751,7 @@ public class UIController : RiseBehavior {
 
     public void ExitCreditsMenuEvent(bool isTrue) {
         List<GameObject> active = new List<GameObject> { };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
         OpenMenu(0, true);
@@ -767,7 +767,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Loading Screen");
 
         List<GameObject> active = new List<GameObject> { Tutorial };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
         GameModel.paused = true;
         StartCoroutine(LoadingDelay(true));
