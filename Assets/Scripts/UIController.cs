@@ -781,7 +781,10 @@ public class UIController : RiseBehavior {
         {
             
             yield return new WaitForSeconds(5);
-            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI, divider, timerUI };
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI, timerUI };
+            if (!GameModel.singlePlayer) {
+                active.Add(divider);
+            }
             List<GameObject> inactive = new List<GameObject> { Tutorial };
             SetActiveInactive(active, inactive);
             GameModel.paused = false;
