@@ -322,7 +322,7 @@ public class UIController : RiseBehavior {
         {
             //quick fix for game over, will need to be changed
             
-            Debug.Log("Game Over! You Died!");
+            // Debug.Log("Game Over! You Died!");
             GameOverEvent(true);
             GameModel.paused = true;
             GameModel.squirrelHealth = 10; //Leads to constant gameovers if this isn't set back to default value
@@ -481,43 +481,51 @@ public class UIController : RiseBehavior {
     //level select menu events
     public void SpringEvent(bool isTrue)
     {
-        Debug.Log("Spring Activated");
+        // Debug.Log("Spring Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 2;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Spring Template");
     }
 
     public void SummerEvent(bool isTrue)
     {
-        Debug.Log("Summer Activated");
+        // Debug.Log("Summer Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 3;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Summer Template");
     }
 
     public void FallEvent(bool isTrue)
     {
-        Debug.Log("Fall Activated");
+        // Debug.Log("Fall Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 4;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Fall Template");
     }
 
     public void WinterEvent(bool isTrue)
     {
-        Debug.Log("Winter Activated");
+        // Debug.Log("Winter Activated");
         GameModel.startAtMenu = false;
         _audioCursor = 5;
         _currentAudioClip = audioClips[_audioCursor];
+        GameModel.timer = 300.0f;
+        GameModel.enableTimer = true;
         SceneManager.LoadScene("Winter Template");
     }
 
     public void ExitLevelSelectEvent(bool isTrue)
     {
-        Debug.Log("Exit Level Select Activated");
+        // Debug.Log("Exit Level Select Activated");
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
@@ -630,7 +638,7 @@ public class UIController : RiseBehavior {
     }
 
     public void NextLevelEvent(bool isTrue) {
-        Debug.Log("Next Level");
+        // Debug.Log("Next Level");
         GameModel.paused = false;
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
@@ -657,7 +665,7 @@ public class UIController : RiseBehavior {
     }
 
     public void ExitEndGameEvent(bool isTrue) {
-        Debug.Log("Exit to Main Menu");
+        // Debug.Log("Exit to Main Menu");
         GameModel.endGame = false;
         SceneManager.LoadScene((SceneManager.GetActiveScene().buildIndex));
         List<GameObject> active = new List<GameObject> { };
@@ -669,7 +677,7 @@ public class UIController : RiseBehavior {
 
     public void GameOverEvent(bool isTrue)
     {
-        Debug.Log("Game Over");
+        // Debug.Log("Game Over");
         if(isTrue)
         {
             gameoverText.text = "Game Over, you ran out of health";
@@ -689,7 +697,7 @@ public class UIController : RiseBehavior {
 
     public void CharacterSelectEvent(bool isTrue)
     {
-        Debug.Log("Character Select");
+        // Debug.Log("Character Select");
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
@@ -708,7 +716,7 @@ public class UIController : RiseBehavior {
 
     public void PlayerOneEvent(bool isTrue)
     {
-        Debug.Log("Player One");
+        // Debug.Log("Player One");
         if (GameModel.isFirstPlayer)
         {
             squirrelPlayer.text = "Squirrel : Player Two";
@@ -727,7 +735,7 @@ public class UIController : RiseBehavior {
 
     public void ExitCharacterEvent(bool isTrue)
     {
-        Debug.Log("Exit Character Select");
+        // Debug.Log("Exit Character Select");
 
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
@@ -763,7 +771,7 @@ public class UIController : RiseBehavior {
 
     public void LoadingScreenEvent(bool isTrue)
     {
-        Debug.Log("Loading Screen");
+        // Debug.Log("Loading Screen");
 
         List<GameObject> active = new List<GameObject> { Tutorial };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
@@ -943,7 +951,7 @@ public class UIController : RiseBehavior {
         CheckpointBehavior temp = checkpoints[misletoeIndex].GetComponent<CheckpointBehavior>();
         if (temp.MistletoeCount() >= temp.mistletoeNeeded && misletoeIndex < checkpoints.Length-1)
         {
-            Debug.Log(checkpoints.Length);
+            // Debug.Log(checkpoints.Length);
             misletoeIndex++;
             UpdateMistletoe();
         }

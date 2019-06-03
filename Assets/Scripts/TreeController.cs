@@ -241,7 +241,7 @@ public class TreeController : RiseBehavior {
                 return;
             }
         }
-        Debug.Log("No enabled BranchProviders on TreeController Instance!");
+        // Debug.Log("No enabled BranchProviders on TreeController Instance!");
     }
 
     /// <summary>
