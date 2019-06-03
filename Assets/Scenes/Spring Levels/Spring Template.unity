@@ -2765,7 +2765,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Path: {fileID: 1932524115}
-  m_PathPosition: 332.3036
+  m_PathPosition: 332.46875
   m_PathSpeed: 0.005
   m_PositionUnits: 0
   m_PathOffset: {x: 0, y: 0, z: 0}
@@ -3127,7 +3127,7 @@ PrefabInstance:
     - target: {fileID: 791684158068344547, guid: 6c527457510c84374bc39a0955f5116a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 791684158068344547, guid: 6c527457510c84374bc39a0955f5116a,
         type: 3}
@@ -4785,7 +4785,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 14.481001, y: 0, z: 0}
 --- !u!114 &534669906
 MonoBehaviour:
@@ -5710,8 +5710,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 593501729}
-  m_LocalRotation: {x: -0.028964844, y: -0.091736175, z: -0.0025533547, w: 0.99535877}
-  m_LocalPosition: {x: 69.00618, y: 4.010055, z: 27.504461}
+  m_LocalRotation: {x: -0.03246964, y: -0.15501416, z: -0.00497401, w: 0.987366}
+  m_LocalPosition: {x: 73.707184, y: 3.6738176, z: 27.689945}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 562199924}
@@ -6750,7 +6750,7 @@ PrefabInstance:
     - target: {fileID: 1542881361, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
       propertyPath: TeleportTutorial
       value: 
-      objectReference: {fileID: 1739279114}
+      objectReference: {fileID: 0}
     - target: {fileID: 2645098257388471313, guid: 02b191eae91d53d43ae5ecce0110924a,
         type: 3}
       propertyPath: treeController
@@ -6977,6 +6977,26 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6919337041698068293, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154574534217816633, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: treeController
+      value: 
+      objectReference: {fileID: 577484134}
+    - target: {fileID: 4154574534217816633, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: _trackCam
+      value: 
+      objectReference: {fileID: 593501732}
+    - target: {fileID: 4154574534217816633, guid: 02b191eae91d53d43ae5ecce0110924a,
+        type: 3}
+      propertyPath: settingsController
+      value: 
+      objectReference: {fileID: 114770512}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 02b191eae91d53d43ae5ecce0110924a, type: 3}
 --- !u!1 &792013025 stripped
@@ -8429,18 +8449,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1027736933}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1049964032 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 2053821468, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1074624812
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -8491,7 +8499,7 @@ PrefabInstance:
     - target: {fileID: 7547524578722158623, guid: 28db81526914ec54b97ae8891ff80a07,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7547524578722158623, guid: 28db81526914ec54b97ae8891ff80a07,
         type: 3}
@@ -9641,7 +9649,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 14.481001, y: 0, z: 0}
 --- !u!65 &1237406276
 BoxCollider:
@@ -10179,7 +10187,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1295323379}
-  m_LocalRotation: {x: -0.028964844, y: -0.091736175, z: -0.0025533547, w: 0.99535877}
+  m_LocalRotation: {x: -0.03246964, y: -0.15501416, z: -0.00497401, w: 0.987366}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -13152,12 +13160,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1736246152}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1739279114 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2344321138351133438, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1769952423
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13869,18 +13871,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1873294968}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1878795499 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 1460090839, guid: 02b191eae91d53d43ae5ecce0110924a,
-    type: 3}
-  m_PrefabInstance: {fileID: 792013024}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1895350245
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15714,7 +15704,7 @@ PrefabInstance:
     - target: {fileID: 475141408096447677, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 475141408096447677, guid: dd6885b7ff2e94e4cb846c0e367c226d,
         type: 3}
@@ -15799,7 +15789,7 @@ PrefabInstance:
         type: 3}
       propertyPath: buttonArray.Array.data[2]
       value: 
-      objectReference: {fileID: 1878795499}
+      objectReference: {fileID: 0}
     - target: {fileID: 2298827586175594228, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: selectorArray.Array.data[0]
@@ -15814,7 +15804,7 @@ PrefabInstance:
         type: 3}
       propertyPath: selectorArray.Array.data[2]
       value: 
-      objectReference: {fileID: 1049964032}
+      objectReference: {fileID: 0}
     - target: {fileID: 2298827586175594228, guid: 954646146aff04c9c80c9dc838056fcc,
         type: 3}
       propertyPath: pauseMenu
