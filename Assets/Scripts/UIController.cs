@@ -300,6 +300,7 @@ public class UIController : RiseBehavior {
 
             // This calls whatever _currentSelectAction is pointing to
             if (_pressedSelect) {
+                _audioSource.PlayOneShot(audioClips[6], 12f);
                 _currentSelectAction(true);
             }
         }
@@ -363,6 +364,7 @@ public class UIController : RiseBehavior {
 
         // Set the function that will be called when 
         // the player hits the confirmation button
+        _audioSource.PlayOneShot(audioClips[7], 2f);
         _currentSelectAction = _listsOfSelectActions[currentMenu][_buttonSelected];
     }
 
