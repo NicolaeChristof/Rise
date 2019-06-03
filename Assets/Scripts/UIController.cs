@@ -767,7 +767,7 @@ public class UIController : RiseBehavior {
         Debug.Log("Loading Screen");
 
         List<GameObject> active = new List<GameObject> { Tutorial };
-        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider };
         SetActiveInactive(active, inactive);
         GameModel.paused = true;
         StartCoroutine(LoadingDelay(true));
@@ -781,7 +781,7 @@ public class UIController : RiseBehavior {
         {
             
             yield return new WaitForSeconds(5);
-            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
+            List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI, divider};
             List<GameObject> inactive = new List<GameObject> { Tutorial };
             SetActiveInactive(active, inactive);
             GameModel.paused = false;
