@@ -837,7 +837,7 @@ public class UIController : RiseBehavior {
         OpenMenu(7, true);
 
         creditsText.transform.position = creditsInitialPosition;
-        currentCreditsTween = creditsText.transform.DOLocalMove(creditsEnd, creditsTime, false).SetEase(Ease.OutSine).OnComplete(() => currentCreditsTween.Restart());
+        currentCreditsTween = creditsText.transform.DOLocalMove(creditsEnd, creditsTime, false).SetEase(Ease.Linear).OnComplete(() => currentCreditsTween.Restart());
     }
 
     public void ExitCreditsMenuEvent(bool isTrue) {
