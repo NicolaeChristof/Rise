@@ -32,6 +32,7 @@ public class PlayerController : RiseBehavior {
     public Slider treeSlider;
 
     public Animator standingAnimator;
+    public Animator sittingAnimator;
 
     // Public Fields
     [Range(0.0f, 10.0f)]
@@ -281,10 +282,12 @@ public class PlayerController : RiseBehavior {
             if (InputHelper.GetButtonDown(SquirrelInput.JUMP) && _numJumps < maxJumps && !GameModel.endGame) {
 
                 standingAnimator.SetBool("isJumping", true);
+                sittingAnimator.SetBool("isJumping", true);
 
                 if (_numJumps == 1)
                 {
                     standingAnimator.SetBool("isDoubleJumping", true);
+                    sittingAnimator.SetBool("isDoubleJumping", true);
                 }
                 _numJumps++;
 
@@ -308,6 +311,8 @@ public class PlayerController : RiseBehavior {
                 _numJumps = 0;
                 standingAnimator.SetBool("isJumping", false);
                 standingAnimator.SetBool("isDoubleJumping", false);
+                sittingAnimator.SetBool("isJumping", false);
+                sittingAnimator.SetBool("isDoubleJumping", false);
                 _onGround = true;
             }
 
