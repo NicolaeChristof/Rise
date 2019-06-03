@@ -719,7 +719,7 @@ public class UIController : RiseBehavior {
 
     private IEnumerator LoadingDelay(bool isNextLevel)
     {
-        while (true)
+        if (true)
         {
             
             yield return new WaitForSeconds(5);
@@ -727,7 +727,6 @@ public class UIController : RiseBehavior {
             List<GameObject> inactive = new List<GameObject> { Tutorial };
             SetActiveInactive(active, inactive);
             GameModel.paused = false;
-
         }
     }
     //----------MENU FUNCTIONS----------
