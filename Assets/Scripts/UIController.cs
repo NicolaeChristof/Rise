@@ -23,6 +23,7 @@ public class UIController : RiseBehavior {
     public GameObject gameOverMenuObject;
     public GameObject characterSelectMenuObject;
     public GameObject creditsMenuObject;
+    public GameObject pauseOptionsMenuObject;
 
     private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
@@ -96,21 +97,15 @@ public class UIController : RiseBehavior {
 
     // The Text labels that correspond to the control method
     // and graphics level we're using, respectively
-    public Text gameModeText;
-    public Text controllerText;
     public Text qualityText;
     public Text squirrelPlayer;
     public Text treePlayer;
+
     // _qualityStrings is a string that holds the possible labels
     // for each graphic level. _qualityCursor holds the index of the
     // current label
     private int _qualityCursor;
     private string[] _qualityStrings;
-
-    // The functionality for the controller swap is similar to that
-    // of the quality options
-    private int _controllerCursor;
-    private string[] _controllerStrings;
     //---------------------
 
     //-----Credits UI------
@@ -145,9 +140,15 @@ public class UIController : RiseBehavior {
     private AudioClip _currentAudioClip;
     private AudioSource _audioSource;
 
-    // This is a temporary variable to ensure that
+    // This is a variable to ensure that
     // the sound plays properly when you hit the restart button
     private static bool _setAudioClipAtStart = true;
+
+    // This variable turns true when you change seasons. The reason this is here
+    // is to ensure that clicking resume when paused and you haven't already changed seasons
+    // used to play the menu music (this is because the game doesn't know associate the audio cursor
+    // with a season until you switch seasons. Before that, we default to the audio source's currently applied clip).
+    private static bool _hasChangedSeason = false;
     //----------------------
 
 
@@ -158,7 +159,7 @@ public class UIController : RiseBehavior {
 
         // Setting menuObjects to store all the menus in the game
 
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject, pauseOptionsMenuObject };
 
         //-----Menu Functionality List-----
 
@@ -169,10 +170,10 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, CreditsMenuEvent, ExitGameEvent });
 
         // Pause Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, PauseOptionsEvent, RestartEvent, ExitFromPauseEvent });
 
         // Options Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { GameModeEvent, ControllerEvent, QualityEvent, ExitFromOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromOptionsEvent });
 
         // Level Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
@@ -188,6 +189,9 @@ public class UIController : RiseBehavior {
 
         // Credits Menu
         _listsOfSelectActions.Add(new List<_selectAction> { ExitCreditsMenuEvent });
+
+        // Pause Options Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromPauseOptionsEvent });
 
         //-------------------------------
 
@@ -245,14 +249,16 @@ public class UIController : RiseBehavior {
         _qualityStrings = new string[] { "Extra Low", "Low", "Medium", "High", "Extra High", "Ultra" };
         _qualityCursor = QualitySettings.GetQualityLevel();
 
-        _controllerStrings = new string[] { "Keyboard", "Controller", "Keyboard (No Controller Detected)" };
+        //_controllerStrings = new string[] { "Keyboard", "Controller", "Keyboard (No Controller Detected)" };
 
         UpdateQuality();
 
+        /*
         PrepareController(GameModel.inputGamePad, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
             false);
+            */
 
-        ChangeController(_controllerCursor);
+        //ChangeController(_controllerCursor);
         //-------------------
 
         creditsInitialPosition = creditsText.transform.position;
@@ -371,7 +377,7 @@ public class UIController : RiseBehavior {
     //----------MENU FUNCTIONS----------
     public void PauseEvent(bool isTrue) {
         // Pause the game
-        if (!GameModel.paused) {
+        if (!GameModel.paused || !isTrue) {
             _audioSource.clip = audioClips[1];
             _audioSource.Play(0);
 
@@ -380,11 +386,6 @@ public class UIController : RiseBehavior {
             List<GameObject> active = new List<GameObject> { heightUIText.gameObject, heightUISlider.gameObject, uiBranches, healthUI };
 
             List<GameObject> inactive = new List<GameObject> { divider, timerUI };
-
-
-
-            
-
             
             SetActiveInactive(active, inactive);
 
@@ -402,8 +403,11 @@ public class UIController : RiseBehavior {
             }
             SetActiveInactive(active, inactive);
 
-
-            _audioSource.clip = audioClips[_audioCursor];
+            if (_hasChangedSeason) {
+                _audioSource.clip = audioClips[_audioCursor];
+            } else {
+                _audioSource.clip = _currentAudioClip;
+            }
             _audioSource.Play(0);
 
             OpenMenu(1, false);
@@ -461,7 +465,7 @@ public class UIController : RiseBehavior {
 
 
 
-
+    /*
     public void GameModeEvent(bool isTrue)
     {
         if (GameModel.singlePlayer)
@@ -475,6 +479,7 @@ public class UIController : RiseBehavior {
             GameModel.singlePlayer = true;
         }
     }
+    */
 
     //level select event
     public void LevelSelectEvent(bool isTrue)
@@ -496,6 +501,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Spring Template");
     }
 
@@ -507,6 +513,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Summer Template");
     }
 
@@ -518,6 +525,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Fall Template");
     }
 
@@ -529,6 +537,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Winter Template");
     }
 
@@ -548,14 +557,21 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
         OpenMenu(2, true);
-        if (GameModel.singlePlayer)
+        /*if (GameModel.singlePlayer)
         {
             gameModeText.text = "One Player";
         }
         else
         {
             gameModeText.text = "Two Players";
-        }
+        }*/
+    }
+
+    public void PauseOptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
+        SetActiveInactive(active, inactive);
+        OpenMenu(8, true);
     }
 
     public void RestartEvent(bool isTrue) {
@@ -578,6 +594,7 @@ public class UIController : RiseBehavior {
         GameModel.endGame = false;
     }
 
+    /*
     public void ControllerEvent(bool isTrue) {
         if (GameModel.inputGamePad) {
             PrepareController(false, (Input.GetJoystickNames().Length > 0) ? (Input.GetJoystickNames()[0] != "") :
@@ -587,6 +604,7 @@ public class UIController : RiseBehavior {
                 false);
         }
     }
+    */
 
     public void QualityEvent(bool isTrue) {
         _qualityCursor = (_qualityCursor + 1) % _qualityStrings.Length;
@@ -619,9 +637,11 @@ public class UIController : RiseBehavior {
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
 
-        ChangeController(_controllerCursor);
-
         OpenMenu(0, true);
+    }
+
+    public void ExitFromPauseOptionsEvent(bool isTrue) {
+        PauseEvent(false);
     }
 
     public void EndGameEvent(bool isTrue) {
@@ -899,6 +919,8 @@ public class UIController : RiseBehavior {
     // A function that sets the controller cursor accordingly.
     // It doesn't actually change the control method (it just tells
     // ExitFromOptionsEvent what control methods we're going to switch to)
+
+    /*
     private void PrepareController(bool useController, bool controllerConnected) {
         if (useController) {
             if (controllerConnected) {
@@ -912,6 +934,7 @@ public class UIController : RiseBehavior {
 
         controllerText.text = _controllerStrings[_controllerCursor];
     }
+    */
 
     // This function takes the controller cursor and uses it
     // to actually set your input method. It's mainly called

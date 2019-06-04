@@ -144,7 +144,7 @@ public class HealthUI : MonoBehaviour
     // the need to get the current sap value, since the current
     // health value is a GameModel variable)
     public void MoveAcorn(Vector3 startPos) {
-        if (GameModel.squirrelHealth < 10) {
+        if ((GameModel.squirrelHealth + cursor) < 10) {
             heartLocation = Hearts[Mathf.FloorToInt((GameModel.squirrelHealth + cursor)/2)].transform.position;
             Vector3 uiPos = cam.WorldToScreenPoint(startPos);
             Image currentAcorn = GameObject.Instantiate(moveableAcorn, uiPos, Quaternion.Euler(0f, 0f, Random.Range(0f, 359f)), transform);
