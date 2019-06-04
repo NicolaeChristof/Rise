@@ -23,6 +23,7 @@ public class UIController : RiseBehavior {
     public GameObject gameOverMenuObject;
     public GameObject characterSelectMenuObject;
     public GameObject creditsMenuObject;
+    public GameObject pauseOptionsMenuObject;
 
     private GameObject[] checkpoints;
     private List<GameObject> menuObjects;
@@ -152,7 +153,7 @@ public class UIController : RiseBehavior {
 
         // Setting menuObjects to store all the menus in the game
 
-        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject };
+        menuObjects = new List<GameObject> { mainMenuObject, pauseMenuObject, optionsMenuObject, levelSelectMenuObject, endGameMenuObject, gameOverMenuObject, characterSelectMenuObject, creditsMenuObject, pauseOptionsMenuObject };
 
         //-----Menu Functionality List-----
 
@@ -163,10 +164,10 @@ public class UIController : RiseBehavior {
         _listsOfSelectActions.Add(new List<_selectAction> { PlayGameEvent, LevelSelectEvent, CharacterSelectEvent, OptionsEvent, CreditsMenuEvent, ExitGameEvent });
 
         // Pause Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, OptionsEvent, RestartEvent, ExitFromPauseEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { PauseEvent, PauseOptionsEvent, RestartEvent, ExitFromPauseEvent });
 
         // Options Menu
-        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromPauseOptionsEvent });
+        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromOptionsEvent });
 
         // Level Select Menu
         _listsOfSelectActions.Add(new List<_selectAction> { SpringEvent, SummerEvent, FallEvent, WinterEvent, ExitLevelSelectEvent });
@@ -182,6 +183,9 @@ public class UIController : RiseBehavior {
 
         // Credits Menu
         _listsOfSelectActions.Add(new List<_selectAction> { ExitCreditsMenuEvent });
+
+        // Pause Options Menu
+        _listsOfSelectActions.Add(new List<_selectAction> { QualityEvent, ExitFromPauseOptionsEvent });
 
         //-------------------------------
 
@@ -549,6 +553,13 @@ public class UIController : RiseBehavior {
         }*/
     }
 
+    public void PauseOptionsEvent(bool isTrue) {
+        List<GameObject> active = new List<GameObject> { };
+        List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
+        SetActiveInactive(active, inactive);
+        OpenMenu(8, true);
+    }
+
     public void RestartEvent(bool isTrue) {
         _setAudioClipAtStart = false;
         GameModel.squirrelHealth = 10;
@@ -611,8 +622,6 @@ public class UIController : RiseBehavior {
         List<GameObject> active = new List<GameObject> { };
         List<GameObject> inactive = new List<GameObject> { heightUISlider.gameObject, heightUIText.gameObject, uiBranches, healthUI, divider, timerUI };
         SetActiveInactive(active, inactive);
-
-        //ChangeController(_controllerCursor);
 
         OpenMenu(0, true);
     }

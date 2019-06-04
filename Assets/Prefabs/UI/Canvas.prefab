@@ -907,6 +907,7 @@ MonoBehaviour:
   gameOverMenuObject: {fileID: 3543302297264031453}
   characterSelectMenuObject: {fileID: 1627964115639353451}
   creditsMenuObject: {fileID: 8174898739979259475}
+  pauseOptionsMenuObject: {fileID: 5737707754222980247}
   _trackCam: {fileID: 0}
   treeController: {fileID: 0}
   uiBranches: {fileID: 2135184480070798262}
@@ -915,8 +916,6 @@ MonoBehaviour:
   heightUISlider: {fileID: 6462225555729219406}
   healthUI: {fileID: 2388469834341774177}
   misletoeUI: {fileID: 8524923258871320601}
-  gameModeText: {fileID: 0}
-  controllerText: {fileID: 0}
   qualityText: {fileID: 88283026818335800}
   squirrelPlayer: {fileID: 545802621164511757}
   treePlayer: {fileID: 5440695980862834165}
@@ -5387,7 +5386,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2089564308118673720
 RectTransform:
   m_ObjectHideFlags: 0
