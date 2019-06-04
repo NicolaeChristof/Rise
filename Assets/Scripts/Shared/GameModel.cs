@@ -9,7 +9,7 @@ public static class GameModel {
 
     public static bool singlePlayer = false;
 
-    public static bool splitScreen = false;
+    public static bool splitScreen = true;
 
     public static bool paused = false;
 
