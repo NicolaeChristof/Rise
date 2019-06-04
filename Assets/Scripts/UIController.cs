@@ -140,9 +140,15 @@ public class UIController : RiseBehavior {
     private AudioClip _currentAudioClip;
     private AudioSource _audioSource;
 
-    // This is a temporary variable to ensure that
+    // This is a variable to ensure that
     // the sound plays properly when you hit the restart button
     private static bool _setAudioClipAtStart = true;
+
+    // This variable turns true when you change seasons. The reason this is here
+    // is to ensure that clicking resume when paused and you haven't already changed seasons
+    // used to play the menu music (this is because the game doesn't know associate the audio cursor
+    // with a season until you switch seasons. Before that, we default to the audio source's currently applied clip).
+    private static bool _hasChangedSeason = false;
     //----------------------
 
 
@@ -397,7 +403,11 @@ public class UIController : RiseBehavior {
             }
             SetActiveInactive(active, inactive);
 
-            _audioSource.clip = audioClips[_audioCursor];
+            if (_hasChangedSeason) {
+                _audioSource.clip = audioClips[_audioCursor];
+            } else {
+                _audioSource.clip = _currentAudioClip;
+            }
             _audioSource.Play(0);
 
             OpenMenu(1, false);
@@ -491,6 +501,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Spring Template");
     }
 
@@ -502,6 +513,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Summer Template");
     }
 
@@ -513,6 +525,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Fall Template");
     }
 
@@ -524,6 +537,7 @@ public class UIController : RiseBehavior {
         _currentAudioClip = audioClips[_audioCursor];
         GameModel.timer = 300.0f;
         GameModel.enableTimer = true;
+        _hasChangedSeason = true;
         SceneManager.LoadScene("Winter Template");
     }
 
